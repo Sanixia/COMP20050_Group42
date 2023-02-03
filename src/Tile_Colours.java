@@ -76,16 +76,8 @@ public class Tile_Colours {
     // Main driver method
     public static void main(String[] args)
     {
-        System.out.println(ANSI_BACK_green + "           " + RESET
-                + "\n" + ANSI_BACK_green + "   " + RESET + " B H " + ANSI_BACK_cyan + "   " + RESET
-                + "\n" + ANSI_BACK_green + "   " + RESET + " S   " + ANSI_BACK_cyan + "   " + RESET
-                + "\n" + ANSI_BACK_cyan + "           " + RESET
-        );
+        System.out.println("");
 
-        System.out.println("\n" + ANSI_BACK_green + "           " + RESET
-                + "\n" + ANSI_BACK_green + "   " + RESET + ANSI_cyan + " B " + ANSI_purple + "H " + ANSI_BACK_cyan + "   " + RESET
-                + "\n" + ANSI_BACK_green + "   " + RESET + ANSI_red + " S   " + ANSI_BACK_cyan + "   " + RESET
-                + "\n" + ANSI_BACK_cyan + "           " + RESET
-        );
+        System.out.println(RED_BACKGROUND + "\n foo"+ RED_BACKGROUND_BRIGHT + "\n foo" + RESET +RED_BOLD+ "\n foo");
     }
 }
