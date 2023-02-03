@@ -23,7 +23,8 @@ public class Cascadia
         String player_two = in.next();
 
         if (player_count < 3) {
-
+            String player_three;
+            String player_four;
         }
 
         /* rng player order */
