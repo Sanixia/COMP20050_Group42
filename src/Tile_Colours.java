@@ -78,6 +78,38 @@ public class Tile_Colours {
     {
         System.out.println("");
 
-        System.out.println(RED_BACKGROUND + "\n foo"+ RED_BACKGROUND_BRIGHT + "\n foo" + RESET +RED_BOLD+ "\n foo");
+        System.out.println(RED_BACKGROUND +
+                "\n foo"+ RED_BACKGROUND_BRIGHT
+                + "\n foo"  +
+                BLACK_BACKGROUND +
+                "\n foo" +
+                BLACK_BACKGROUND_BRIGHT+
+                "\n foo" +
+                BLUE_BACKGROUND +
+                "\n fo4o + "+
+                BLUE_BACKGROUND_BRIGHT
+                + "\n foos" +
+                CYAN_BACKGROUND_BRIGHT +
+                "\n food" +
+                CYAN_BACKGROUND +
+                "\n fds" +
+                GREEN_BACKGROUND +
+                "\n fds" +
+                GREEN_BACKGROUND_BRIGHT +
+                "\n fds" +
+                PURPLE_BACKGROUND +
+                "\n fds" +
+                PURPLE_BACKGROUND_BRIGHT +
+                "\n fds" +
+                YELLOW_BACKGROUND +
+                "\n fds" +
+                YELLOW_BACKGROUND_BRIGHT +
+                "\n fds" +
+                WHITE_BACKGROUND +
+                "\n fds" +
+                WHITE_BACKGROUND_BRIGHT +
+                "\n fds"
+                + RESET +RED_BOLD+
+                "\n foo");
     }
 }
