@@ -22,9 +22,11 @@ public class Cascadia
         System.out.println("\nPlayer 2 please enter your name: ");
         String player_two = in.next();
 
-        if (player_count < 3) {
+        if (player_count >= 3) {
             String player_three;
-            String player_four;
+            if (player_count == 4) {
+                String player_four;
+            }
         }
 
         /* rng player order */
@@ -78,4 +80,6 @@ public class Cascadia
         /* 2 players: 43 tiles }
            3 players: 63 tiles } 20 per player +3 for habitat
            4 players: 83 tiles } */
+
+        /* to rotate have a how many times rotate clockwise */
 }
