@@ -13,7 +13,6 @@ public class Habitat_Tiles {
 
     public static void main(String[] args) {
 
-
     }
 }
 

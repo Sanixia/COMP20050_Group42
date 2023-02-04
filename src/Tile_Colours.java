@@ -9,6 +9,8 @@ public class Tile_Colours {
 
     public static final String BLUE_BACKGROUND_BRIGHT = "\033[0;104m";// BLUE
 
+    // System.out.println("\033[48;5;200m" + "ERROR MESSAGE IN RED");  Change 200 for any colour for background
+
     // Above are the colours for the tiles
 
     // Regular Colors
