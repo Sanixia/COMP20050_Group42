@@ -11,8 +11,15 @@ public class Cascadia
         /* ask how many players */
 
         Scanner in = new Scanner(System.in);
-        System.out.println("\nEnter the number of players (2-4): ");
-        int player_count = in.nextInt();
+
+            /// ! this needs to be fixed apparently
+
+        int player_count = 0;
+        while (player_count >= 2 && player_count <= 4) {
+            System.out.println("\nEnter the number of players (2-4): ");
+            player_count = in.nextInt();
+        }
+
 
         /* enter player names */
 
@@ -23,14 +30,21 @@ public class Cascadia
         String player_two = in.next();
 
         if (player_count >= 3) {
-            String player_three;
+            System.out.println("\nPlayer 3 please enter your name: ");
+            String player_three = in.next();
             if (player_count == 4) {
-                String player_four;
+                System.out.println("\nPlayer 4 please enter your name: ");
+                String player_four = in.next();
             }
         }
 
+        System.out.println("random message for now");
+
         /* rng player order */
+
+
         /* show 4 habitat tiles and 4 paired tokens */
+
 
         /* starter habitats randomly generated for each player */
 
