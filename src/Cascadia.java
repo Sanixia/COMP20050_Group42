@@ -66,8 +66,9 @@ public class Cascadia
     }
     public static void main(String[] args)
     {
+        Display_And_Input.welcome();
         Display_And_Input.num_players();
-        System.out.println(Display_And_Input.getPlayer_count());
+        Display_And_Input.player_names();
     }
 
     /* welcome message */

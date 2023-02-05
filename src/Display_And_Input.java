@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 
 public class Display_And_Input {
-    private ArrayList<String> playerNames = new ArrayList<>();
+    private static ArrayList<String> playerNames = new ArrayList<>();
     private static int player_count = 0;
-    Scanner in;
+
 
     public static int getPlayer_count() {
         return player_count;
@@ -18,12 +18,12 @@ public class Display_And_Input {
 
 
 
-    public void welcome(){
+    public static void welcome(){
         /* welcome message */
         /* ask how many players */
 
         System.out.println("Welcome to Cascadia!");
-        System.out.println("How many people are playing? Please enter 2, 3 or 4: ");
+        System.out.print("How many people are playing? Please enter 2, 3 or 4: ");
     }
 
     public static void num_players() {
@@ -41,12 +41,12 @@ public class Display_And_Input {
                     validNumOfPlayers = true;
                 }
                 else{
-                    System.out.println("Please enter a number that is either 2, 3, 4: ");
+                    System.out.print("Please enter a number that is either 2, 3 or 4: ");
                 }
 
             }
             catch (InputMismatchException ex) {
-                System.out.println("Please enter a valid number.");
+                System.out.print("Please enter a valid number.");
                 in.nextLine();
             }
         }
@@ -57,39 +57,37 @@ public class Display_And_Input {
 
     }
 
-    public static boolean isNameValid (String name){
-        return name.isBlank();
-    }
 
-    public void player_names(){
-        System.out.println("\nPlayer 1 please enter your name: ");
-
-        boolean validAllNames = false;
-        boolean checkValidName = false;
-
-        do{
-            String player_one = in.next();
-        }
-        while(!validAllNames){
-            if ()
-        }
+    public static void player_names(){
+        Scanner in = new Scanner(System.in);
+        String temp_name;
+        int i = 0;
+        int numPlayer;
 
 
 
+        boolean checkValidName;
 
 
+        for (i = 0; i < getPlayer_count(); i++){
+            numPlayer = i+1;
+            checkValidName = false;
+            System.out.print("\nPlayer " + numPlayer + " please enter your name: ");
 
 
-        String player_one = in.next();
+            while(!checkValidName){
+                temp_name = in.next();
 
-        System.out.println("\nPlayer 2 please enter your name: ");
-        String player_two = in.next();
-
-        if (player_count >= 3) {
-            String player_three;
-            if (player_count == 4) {
-                String player_four;
+                if (playerNames.contains(temp_name)){
+                    System.out.print("Please enter a name that isn't already taken: ");
+                }
+                else{
+                    playerNames.add(temp_name);
+                    checkValidName = true;
+                }
             }
         }
     }
+
+
 }
