@@ -25,6 +25,7 @@ public class Tile_Colours {
 
     // Bold
     public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
+
     public static final String RED_BOLD = "\033[1;31m";    // RED
     public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
     public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
@@ -87,39 +88,20 @@ public class Tile_Colours {
     // Main driver method
     public static void main(String[] args)
     {
-        System.out.println("");
 
-        System.out.println(RED_BACKGROUND +
-                "\n foo"+ RED_BACKGROUND_BRIGHT
-                + "\n foo"  +
-                BLACK_BACKGROUND +
-                "\n foo" +
+
+        System.out.println(
                 BLACK_BACKGROUND_BRIGHT+
-                "\n foo" +
-                BLUE_BACKGROUND +
-                "\n fo4o + "+
-                BLUE_BACKGROUND_BRIGHT
-                + "\n foos" +
-                CYAN_BACKGROUND_BRIGHT +
-                "\n food" +
-                CYAN_BACKGROUND +
-                "\n fds" +
+                        "\n fds" +
+                BLUE_BACKGROUND_BRIGHT +
+                        "\n fds" +
                 GREEN_BACKGROUND +
                 "\n fds" +
                 GREEN_BACKGROUND_BRIGHT +
                 "\n fds" +
-                PURPLE_BACKGROUND +
-                "\n fds" +
-                PURPLE_BACKGROUND_BRIGHT +
-                "\n fds" +
-                YELLOW_BACKGROUND +
-                "\n fds" +
-                YELLOW_BACKGROUND_BRIGHT +
-                "\n fds" +
-                WHITE_BACKGROUND +
-                "\n fds" +
-                WHITE_BACKGROUND_BRIGHT +
-                "\n fds"
+                YELLOW_BACKGROUND_BRIGHT+
+                        "\n fds"
+
                 + RESET +RED_BOLD+
                 "\n foo");
     }
