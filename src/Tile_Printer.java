@@ -9,6 +9,7 @@ public class Tile_Printer {
 
         switch (starterType){
             case "Forest":
+
                 System.out.println(blankSix + Tile_Colours.GREEN_BACKGROUND + bigBlank + Tile_Colours.RESET
                         + blankSix + Tile_Colours.GREEN_BACKGROUND+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.GREEN_BACKGROUND + smallBlank + Tile_Colours.RESET
                         + blankSix + Tile_Colours.GREEN_BACKGROUND + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.GREEN_BACKGROUND + smallBlank + Tile_Colours.RESET
@@ -16,21 +17,33 @@ public class Tile_Printer {
                 );
                 break;
             case "Mountain":
+                /*
                 System.out.println( blankSix + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.BLACK_BACKGROUND_BRIGHT+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank+ Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLACK_BACKGROUND_BRIGHT+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.BLUE_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.BLUE_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLUE_BACKGROUND_BRIGHT + bigBlank+ Tile_Colours.RESET
                 );
-                System.out.print(2 + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank + Tile_Colours.RESET + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank + Tile_Colours.RESET
+
+                 */
+
+
+                System.out.print(Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank + Tile_Colours.RESET + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.BLACK_BACKGROUND_BRIGHT+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET  + Tile_Colours.BLACK_BACKGROUND_BRIGHT+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.BLUE_BACKGROUND + bigBlank+ Tile_Colours.RESET + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank+ Tile_Colours.RESET
+                );
+
+
+
+                /*
+                System.out.print(Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank + Tile_Colours.RESET + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank + Tile_Colours.RESET
                         + "\n" + Tile_Colours.BLACK_BACKGROUND_BRIGHT+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET  + Tile_Colours.BLACK_BACKGROUND_BRIGHT+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
                         + "\n" + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
                         + "\n" + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank+ Tile_Colours.RESET + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank+ Tile_Colours.RESET
                 );
-                System.out.print(2 + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank + Tile_Colours.RESET + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank + Tile_Colours.RESET
-                        + "\n " + Tile_Colours.BLACK_BACKGROUND_BRIGHT+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET  + Tile_Colours.BLACK_BACKGROUND_BRIGHT+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank+ Tile_Colours.RESET + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank+ Tile_Colours.RESET
-                );
+
+                 */
+
 
 
 
@@ -82,8 +95,25 @@ public class Tile_Printer {
                         + blankSix + Tile_Colours.BLUE_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.BLUE_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
                         + blankSix + Tile_Colours.BLUE_BACKGROUND_BRIGHT + bigBlank+ Tile_Colours.RESET
                 );
-                break;
 
+                System.out.println( blankSix + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLACK_BACKGROUND_BRIGHT+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLUE_BACKGROUND + bigBlank+ Tile_Colours.RESET
+                );
+
+                System.out.println( blankSix + Tile_Colours.BLACK_BACKGROUND_BRIGHT + bigBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLUE_BACKGROUND+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLUE_BACKGROUND + "            " + Tile_Colours.RESET
+                );
+
+                System.out.println( blankSix + Tile_Colours.BLUE_BACKGROUND + "      " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + "      " + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLUE_BACKGROUND+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLUE_BACKGROUND + "      " + Tile_Colours.BLACK_BACKGROUND_BRIGHT + "      " + Tile_Colours.RESET
+                );
+                break;
         }
 
     }
