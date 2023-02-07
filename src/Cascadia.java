@@ -66,9 +66,15 @@ public class Cascadia
     }
     public static void main(String[] args)
     {
+        Tile_Printer.starter_tile_printout("Mountain");
+        Tile_Printer.starter_tile_printout("Prairie");
+        Tile_Printer.starter_tile_printout("Wetland");
+        Tile_Printer.starter_tile_printout("Forest");
+        Tile_Printer.starter_tile_printout("River");
         Display_And_Input.welcome();
         Display_And_Input.num_players();
         Display_And_Input.player_names();
+
     }
 
     /* welcome message */
