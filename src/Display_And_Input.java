@@ -46,7 +46,7 @@ public class Display_And_Input {
 
             }
             catch (InputMismatchException ex) {
-                System.out.print("Please enter a valid number.");
+                System.out.print("Please enter a valid number (2, 3 or 4): ");
                 in.nextLine();
             }
         }
