@@ -19,7 +19,7 @@ public class Starter_Habitat {
 
 
     public static void main(String[] args) {
-        System.out.println(Tile_Colours.GREEN_BACKGROUND);
+
 
     }
 

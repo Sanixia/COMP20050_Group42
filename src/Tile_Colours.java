@@ -2,12 +2,12 @@ public class Tile_Colours {
     // Reset
     public static final String RESET = "\033[0m";  // Text Reset
 
-    public static final String GREEN_BACKGROUND = "\033[42m";  // GREEN
-    public static final String BLACK_BACKGROUND_BRIGHT = "\033[0;100m";// BLACK
-    public static final String YELLOW_BACKGROUND_BRIGHT = "\033[0;103m";// YELLOW
-    public static final String GREEN_BACKGROUND_BRIGHT = "\033[0;102m";// GREEN
+    public static final String FOREST_COLOUR = "\033[42m";  // DARK GREEN
+    public static final String MOUNTAIN_COLOUR = "\033[0;100m";// GREY
+    public static final String PRAIRIE_COLOUR= "\033[0;103m";// YELLOW
+    public static final String WETLAND_COLOUR = "\033[48;5;154m";// LIGHT GREEN
 
-    public static final String BLUE_BACKGROUND_BRIGHT = "\033[0;104m";// BLUE
+    public static final String RIVER_COLOUR = "\033[0;104m";// BLUE
 
     // System.out.println("\033[48;5;200m" + "ERROR MESSAGE IN RED");  Change 200 for any colour for background
 
@@ -85,24 +85,5 @@ public class Tile_Colours {
     public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
 
 
-    // Main driver method
-    public static void main(String[] args)
-    {
 
-
-        System.out.println(
-                BLACK_BACKGROUND_BRIGHT+
-                        "\n fds" +
-                BLUE_BACKGROUND_BRIGHT +
-                        "\n fds" +
-                GREEN_BACKGROUND +
-                "\n fds" +
-                GREEN_BACKGROUND_BRIGHT +
-                "\n fds" +
-                YELLOW_BACKGROUND_BRIGHT+
-                        "\n fds"
-
-                + RESET +RED_BOLD+
-                "\n foo");
-    }
 }
