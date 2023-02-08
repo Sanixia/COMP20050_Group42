@@ -66,6 +66,7 @@ public class Cascadia
     }
     public static void main(String[] args)
     {
+        Tile_Printer.habitat_tile_printout(Tile_Printer.habitat_tile_setup("FW"), "BES");
         Tile_Printer.starter_tile_printout("Mountain");
         Tile_Printer.starter_tile_printout("Prairie");
         Tile_Printer.starter_tile_printout("Wetland");

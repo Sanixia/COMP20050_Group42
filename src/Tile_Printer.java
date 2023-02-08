@@ -141,6 +141,8 @@ public class Tile_Printer {
 
     }
 
+
+    // Idea: array.split ex, FM_B for forest mountian bear, then
     public static String[] habitat_tile_setup(String biomeTile) {
 
         return switch (biomeTile) {
@@ -166,8 +168,21 @@ public class Tile_Printer {
 
     }
 
-    public static void habitat_tile_printout(String[] biomeTile) {
-
+    public static void habitat_tile_printout(String[] biomeTile, String animalTile) {
+        if (biomeTile.length == 1){
+            System.out.println(blankSix + biomeTile[0] + bigBlank + Tile_Colours.RESET
+                    + blankSix + biomeTile[0] + smallBlank + Tile_Colours.RESET + Tile_Colours.FOX_COLOUR + " " + "F" + "  " + Tile_Colours.RESET + "  " + biomeTile[0] + smallBlank + Tile_Colours.RESET
+                    + blankSix + biomeTile[0] + smallBlank + Tile_Colours.RESET  + "      " + biomeTile[0] + smallBlank + Tile_Colours.RESET
+                    + blankSix + biomeTile[0] + bigBlank + Tile_Colours.RESET
+            );
+        }
+        else{
+            System.out.println(biomeTile[0] + bigBlank + Tile_Colours.RESET
+                    + "\n" + biomeTile[0] + smallBlank + Tile_Colours.RESET + Tile_Colours.SALMON_COLOUR + " " + "S" + "  " + Tile_Colours.ELK_COLOUR + "E" + " " + biomeTile[1] + smallBlank + Tile_Colours.RESET
+                    + "\n" + biomeTile[0] + smallBlank + Tile_Colours.RESET + Tile_Colours.HAWK_COLOUR + " " + "H" + "    " + biomeTile[1] + smallBlank + Tile_Colours.RESET
+                    + "\n" + biomeTile[1] + bigBlank + Tile_Colours.RESET
+            );
+        }
     }
 
 }
