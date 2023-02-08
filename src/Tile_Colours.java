@@ -3,11 +3,16 @@ public class Tile_Colours {
     public static final String RESET = "\033[0m";  // Text Reset
 
     public static final String FOREST_COLOUR = "\033[42m";  // DARK GREEN
-    public static final String MOUNTAIN_COLOUR = "\033[0;100m";// GREY
+    public static final String MOUNTAIN_COLOUR = "\033[48;5;250m";// GREY
     public static final String PRAIRIE_COLOUR= "\033[0;103m";// YELLOW
     public static final String WETLAND_COLOUR = "\033[48;5;154m";// LIGHT GREEN
-
     public static final String RIVER_COLOUR = "\033[0;104m";// BLUE
+
+    public static final String HAWK_COLOUR = "\033[38;5;87m";   // CYAN
+    public static final String BEAR_COLOUR = "\033[38;5;94m";  // GOLDEN BROWN
+    public static final String FOX_COLOUR = "\033[38;5;166m";  // ORANGE
+    public static final String ELK_COLOUR = "\033[1;30m";  // BLACK
+    public static final String SALMON_COLOUR = "\033[38;5;160m";    // PINK
 
     // System.out.println("\033[48;5;200m" + "ERROR MESSAGE IN RED");  Change 200 for any colour for background
 
@@ -24,16 +29,16 @@ public class Tile_Colours {
     public static final String WHITE = "\033[0;37m";   // WHITE
 
     // Bold
-    public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
 
-    public static final String RED_BOLD = "\033[1;31m";    // RED
-    public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
-    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
-    public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
-    public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
-    public static final String CYAN_BOLD = "\033[1;36m";   // CYAN
-    public static final String WHITE_BOLD = "\033[1;37m";  // WHITE
+   // \033[38;5;__m
 
+
+
+
+
+
+
+/*
     // Underline
     public static final String BLACK_UNDERLINED = "\033[4;30m";  // BLACK
     public static final String RED_UNDERLINED = "\033[4;31m";    // RED
@@ -83,6 +88,8 @@ public class Tile_Colours {
     public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m"; // PURPLE
     public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
     public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
+
+ */
 
 
 

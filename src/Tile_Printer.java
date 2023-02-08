@@ -11,27 +11,27 @@ public class Tile_Printer {
             case "Forest":
 
                 System.out.println(blankSix + Tile_Colours.FOREST_COLOUR + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.FOREST_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.FOREST_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " E  " + Tile_Colours.ELK_COLOUR + "  " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET
                         + blankSix + Tile_Colours.FOREST_COLOUR + bigBlank+ Tile_Colours.RESET
                 );
                 System.out.println(Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.WETLAND_COLOUR + bigBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.RIVER_COLOUR+ smallBlank + Tile_Colours.RESET  + Tile_Colours.PRAIRIE_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.WETLAND_COLOUR+ smallBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.HAWK_COLOUR + " H  " + Tile_Colours.ELK_COLOUR + "E " + Tile_Colours.RIVER_COLOUR+ smallBlank + Tile_Colours.RESET  + Tile_Colours.PRAIRIE_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.FOX_COLOUR + " F  " + Tile_Colours.SALMON_COLOUR + "S " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.BEAR_COLOUR + " B    " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.WETLAND_COLOUR+ smallBlank + Tile_Colours.RESET
                         + "\n" + Tile_Colours.RIVER_COLOUR + bigBlank+ Tile_Colours.RESET + Tile_Colours.PRAIRIE_COLOUR+ bigBlank+ Tile_Colours.RESET
                 );
                 break;
             case "Mountain":
 
                 System.out.println( blankSix + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.BEAR_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "  " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
                         + blankSix + Tile_Colours.MOUNTAIN_COLOUR + bigBlank+ Tile_Colours.RESET
                 );
 
                 System.out.println(Tile_Colours.FOREST_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.RIVER_COLOUR + bigBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.FOREST_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET  + Tile_Colours.PRAIRIE_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.RIVER_COLOUR+ smallBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.FOREST_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.HAWK_COLOUR + " H  " + Tile_Colours.ELK_COLOUR + "E " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET  + Tile_Colours.PRAIRIE_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.BEAR_COLOUR+ " B  " + Tile_Colours.SALMON_COLOUR + "S " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.FOX_COLOUR + " F    " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.RIVER_COLOUR+ smallBlank + Tile_Colours.RESET
                         + "\n" + Tile_Colours.WETLAND_COLOUR + bigBlank+ Tile_Colours.RESET + Tile_Colours.PRAIRIE_COLOUR+ bigBlank+ Tile_Colours.RESET
                 );
 
@@ -39,8 +39,8 @@ public class Tile_Printer {
 
                 /*
                 System.out.print(Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET  + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET  + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
                         + "\n" + Tile_Colours.MOUNTAIN_COLOUR + bigBlank+ Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + bigBlank+ Tile_Colours.RESET
                 );
 
@@ -52,13 +52,13 @@ public class Tile_Printer {
                 /* 2 tiles seperated
 
                 System.out.print(2 + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                        + "\n1" + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n2" + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
+                        + "\n1" + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
+                        + "\n2" + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
                         + "\n4" + Tile_Colours.MOUNTAIN_COLOUR + bigBlank+ Tile_Colours.RESET
                 );
                 System.out.println(3 + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                        +"\n3" + bigBlank + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        +"\n5" + bigBlank + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
+                        +"\n3" + bigBlank + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
+                        +"\n5" + bigBlank + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
                         +"\n7" + bigBlank + Tile_Colours.MOUNTAIN_COLOUR + bigBlank+ Tile_Colours.RESET
                 );
 
@@ -77,39 +77,39 @@ public class Tile_Printer {
 
             case "Prairie":
                 System.out.println(blankSix + Tile_Colours.PRAIRIE_COLOUR + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.PRAIRIE_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.PRAIRIE_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.FOX_COLOUR + " F  " + Tile_Colours.ELK_COLOUR + "  " + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET
                         + blankSix + Tile_Colours.PRAIRIE_COLOUR + bigBlank+ Tile_Colours.RESET
                 );
                 System.out.println(Tile_Colours.WETLAND_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.FOREST_COLOUR+ bigBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.WETLAND_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET  + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.FOREST_COLOUR+ smallBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.WETLAND_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.SALMON_COLOUR + " S  " + Tile_Colours.HAWK_COLOUR + "H " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET  + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.BEAR_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "E " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.FOX_COLOUR+ " F    " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.FOREST_COLOUR+ smallBlank + Tile_Colours.RESET
                         + "\n" + Tile_Colours.RIVER_COLOUR + bigBlank+ Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR+ bigBlank+ Tile_Colours.RESET
                 );
                 break;
 
             case "Wetland":
                 System.out.println(blankSix + Tile_Colours.WETLAND_COLOUR + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.WETLAND_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.WETLAND_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.HAWK_COLOUR + " H  " + Tile_Colours.ELK_COLOUR + "  " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET
                         + blankSix + Tile_Colours.WETLAND_COLOUR + bigBlank+ Tile_Colours.RESET
                 );
                 System.out.println(Tile_Colours.RIVER_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.PRAIRIE_COLOUR+ bigBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.RIVER_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET  + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.PRAIRIE_COLOUR+ smallBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.RIVER_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.SALMON_COLOUR + " S  " + Tile_Colours.ELK_COLOUR + "E " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET  + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.BEAR_COLOUR + " B  " + Tile_Colours.FOX_COLOUR + "F " + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.HAWK_COLOUR + " H    " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.PRAIRIE_COLOUR+ smallBlank + Tile_Colours.RESET
                         + "\n" + Tile_Colours.FOREST_COLOUR + bigBlank+ Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR+ bigBlank+ Tile_Colours.RESET
                 );
                 break;
 
             case "River":
                 System.out.println(blankSix + Tile_Colours.RIVER_COLOUR + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.RIVER_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.RIVER_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.SALMON_COLOUR + " S  " + Tile_Colours.ELK_COLOUR + "  " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET
                         + blankSix + Tile_Colours.RIVER_COLOUR + bigBlank+ Tile_Colours.RESET
                 );
                 System.out.println(Tile_Colours.PRAIRIE_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.PRAIRIE_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET  + Tile_Colours.WETLAND_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.PRAIRIE_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.PRAIRIE_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.SALMON_COLOUR + " S  " + Tile_Colours.ELK_COLOUR + "E " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET  + Tile_Colours.WETLAND_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.FOX_COLOUR+ " F  " + Tile_Colours.HAWK_COLOUR + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
+                        + "\n" + Tile_Colours.PRAIRIE_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.BEAR_COLOUR + " B    " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET
                         + "\n" + Tile_Colours.FOREST_COLOUR + bigBlank+ Tile_Colours.RESET + Tile_Colours.WETLAND_COLOUR+ bigBlank+ Tile_Colours.RESET
                 );
 
@@ -118,20 +118,20 @@ public class Tile_Printer {
                 /*     USED FOR SPRINT 2
 
                 System.out.println( blankSix + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "H " + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " S    " + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET
                         + blankSix + Tile_Colours.BLUE_BACKGROUND + bigBlank+ Tile_Colours.RESET
                 );
 
                 System.out.println( blankSix + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.BLUE_BACKGROUND+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLUE_BACKGROUND+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
                         + blankSix + Tile_Colours.BLUE_BACKGROUND + "            " + Tile_Colours.RESET
                 );
 
                 System.out.println( blankSix + Tile_Colours.BLUE_BACKGROUND + "      " + Tile_Colours.MOUNTAIN_COLOUR + "      " + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.BLUE_BACKGROUND+ smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " B  " + Tile_Colours.GREEN_BOLD + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET + Tile_Colours.GREEN_BOLD + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLUE_BACKGROUND+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
+                        + blankSix + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
                         + blankSix + Tile_Colours.BLUE_BACKGROUND + "      " + Tile_Colours.MOUNTAIN_COLOUR + "      " + Tile_Colours.RESET
                 );
 
