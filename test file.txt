@@ -1,1 +1,10 @@
 Test commit :D
+
+
+Tasks to complete for Sprint 1:
+
+1) assign an arraylist to each user to store their tiles
+2) shuffle out tiles to players (same random number needs to be generated for animals and biome arraylists)
+3) put everything together and create a menu
+
+x) early unit testing to make sure everything works
