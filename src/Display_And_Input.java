@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -87,6 +88,17 @@ public class Display_And_Input {
                 }
             }
         }
+    }
+
+    public static void randomised_order(){
+        int i;
+        System.out.println("The order in which players will play will be: ");
+        Collections.shuffle(playerNames);
+
+        for (i = 0; i < player_count; i++){
+            System.out.println((i+1) + ") " + playerNames.get(i));
+        }
+
     }
 
 

@@ -75,6 +75,7 @@ public class Cascadia
         Display_And_Input.welcome();
         Display_And_Input.num_players();
         Display_And_Input.player_names();
+        Display_And_Input.randomised_order();
 
     }
 }
