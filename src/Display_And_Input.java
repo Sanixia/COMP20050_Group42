@@ -181,7 +181,7 @@ public class Display_And_Input {
 
     public static void display_tiles_and_tokens(int player){
 
-        int i;
+        int i, j;
 
         System.out.println(players.get(player).getPlayer_name() + "'s  Tiles: \n");
         System.out.println("Starter Tile: \n");
@@ -193,7 +193,11 @@ public class Display_And_Input {
         }
 
         System.out.println("Wildlife Tokens: \n");
-        System.out.println(players.get(player).getWildlife_tokens());
+
+        for (j = 0; j < 4; j++){
+            System.out.println(Tile_Printer.token_printer(players.get(player).getWildlife_tokens().get(j)));
+        }
+
 
 
 

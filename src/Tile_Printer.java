@@ -190,4 +190,23 @@ public class Tile_Printer {
 
      */
 
+    public static String token_printer(String animal) {
+        String colour;
+        String reset  = Tile_Colours.RESET;
+        switch (animal) {
+            case "B" : colour = Tile_Colours.BEAR_COLOUR_BACKGROUND;
+                return colour + " B " + reset;
+            case "E": colour = Tile_Colours.ELK_COLOUR_BACKGROUND;
+                return colour + " E " + reset;
+            case "F": colour = Tile_Colours.FOX_COLOUR_BACKGROUND;
+                return colour + " F " + reset;
+            case "H": colour = Tile_Colours.HAWK_COLOUR_BACKGROUND;
+                return colour + " H " +  reset ;
+            case "S": colour = Tile_Colours.SALMON_COLOUR_BACKGROUND;
+                return colour + " S " +  reset;
+            default:
+                return null;
+        }
+    }
+
 }
