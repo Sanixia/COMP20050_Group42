@@ -9,3 +9,29 @@ Tasks to complete for Sprint 1:
 4) Someone pls add corresponding background colours to the animal string colours
 
 x) early unit testing to make sure everything works
+
+
+
+        /* rng player order */
+
+
+        /* show 4 habitat tiles and 4 paired tokens */
+
+
+        /* starter habitats randomly generated for each player */
+
+
+        // upon a players turn :
+        /* pick tile
+           next command to show their habitat
+           quit command to terminate program */
+
+
+        // NOTES:
+        /* there are only 5 possible starter tiles to rng (check manual)
+           60 double habitat tiles (10 unique types) ,
+           25 keystone tiles (5 unique types) */
+
+        /* 2 players: 43 tiles }
+           3 players: 63 tiles } 20 per player +3 for habitat
+           4 players: 83 tiles } */
