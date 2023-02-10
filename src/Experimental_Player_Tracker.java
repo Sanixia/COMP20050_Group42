@@ -10,6 +10,7 @@ public class Experimental_Player_Tracker {
 
     private ArrayList<String> wildlife_tokens = new ArrayList<>();
 
+    private ArrayList<String> animal_tiles = new ArrayList<>();
 
 
 
@@ -19,17 +20,15 @@ public class Experimental_Player_Tracker {
 
 
 
-    public Experimental_Player_Tracker(String player_name, String starter_tile, ArrayList<String> habitat_tiles, ArrayList<String> wildlife_tokens){
+    //Used in the arraylist to keep track of players and their tiles and tokens
+    public Experimental_Player_Tracker(String player_name, String starter_tile, ArrayList<String> habitat_tiles, ArrayList<String> animal_tiles, ArrayList<String> wildlife_tokens){
 
         this.player_name = player_name;
         this.starter_tile = starter_tile;
         this.habitat_tiles = habitat_tiles;
+        this.animal_tiles = animal_tiles;
         this.wildlife_tokens = wildlife_tokens;
 
-        //player name
-        //player starter tile
-        //habitat tiles
-        //animal tokens
 
 
 
@@ -70,6 +69,16 @@ public class Experimental_Player_Tracker {
     public void setWildlife_tokens(ArrayList<String> wildlife_tokens) {
         this.wildlife_tokens = wildlife_tokens;
     }
+
+
+    public ArrayList<String> getAnimal_tiles() {
+        return animal_tiles;
+    }
+
+    public void setAnimal_tiles(ArrayList<String> animal_tiles) {
+        this.animal_tiles = animal_tiles;
+    }
+
 
 
 }

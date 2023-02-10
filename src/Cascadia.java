@@ -2,43 +2,6 @@ import java.util.Scanner;
 
 public class Cascadia
 {
-    public static void controller()
-    {
-        /* welcome message */
-
-        System.out.println("Welcome to Cascadia!");
-
-        /* ask how many players */
-
-        Scanner in = new Scanner(System.in);
-
-            /// ! this needs to be fixed apparently
-
-        int player_count = 0;
-        while (player_count >= 2 && player_count <= 4) {
-            System.out.println("\nEnter the number of players (2-4): ");
-            player_count = in.nextInt();
-        }
-
-
-        /* enter player names */
-
-        System.out.println("\nPlayer 1 please enter your name: ");
-        String player_one = in.next();
-
-        System.out.println("\nPlayer 2 please enter your name: ");
-        String player_two = in.next();
-
-        if (player_count >= 3) {
-            System.out.println("\nPlayer 3 please enter your name: ");
-            String player_three = in.next();
-            if (player_count == 4) {
-                System.out.println("\nPlayer 4 please enter your name: ");
-                String player_four = in.next();
-            }
-        }
-
-        System.out.println("random message for now");
 
         /* rng player order */
 
@@ -63,20 +26,61 @@ public class Cascadia
         /* 2 players: 43 tiles }
            3 players: 63 tiles } 20 per player +3 for habitat
            4 players: 83 tiles } */
-    }
+
     public static void main(String[] args)
     {
-        Tile_Printer.habitat_tile_printout(Tile_Printer.habitat_tile_setup("FW"), "BES");
-        Tile_Printer.starter_tile_printout("Mountain");
-        Tile_Printer.starter_tile_printout("Prairie");
-        Tile_Printer.starter_tile_printout("Wetland");
-        Tile_Printer.starter_tile_printout("Forest");
-        Tile_Printer.starter_tile_printout("River");
-        Display_And_Input.welcome();
-        Display_And_Input.num_players();
-        Display_And_Input.player_names();
-        Display_And_Input.randomised_order_players();
-        Display_And_Input.randomise_player_tiles_and_tokens();
+        Command_State command_state;
+
+            Display_And_Input.welcome();
+            Display_And_Input.num_players();
+            Display_And_Input.player_names();
+            Display_And_Input.randomised_order_players();
+
+            boolean randomCheck = true;                     // check for one randomisation of tiles
+            int playerNum = 0;
+
+
+
+          do{
+              command_state = Command_State.get_Input();   // Setting the command state Play or Quit
+
+
+
+              if (command_state.isInPlay()){
+
+                  if (randomCheck){
+                      Display_And_Input.randomise_player_tiles_and_tokens();          // Has to do the randomistion once else it will cause errors
+                      randomCheck = false;
+                  }
+
+
+                  if (command_state.getChoice() == 1){
+
+                      Display_And_Input.display_tiles_and_tokens(playerNum);
+                  }
+
+                  else if (command_state.getChoice() == 2){
+
+
+
+                      if (playerNum == Display_And_Input.getPlayer_count() - 1){    //resets to the start of the player list
+                          playerNum = 0;
+                      }
+                      else{
+                          playerNum++;
+                      }
+                      System.out.println("Next player is up...");
+
+                  }
+
+
+
+
+              }
+
+          }while (!command_state.isQuit());
+          Command_State.quitMessage();
+        }
+
 
     }
-}

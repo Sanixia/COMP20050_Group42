@@ -2,15 +2,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Random;
 
 
 
 public class Display_And_Input {
 
 
+
+
     private static ArrayList<String> playerNames = new ArrayList<>();
 
-    private static ArrayList<Experimental_Player_Tracker> players = new ArrayList<>();
+    private static ArrayList<Experimental_Player_Tracker> players = new ArrayList<>();   //Array of objects to keep track of players
     private static int player_count = 0;
 
 
@@ -109,7 +112,7 @@ public class Display_And_Input {
 
 
 
-    public static void randomised_order_players(){
+    public static void randomised_order_players(){                                  // Might get rid of, seems redundant
         int i;
 
         System.out.println("The order in which players will play will be: ");
@@ -135,34 +138,40 @@ public class Display_And_Input {
         int i, j, k;
         ArrayList<String> temp_biomes = new ArrayList<>();
         ArrayList<String> temp_tokens = new ArrayList<>();
+        ArrayList<String> temp_animals = new ArrayList<>();
 
 
-
-
+        long seed = System.nanoTime();                                          // To have the same randomised list order for animals and biome tiles
         Collections.shuffle(Starter_Habitat.getStarter_Habitat_Tiles());
-        Collections.shuffle(Habitat_Tiles.biome);
+
+        Collections.shuffle(Habitat_Tiles.biome, new Random(seed));
+        Collections.shuffle(Habitat_Tiles.animals, new Random(seed));
         Collections.shuffle(Wildlife_Tokens.tokens);
 
 
-        for (i = 0; i < player_count; i ++){
-            temp_biomes.clear();
+        for (i = 0; i < player_count; i++){
+            temp_biomes.clear();                                                                    // Needs to be cleared every i loop
+            temp_animals.clear();
 
             for (k = 0; k < 20; k++){
-                temp_biomes.add(Habitat_Tiles.biome.get(0));
+                temp_biomes.add(Habitat_Tiles.biome.get(0));                                        // adds tiles to temp and removes them from the original
                 Habitat_Tiles.biome.remove(0);
 
-            }
+                temp_animals.add(Habitat_Tiles.animals.get(0));
+                Habitat_Tiles.animals.remove(0);
 
+            }
+            temp_tokens.clear();
             for (j = 0; j < 4; j ++){
                 temp_tokens.add(Wildlife_Tokens.tokens.get(0));
-                Habitat_Tiles.biome.remove(0);
+                Wildlife_Tokens.tokens.remove(0);
             }
 
-            players.add(new Experimental_Player_Tracker(playerNames.get(i), Starter_Habitat.getStarter_Habitat_Tiles().get(i), temp_biomes, temp_tokens));
+            //Calls the constructor
+
+            players.add(new Experimental_Player_Tracker(playerNames.get(i), Starter_Habitat.getStarter_Habitat_Tiles().get(i), temp_biomes, temp_animals, temp_tokens));
+
         }
-
-
-
     }
 
 
@@ -170,4 +179,33 @@ public class Display_And_Input {
 
 
 
+    public static void display_tiles_and_tokens(int player){
+
+        int i;
+
+        System.out.println(players.get(player).getPlayer_name() + "'s  Tiles: \n");
+        System.out.println("Starter Tile: \n");
+        Tile_Printer.starter_tile_printout(players.get(player).getStarter_tile());
+
+        System.out.println("\nHabitat Tiles: \n");
+        for (i = 0; i < 4; i++){
+            System.out.println(Experimental_Printer.print_tile_setup(players.get(player).getHabitat_tiles().get(i), 1, players.get(player).getAnimal_tiles().get(i) ));
+        }
+
+        System.out.println("Wildlife Tokens: \n");
+        System.out.println(players.get(player).getWildlife_tokens());
+
+
+
+    }
 }
+
+
+
+
+
+
+
+
+
+

@@ -5,6 +5,9 @@ public class Tile_Printer {
     private static final String smallBlank = "   ";
     private static final String blankSix = "\n      ";
 
+
+
+    // Hardcoded for now
     public static void starter_tile_printout(String starterType) {
 
         switch (starterType) {
@@ -143,7 +146,7 @@ public class Tile_Printer {
 
 
     // Idea: array.split ex, FM_B for forest mountian bear, then
-    public static String[] habitat_tile_setup(String biomeTile) {
+    /*public static String[] habitat_tile_setup(String biomeTile) {
 
         return switch (biomeTile) {
             case "FW" -> new String[]{Tile_Colours.FOREST_COLOUR, Tile_Colours.WETLAND_COLOUR};
@@ -184,5 +187,7 @@ public class Tile_Printer {
             );
         }
     }
+
+     */
 
 }

@@ -9,9 +9,5 @@ public class Wildlife_Tokens {
                     "S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S")
     );
 
-    public static void main(String[] args) {
-        for (int i=0; i<100; i++) {
-            System.out.println((i+1) +"  "+ tokens.get(i));
-        }
-    }
+
 }
