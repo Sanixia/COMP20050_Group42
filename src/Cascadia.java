@@ -19,6 +19,7 @@ public class Cascadia
 
 
           do{
+
               command_state = Command_State.get_Input();   // Setting the command state Play or Quit
 
 

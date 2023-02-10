@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Experimental_Player_Tracker {
+public class Player_Tracker {
 
     private String player_name;
 
@@ -21,7 +21,7 @@ public class Experimental_Player_Tracker {
 
 
     //Used in the arraylist to keep track of players and their tiles and tokens
-    public Experimental_Player_Tracker(String player_name, String starter_tile, ArrayList<String> habitat_tiles, ArrayList<String> animal_tiles, ArrayList<String> wildlife_tokens){
+    public Player_Tracker(String player_name, String starter_tile, ArrayList<String> habitat_tiles, ArrayList<String> animal_tiles, ArrayList<String> wildlife_tokens){
 
         this.player_name = player_name;
         this.starter_tile = starter_tile;

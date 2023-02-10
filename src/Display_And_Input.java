@@ -13,7 +13,7 @@ public class Display_And_Input {
 
     private static ArrayList<String> playerNames = new ArrayList<>();
 
-    private static ArrayList<Experimental_Player_Tracker> players = new ArrayList<>();   //Array of objects to keep track of players
+    private static ArrayList<Player_Tracker> players = new ArrayList<>();   //Array of objects to keep track of players
     private static int player_count = 0;
 
 
@@ -25,7 +25,7 @@ public class Display_And_Input {
         return playerNames;
     }
 
-    public static ArrayList<Experimental_Player_Tracker> getPlayers() {
+    public static ArrayList<Player_Tracker> getPlayers() {
         return players;
     }
 
@@ -169,7 +169,7 @@ public class Display_And_Input {
 
             //Calls the constructor
 
-            players.add(new Experimental_Player_Tracker(playerNames.get(i), Starter_Habitat.getStarter_Habitat_Tiles().get(i), temp_biomes, temp_animals, temp_tokens));
+            players.add(new Player_Tracker(playerNames.get(i), Starter_Habitat.getStarter_Habitat_Tiles().get(i), temp_biomes, temp_animals, temp_tokens));
 
         }
     }
@@ -185,17 +185,17 @@ public class Display_And_Input {
 
         System.out.println(players.get(player).getPlayer_name() + "'s  Tiles: \n");
         System.out.println("Starter Tile: \n");
-        Tile_Printer.starter_tile_printout(players.get(player).getStarter_tile());
+        Starter_Tile_Printer.starter_tile_printout(players.get(player).getStarter_tile());
 
         System.out.println("\nHabitat Tiles: \n");
         for (i = 0; i < 4; i++){
-            System.out.println(Experimental_Printer.print_tile_setup(players.get(player).getHabitat_tiles().get(i), 1, players.get(player).getAnimal_tiles().get(i) ));
+            System.out.println(Tile_Printer.print_tile_setup(players.get(player).getHabitat_tiles().get(i), 1, players.get(player).getAnimal_tiles().get(i) ));
         }
 
         System.out.println("Wildlife Tokens: \n");
 
         for (j = 0; j < 4; j++){
-            System.out.println(Tile_Printer.token_printer(players.get(player).getWildlife_tokens().get(j)));
+            System.out.println(Starter_Tile_Printer.token_printer(players.get(player).getWildlife_tokens().get(j)));
         }
 
 

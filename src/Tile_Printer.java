@@ -1,212 +1,125 @@
-public class Tile_Printer {
-
-    // Note: N will represent null animal
-    private static final String bigBlank = "            ";
-    private static final String smallBlank = "   ";
-    private static final String blankSix = "\n      ";
-
-
-
-    // Hardcoded for now
-    public static void starter_tile_printout(String starterType) {
-
-        switch (starterType) {
-            case "Forest":
-
-                System.out.println(blankSix + Tile_Colours.FOREST_COLOUR + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " E  " + Tile_Colours.ELK_COLOUR + "  " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.FOREST_COLOUR + bigBlank + Tile_Colours.RESET
-                );
-                System.out.println(Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.WETLAND_COLOUR + bigBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.HAWK_COLOUR + " H  " + Tile_Colours.ELK_COLOUR + "E " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.FOX_COLOUR + " F  " + Tile_Colours.SALMON_COLOUR + "S " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.BEAR_COLOUR + " B    " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.RIVER_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.PRAIRIE_COLOUR + bigBlank + Tile_Colours.RESET
-                );
-                break;
-            case "Mountain":
-
-                System.out.println(blankSix + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.BEAR_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "  " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                );
-
-                System.out.println(Tile_Colours.FOREST_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.RIVER_COLOUR + bigBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.HAWK_COLOUR + " H  " + Tile_Colours.ELK_COLOUR + "E " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.BEAR_COLOUR + " B  " + Tile_Colours.SALMON_COLOUR + "S " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.FOX_COLOUR + " F    " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.WETLAND_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.PRAIRIE_COLOUR + bigBlank + Tile_Colours.RESET
-                );
+public class Tile_Printer
+{
+    // Declaring constants to make printing more efficient
+    // Naming scheme: sp6_R refers to 6 empty spaces with a reset
+    private static final String reset = Tile_Colours.RESET;
+    private static final String sp12_R = "            " + reset;
+    private static final String sp6_R = "      " + reset;
+    private static final String sp3_R = "   " + reset;
+    private static final String sp6 = "      ";
+    private static final String sp3 = "   ";
 
 
+    // function which gets the necessary biome colours before passing on to main print function
+    // Note: cases aren't commutative i.e. FW works but WF does not
+    public static String print_tile_setup(String biome_tile, int rotation, String animals)
+    {
+        String col1 = null, col2 = null;
+        String animals_with_space = animals + "   ";        // adding 3 empty spaces to avoid program crashing in middle_section function
 
-                /*
-                System.out.print(Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET  + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.MOUNTAIN_COLOUR + bigBlank+ Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + bigBlank+ Tile_Colours.RESET
-                );
-
-                 */
-
-
-
-
-                /* 2 tiles seperated
-
-                System.out.print(2 + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                        + "\n1" + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n2" + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n4" + Tile_Colours.MOUNTAIN_COLOUR + bigBlank+ Tile_Colours.RESET
-                );
-                System.out.println(3 + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                        +"\n3" + bigBlank + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        +"\n5" + bigBlank + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        +"\n7" + bigBlank + Tile_Colours.MOUNTAIN_COLOUR + bigBlank+ Tile_Colours.RESET
-                );
-
-                */
-
-                /*
-                System.out.println(Tile_Colours.FOREST_COLOUR + "           " + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.FOREST_COLOUR + "   " + Tile_Colours.RESET + " B H " + Tile_Colours.MOUNTAIN_COLOUR + "   " + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.FOREST_COLOUR + "   " + Tile_Colours.RESET + " S   " + Tile_Colours.MOUNTAIN_COLOUR + "   " + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.MOUNTAIN_COLOUR + "           " + Tile_Colours.RESET
-                );
-                 */
-
-
-                break;
-
-            case "Prairie":
-                System.out.println(blankSix + Tile_Colours.PRAIRIE_COLOUR + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.FOX_COLOUR + " F  " + Tile_Colours.ELK_COLOUR + "  " + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.PRAIRIE_COLOUR + bigBlank + Tile_Colours.RESET
-                );
-                System.out.println(Tile_Colours.WETLAND_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.FOREST_COLOUR + bigBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.SALMON_COLOUR + " S  " + Tile_Colours.HAWK_COLOUR + "H " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.BEAR_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "E " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.FOX_COLOUR + " F    " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.RIVER_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                );
-                break;
-
-            case "Wetland":
-                System.out.println(blankSix + Tile_Colours.WETLAND_COLOUR + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.HAWK_COLOUR + " H  " + Tile_Colours.ELK_COLOUR + "  " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.WETLAND_COLOUR + bigBlank + Tile_Colours.RESET
-                );
-                System.out.println(Tile_Colours.RIVER_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.PRAIRIE_COLOUR + bigBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.SALMON_COLOUR + " S  " + Tile_Colours.ELK_COLOUR + "E " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.BEAR_COLOUR + " B  " + Tile_Colours.FOX_COLOUR + "F " + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.HAWK_COLOUR + " H    " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.FOREST_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                );
-                break;
-
-            case "River":
-                System.out.println(blankSix + Tile_Colours.RIVER_COLOUR + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.SALMON_COLOUR + " S  " + Tile_Colours.ELK_COLOUR + "  " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.RIVER_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.RIVER_COLOUR + bigBlank + Tile_Colours.RESET
-                );
-                System.out.println(Tile_Colours.PRAIRIE_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.SALMON_COLOUR + " S  " + Tile_Colours.ELK_COLOUR + "E " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.FOX_COLOUR + " F  " + Tile_Colours.HAWK_COLOUR + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.PRAIRIE_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.BEAR_COLOUR + " B    " + Tile_Colours.FOREST_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.WETLAND_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + "      " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + "\n" + Tile_Colours.FOREST_COLOUR + bigBlank + Tile_Colours.RESET + Tile_Colours.WETLAND_COLOUR + bigBlank + Tile_Colours.RESET
-                );
-
-
-
-                /*     USED FOR SPRINT 2
-
-                System.out.println( blankSix + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.MOUNTAIN_COLOUR+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "H " + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " S    " + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.BLUE_BACKGROUND + bigBlank+ Tile_Colours.RESET
-                );
-
-                System.out.println( blankSix + Tile_Colours.MOUNTAIN_COLOUR + bigBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.BLUE_BACKGROUND+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.BLUE_BACKGROUND + "            " + Tile_Colours.RESET
-                );
-
-                System.out.println( blankSix + Tile_Colours.BLUE_BACKGROUND + "      " + Tile_Colours.MOUNTAIN_COLOUR + "      " + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.BLUE_BACKGROUND+ smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " B  " + Tile_Colours.ELK_COLOUR + "H " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.BLUE_BACKGROUND + smallBlank + Tile_Colours.RESET + Tile_Colours.ELK_COLOUR + " S    " + Tile_Colours.MOUNTAIN_COLOUR + smallBlank + Tile_Colours.RESET
-                        + blankSix + Tile_Colours.BLUE_BACKGROUND + "      " + Tile_Colours.MOUNTAIN_COLOUR + "      " + Tile_Colours.RESET
-                );
-
-                 */
-
+        switch (biome_tile) {
+            case "F": col1=Tile_Colours.FOREST_COLOUR;  break;
+            case "W": col1=Tile_Colours.WETLAND_COLOUR;  break;
+            case "R": col1=Tile_Colours.RIVER_COLOUR;  break;
+            case "M": col1=Tile_Colours.MOUNTAIN_COLOUR;  break;
+            case "P": col1=Tile_Colours.PRAIRIE_COLOUR;  break;
+            case "FW": col1=Tile_Colours.FOREST_COLOUR; col2=Tile_Colours.WETLAND_COLOUR; break;
+            case "FR": col1=Tile_Colours.FOREST_COLOUR; col2=Tile_Colours.RIVER_COLOUR; break;
+            case "FM": col1=Tile_Colours.FOREST_COLOUR; col2=Tile_Colours.MOUNTAIN_COLOUR; break;
+            case "FP": col1=Tile_Colours.FOREST_COLOUR; col2=Tile_Colours.PRAIRIE_COLOUR; break;
+            case "WR": col1=Tile_Colours.WETLAND_COLOUR; col2=Tile_Colours.RIVER_COLOUR; break;
+            case "WM": col1=Tile_Colours.WETLAND_COLOUR; col2=Tile_Colours.MOUNTAIN_COLOUR; break;
+            case "WP": col1=Tile_Colours.WETLAND_COLOUR; col2=Tile_Colours.PRAIRIE_COLOUR; break;
+            case "RM": col1=Tile_Colours.RIVER_COLOUR; col2=Tile_Colours.MOUNTAIN_COLOUR; break;
+            case "RP": col1=Tile_Colours.RIVER_COLOUR; col2=Tile_Colours.PRAIRIE_COLOUR; break;
+            case "MP": col1=Tile_Colours.MOUNTAIN_COLOUR; col2=Tile_Colours.PRAIRIE_COLOUR; break;
+            default: break;
         }
-
+        return tile_printout(col1, col2, rotation, animals_with_space);
     }
 
 
-    // Idea: array.split ex, FM_B for forest mountian bear, then
-    /*public static String[] habitat_tile_setup(String biomeTile) {
+    public static String tile_printout(String colour1, String colour2, int rotation, String animals)
+    {
+        // Printing keystone tiles
+        if (colour2 == null)
+        {
+            return long_section(colour1) + body(colour1, colour1, animals) + long_section(colour1);
+        }
 
-        return switch (biomeTile) {
-            case "FW" -> new String[]{Tile_Colours.FOREST_COLOUR, Tile_Colours.WETLAND_COLOUR};
-            case "FR" -> new String[]{Tile_Colours.FOREST_COLOUR, Tile_Colours.RIVER_COLOUR};
-            case "FM" -> new String[]{Tile_Colours.FOREST_COLOUR, Tile_Colours.MOUNTAIN_COLOUR};
-            case "FP" -> new String[]{Tile_Colours.FOREST_COLOUR, Tile_Colours.PRAIRIE_COLOUR};
-            case "WR" -> new String[]{Tile_Colours.WETLAND_COLOUR, Tile_Colours.RIVER_COLOUR};
-            case "WM" -> new String[]{Tile_Colours.WETLAND_COLOUR, Tile_Colours.MOUNTAIN_COLOUR};
-            case "WP" -> new String[]{Tile_Colours.WETLAND_COLOUR, Tile_Colours.PRAIRIE_COLOUR};
-            case "RM" -> new String[]{Tile_Colours.RIVER_COLOUR, Tile_Colours.MOUNTAIN_COLOUR};
-            case "RP" -> new String[]{Tile_Colours.RIVER_COLOUR, Tile_Colours.PRAIRIE_COLOUR};
-            case "MP" -> new String[]{Tile_Colours.MOUNTAIN_COLOUR, Tile_Colours.PRAIRIE_COLOUR};
-            case "F" -> new String[]{Tile_Colours.FOREST_COLOUR};
-            case "W" -> new String[]{Tile_Colours.WETLAND_COLOUR};
-            case "R" -> new String[]{Tile_Colours.RIVER_COLOUR};
-            case "M" -> new String[]{Tile_Colours.MOUNTAIN_COLOUR};
-            case "P" -> new String[]{Tile_Colours.PRAIRIE_COLOUR};
-            default -> new String[]{};
-        };
+        // Switch case for printing double biome tiles in each of their rotations
+        else {
+            switch (rotation) {
+                case 1: return long_section(colour1) + body(colour2, colour1, animals) + long_section(colour2);
 
+                case 2: return long_section_dual(colour2, colour1) + body(colour2, colour1, animals) + long_section_dual(colour2, colour1);
 
+                case 3: return long_section(colour2) + body(colour2, colour1, animals) + long_section(colour1);
 
+                case 4: return long_section(colour2) + body(colour1, colour2, animals) + long_section(colour1);
+
+                case 5: return long_section_dual(colour1, colour2) + body(colour1, colour2, animals) + long_section_dual(colour1, colour2);
+
+                case 6: return long_section(colour1) + body(colour1, colour2, animals) + long_section(colour2);
+
+                default:
+                    break;
+            }
+        }
+        return null;
     }
 
-    public static void habitat_tile_printout(String[] biomeTile, String animalTile) {
-        if (biomeTile.length == 1){
-            System.out.println(blankSix + biomeTile[0] + bigBlank + Tile_Colours.RESET
-                    + blankSix + biomeTile[0] + smallBlank + Tile_Colours.RESET + Tile_Colours.FOX_COLOUR + " " + "F" + "  " + Tile_Colours.RESET + "  " + biomeTile[0] + smallBlank + Tile_Colours.RESET
-                    + blankSix + biomeTile[0] + smallBlank + Tile_Colours.RESET  + "      " + biomeTile[0] + smallBlank + Tile_Colours.RESET
-                    + blankSix + biomeTile[0] + bigBlank + Tile_Colours.RESET
-            );
-        }
-        else{
-            System.out.println(biomeTile[0] + bigBlank + Tile_Colours.RESET
-                    + "\n" + biomeTile[0] + smallBlank + Tile_Colours.RESET + Tile_Colours.SALMON_COLOUR + " " + "S" + "  " + Tile_Colours.ELK_COLOUR + "E" + " " + biomeTile[1] + smallBlank + Tile_Colours.RESET
-                    + "\n" + biomeTile[0] + smallBlank + Tile_Colours.RESET + Tile_Colours.HAWK_COLOUR + " " + "H" + "    " + biomeTile[1] + smallBlank + Tile_Colours.RESET
-                    + "\n" + biomeTile[1] + bigBlank + Tile_Colours.RESET
-            );
-        }
+    // Prints out one coloured roof / floors
+    public static String long_section(String colour) {
+        return colour + sp12_R + "\n";
     }
 
-     */
+    // Prints out two coloured roof / floor for when the double biomes are divided vertically
+    public static String long_section_dual(String colour1, String colour2) {
+        return colour1 + sp6 + colour2 +sp6_R + "\n";
+    }
 
-    public static String token_printer(String animal) {
+    // Prints out the body of a tile; the sides, animals and empty spaces
+    public static String body(String colour1, String colour2, String animals) {
+        return sides_section(colour1) + middle_section(animals.charAt(0)) + middle_section(animals.charAt(1)) + sides_section(colour2) + "\n"
+                + sides_section(colour1) + middle_section(animals.charAt(2)) + sp3 + sides_section(colour2) +"\n";
+    }
+
+    public static String sides_section(String colour) {
+        return colour + sp3_R;
+    }
+
+    // Printing out animal (or empty) character spaces with their respective colours
+    public static String middle_section(char animal) {
         String colour;
-        String reset  = Tile_Colours.RESET;
         switch (animal) {
-            case "B" : colour = Tile_Colours.BEAR_COLOUR_BACKGROUND;
-                return colour + " B " + reset;
-            case "E": colour = Tile_Colours.ELK_COLOUR_BACKGROUND;
-                return colour + " E " + reset;
-            case "F": colour = Tile_Colours.FOX_COLOUR_BACKGROUND;
-                return colour + " F " + reset;
-            case "H": colour = Tile_Colours.HAWK_COLOUR_BACKGROUND;
-                return colour + " H " +  reset ;
-            case "S": colour = Tile_Colours.SALMON_COLOUR_BACKGROUND;
-                return colour + " S " +  reset;
+            case 'B': colour = Tile_Colours.BEAR_COLOUR;
+                return " " + colour + "B" + reset + " ";
+            case 'E': colour = Tile_Colours.ELK_COLOUR;
+                return " " + colour + "E" + reset + " ";
+            case 'F': colour = Tile_Colours.FOX_COLOUR;
+                return " " + colour + "F" + reset + " ";
+            case 'H': colour = Tile_Colours.HAWK_COLOUR;
+                return " " + colour + "H" +  reset + " ";
+            case 'S': colour = Tile_Colours.SALMON_COLOUR;
+                return " " + colour + "S" +  reset + " ";
             default:
-                return null;
+                return sp3;
         }
     }
 
+
+    public static void main(String[] args)  // some tests
+    {
+        System.out.println(print_tile_setup("FW", 1,"EHS") + "POSITION 1");
+        System.out.println(print_tile_setup("FW", 2,"B") + "POSITION 2");
+        System.out.println(print_tile_setup("FW", 3,"BS") + "POSITION 3");
+        System.out.println(print_tile_setup("FW", 4,"EFH") + "POSITION 4");
+        System.out.println(print_tile_setup("FW", 5,"FH") + "POSITION 5");
+        System.out.println(print_tile_setup("FW", 6,"S") + "POSITION 6\n\n");
+        System.out.println(print_tile_setup("RM", 3,"H"));
+        System.out.println(print_tile_setup("R", 3,"BE"));
+        System.out.println(print_tile_setup("WP", 5,"BFS"));
+        System.out.println(print_tile_setup("M", 3,"BE"));
+    }
 }
