@@ -135,9 +135,8 @@ public class Display_And_Input {
 
     public static void randomise_player_tiles_and_tokens(){
 
-        int i, j, k;
+        int i, k;
         ArrayList<String> temp_biomes = new ArrayList<>();
-        ArrayList<String> temp_tokens = new ArrayList<>();
         ArrayList<String> temp_animals = new ArrayList<>();
 
 
@@ -161,15 +160,11 @@ public class Display_And_Input {
                 Habitat_Tiles.animals.remove(0);
 
             }
-            temp_tokens.clear();
-            for (j = 0; j < 4; j ++){
-                temp_tokens.add(Wildlife_Tokens.tokens.get(0));
-                Wildlife_Tokens.tokens.remove(0);
-            }
+
 
             //Calls the constructor
 
-            players.add(new Player_Tracker(playerNames.get(i), Starter_Habitat.getStarter_Habitat_Tiles().get(i), temp_biomes, temp_animals, temp_tokens));
+            players.add(new Player_Tracker(playerNames.get(i), Starter_Habitat.getStarter_Habitat_Tiles().get(i), temp_biomes, temp_animals));
 
         }
     }
@@ -182,6 +177,7 @@ public class Display_And_Input {
     public static void display_tiles_and_tokens(int player){
 
         int i, j;
+        String culling = "";
 
         System.out.println(players.get(player).getPlayer_name() + "'s  Tiles: \n");
         System.out.println("Starter Tile: \n");
@@ -192,10 +188,39 @@ public class Display_And_Input {
             System.out.println(Tile_Printer.print_tile_setup(players.get(player).getHabitat_tiles().get(i), 1, players.get(player).getAnimal_tiles().get(i) ));
         }
 
+
+
+
         System.out.println("Wildlife Tokens: \n");
 
         for (j = 0; j < 4; j++){
-            System.out.println(Starter_Tile_Printer.token_printer(players.get(player).getWildlife_tokens().get(j)));
+
+            culling = culling + Wildlife_Tokens.tokens.get(j);
+            System.out.println(culling);
+            //System.out.println(Starter_Tile_Printer.token_printer(players.get(player).getWildlife_tokens().get(j)));
+        }
+
+
+        while(Wildlife_Tokens.verifyCulling.contains(culling)){
+            culling = "";
+            System.out.println("Culling initiated as there has been 4 tokens that are the same, replacing tokens...");
+
+            for (j = 0; j < 4; j++){
+
+
+                //later have a verify thing to prevent tokens from reaching 4
+
+
+
+
+                culling = culling + Wildlife_Tokens.tokens.get(j+4);
+
+                Wildlife_Tokens.tokens.remove(0);
+            }
+        }
+
+        for (j = 0; j < 4; j++){
+            System.out.println(Starter_Tile_Printer.token_printer(Wildlife_Tokens.tokens.get(j)));
         }
 
 
