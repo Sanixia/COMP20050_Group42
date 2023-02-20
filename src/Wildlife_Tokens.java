@@ -3,10 +3,10 @@ import java.util.Arrays;
 public class Wildlife_Tokens {
     static ArrayList<String> tokens = new ArrayList<>(
             Arrays.asList("B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B",
-                    "B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B",
-                    "B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B",
-                    "B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B",
-                    "B","B","B","B","B","B","B","B","B","B","S","S","S","S","S","S","S","S","S","S")
+                    "E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E",
+                    "F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F",
+                    "H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H",
+                    "S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S")
     );
 
     static ArrayList<String> verifyCulling = new ArrayList<>(
