@@ -178,9 +178,9 @@ public class Display_And_Input {
 
         int i, j;
         String culling = "";
-        int numForCulling = 6;
+        int numForCulling;
         int cullingChoice = 0;
-        Scanner in = new Scanner(System.in);
+
 
 
 
@@ -195,8 +195,11 @@ public class Display_And_Input {
 
 
 
+        //will need to be separated into a different function because it is too big
 
         System.out.println("Wildlife Tokens: \n");
+        printTokens();
+
         culling = getCulling(culling);
 
         numForCulling = cullingCheck(culling);
@@ -218,32 +221,71 @@ public class Display_And_Input {
                     culling = getCulling(culling);
                     break;
 
-                case 3:
-                    culling = "";
-                    Wildlife_Tokens.tokens.remove(3);
 
-                    culling = getCulling(culling);
+
+                case 3:
+
+                    cullingChoice = getCullingChoice(cullingChoice);
+                    if(cullingChoice == 1){
+                        culling = "";
+                        Wildlife_Tokens.tokens.remove(0);
+                        Wildlife_Tokens.tokens.remove(0);
+                        Wildlife_Tokens.tokens.remove(0);
+                        culling = getCulling(culling);
+                    }
+                    else{
+                        culling = getCulling(culling);
+                    }
+
                     break;
 
                 case 2:
-                    culling = "";
-                    Wildlife_Tokens.tokens.remove(2);
-                    culling = getCulling(culling);
+
+                    cullingChoice = getCullingChoice(cullingChoice);
+                    if(cullingChoice == 1){
+                        culling = "";
+                        Wildlife_Tokens.tokens.remove(0);
+                        Wildlife_Tokens.tokens.remove(0);
+                        Wildlife_Tokens.tokens.remove(1);
+                        culling = getCulling(culling);
+                    }
+                    else{
+                        culling = getCulling(culling);
+                    }
                     break;
 
                 case 1:
-                    culling = "";
-                    Wildlife_Tokens.tokens.remove(1);
-                    culling = getCulling(culling);
+
+                    cullingChoice = getCullingChoice(cullingChoice);
+                    if(cullingChoice == 1){
+                        culling = "";
+                        Wildlife_Tokens.tokens.remove(0);
+                        Wildlife_Tokens.tokens.remove(1);
+                        Wildlife_Tokens.tokens.remove(1);
+                        culling = getCulling(culling);
+                    }
+                    else{
+                        culling = getCulling(culling);
+                    }
                     break;
 
                 case 0:
-                    culling = "";
-                    Wildlife_Tokens.tokens.remove(0);
-                    culling = getCulling(culling);
+
+                    cullingChoice = getCullingChoice(cullingChoice);
+                    if(cullingChoice == 1){
+                        culling = "";
+                        Wildlife_Tokens.tokens.remove(1);
+                        Wildlife_Tokens.tokens.remove(1);
+                        Wildlife_Tokens.tokens.remove(1);
+                        culling = getCulling(culling);
+                    }
+                    else{
+                        culling = getCulling(culling);
+                    }
                     break;
 
             }
+            printTokens();
 
             numForCulling = cullingCheck(culling);
 
@@ -259,52 +301,14 @@ public class Display_And_Input {
 
 
 
+    }
 
+    public static int getCullingChoice(int cullingChoice){
 
+        Scanner in = new Scanner(System.in);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        while(Wildlife_Tokens.verifyCulling.contains(culling)){
-            culling = "";
-            System.out.println("Culling initiated as there has been 4 tokens that are the same, replacing tokens...");
-
-            for (j = 0; j < 4; j++){
-
-
-                //later have a verify thing to prevent tokens from reaching 4
-
-
-                if(Wildlife_Tokens.tokens.size() != 6){                   //otherwise would cause errors
-                    culling = culling + Wildlife_Tokens.tokens.get(j+4);
-
-                    Wildlife_Tokens.tokens.remove(0);
-                }
-
-            }
-        }
-
-
-        culling = "";
-        for (j = 0; j < 4; j++){
-            culling = culling + Wildlife_Tokens.tokens.get(j);
-            System.out.println(culling);
-            //System.out.println(Starter_Tile_Printer.token_printer(Wildlife_Tokens.tokens.get(j)));
-        }
-        if(CullingCheck(culling)){
-            System.out.println("Optional culling identified as 3 tiles are the same, would you like to get rid of the 3 or continue?");
-            System.out.print("Please enter 1 for yes or 2 for no (1/2): ");
+        System.out.println("Optional culling identified as 3 tiles are the same, would you like to get rid of the 3 or continue?");
+        System.out.print("Please enter 1 for yes or 2 to continue (1/2): ");
 
             boolean validInput = false;
 
@@ -312,37 +316,25 @@ public class Display_And_Input {
                 try{
 
                     cullingChoice = in.nextInt();
-                    if (cullingChoice == 1){
-
-                        for(j = 0; j < 4; j++){
-
-                        }
-
-
-
+                    if (cullingChoice == 1 || cullingChoice == 2){
 
                         validInput = true;
                     }
-                    else if(cullingChoice == 2){
 
-                        validInput = true;
-                    }
                     else{
-                        System.out.print("Please enter a number that is either 1 for yes or 2 for no: ");
+                        System.out.print("Please enter a number that is either 1 for yes or 2 to continue: ");
                     }
 
                 }
+
                 catch (InputMismatchException ex) {
-                    System.out.print("Please enter a valid number (1 for yes and 2 for no): ");
+                    System.out.print("Please enter a valid number (1 for yes and 2 to continue): ");
                     in.nextLine();
                 }
             }
             while (!validInput);
 
-        }
-
-
-
+            return cullingChoice;
 
     }
 
@@ -354,6 +346,15 @@ public class Display_And_Input {
             culling = culling + Wildlife_Tokens.tokens.get(i);
         }
         return culling;
+    }
+
+
+    public static void printTokens(){
+        int k;
+
+        for (k = 0; k < 4; k++){
+            System.out.println(Starter_Tile_Printer.token_printer(Wildlife_Tokens.tokens.get(k)));
+        }
     }
 
 
