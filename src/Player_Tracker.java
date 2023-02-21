@@ -17,8 +17,6 @@ public class Player_Tracker {
 
 
 
-
-
     //Used in the arraylist to keep track of players and their tiles and tokens
     public  Player_Tracker(String player_name, String starter_tile, ArrayList<String> habitat_tiles, ArrayList<String> animal_tiles){
 

@@ -178,6 +178,10 @@ public class Display_And_Input {
 
         int i, j;
         String culling = "";
+        int cullingChoice = 0;
+        Scanner in = new Scanner(System.in);
+
+
 
         System.out.println(players.get(player).getPlayer_name() + "'s  Tiles: \n");
         System.out.println("Starter Tile: \n");
@@ -197,7 +201,7 @@ public class Display_And_Input {
 
             culling = culling + Wildlife_Tokens.tokens.get(j);
             System.out.println(culling);
-            //System.out.println(Starter_Tile_Printer.token_printer(players.get(player).getWildlife_tokens().get(j)));
+
         }
 
 
@@ -211,21 +215,91 @@ public class Display_And_Input {
                 //later have a verify thing to prevent tokens from reaching 4
 
 
+                if(Wildlife_Tokens.tokens.size() != 6){                   //otherwise would cause errors
+                    culling = culling + Wildlife_Tokens.tokens.get(j+4);
 
+                    Wildlife_Tokens.tokens.remove(0);
+                }
 
-                culling = culling + Wildlife_Tokens.tokens.get(j+4);
-
-                Wildlife_Tokens.tokens.remove(0);
             }
         }
 
+
+        culling = "";
         for (j = 0; j < 4; j++){
-            System.out.println(Starter_Tile_Printer.token_printer(Wildlife_Tokens.tokens.get(j)));
+            culling = culling + Wildlife_Tokens.tokens.get(j);
+            System.out.println(culling);
+            //System.out.println(Starter_Tile_Printer.token_printer(Wildlife_Tokens.tokens.get(j)));
+        }
+        if(optionalCullingCheck(culling)){
+            System.out.println("Optional culling identified as 3 tiles are the same, would you like to get rid of the 3 or continue?");
+            System.out.print("Please enter 1 for yes or 2 for no (1/2): ");
+
+            boolean validInput = false;
+
+            do{
+                try{
+
+                    cullingChoice = in.nextInt();
+                    if (cullingChoice == 1){
+
+                        for(j = 0; j < 4; j++){
+
+                        }
+
+
+
+
+                        validInput = true;
+                    }
+                    else if(cullingChoice == 2){
+
+                        validInput = true;
+                    }
+                    else{
+                        System.out.print("Please enter a number that is either 1 for yes or 2 for no: ");
+                    }
+
+                }
+                catch (InputMismatchException ex) {
+                    System.out.print("Please enter a valid number (1 for yes and 2 for no): ");
+                    in.nextLine();
+                }
+            }
+            while (!validInput);
+
         }
 
 
 
 
+    }
+
+
+
+
+
+
+
+    //have to determine which token is the one being left over for the culling in the 3 case
+    public static boolean optionalCullingCheck(String cullingWord){
+        char firstLetter = cullingWord.charAt(0);
+        char secondLetter = cullingWord.charAt(1);
+        char thirdLetter = cullingWord.charAt(2);
+        char fourthLetter = cullingWord.charAt(3);
+
+        boolean firstThreeSame = firstLetter == secondLetter && secondLetter == thirdLetter;
+        boolean lastThreeSame = secondLetter == thirdLetter && thirdLetter == fourthLetter;
+        boolean firstAndLastTwoSame = firstLetter == thirdLetter && thirdLetter == fourthLetter;
+        boolean firstTwoAndLastSame = firstLetter == secondLetter && secondLetter == fourthLetter;
+        boolean allSame = firstLetter == secondLetter && secondLetter == thirdLetter && thirdLetter == fourthLetter;
+
+        if (allSame){
+            return
+        }
+
+
+        return firstThreeSame || lastThreeSame || firstAndLastTwoSame || firstTwoAndLastSame;
     }
 }
 
