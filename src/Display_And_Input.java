@@ -178,6 +178,7 @@ public class Display_And_Input {
 
         int i, j;
         String culling = "";
+        int numForCulling = 6;
         int cullingChoice = 0;
         Scanner in = new Scanner(System.in);
 
@@ -196,13 +197,83 @@ public class Display_And_Input {
 
 
         System.out.println("Wildlife Tokens: \n");
+        culling = getCulling(culling);
 
-        for (j = 0; j < 4; j++){
+        numForCulling = cullingCheck(culling);
 
-            culling = culling + Wildlife_Tokens.tokens.get(j);
-            System.out.println(culling);
+        while(numForCulling != 5){
+
+
+
+
+            switch(numForCulling){
+                case 4:
+                    System.out.println("Culling initiated as there has been 4 tokens that are the same, replacing tokens...");
+                    culling = "";
+
+
+                    for (j = 0; j < 4; j++){
+                        Wildlife_Tokens.tokens.remove(0);
+                    }
+                    culling = getCulling(culling);
+                    break;
+
+                case 3:
+                    culling = "";
+                    Wildlife_Tokens.tokens.remove(3);
+
+                    culling = getCulling(culling);
+                    break;
+
+                case 2:
+                    culling = "";
+                    Wildlife_Tokens.tokens.remove(2);
+                    culling = getCulling(culling);
+                    break;
+
+                case 1:
+                    culling = "";
+                    Wildlife_Tokens.tokens.remove(1);
+                    culling = getCulling(culling);
+                    break;
+
+                case 0:
+                    culling = "";
+                    Wildlife_Tokens.tokens.remove(0);
+                    culling = getCulling(culling);
+                    break;
+
+            }
+
+            numForCulling = cullingCheck(culling);
+
+
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         while(Wildlife_Tokens.verifyCulling.contains(culling)){
@@ -231,7 +302,7 @@ public class Display_And_Input {
             System.out.println(culling);
             //System.out.println(Starter_Tile_Printer.token_printer(Wildlife_Tokens.tokens.get(j)));
         }
-        if(optionalCullingCheck(culling)){
+        if(CullingCheck(culling)){
             System.out.println("Optional culling identified as 3 tiles are the same, would you like to get rid of the 3 or continue?");
             System.out.print("Please enter 1 for yes or 2 for no (1/2): ");
 
@@ -276,30 +347,59 @@ public class Display_And_Input {
     }
 
 
+    public static String getCulling(String culling){
+        int i;
+
+        for (i = 0; i < 4; i++){
+            culling = culling + Wildlife_Tokens.tokens.get(i);
+        }
+        return culling;
+    }
+
+
 
 
 
 
 
     //have to determine which token is the one being left over for the culling in the 3 case
-    public static boolean optionalCullingCheck(String cullingWord){
+    public static int cullingCheck(String cullingWord){
         char firstLetter = cullingWord.charAt(0);
         char secondLetter = cullingWord.charAt(1);
         char thirdLetter = cullingWord.charAt(2);
         char fourthLetter = cullingWord.charAt(3);
 
-        boolean firstThreeSame = firstLetter == secondLetter && secondLetter == thirdLetter;
+
+
+
+        boolean firstThreeSame = firstLetter == secondLetter && secondLetter == thirdLetter ;
         boolean lastThreeSame = secondLetter == thirdLetter && thirdLetter == fourthLetter;
         boolean firstAndLastTwoSame = firstLetter == thirdLetter && thirdLetter == fourthLetter;
         boolean firstTwoAndLastSame = firstLetter == secondLetter && secondLetter == fourthLetter;
         boolean allSame = firstLetter == secondLetter && secondLetter == thirdLetter && thirdLetter == fourthLetter;
 
         if (allSame){
-            return
+            return 4;
+        }
+        else if(firstThreeSame){
+            return 3;
+        }
+        else if(firstTwoAndLastSame){
+            return 2;
+        }
+        else if(firstAndLastTwoSame){
+            return 1;
+        }
+        else if(lastThreeSame){
+            return 0;
+        }
+
+        else{
+            return 5;
         }
 
 
-        return firstThreeSame || lastThreeSame || firstAndLastTwoSame || firstTwoAndLastSame;
+
     }
 }
 
