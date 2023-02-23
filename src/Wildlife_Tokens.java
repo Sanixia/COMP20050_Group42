@@ -9,8 +9,9 @@ public class Wildlife_Tokens {
                     "S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S")
     );
 
-    static ArrayList<String> verifyCulling = new ArrayList<>(
-            Arrays.asList("BBBB", "EEEE", "FFFF", "HHHH", "SSSS")
+    static ArrayList<String> natureTokens = new ArrayList<>(
+            Arrays.asList("NT","NT","NT","NT","NT","NT","NT","NT","NT","NT",
+                            "NT","NT","NT","NT","NT","NT","NT","NT","NT","NT")
     );
 
 

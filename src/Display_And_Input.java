@@ -176,10 +176,8 @@ public class Display_And_Input {
 
     public static void display_tiles_and_tokens(int player){
 
-        int i, j;
-        String culling = "";
-        int numForCulling;
-        int cullingChoice = 0;
+        int i;
+
 
 
 
@@ -199,6 +197,14 @@ public class Display_And_Input {
 
         System.out.println("Wildlife Tokens: \n");
         printTokens();
+        callTheCulling();
+    }
+
+    public static void callTheCulling(){
+
+        String culling = "";
+        int numForCulling, j;
+        int cullingChoice = 0;
 
         culling = getCulling(culling);
 
@@ -292,15 +298,6 @@ public class Display_And_Input {
 
 
         }
-
-
-
-
-
-
-
-
-
     }
 
     public static int getCullingChoice(int cullingChoice){

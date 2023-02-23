@@ -131,12 +131,12 @@ public class Ex
         return sp12;
     }
 
-
+    static ArrayList<String> board = new ArrayList<>();
 
 
     public static void main(String[] args)
     {
-        ArrayList<String> board = new ArrayList<>();
+
 
 
         board.add(half_tile);
