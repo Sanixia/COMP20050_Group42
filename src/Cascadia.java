@@ -20,7 +20,7 @@ public class Cascadia
 
           do{
 
-              command_state = Command_State.get_Input();   // Setting the command state Play or Quit
+              command_state = Command_State.get_Input();   // Setting the command state
 
 
 
@@ -40,7 +40,6 @@ public class Cascadia
                   else if (command_state.getChoice() == 2){
 
 
-
                       if (playerNum == Display_And_Input.getPlayer_count() - 1){    //resets to the start of the player list
                           playerNum = 0;
                       }
@@ -49,6 +48,19 @@ public class Cascadia
                       }
                       System.out.println("Next player is up...");
 
+                  }
+
+
+
+                  else if (command_state.getChoice() == 3){
+                      do {
+
+
+
+
+
+
+                      }while (!command_state.isInMainMenu());
                   }
 
 

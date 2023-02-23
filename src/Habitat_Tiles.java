@@ -28,11 +28,7 @@ public class Habitat_Tiles
     );
 
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 85; i++) {
-            System.out.println((i+1) + " biome: " + biome.get(i) + "   animal: " + animals.get(i));
-        }
-    };
+
 };
 
 

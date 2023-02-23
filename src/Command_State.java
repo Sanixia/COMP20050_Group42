@@ -9,20 +9,23 @@ public class Command_State {
     public Command_State(int input){
 
         if (input == 1){
-            state_type = state.PLAY;
+            state_type = state.MAIN_MENU;
             this.choice = 1;
         }
         else if (input == 2){
-            state_type = state.PLAY;
+            state_type = state.MAIN_MENU;
             this.choice = 2;
         }
-        else if (input == 3){
+        else if(input == 3){
+            state_type = state.BOARD_MENU;
+        }
+        else if (input == 4){
             state_type = state.QUIT;
         }
 
     }
 
-    private static state state_type;           // Initiliases the enum for state of the game
+    private static state state_type;           // Initializes the enum for state of the game
 
     public static Command_State get_Input(){
         Scanner in = new Scanner(System.in);
@@ -30,10 +33,11 @@ public class Command_State {
         Command_State commandState = null;
 
         while(!check){
-            System.out.println("\n\nEnter a command from the menu (1, 2 or 3) ");
-            System.out.println("1) Show starter habitat, habitats and tokens");
-            System.out.println("2) Next player habitat");
-            System.out.println("3) Quit");
+            System.out.println("\n\nEnter a command from the menu (1, 2, 3 or 4) ");
+            System.out.println("1) Show current player's starter habitat tile, habitat tiles and tokens");
+            System.out.println("2) Next player's turn");
+            System.out.println("3) Show board");
+            System.out.println("4) Quit");
 
             String user_input = in.nextLine();
 
@@ -46,14 +50,18 @@ public class Command_State {
                     commandState = new Command_State(2);
                     check = true;
                 }
-                else{
+                else if(user_input.equals("3")){
                     commandState = new Command_State(3);
+                    check = true;
+                }
+                else{
+                    commandState = new Command_State(4);
                     check = true;
                 }
 
             }
             else{
-                System.out.println("Please enter 1, 2 or 3.");
+                System.out.println("Please enter 1, 2, 3 or 4.");
 
             }
         }
@@ -67,13 +75,14 @@ public class Command_State {
 
 
     private enum state {                    // states for game which can be added to later
-        PLAY,
+        MAIN_MENU,
+        BOARD_MENU,
         QUIT
     }
 
 
     public static boolean isValid(String input){
-        return input.equals("1") || input.equals("2") || input.equals("3");
+        return input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4");
     }
 
     public boolean isQuit(){
@@ -81,7 +90,11 @@ public class Command_State {
     }
 
     public boolean isInPlay() {
-        return state_type == state.PLAY;
+        return state_type != state.QUIT;
+    }
+
+    public boolean isInMainMenu(){
+        return state_type == state.MAIN_MENU;
     }
 
     public static void quitMessage(){

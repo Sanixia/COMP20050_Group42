@@ -13,6 +13,10 @@ public class Player_Tracker {
 
 
 
+    private int playerTurn = 0;
+
+
+
 
 
 
@@ -24,6 +28,7 @@ public class Player_Tracker {
         this.starter_tile = starter_tile;
         this.habitat_tiles = habitat_tiles;
         this.animal_tiles = animal_tiles;
+
 
 
 
@@ -50,7 +55,7 @@ public class Player_Tracker {
     }
 
     public ArrayList<String> getHabitat_tiles() {
-        return habitat_tiles;
+        return this.habitat_tiles;
     }
 
     public void setHabitat_tiles(ArrayList<String> habitat_tiles) {
@@ -65,6 +70,14 @@ public class Player_Tracker {
 
     public void setAnimal_tiles(ArrayList<String> animal_tiles) {
         this.animal_tiles = animal_tiles;
+    }
+
+    public int getPlayerTurn() {
+        return playerTurn;
+    }
+
+    public void setPlayerTurn(int playerTurn) {
+        this.playerTurn = playerTurn;
     }
 
 

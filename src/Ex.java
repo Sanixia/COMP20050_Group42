@@ -139,11 +139,7 @@ public class Ex
 
 
 
-        board.add(half_tile);
-        board.add(encoder("F", "0", "E"));
-        board.add(newline);
-        board.add(encoder("RM", "5", "BEH"));
-        board.add(encoder("WP", "6", "FS"));
+
 
         /*
         //board.add(half_tile);
@@ -183,7 +179,19 @@ public class Ex
 
 
         // TODO put into a FUNCTION
+        printTiles();
 
+        /* // can be used to test singular tiles
+        System.out.println(print_tile_setup("FW", 1,"EHS") + "POSITION 1");
+        System.out.println(print_tile_setup("FW", 2,"B") + "POSITION 2");
+        System.out.println(print_tile_setup("FW", 3,"BS") + "POSITION 3");
+        System.out.println(print_tile_setup("FW", 4,"EFH") + "POSITION 4");
+        System.out.println(print_tile_setup("FW", 5,"FH") + "POSITION 5");
+        System.out.println(print_tile_setup("FW", 6,"S") + "POSITION 6");
+        */
+    }
+
+    public static void printTiles(){
         int n = board.size();
 
         String row, line_1 = "", line_2 = "", line_3 = "", line_4 = ""; //, tile_str;
@@ -209,15 +217,6 @@ public class Ex
                 line_4 = "";
             }
         }
-
-        /* // can be used to test singular tiles
-        System.out.println(print_tile_setup("FW", 1,"EHS") + "POSITION 1");
-        System.out.println(print_tile_setup("FW", 2,"B") + "POSITION 2");
-        System.out.println(print_tile_setup("FW", 3,"BS") + "POSITION 3");
-        System.out.println(print_tile_setup("FW", 4,"EFH") + "POSITION 4");
-        System.out.println(print_tile_setup("FW", 5,"FH") + "POSITION 5");
-        System.out.println(print_tile_setup("FW", 6,"S") + "POSITION 6");
-        */
     }
 
     public static String encoder(String b, String r, String a) { // encodes strings into 1 String

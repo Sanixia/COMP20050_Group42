@@ -119,9 +119,6 @@ public class Display_And_Input {
 
         Collections.shuffle(playerNames);
 
-
-
-
         for (i = 0; i < player_count; i++){
             System.out.println((i+1) + ") " + playerNames.get(i));
 
@@ -154,6 +151,7 @@ public class Display_And_Input {
 
             for (k = 0; k < 20; k++){
                 temp_biomes.add(Habitat_Tiles.biome.get(0));                                        // adds tiles to temp and removes them from the original
+
                 Habitat_Tiles.biome.remove(0);
 
                 temp_animals.add(Habitat_Tiles.animals.get(0));
@@ -162,9 +160,11 @@ public class Display_And_Input {
             }
 
 
+
             //Calls the constructor
 
             players.add(new Player_Tracker(playerNames.get(i), Starter_Habitat.getStarter_Habitat_Tiles().get(i), temp_biomes, temp_animals));
+
 
         }
     }
@@ -182,18 +182,19 @@ public class Display_And_Input {
 
 
 
+
         System.out.println(players.get(player).getPlayer_name() + "'s  Tiles: \n");
         System.out.println("Starter Tile: \n");
         Starter_Tile_Printer.starter_tile_printout(players.get(player).getStarter_tile());
 
         System.out.println("\nHabitat Tiles: \n");
+
         for (i = 0; i < 4; i++){
             System.out.println(Tile_Printer.print_tile_setup(players.get(player).getHabitat_tiles().get(i), 1, players.get(player).getAnimal_tiles().get(i) ));
         }
 
 
 
-        //will need to be separated into a different function because it is too big
 
         System.out.println("Wildlife Tokens: \n");
         printTokens();
@@ -204,7 +205,7 @@ public class Display_And_Input {
 
         String culling = "";
         int numForCulling, j;
-        int cullingChoice = 0;
+        int cullingChoice = 0, continueOption = 0;
 
         culling = getCulling(culling);
 
@@ -240,6 +241,7 @@ public class Display_And_Input {
                         culling = getCulling(culling);
                     }
                     else{
+                        continueOption = 1;
                         culling = getCulling(culling);
                     }
 
@@ -256,6 +258,7 @@ public class Display_And_Input {
                         culling = getCulling(culling);
                     }
                     else{
+                        continueOption = 1;
                         culling = getCulling(culling);
                     }
                     break;
@@ -271,6 +274,7 @@ public class Display_And_Input {
                         culling = getCulling(culling);
                     }
                     else{
+                        continueOption = 1;
                         culling = getCulling(culling);
                     }
                     break;
@@ -286,14 +290,23 @@ public class Display_And_Input {
                         culling = getCulling(culling);
                     }
                     else{
+                        continueOption = 1;
                         culling = getCulling(culling);
                     }
                     break;
 
             }
+
+
             printTokens();
 
-            numForCulling = cullingCheck(culling);
+            if (continueOption == 1) {
+                numForCulling = 5;
+            }
+            else{
+                numForCulling = cullingCheck(culling);
+            }
+
 
 
 
