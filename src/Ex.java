@@ -15,7 +15,7 @@ public class Ex
     // half and full empty tile spaces for the board
     private static final String half_tile = "H_null_null";
     private static final String tile = "T_null_null";
-    private static final String newline = "N_null_null";
+    private static final String newline = "\n";
 
 
     // function which gets the necessary biome colours before passing on to main print function
@@ -35,7 +35,6 @@ public class Ex
         switch (biome_tile) {
             case "H": return empty_half_tiles();
             case "T": return empty_tiles();
-            case "N": return "\n";
             case "F": col1=Tile_Colours.FOREST_COLOUR;  break;
             case "W": col1=Tile_Colours.WETLAND_COLOUR;  break;
             case "R": col1=Tile_Colours.RIVER_COLOUR;  break;
@@ -142,7 +141,7 @@ public class Ex
 
         board.add(half_tile);
         board.add(encoder("F", "0", "E"));
-        //board.add(newline);
+        board.add(newline);
         board.add(encoder("RM", "5", "BEH"));
         board.add(encoder("WP", "6", "FS"));
 
@@ -184,7 +183,7 @@ public class Ex
 
 
         // TODO put into a FUNCTION
-        String newline = "n";
+
         int n = board.size();
 
         String row, line_1 = "", line_2 = "", line_3 = "", line_4 = ""; //, tile_str;
@@ -192,7 +191,7 @@ public class Ex
         for (int i=0; i<n; i++) {
             // tile_str = board.get(i);
 
-            if (board.get(i) != newline) {
+            if (!board.get(i).equals(newline)) {
                 String tile = print_tile_setup(board.get(i));
                 line_1 += splitter(tile, 0);
                 line_2 += splitter(tile, 1);
@@ -221,7 +220,7 @@ public class Ex
         */
     }
 
-    public static String encoder(String b, String r, String a) { // encodes string into 1 String
+    public static String encoder(String b, String r, String a) { // encodes strings into 1 String
         return b + "_" + r + "_" + a;
     }
 
