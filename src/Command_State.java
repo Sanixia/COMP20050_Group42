@@ -11,15 +11,15 @@ public class Command_State {
         if(inputMainMenu == 1){
             if (mainMenuInput == 1){
                 state_type = state.MAIN_MENU;
-                this.choice = 1;
+                choice = 1;
             }
             else if (mainMenuInput == 2){
                 state_type = state.MAIN_MENU;
-                this.choice = 2;
+                choice = 2;
             }
             else if(mainMenuInput == 3){
                 state_type = state.BOARD_MENU;
-                this.choice = 3;
+                choice = 3;
             }
             else if (mainMenuInput == 4){
                 state_type = state.QUIT;
@@ -31,11 +31,11 @@ public class Command_State {
 
             if(boardMenuInput == 1){
                 state_type = state.BOARD_MENU;
-                this.choice = 4;
+                choice = 4;
             }
             else if(boardMenuInput == 2){
                 state_type = state.BOARD_MENU;
-                this.choice = 5;
+                choice = 5;
             }
             else{
                 state_type = state.MAIN_MENU;

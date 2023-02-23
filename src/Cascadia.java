@@ -21,15 +21,16 @@ public class Cascadia
           do{
 
               command_state = Command_State.get_Input();   // Setting the command state
+              if (randomCheck){
+                  Display_And_Input.randomise_player_tiles_and_tokens();          // Has to do the randomization once else it will cause errors
+                  randomCheck = false;
+              }
 
 
 
               if (command_state.isInPlay()){
 
-                  if (randomCheck){
-                      Display_And_Input.randomise_player_tiles_and_tokens();          // Has to do the randomization once else it will cause errors
-                      randomCheck = false;
-                  }
+
 
 
                   if (command_state.getChoice() == 1){
@@ -39,6 +40,8 @@ public class Cascadia
 
                   else if (command_state.getChoice() == 2){
 
+                      Display_And_Input.getPlayers().get(playerNum).setPlayerTurn(Display_And_Input.getPlayers().get(playerNum).getPlayerTurn());  //increments turn by 1 each time this is called
+
 
                       if (playerNum == Display_And_Input.getPlayer_count() - 1){    //resets to the start of the player list
                           playerNum = 0;
@@ -46,7 +49,7 @@ public class Cascadia
                       else{
                           playerNum++;
                       }
-                      System.out.println("Next player is up...");
+                      System.out.println(Display_And_Input.getPlayers().get(playerNum).getPlayer_name() + " is up...");
 
                   }
 
@@ -58,8 +61,20 @@ public class Cascadia
 
 
                       do {
+                          Display_And_Input.display_board(playerNum);
                           command_state = Command_State.get_Input();
 
+                          if (command_state.getChoice() == 1){
+
+                          }
+
+                          else if(command_state.getChoice() == 2){
+
+                          }
+
+                          else{
+
+                          }
 
 
 

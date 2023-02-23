@@ -146,6 +146,7 @@ public class Display_And_Input {
 
 
         for (i = 0; i < player_count; i++){
+            /*
             temp_biomes.clear();                                                                    // Needs to be cleared every i loop
             temp_animals.clear();
 
@@ -159,14 +160,36 @@ public class Display_And_Input {
 
             }
 
+         */
+
 
 
             //Calls the constructor
 
-            players.add(new Player_Tracker(playerNames.get(i), Starter_Habitat.getStarter_Habitat_Tiles().get(i), temp_biomes, temp_animals));
+            players.add(new Player_Tracker(playerNames.get(i), Starter_Habitat.getStarter_Habitat_Tiles().get(i)));
 
 
         }
+    }
+
+
+    public static void display_board(int player){
+        int i;
+
+
+        System.out.println("Board: \n");
+        Starter_Tile_Printer.starter_tile_printout(players.get(player).getStarter_tile());
+
+        System.out.println("\nHabitat Tiles: \n");
+
+        for (i = 0; i < 4; i++){
+            System.out.println(Tile_Printer.print_tile_setup(Habitat_Tiles.biome.get(i), 1, Habitat_Tiles.animals.get(i)));
+        }
+
+
+        System.out.println("Wildlife Tokens: \n");
+        printTokens();
+        callTheCulling();
     }
 
 
@@ -178,11 +201,6 @@ public class Display_And_Input {
 
         int i;
 
-
-
-
-
-
         System.out.println(players.get(player).getPlayer_name() + "'s  Tiles: \n");
         System.out.println("Starter Tile: \n");
         Starter_Tile_Printer.starter_tile_printout(players.get(player).getStarter_tile());
@@ -190,7 +208,7 @@ public class Display_And_Input {
         System.out.println("\nHabitat Tiles: \n");
 
         for (i = 0; i < 4; i++){
-            System.out.println(Tile_Printer.print_tile_setup(players.get(player).getHabitat_tiles().get(i), 1, players.get(player).getAnimal_tiles().get(i) ));
+            System.out.println(Tile_Printer.print_tile_setup(Habitat_Tiles.biome.get(i), 1,  Habitat_Tiles.animals.get(i) ));
         }
 
 
