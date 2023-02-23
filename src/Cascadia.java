@@ -27,7 +27,7 @@ public class Cascadia
               if (command_state.isInPlay()){
 
                   if (randomCheck){
-                      Display_And_Input.randomise_player_tiles_and_tokens();          // Has to do the randomistion once else it will cause errors
+                      Display_And_Input.randomise_player_tiles_and_tokens();          // Has to do the randomization once else it will cause errors
                       randomCheck = false;
                   }
 
@@ -53,7 +53,12 @@ public class Cascadia
 
 
                   else if (command_state.getChoice() == 3){
+
+
+
+
                       do {
+                          command_state = Command_State.get_Input();
 
 
 
