@@ -114,10 +114,9 @@ public class Ex
 
                 case 6: return long_section(colour1) + body(colour2, colour1, animals) + long_section(colour2);
                 default:
-                    break;
+                    return long_section(colour1) + body(colour2, colour1, animals) + long_section(colour2);
             }
         }
-        return null;
     }
 
     //// Line by line printing functions
