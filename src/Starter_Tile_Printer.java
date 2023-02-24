@@ -16,12 +16,15 @@ public class Starter_Tile_Printer {
         switch (starterType) {
             case "Forest":
 
+                /*
                 Ex.board.add(half_tile);
                 Ex.board.add(Ex.encoder("F", "0", "E"));
                 Ex.board.add(newline);
                 Ex.board.add(Ex.encoder("RM", "5", "BEH"));
                 Ex.board.add(Ex.encoder("WP", "6", "FS"));
                 Ex.printTiles();
+                 */
+
 
                 break;
             case "Mountain":
