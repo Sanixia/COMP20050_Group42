@@ -47,7 +47,7 @@ public class tile {
         board.add(new ArrayList<>());
 
         board_add_tile("F", "BES", 0, 0, 1);
-        place_animal_token("B", 0, 0);
+        place_animal_token("b", 0, 0);
         print_board();
     }
 
@@ -57,7 +57,7 @@ public class tile {
     }
 
     public static void place_animal_token(String animals, int row, int pos) {
-        board.get(row).get(pos).setAnimals("e");
+        board.get(row).get(pos).setAnimals(animals);
     }
 
     public static void print_board() {

@@ -16,6 +16,7 @@ public class Starter_Tile_Printer {
         switch (starterType) {
             case "Forest":
 
+
                 /*
                 Ex.tile.add(half_tile);
                 Ex.tile.add(Ex.encoder("F", "0", "E"));
@@ -24,7 +25,6 @@ public class Starter_Tile_Printer {
                 Ex.tile.add(Ex.encoder("WP", "6", "FS"));
                 Ex.printTiles();
                  */
-
 
 
 
