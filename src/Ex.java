@@ -8,19 +8,38 @@ public class Ex
     private static final String sp12_R = "            " + reset;
     private static final String sp6_R = "      " + reset;
     private static final String sp3_R = "   " + reset;
-    private static final String sp12 = "            ";
     private static final String sp6 = "      ";
     private static final String sp3 = "   ";
-
-    // half and full empty tile spaces for the board
-    private static final String half_tile = "H_null_null";
-    private static final String tile = "T_null_null";
     private static final String newline = "\n";
 
+    public static void row_printer(ArrayList<tile> row, int max) {
+        int n = row.size();
+        String row_str, line_1 = "", line_2 = "", line_3 = "", line_4 = "";
+
+        for (int i=0; i<n; i++) {
+            if (!row.get(i).equals(newline)) {
+                String tile = print_tile_setup(row.get(i));
+                line_1 += splitter(tile, 0);
+                line_2 += splitter(tile, 1);
+                line_3 += splitter(tile, 2);
+                line_4 += splitter(tile, 3);
+            }
+
+            if (i==n-1) {
+                row_str = line_1 + "\n" + line_2 + "\n" + line_3 + "\n" + line_4;
+                System.out.println(row_str);
+                row_str = "";
+                line_1 = "";
+                line_2 = "";
+                line_3 = "";
+                line_4 = "";
+            }
+        }
+    }
 
     // function which gets the necessary biome colours before passing on to main print function
     // Note: cases aren't commutative i.e. FW works but WF does not
-    public static String print_tile_setup(board tile)
+    public static String print_tile_setup(tile tile)
     {
         String biome_tile = tile.getBiome();
         String animals = tile.getAnimals() + "   "; // adding 3 empty spaces to avoid program crashing in middle_section function
@@ -29,8 +48,6 @@ public class Ex
         String col1 = null, col2 = null;
 
         switch (biome_tile) {
-            case "H": return empty_half_tiles();
-            case "T": return empty_tiles();
             case "F": col1=Tile_Colours.FOREST_COLOUR;  break;
             case "W": col1=Tile_Colours.WETLAND_COLOUR;  break;
             case "R": col1=Tile_Colours.RIVER_COLOUR;  break;
@@ -80,6 +97,7 @@ public class Ex
         return null;
     }
 
+    //// Line by line printing functions
     // Prints out one coloured roof / floors
     public static String long_section(String colour) {
         return colour + sp12_R + "\n";
@@ -130,47 +148,42 @@ public class Ex
         }
     }
 
-    public static String empty_half_tiles() {
-        return "------";
-    }
-
-    public static String empty_tiles() {
-        return "+----------+";
-    }
 
 
 
-    public static void main(String[] args) {
-    }
-
-    public static void row_printer(ArrayList<board> row) {
-        int n = row.size();
-        String row_str, line_1 = "", line_2 = "", line_3 = "", line_4 = "";
-
-        for (int i=0; i<n; i++) {
-            if (!row.get(i).equals(newline)) {
-                String tile = print_tile_setup(row.get(i));
-                line_1 += splitter(tile, 0);
-                line_2 += splitter(tile, 1);
-                line_3 += splitter(tile, 2);
-                line_4 += splitter(tile, 3);
-            }
-
-            if (i==n-1) {
-                row_str = line_1 + "\n" + line_2 + "\n" + line_3 + "\n" + line_4;
-                System.out.println(row_str);
-                row_str = "";
-                line_1 = "";
-                line_2 = "";
-                line_3 = "";
-                line_4 = "";
-            }
+    public static String blank_tile_setup(char c) {
+        switch (c) {
+            case 'L':
+                return empty_left() + newline + empty_left_side() + newline + empty_left_side() + newline + empty_left();
+            case 'R':
+                return empty_right() + newline + empty_right_side() + newline + empty_right_side() + newline + empty_right();
+            default:
+                return empty_left() + empty_right() + newline + empty_body() + newline + empty_left() + empty_right();
         }
     }
 
-    public static String encoder(String b, String r, String a) { // encodes strings into 1 String
-        return b + "_" + r + "_" + a;
+
+    public static String empty_left() {
+        return "+-----";
     }
+
+    public static String empty_right() {
+        return "-----+";
+    }
+
+    public static String empty_body() {
+        return empty_left_side() + empty_right_side() + newline + empty_left_side() + empty_right_side();
+    }
+
+    public static String empty_left_side() {
+        return "|      ";
+    }
+
+    public static String empty_right_side() {
+        return "     |";
+    }
+
+
 
     public static String splitter(String str, int line) {
         if (str.contains("\n")) {

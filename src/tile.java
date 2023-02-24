@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 
-public class board {
+public class tile {
 
     private String biome;
     private String animals;
     private int rotation;
-    private double position;
+    private int position;
 
-    static ArrayList<ArrayList<board>> board = new ArrayList<>();;
+    static ArrayList<ArrayList<tile>> board = new ArrayList<>();;
 
-    public board(String biome, String animals, int rotation, double position) {
+    public tile(String biome, String animals, int rotation, double position) {
         this.biome = biome;
         this.animals = animals;
         this.rotation = rotation;
@@ -24,7 +24,7 @@ public class board {
     public int getRotation() {
         return rotation;
     }
-    public double getPosition() {
+    public int getPosition() {
         return position;
     }
 
@@ -34,31 +34,35 @@ public class board {
     public void setRotation(int rotation) {
         this.rotation = rotation;
     }
-    public void setPosition(double position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 
 
     public static void main(String[] args)
     {
-        board_add_tile("F", "BES", 0, 0, 0);
+        board.add(new ArrayList<>());
+        board.add(new ArrayList<>());
+        board.add(new ArrayList<>());
+        board.add(new ArrayList<>());
+
+        board_add_tile("F", "BES", 0, 0, 1);
+        place_animal_token("B", 0, 0);
+        print_board();
     }
 
     public static void board_add_tile(String biome, String animals, int rotation, int row, int pos) {
-        board tile = new board(biome, animals, rotation, pos);
-
-        board.add(new ArrayList<>());
-        board.add(new ArrayList<>());
-        board.add(new ArrayList<>());
+        tile tile = new tile(biome, animals, rotation, pos);
         board.get(row).add(tile);
-        print_board();
+    }
+
+    public static void place_animal_token(String animals, int row, int pos) {
         board.get(row).get(pos).setAnimals("e");
-        print_board();
     }
 
     public static void print_board() {
         for (int i=0; i<board.size(); i++) {
-            Ex.row_printer(board.get(i));
+            Ex.row_printer(board.get(i), 2);
         }
     }
 }

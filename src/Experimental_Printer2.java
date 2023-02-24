@@ -12,7 +12,7 @@ public class Experimental_Printer2
     private static final String sp6 = "      ";
     private static final String sp3 = "   ";
 
-    // half and full empty tile spaces for the board
+    // half and full empty tile spaces for the tile
     private static final String half_tile = "H_null_null";
     private static final String tile = "T_null_null";
 

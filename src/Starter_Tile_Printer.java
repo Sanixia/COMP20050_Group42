@@ -17,13 +17,15 @@ public class Starter_Tile_Printer {
             case "Forest":
 
                 /*
-                Ex.board.add(half_tile);
-                Ex.board.add(Ex.encoder("F", "0", "E"));
-                Ex.board.add(newline);
-                Ex.board.add(Ex.encoder("RM", "5", "BEH"));
-                Ex.board.add(Ex.encoder("WP", "6", "FS"));
+                Ex.tile.add(half_tile);
+                Ex.tile.add(Ex.encoder("F", "0", "E"));
+                Ex.tile.add(newline);
+                Ex.tile.add(Ex.encoder("RM", "5", "BEH"));
+                Ex.tile.add(Ex.encoder("WP", "6", "FS"));
                 Ex.printTiles();
                  */
+
+
 
 
                 break;
