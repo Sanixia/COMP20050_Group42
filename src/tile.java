@@ -9,10 +9,11 @@ public class tile {
 
     static ArrayList<ArrayList<tile>> board = new ArrayList<>();;
 
-    public tile(String biome, String animals, int rotation, double position) {
+    public tile(String biome, String animals, int rotation, int position) {
         this.biome = biome;
         this.animals = animals;
         this.rotation = rotation;
+        this.position = position;
     }
 
     public String getBiome() {
@@ -47,7 +48,7 @@ public class tile {
         board.add(new ArrayList<>());
 
         board_add_tile("F", "BES", 0, 0, 1);
-        board_add_tile("RM", "BEH", 0, 1, 1);
+        board_add_tile("RM", "BEH", 0, 1, 0);
         board_add_tile("WP", "FS", 0, 1, 1);
         //place_animal_token("b", 0, 0);
         print_board();

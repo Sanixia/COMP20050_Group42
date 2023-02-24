@@ -198,7 +198,7 @@ public class Ex
     }
 
     public static String empty_left_side() {
-        return "|      ";
+        return "|     ";
     }
 
     public static String empty_right_side() {
