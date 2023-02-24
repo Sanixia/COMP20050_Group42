@@ -61,20 +61,9 @@ public class Cascadia
 
 
                       do {
-                          Display_And_Input.display_board(playerNum);
+                          Display_And_Input.display_tiles_and_tokens(playerNum);
                           command_state = Command_State.get_Input();
 
-                          if (command_state.getChoice() == 1){
-
-                          }
-
-                          else if(command_state.getChoice() == 2){
-
-                          }
-
-                          else{
-
-                          }
 
 
 
