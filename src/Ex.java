@@ -13,17 +13,40 @@ public class Ex
     private static final String newline = "\n";
 
     public static void row_printer(ArrayList<tile> row, int max) {
-        int n = row.size();
-        String row_str, line_1 = "", line_2 = "", line_3 = "", line_4 = "";
+        int n = row.size(), pos, odd=0;
+        String row_str, line_1 = "", line_2 = "", line_3 = "", line_4 = "", tile_print;
+        tile t;
 
         for (int i=0; i<n; i++) {
-            if (!row.get(i).equals(newline)) {
-                String tile = print_tile_setup(row.get(i));
-                line_1 += splitter(tile, 0);
-                line_2 += splitter(tile, 1);
-                line_3 += splitter(tile, 2);
-                line_4 += splitter(tile, 3);
+            t = row.get(i);
+            pos = t.getPosition();
+
+            if (pos%2==1) {
+                odd = 1;
+                pos += 1;
             }
+            pos = pos/2;
+
+            for (int j=i; j<pos; j++) {
+                if (odd == 1) {
+                    tile_print = blank_tile_setup('L');
+                } else {
+                    tile_print = blank_tile_setup('t');
+                }
+
+                line_1 += splitter(tile_print, 0);
+                line_2 += splitter(tile_print, 1);
+                line_3 += splitter(tile_print, 2);
+                line_4 += splitter(tile_print, 3);
+            }
+
+
+            tile_print = print_tile_setup(t);
+            line_1 += splitter(tile_print, 0);
+            line_2 += splitter(tile_print, 1);
+            line_3 += splitter(tile_print, 2);
+            line_4 += splitter(tile_print, 3);
+
 
             if (i==n-1) {
                 row_str = line_1 + "\n" + line_2 + "\n" + line_3 + "\n" + line_4;

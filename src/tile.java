@@ -46,7 +46,9 @@ public class tile {
         board.add(new ArrayList<>());
         board.add(new ArrayList<>());
 
-        board_add_tile("F", "BES", 0, 0, 1);
+        board_add_tile("F", "BES", 0, 0, 2);
+        board_add_tile("F", "BEH", 0, 1, 1);
+        board_add_tile("F", "FS", 0, 1, 1);
         place_animal_token("b", 0, 0);
         print_board();
     }
