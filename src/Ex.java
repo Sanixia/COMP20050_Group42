@@ -30,8 +30,9 @@ public class Ex
             for (int j=i; j<pos; j++) {
                 if (odd == 1) {
                     tile_print = blank_tile_setup('L');
+                    odd = 0;
                 } else {
-                    tile_print = blank_tile_setup('t');
+                    tile_print = blank_tile_setup('T');
                 }
 
                 line_1 += splitter(tile_print, 0);
@@ -51,7 +52,6 @@ public class Ex
             if (i==n-1) {
                 row_str = line_1 + "\n" + line_2 + "\n" + line_3 + "\n" + line_4;
                 System.out.println(row_str);
-                row_str = "";
                 line_1 = "";
                 line_2 = "";
                 line_3 = "";
@@ -179,8 +179,10 @@ public class Ex
                 return empty_left() + newline + empty_left_side() + newline + empty_left_side() + newline + empty_left();
             case 'R':
                 return empty_right() + newline + empty_right_side() + newline + empty_right_side() + newline + empty_right();
-            default:
+            case 'T':
                 return empty_left() + empty_right() + newline + empty_body() + newline + empty_left() + empty_right();
+            default:
+                return null;
         }
     }
 

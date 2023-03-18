@@ -1,21 +1,26 @@
 import java.util.ArrayList;
 
-public class tile {
-
+// tile.java but modified to use 2d array instead of list of lists for board
+public class tile2D {
+    private static final int MAXSIZE = 24;
     private String biome;
     private String animals;
     private int rotation;
     private int position;
-
     private static int max_row=4;
+    private static int start_row=0;
+    private static int end_row=2;
+    public static int odd = 1;
 
-    static ArrayList<ArrayList<tile>> board = new ArrayList<>();;
 
-    public tile(String biome, String animals, int rotation, int position) {
+    static ArrayList<ArrayList<tile>> board1 = new ArrayList<>();
+    static tile[][] board2 = new tile[MAXSIZE*2][MAXSIZE];
+
+    public tile2D(String biome, String animals, int rotation, int column) {
         this.biome = biome;
         this.animals = animals;
         this.rotation = rotation;
-        this.position = position;
+        this.position = column;
     }
 
     public String getBiome() {
@@ -44,11 +49,6 @@ public class tile {
 
     public static void main(String[] args)
     {
-        board.add(new ArrayList<>());
-        board.add(new ArrayList<>());
-        board.add(new ArrayList<>());
-        board.add(new ArrayList<>());
-
         board_add_tile("F", "BES", 0, 0, 0);
         board_add_tile("F", "BES", 0, 0, 3);
 
@@ -61,31 +61,31 @@ public class tile {
         //place_animal_token("s", 0, 0);
         print_board();
 
-        //indent(1);
+        //indent(2);
         //print_board();
     }
 
-    public static void board_add_tile(String biome, String animals, int rotation, int row, int pos) {
-        tile tile = new tile(biome, animals, rotation, pos);
-        board.get(row).add(tile);
+    public static void board_add_tile(String biome, String animals, int rotation, int row, int col) { //TODO
+        tile tile = new tile(biome, animals, rotation, col);
+        board2[row][col] = tile;
     }
 
-    public static void place_animal_token(String animals, int row, int pos) {
-        board.get(row).get(pos).setAnimals(animals);
+    public static void place_animal_token(String animal, int row, int col) {
+        board2[row][col].setAnimals(animal);
     }
 
     public static void print_board() {
-        for (int i=0; i<board.size(); i++) {
-            Ex.row_printer(board.get(i), max_row);
+        for (int i=start_row; i<end_row; i++) {
+            Ex2D.row_printer(board2[i], max_row);
         }
     }
 
     public static void indent(int space) {
         int index;
-        for (int i=0; i<board.size(); i++) {
-            for (int j=0; j<board.get(i).size(); j++) {
-                index = board.get(i).get(j).getPosition()+space;
-                board.get(i).get(j).setPosition(index);
+        for (int i=0; i<MAXSIZE; i++) {
+            for (int j=0; j<max_row; j++) {
+                index = board2[i][j].getPosition()+space;
+                board2[i][j].setPosition(index);
             }
         }
     }
