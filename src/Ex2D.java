@@ -13,10 +13,10 @@ public class Ex2D
 
 
 
-    public static void row_printer(tile[] arr, int max) {
+    public static void row_printer(tile2D[] arr, int max) {
         int pos;
         String row_str, line_1 = "", line_2 = "", line_3 = "", line_4 = "", tile_print;
-        tile t;
+        tile2D t;
 
         for (int i=0; i<MAXSIZE; i++) {
             t = arr[i];
@@ -38,7 +38,7 @@ public class Ex2D
 
     // function which gets the necessary biome colours before passing on to main print function
     // Note: cases aren't commutative i.e. FW works but WF does not
-    public static String print_tile_setup(tile tile)
+    public static String print_tile_setup(tile2D tile)
     {
         if (tile == null) return null;
 

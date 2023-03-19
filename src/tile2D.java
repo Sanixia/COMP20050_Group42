@@ -12,15 +12,12 @@ public class tile2D {
     private static int end_row=2;
     public static int odd = 1;
 
+    static tile2D[][] board2 = new tile2D[MAXSIZE*2][MAXSIZE];
 
-    static ArrayList<ArrayList<tile>> board1 = new ArrayList<>();
-    static tile[][] board2 = new tile[MAXSIZE*2][MAXSIZE];
-
-    public tile2D(String biome, String animals, int rotation, int column) {
+    public tile2D(String biome, String animals, int rotation) {
         this.biome = biome;
         this.animals = animals;
         this.rotation = rotation;
-        this.position = column;
     }
 
     public String getBiome() {
@@ -32,9 +29,7 @@ public class tile2D {
     public int getRotation() {
         return rotation;
     }
-    public int getPosition() {
-        return position;
-    }
+
 
     public void setAnimals(String animals) {
         this.animals = animals;
@@ -52,7 +47,7 @@ public class tile2D {
         board_add_tile("F", "BES", 0, 0, 0);
         board_add_tile("F", "BES", 0, 0, 3);
 
-        board_add_tile("RM", "BEH", 0, 1, 0);
+        board_add_tile("RM", "BEH", 1, 1, 0);
         board_add_tile("WP", "FS", 0, 1, 2);
 
         board_add_tile("P", "E", 1, 2, 1);
@@ -61,12 +56,12 @@ public class tile2D {
         //place_animal_token("s", 0, 0);
         print_board();
 
-        //indent(2);
-        //print_board();
+        indent();
+        print_board();
     }
 
     public static void board_add_tile(String biome, String animals, int rotation, int row, int col) { //TODO
-        tile tile = new tile(biome, animals, rotation, col);
+        tile2D tile = new tile2D(biome, animals, rotation);
         board2[row][col] = tile;
     }
 
@@ -75,17 +70,32 @@ public class tile2D {
     }
 
     public static void print_board() {
-        for (int i=start_row; i<end_row; i++) {
+        for (int i=start_row; i<end_row+1; i++) {
             Ex2D.row_printer(board2[i], max_row);
         }
     }
 
-    public static void indent(int space) {
+    /*
+    public static void indent() {
         int index;
-        for (int i=0; i<MAXSIZE; i++) {
+        for (int i=start_row; i<end_row; i++) {
             for (int j=0; j<max_row; j++) {
-                index = board2[i][j].getPosition()+space;
+                index = board2[i][j].getPosition()+2;
                 board2[i][j].setPosition(index);
+            }
+        }
+    }
+     */
+
+    public static void indent() {
+        for (int i=start_row; i<end_row; i++) {
+            tile2D curr = board2[i][0];
+            tile2D next;
+            board2[i][0] = null;
+            for (int j=0; j<max_row; j++) {
+                next = board2[i][j+1];
+                board2[i][j+1] = curr;
+                curr = next;
             }
         }
     }
