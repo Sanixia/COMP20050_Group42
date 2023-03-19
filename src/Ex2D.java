@@ -9,16 +9,21 @@ public class Ex2D
     private static final String sp6 = "      ";
     private static final String sp3 = "   ";
     private static final String newline = "\n";
-    private static final int MAXSIZE = 24;
 
 
-
-    public static void row_printer(tile2D[] arr, int max) {
+    public static void row_printer(tile2D[] arr, int max, int space) {
         int pos;
         String row_str, line_1 = "", line_2 = "", line_3 = "", line_4 = "", tile_print;
         tile2D t;
 
-        for (int i=0; i<MAXSIZE; i++) {
+        if (space == 1){
+            line_1 += splitter(blank_space(), 0);
+            line_2 += splitter(blank_space(), 1);
+            line_3 += splitter(blank_space(), 2);
+            line_4 += splitter(blank_space(), 3);
+        }
+
+        for (int i=0; i<max; i++) {
             t = arr[i];
             tile_print = print_tile_setup(t);
 
@@ -158,10 +163,16 @@ public class Ex2D
     public static String blank_right() {
         return empty_left() + newline + empty_left_side() + newline + empty_left_side() + newline + empty_left();
     }
+    public static String blank_space() {
+        return empty() + newline + empty() + newline + empty() + newline + empty();
+    }
 
 
     public static String empty_left() {
         return "+-----";
+    }
+    public static String empty() {
+        return "      ";
     }
     public static String empty_right() {
         return "-----+";

@@ -7,10 +7,10 @@ public class tile2D {
     private String animals;
     private int rotation;
     private int position;
-    private static int max_row=4;
-    private static int start_row=0;
-    private static int end_row=2;
-    public static int odd = 1;
+    private static int max_row;
+    private static int start_row;
+    private static int end_row;
+    private static int odd;          // 1 if odd rows are at the front
 
     static tile2D[][] board2 = new tile2D[MAXSIZE*2][MAXSIZE];
 
@@ -41,9 +41,26 @@ public class tile2D {
         this.position = position;
     }
 
+    public void setStart_row() {
+        start_row--;
+    }
+    public void setEnd_row_row() {
+        end_row++;
+    }
+    public void changeOdd() {
+        if (odd==1) odd = 0;
+        else odd = 1;
+    }
+
+
+
 
     public static void main(String[] args)
     {
+        //tile2D t = new tile2D("F", "BES", 0);           // can test printing out individual tiles
+        //System.out.println(Ex2D.print_tile_setup(t));
+
+        /*
         board_add_tile("F", "BES", 0, 0, 0);
         board_add_tile("F", "BES", 0, 0, 3);
 
@@ -53,39 +70,48 @@ public class tile2D {
         board_add_tile("P", "E", 1, 2, 1);
         board_add_tile("P", "E", 3, 2, 2);
 
-        //place_animal_token("s", 0, 0);
+        board_add_tile("P", "E", 1, 3, 1);
+        board_add_tile("P", "E", 3, 4, 2);
         print_board();
-
+        place_animal_token("s", 0, 0);
         indent();
+        print_board();
+         */
+
+        setup();
         print_board();
     }
 
-    public static void board_add_tile(String biome, String animals, int rotation, int row, int col) { //TODO
+    public static void setup() {
+        board_add_tile("F", "BES", 0, MAXSIZE, 1);
+        board_add_tile("F", "BES", 0, MAXSIZE+1, 1);
+        board_add_tile("RM", "BEH", 1, MAXSIZE+1, 2);
+
+        start_row = MAXSIZE;
+        end_row = MAXSIZE+1;
+        odd = 1;
+        max_row = 4;
+    }
+
+
+    public static void board_add_tile(String biome, String animals, int rotation, int row, int col) { //TODO verify
         tile2D tile = new tile2D(biome, animals, rotation);
         board2[row][col] = tile;
     }
 
-    public static void place_animal_token(String animal, int row, int col) {
+    public static void place_animal_token(String animal, int row, int col) { //TODO verify
         board2[row][col].setAnimals(animal);
     }
 
     public static void print_board() {
-        for (int i=start_row; i<end_row+1; i++) {
-            Ex2D.row_printer(board2[i], max_row);
-        }
-    }
-
-    /*
-    public static void indent() {
-        int index;
-        for (int i=start_row; i<end_row; i++) {
-            for (int j=0; j<max_row; j++) {
-                index = board2[i][j].getPosition()+2;
-                board2[i][j].setPosition(index);
+        for (int i=start_row-1; i!=end_row+2; i++) {                // printing the board + 1 empty row boarder
+            if (i%2==0 && odd==1 || i%2==1 && odd==0) {
+                Ex2D.row_printer(board2[i], max_row, 1);      // maxrow specifies lenght
+            } else {
+                Ex2D.row_printer(board2[i], max_row, 0);
             }
         }
     }
-     */
 
     public static void indent() {
         for (int i=start_row; i<end_row; i++) {
