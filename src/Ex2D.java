@@ -11,7 +11,7 @@ public class Ex2D
     private static final String newline = "\n";
 
 
-    public static void row_printer(tile2D[] arr, int max, int space) {
+    public static String row_printer(tile2D[] arr, int max, int space) {
         int pos;
         String row_str, line_1 = "", line_2 = "", line_3 = "", line_4 = "", tile_print;
         tile2D t;
@@ -34,11 +34,11 @@ public class Ex2D
         }
 
         row_str = line_1 + "\n" + line_2 + "\n" + line_3 + "\n" + line_4;
-        System.out.println(row_str);
-        line_1 = "";
-        line_2 = "";
-        line_3 = "";
-        line_4 = "";
+        return row_str;
+        //line_1 = "";
+        //line_2 = "";
+        //line_3 = "";
+        //line_4 = "";
     }
 
     // function which gets the necessary biome colours before passing on to main print function
