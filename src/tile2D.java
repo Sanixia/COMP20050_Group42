@@ -7,8 +7,8 @@ public class tile2D {
     private String animals;
     private int rotation;
     private int position;
-    private static int max_row;
-    private static int max_col;
+    private static int max_col;         // adjusts 'length' of board
+    private static int max_row;         // adjusts 'height' of board
     private static int odd;          // 1 if odd rows are at the front
 
     static tile2D[][] board2 = new tile2D[MAXSIZE][MAXSIZE];
@@ -36,11 +36,11 @@ public class tile2D {
     public void setRotation(int rotation) {
         this.rotation = rotation;
     }
-    public void setMax_col() {
-        max_col++;
-    }
-    public void setMax_row() {
+    public void setmax_row() {
         max_row++;
+    }
+    public void setmax_col() {
+        max_col++;
     }
     public static void changeOdd() {
         if (odd==1) odd = 0;
@@ -77,27 +77,66 @@ public class tile2D {
         setup();
         print_board();
 
-        indent_col();
+        board_add_tile("F", "BES", 0, 0, 3);
         print_board();
 
-        indent_row();
+        board_add_tile("F", "BES", 0, 1, 2);
+        print_board();
+
+        board_add_tile("F", "BES", 0, 3, 4);
+        print_board();
+
+        board_add_tile("F", "BES", 0, 2, 4);
+        print_board();
+
+        board_add_tile("F", "BES", 0, 2, 5);
+        print_board();
+
+        board_add_tile("F", "BES", 0, 2, 6);
+        print_board();
+
+        board_add_tile("F", "BES", 0, 0, 1);
+        print_board();
+
+        board_add_tile("F", "BES", 0, 0, 0);
+        board_add_tile("F", "BES", 0, 0, 0);
+        board_add_tile("F", "BES", 0, 0, 0);
+        board_add_tile("F", "BES", 0, 0, 0);
+        board_add_tile("F", "BES", 0, 0, 0);
         print_board();
     }
 
     public static void setup() {
-        board_add_tile("F", "BES", 0, 1, 1);
-        board_add_tile("F", "BES", 0, 2, 1);
-        board_add_tile("RM", "BEH", 1, 2, 2);
+        board_add_tile("F", "BES", 0, 1, 2);
+        board_add_tile("F", "BES", 0, 2, 2);
+        board_add_tile("RM", "BEH", 1, 2, 3);
 
         odd = 0;
-        max_col = 4;
         max_row = 4;
+        max_col = 6;
     }
 
 
     public static void board_add_tile(String biome, String animals, int rotation, int row, int col) { //TODO verify
         tile2D tile = new tile2D(biome, animals, rotation);
         board2[row][col] = tile;
+
+        int one = 0;
+        if (col%2==1 && odd==1 || col%2==0 && odd==0) one = 1;
+
+        if (row == 0) {
+            indent_row();
+            max_row++;
+        } else if (row >= max_row-1) {
+            max_row++;
+        }
+
+        if (col == 0) {
+            indent_col();
+            max_col++;
+        } else if (col+one >= max_col-2) {
+            max_col++;
+        }
     }
 
     public static void place_animal_token(String animal, int row, int col) { //TODO verify
@@ -106,11 +145,12 @@ public class tile2D {
 
     public static void print_board() {
         String row;
-        for (int i=0; i!=max_col; i++) {                // printing the board + 1 empty row boarder
+        System.out.println(Ex2D.column_numbers(max_col));
+        for (int i=0; i!=max_row; i++) {                // printing the board + 1 empty row boarder
             if (i%2==0 && odd==1 || i%2==1 && odd==0) {
-                row = Ex2D.row_printer(board2[i], max_row, 1);      // maxrow specifies lenght
+                row = Ex2D.row_printer(board2[i], max_col, 1, String.valueOf(i));      // maxrow specifies lenght
             } else {
-                row = Ex2D.row_printer(board2[i], max_row, 0);
+                row = Ex2D.row_printer(board2[i], max_col, 0, String.valueOf(i));
             }
             System.out.println(row);
         }
@@ -118,11 +158,11 @@ public class tile2D {
     }
 
     public static void indent_col() {
-        for (int i=0; i<max_col+1; i++) {
+        for (int i=0; i<max_row+1; i++) {
             tile2D curr = board2[i][0];
             tile2D next;
             board2[i][0] = null;
-            for (int j=0; j<max_row; j++) {
+            for (int j=0; j<max_col; j++) {
                 next = board2[i][j+1];
                 board2[i][j+1] = curr;
                 curr = next;
@@ -131,11 +171,11 @@ public class tile2D {
     }
 
     public static void indent_row() {
-        for (int i=0; i<max_row+1; i++) {
+        for (int i=0; i<max_col+1; i++) {
             tile2D curr = board2[0][i];
             tile2D next;
             board2[0][i] = null;
-            for (int j=0; j<max_col; j++) {
+            for (int j=0; j<max_row; j++) {
                 next = board2[j+1][i];
                 board2[j+1][i] = curr;
                 curr = next;

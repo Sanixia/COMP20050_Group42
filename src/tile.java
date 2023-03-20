@@ -7,7 +7,7 @@ public class tile {
     private int rotation;
     private int position;
 
-    private static int max_row=4;
+    private static int max_col=4;
 
     static ArrayList<ArrayList<tile>> board = new ArrayList<>();;
 
@@ -76,7 +76,7 @@ public class tile {
 
     public static void print_board() {
         for (int i=0; i<board.size(); i++) {
-            Ex.row_printer(board.get(i), max_row);
+            Ex.row_printer(board.get(i), max_col);
         }
     }
 

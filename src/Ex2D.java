@@ -10,17 +10,31 @@ public class Ex2D
     private static final String sp3 = "   ";
     private static final String newline = "\n";
 
+    public static String column_numbers(int max_col) {
+        String row_str = "  ";
 
-    public static String row_printer(tile2D[] arr, int max, int space) {
+        for (int i=0; i<max_col; i++) {
+            row_str+= sp6 + "    ";
+            if (i<9) row_str += " ";
+            row_str+= i;
+        }
+        return row_str;
+    }
+
+
+    public static String row_printer(tile2D[] arr, int max, int space, String row_num) {
         int pos;
-        String row_str, line_1 = "", line_2 = "", line_3 = "", line_4 = "", tile_print;
+        String row_str, line_1 = "\t", line_2 = row_num + "  ", line_3 = "\t", line_4 = "\t", tile_print;
         tile2D t;
+
+        if (row_num.length() == 1) line_2+=" ";
 
         if (space == 1){
             line_1 += splitter(blank_space(), 0);
             line_2 += splitter(blank_space(), 1);
             line_3 += splitter(blank_space(), 2);
             line_4 += splitter(blank_space(), 3);
+            max--;
         }
 
         for (int i=0; i<max; i++) {
@@ -35,10 +49,6 @@ public class Ex2D
 
         row_str = line_1 + "\n" + line_2 + "\n" + line_3 + "\n" + line_4;
         return row_str;
-        //line_1 = "";
-        //line_2 = "";
-        //line_3 = "";
-        //line_4 = "";
     }
 
     // function which gets the necessary biome colours before passing on to main print function
