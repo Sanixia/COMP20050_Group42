@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Ex
+public class Ex         // TODO CAN BE DELETED LATER
 {
     // Declaring constants to make printing more efficient
     // Naming scheme: sp6_R refers to 6 empty spaces with a reset

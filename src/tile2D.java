@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Scanner;
 
 // tile.java but modified to use 2d array instead of list of lists for board
 public class tile2D {
@@ -75,45 +75,44 @@ public class tile2D {
 
 
         setup();
+        place_animal_token("b", 1, 2);
+        place_animal_token("e", 2, 3);
         print_board();
 
-        board_add_tile("F", "BES", 0, 0, 3);
-        print_board();
-
-        board_add_tile("F", "BES", 0, 1, 2);
-        print_board();
-
-        board_add_tile("F", "BES", 0, 3, 4);
-        print_board();
-
-        board_add_tile("F", "BES", 0, 2, 4);
-        print_board();
-
-        board_add_tile("F", "BES", 0, 2, 5);
-        print_board();
-
-        board_add_tile("F", "BES", 0, 2, 6);
-        print_board();
-
-        board_add_tile("F", "BES", 0, 0, 1);
-        print_board();
-
-        board_add_tile("F", "BES", 0, 0, 0);
-        board_add_tile("F", "BES", 0, 0, 0);
-        board_add_tile("F", "BES", 0, 0, 0);
-        board_add_tile("F", "BES", 0, 0, 0);
-        board_add_tile("F", "BES", 0, 0, 0);
-        print_board();
+        for (int i=0; i<20; i++) {
+            place();
+            print_board();
+        }
     }
 
     public static void setup() {
         board_add_tile("F", "BES", 0, 1, 2);
         board_add_tile("F", "BES", 0, 2, 2);
         board_add_tile("RM", "BEH", 1, 2, 3);
+        //board_add_tile("slot", "", 0, 1, 1);
+        //board_add_tile("slot", "", 0, 2, 1);
+        //board_add_tile("slot", "", 0, 3, 1);
+        //board_add_tile("slot", "", 0, 3, 2);
+        //board_add_tile("slot", "", 0, 3, 3);
+        //board_add_tile("slot", "", 0, 2, 4);
+        //board_add_tile("slot", "", 0, 1, 3);
+        //board_add_tile("slot", "", 0, 0, 2);
+        //board_add_tile("slot", "", 0, 1, 3);
 
         odd = 0;
         max_row = 4;
         max_col = 6;
+    }
+
+    public static void place() {            // temporary place test feature
+        Scanner in = new Scanner(System.in);
+        int x, y;
+        System.out.print("enter x: ");
+        x = in.nextInt();
+        System.out.print("\nenter y: ");
+        y = in.nextInt();
+
+        board_add_tile("RM", "BEH", 1, x, y);
     }
 
 
@@ -121,20 +120,20 @@ public class tile2D {
         tile2D tile = new tile2D(biome, animals, rotation);
         board2[row][col] = tile;
 
-        int one = 0;
-        if (col%2==1 && odd==1 || col%2==0 && odd==0) one = 1;
+        int plusOne = 0;
+        if (col%2==1 && odd==1 || col%2==0 && odd==0) plusOne = 1;
 
         if (row == 0) {
-            indent_row();
+             indent_row();
             max_row++;
         } else if (row >= max_row-1) {
             max_row++;
         }
 
         if (col == 0) {
-            indent_col();
+             indent_col();
             max_col++;
-        } else if (col+one >= max_col-2) {
+        } else if (col+plusOne >= max_col-1) {
             max_col++;
         }
     }
@@ -156,6 +155,7 @@ public class tile2D {
         }
         System.out.println("\n");
     }
+
 
     public static void indent_col() {
         for (int i=0; i<max_row+1; i++) {

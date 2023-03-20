@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class tile {
+public class tile {         // DELETE LATER
 
     private String biome;
     private String animals;
