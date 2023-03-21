@@ -219,8 +219,14 @@ public class tile2D {
 
         }
         else{
-            return board2[x][y] == null && board2[x][y - 1] == null && board2[x][y + 1] == null && board2[x - 1][y - 1] == null && board2[x - 1][y] == null       //everyhting else
-                    && board2[x + 1][y - 1] == null && board2[x + 1][y] == null;
+            if(board2[x][y] != null){
+                return true;
+            }
+            else{
+                return board2[x][y] == null && board2[x][y - 1] == null && board2[x][y + 1] == null && board2[x - 1][y - 1] == null && board2[x - 1][y] == null       //everyhting else
+                        && board2[x + 1][y - 1] == null && board2[x + 1][y] == null;
+            }
+
         }
     }
 }
