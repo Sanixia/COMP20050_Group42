@@ -4,9 +4,7 @@ public class Starter_Tile_Printer {
     private static final String bigBlank = "            ";
     private static final String smallBlank = "   ";
     private static final String blankSix = "\n      ";
-    private static final String half_tile = "H_null_null";
-    private static final String tile = "T_null_null";
-    private static final String newline = "\n";
+
 
 
 
@@ -15,6 +13,21 @@ public class Starter_Tile_Printer {
 
         switch (starterType) {
             case "Forest":
+
+
+
+                tile.setupBoard();
+
+                tile.board_add_tile("F","E" , 0, 0, 1);
+                tile.board_add_tile("RM","BEH" , 6, 1, 0);
+                tile.board_add_tile("WP","FS" , 6, 1, 1);
+                tile.print_board();
+
+
+
+
+
+
 
 
                 /*

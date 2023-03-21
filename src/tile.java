@@ -41,13 +41,17 @@ public class tile {         // DELETE LATER
         this.position = position;
     }
 
+    public static void setupBoard(){
+        board.add(new ArrayList<>());
+        board.add(new ArrayList<>());
+        board.add(new ArrayList<>());
+        board.add(new ArrayList<>());
+    }
+
 
     public static void main(String[] args)
     {
-        board.add(new ArrayList<>());
-        board.add(new ArrayList<>());
-        board.add(new ArrayList<>());
-        board.add(new ArrayList<>());
+
 
         board_add_tile("F", "BES", 0, 0, 0);
         board_add_tile("F", "BES", 0, 0, 3);

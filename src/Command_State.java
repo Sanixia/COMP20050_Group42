@@ -31,11 +31,11 @@ public class Command_State {
 
             if(boardMenuInput == 1){
                 state_type = state.BOARD_MENU;
-                choice = 4;
+                choice = 3;
             }
             else if(boardMenuInput == 2){
                 state_type = state.BOARD_MENU;
-                choice = 5;
+                choice = 3;
             }
             else{
                 state_type = state.MAIN_MENU;
@@ -57,8 +57,8 @@ public class Command_State {
         if(choice == 3){
             while(!check){
                 System.out.println("\n\nEnter a command from the menu (1, 2, or 3) ");
-                System.out.println("1) Select a habitat tile to be placed on the tile");
-                System.out.println("2) Select a token to be placed on the tile");
+                System.out.println("1) Select a habitat tile to be placed on the board");
+                System.out.println("2) Select a token to be placed on the board");
                 System.out.println("3) Back to main menu");
 
                 String user_input_2 = in.nextLine();
@@ -93,7 +93,7 @@ public class Command_State {
                 System.out.println("\n\nEnter a command from the menu (1, 2, 3 or 4) ");
                 System.out.println("1) Show current player's starter habitat tile, habitat tiles and tokens");
                 System.out.println("2) Next player's turn");
-                System.out.println("3) Show tile");
+                System.out.println("3) Show board");
                 System.out.println("4) Quit");
 
                 String user_input = in.nextLine();

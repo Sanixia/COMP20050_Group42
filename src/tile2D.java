@@ -1,8 +1,9 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 // tile.java but modified to use 2d array instead of list of lists for board
 public class tile2D {
-    private static final int MAXSIZE = 24;
+    private static final int MAXSIZE = 26;
     private String biome;
     private String animals;
     private int rotation;
@@ -78,10 +79,12 @@ public class tile2D {
         place_animal_token("b", 1, 2);
         place_animal_token("e", 2, 3);
         print_board();
+        System.out.println(Arrays.deepToString(board2));
 
         for (int i=0; i<20; i++) {
             place();
             print_board();
+            System.out.println(Arrays.deepToString(board2));
         }
     }
 
@@ -112,6 +115,13 @@ public class tile2D {
         System.out.print("\nenter y: ");
         y = in.nextInt();
 
+        while(verify_tile_placement(x,y)){
+            System.out.println("Please enter a valid tile placement!\n");
+            System.out.print("enter x: ");
+            x = in.nextInt();
+            System.out.print("\nenter y: ");
+            y = in.nextInt();
+        }
         board_add_tile("RM", "BEH", 1, x, y);
     }
 
@@ -182,5 +192,35 @@ public class tile2D {
             }
         }
         changeOdd();
+    }
+
+    public static boolean verify_tile_placement(int x, int y){
+
+        if(x == 0 && y == 0){
+            return board2[x][y] == null && board2[x][y+1] == null && board2[x+1][y] == null; //top left corner
+        }
+
+        else if(x == 0){
+            return board2[x][y] == null && board2[x][y+1] == null && board2[x][y-1] == null && //top section
+                    board2[x+1][y-1] == null && board2[x+1][y] == null;
+        }
+
+        else if(y == 0){ //left side
+
+
+            if(x % 2 == 0){
+                return board2[x][y] == null && board2[x][y+1] == null && board2[x+1][y] == null && board2[x-1][y] == null;                 // odd and even rows EXCEPT DUMB indent rows and columns keep changing]
+                                                                                                                                            // this so basically useless
+            }
+            else{
+                return board2[x][y] == null && board2[x][y+1] == null && board2[x-1][y] == null && board2[x-1][y+1] == null
+                        && board2[x+1][y] == null && board2[x+1][y+1] == null;
+            }
+
+        }
+        else{
+            return board2[x][y] == null && board2[x][y - 1] == null && board2[x][y + 1] == null && board2[x - 1][y - 1] == null && board2[x - 1][y] == null       //everyhting else
+                    && board2[x + 1][y - 1] == null && board2[x + 1][y] == null;
+        }
     }
 }

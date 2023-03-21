@@ -55,14 +55,14 @@ public class Cascadia
 
 
 
-                  else if (command_state.getChoice() == 3){
+                  else if (command_state.getChoice() == 3){   // this is for the board menu which will be updated with more options
 
 
 
 
                       do {
                           Display_And_Input.display_tiles_and_tokens(playerNum);
-                          command_state = Command_State.get_Input();
+                          command_state = Command_State.get_Input();               //will be updated to have options for select tile and token
 
 
 

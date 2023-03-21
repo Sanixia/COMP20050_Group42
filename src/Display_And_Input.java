@@ -133,8 +133,8 @@ public class Display_And_Input {
     public static void randomise_player_tiles_and_tokens(){
 
         int i, k;
-        ArrayList<String> temp_biomes = new ArrayList<>();
-        ArrayList<String> temp_animals = new ArrayList<>();
+       // ArrayList<String> temp_biomes = new ArrayList<>();
+        //ArrayList<String> temp_animals = new ArrayList<>();
 
 
         long seed = System.nanoTime();                                          // To have the same randomised list order for animals and biome tiles
@@ -172,7 +172,7 @@ public class Display_And_Input {
         }
     }
 
-
+/*
     public static void display_board(int player){
         int i;
 
@@ -192,6 +192,8 @@ public class Display_And_Input {
         callTheCulling();
     }
 
+ */
+
 
 
 
@@ -201,7 +203,7 @@ public class Display_And_Input {
 
         int i;
 
-        System.out.println(players.get(player).getPlayer_name() + "'s  Tiles: \n");
+        System.out.println("--- " + players.get(player).getPlayer_name() + "'s  Turn --- \n");
         System.out.println("Starter Tile: \n");
         Starter_Tile_Printer.starter_tile_printout(players.get(player).getStarter_tile());
 
