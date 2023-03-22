@@ -11,7 +11,9 @@ public class tile2D {
     private static int max_col;         // adjusts 'length' of board
     private static int max_row;         // adjusts 'height' of board
     private static int odd;          // 1 if odd rows are at the front
-    private static int checkBoard = 0;
+
+    private static int checkBoardUpper = 0;
+    private static int checkBoardLower = 0;
     static tile2D[][] board2 = new tile2D[MAXSIZE][MAXSIZE];
 
     public tile2D(String biome, String animals, int rotation) {
@@ -50,12 +52,20 @@ public class tile2D {
     }
 
 
-    public static int getCheckBoard() {
-        return checkBoard;
+    public static int getCheckBoardUpper() {
+        return checkBoardUpper;
     }
 
-    public static void setCheckBoard() {
-        checkBoard++;
+    public static void setCheckBoardUpper() {
+        checkBoardUpper++;
+    }
+
+    public static int getCheckBoardLower() {
+        return checkBoardLower;
+    }
+
+    public static void setCheckBoardLower() {
+        checkBoardLower++;
     }
 
     public static void changeOdd() {
@@ -91,14 +101,17 @@ public class tile2D {
 
         //place_animal_token("e", 2, 3);
         print_board();
-        place_animal_token("b");
+        //place_animal_token("b");
         System.out.println(Arrays.deepToString(board2));
+        System.out.println(max_col);
+        System.out.println(max_row);
 
         for (int i = 0; i < 20; i++) {
             place();
             print_board();
-            place_animal_token("b");
+            //place_animal_token("b");
             System.out.println(Arrays.deepToString(board2));
+            System.out.println(checkBoardUpper);
         }
     }
 
@@ -129,7 +142,7 @@ public class tile2D {
         System.out.print("\nenter y: ");
         y = in.nextInt();
 
-        while (verify_tile_placement(x, y, getCheckBoard())) {
+        while (verify_tile_placement(x, y, getCheckBoardUpper(), getCheckBoardLower())) {
             System.out.println("Please enter a valid tile placement!\n");
             System.out.print("enter x: ");
             x = in.nextInt();
@@ -148,9 +161,10 @@ public class tile2D {
 
         if (row == 0) {
             indent_row();
-            setCheckBoard();
+            setCheckBoardUpper();
             max_row++;
         } else if (row >= max_row - 1) {
+            setCheckBoardLower();
             max_row++;
         }
 
@@ -166,20 +180,44 @@ public class tile2D {
 
         Scanner in = new Scanner(System.in);
         int x, y;
+        boolean availableTokenPlacement = false;
         System.out.print("enter x: ");
         x = in.nextInt();
         System.out.print("\nenter y: ");
         y = in.nextInt();
 
-        while (verify_animal_token_placement(x, y, animal)) {
-            System.out.println("Please enter a valid tile that can place this animal token onto it and hasn't been taken already!\n");
-            System.out.print("enter x: ");
-            x = in.nextInt();
-            System.out.print("\nenter y: ");
-            y = in.nextInt();
+
+        // verify that there is available tiles that can place a token on
+
+        for(int i = 0; i < max_row; i++){
+
+            for(int j = 0; j < max_col; j++){
+                if(board2[x][y] != null){
+                    if(board2[x][y].getAnimals().contains(animal)){
+                        availableTokenPlacement = true;
+                        i = max_row;
+                        break;
+                    }
+                }
+            }
         }
 
-        board2[x][y].setAnimals(animal);
+        if(availableTokenPlacement){
+            while (verify_animal_token_placement(x, y, animal)) {
+                System.out.println("Please enter a valid tile that can place this animal token onto it and hasn't been taken already!\n");
+                System.out.print("enter x: ");
+                x = in.nextInt();
+                System.out.print("\nenter y: ");
+                y = in.nextInt();
+            }
+
+            board2[x][y].setAnimals(animal);
+        }
+        else{
+            System.out.println("No available tiles to place token");
+        }
+
+
     }
 
     public static void print_board() {
@@ -238,9 +276,9 @@ public class tile2D {
         return true;
     }
 
-    public static boolean verify_tile_placement(int x, int y, int checkBoard) {
+    public static boolean verify_tile_placement(int x, int y, int checkBoardUpper, int checkBoardLower) {
 
-        if (checkBoard % 2 == 0) { //even top rows
+        if (checkBoardUpper % 2 == 0) { //even top rows
             if (x == 0 && y == 0) {
                 return board2[x][y] == null && board2[x][y + 1] == null && board2[x + 1][y] == null; //top left corner
             } else if (x == 0) {
@@ -260,7 +298,7 @@ public class tile2D {
         }
 
 
-        if (checkBoard % 2 != 0) { // odd top rows
+        if (checkBoardUpper % 2 != 0) { // odd top rows
             if (x == 0 && y == 0) {
                 return board2[x][y] == null && board2[x][y + 1] == null && board2[x + 1][y] == null && board2[x + 1][y + 1] == null; //top left corner
             } else if (x == 0) {
@@ -283,8 +321,18 @@ public class tile2D {
                 return true;
             }
 
-            return board2[x][y] == null && board2[x][y - 1] == null && board2[x][y + 1] == null && board2[x - 1][y - 1] == null && board2[x - 1][y] == null       //everyhting else
+
+            // check if bottom row of board is odd number of spaces
+            if(checkBoardLower % 2 != 0){
+                return board2[x][y] == null && board2[x][y - 1] == null && board2[x][y + 1] == null && board2[x - 1][y] == null && board2[x - 1][y+1] == null
+                        && board2[x + 1][y] == null && board2[x + 1][y+1] == null;
+            }
+
+            else{
+                return board2[x][y] == null && board2[x][y - 1] == null && board2[x][y + 1] == null && board2[x - 1][y - 1] == null && board2[x - 1][y] == null       //everyhting else
                         && board2[x + 1][y - 1] == null && board2[x + 1][y] == null;
+            }
+
     }
 
 
