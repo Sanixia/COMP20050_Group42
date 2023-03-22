@@ -78,6 +78,7 @@ public class Cascadia
               }
 
           }while (!command_state.isQuit());
+
           Command_State.quitMessage();
         }
 

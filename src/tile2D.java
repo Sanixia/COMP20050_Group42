@@ -88,21 +88,23 @@ public class tile2D {
 
 
         setup();
-        place_animal_token("b", 1, 2);
-        place_animal_token("e", 2, 3);
+
+        //place_animal_token("e", 2, 3);
         print_board();
+        place_animal_token("b");
         System.out.println(Arrays.deepToString(board2));
 
         for (int i = 0; i < 20; i++) {
             place();
             print_board();
+            place_animal_token("b");
             System.out.println(Arrays.deepToString(board2));
         }
     }
 
     public static void setup() {
         board_add_tile("F", "BES", 0, 1, 2);
-        board_add_tile("F", "BES", 0, 2, 2);
+        board_add_tile("P", "BES", 0, 2, 2);
         board_add_tile("RM", "BEH", 1, 2, 3);
         //board_add_tile("slot", "", 0, 1, 1);
         //board_add_tile("slot", "", 0, 2, 1);
@@ -160,8 +162,24 @@ public class tile2D {
         }
     }
 
-    public static void place_animal_token(String animal, int row, int col) { //TODO verify
-        board2[row][col].setAnimals(animal);
+    public static void place_animal_token(String animal) { //TODO verify
+
+        Scanner in = new Scanner(System.in);
+        int x, y;
+        System.out.print("enter x: ");
+        x = in.nextInt();
+        System.out.print("\nenter y: ");
+        y = in.nextInt();
+
+        while (verify_animal_token_placement(x, y, animal)) {
+            System.out.println("Please enter a valid tile that can place this animal token onto it and hasn't been taken already!\n");
+            System.out.print("enter x: ");
+            x = in.nextInt();
+            System.out.print("\nenter y: ");
+            y = in.nextInt();
+        }
+
+        board2[x][y].setAnimals(animal);
     }
 
     public static void print_board() {
@@ -204,6 +222,20 @@ public class tile2D {
             }
         }
         changeOdd();
+    }
+
+
+    public static boolean verify_animal_token_placement(int x, int y, String animalToken){
+
+        // first check if it's placed on tile
+        if(board2[x][y] != null){
+
+            //check if tile contains the animalToken letter and checks if tile hasn't been taken already
+            if(board2[x][y].getAnimals().contains(animalToken.toUpperCase()) && !board2[x][y].getAnimals().equals(animalToken)){
+                return false;
+            }
+        }
+        return true;
     }
 
     public static boolean verify_tile_placement(int x, int y, int checkBoard) {
