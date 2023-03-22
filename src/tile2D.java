@@ -11,7 +11,7 @@ public class tile2D {
     private static int max_col;         // adjusts 'length' of board
     private static int max_row;         // adjusts 'height' of board
     private static int odd;          // 1 if odd rows are at the front
-    private static int checkBoard;
+    private static int checkBoard = 0;
     static tile2D[][] board2 = new tile2D[MAXSIZE][MAXSIZE];
 
     public tile2D(String biome, String animals, int rotation) {
@@ -54,8 +54,8 @@ public class tile2D {
         return checkBoard;
     }
 
-    public static void setCheckBoard(int checkBoard) {
-        tile2D.checkBoard = checkBoard;
+    public static void setCheckBoard() {
+        checkBoard++;
     }
 
     public static void changeOdd() {
@@ -141,13 +141,12 @@ public class tile2D {
     public static void board_add_tile(String biome, String animals, int rotation, int row, int col) { //TODO verify
         tile2D tile = new tile2D(biome, animals, rotation);
         board2[row][col] = tile;
-        setCheckBoard(0);
         int plusOne = 0;
         if (col % 2 == 1 && odd == 1 || col % 2 == 0 && odd == 0) plusOne = 1;
 
         if (row == 0) {
             indent_row();
-            setCheckBoard(1);
+            setCheckBoard();
             max_row++;
         } else if (row >= max_row - 1) {
             max_row++;
@@ -209,7 +208,7 @@ public class tile2D {
 
     public static boolean verify_tile_placement(int x, int y, int checkBoard) {
 
-        if (checkBoard == 0) {
+        if (checkBoard % 2 == 0) { //even top rows
             if (x == 0 && y == 0) {
                 return board2[x][y] == null && board2[x][y + 1] == null && board2[x + 1][y] == null; //top left corner
             } else if (x == 0) {
@@ -229,7 +228,7 @@ public class tile2D {
         }
 
 
-        if (checkBoard == 1) {
+        if (checkBoard % 2 != 0) { // odd top rows
             if (x == 0 && y == 0) {
                 return board2[x][y] == null && board2[x][y + 1] == null && board2[x + 1][y] == null && board2[x + 1][y + 1] == null; //top left corner
             } else if (x == 0) {
