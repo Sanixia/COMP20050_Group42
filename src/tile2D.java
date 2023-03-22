@@ -103,20 +103,20 @@ public class tile2D {
         print_board();
         //place_animal_token("b");
         System.out.println(Arrays.deepToString(board2));
-        System.out.println(max_col);
-        System.out.println(max_row);
+
 
         for (int i = 0; i < 20; i++) {
             place();
             print_board();
-            //place_animal_token("b");
+            place_animal_token("f");
             System.out.println(Arrays.deepToString(board2));
-            System.out.println(checkBoardUpper);
+            System.out.println(max_col);
+            System.out.println(max_row);
         }
     }
 
     public static void setup() {
-        board_add_tile("F", "BES", 0, 1, 2);
+        board_add_tile("F", "F", 0, 1, 2);
         board_add_tile("P", "BES", 0, 2, 2);
         board_add_tile("RM", "BEH", 1, 2, 3);
         //board_add_tile("slot", "", 0, 1, 1);
@@ -177,23 +177,13 @@ public class tile2D {
     }
 
     public static void place_animal_token(String animal) { //TODO verify
-
-        Scanner in = new Scanner(System.in);
-        int x, y;
         boolean availableTokenPlacement = false;
-        System.out.print("enter x: ");
-        x = in.nextInt();
-        System.out.print("\nenter y: ");
-        y = in.nextInt();
-
-
-        // verify that there is available tiles that can place a token on
 
         for(int i = 0; i < max_row; i++){
 
             for(int j = 0; j < max_col; j++){
-                if(board2[x][y] != null){
-                    if(board2[x][y].getAnimals().contains(animal)){
+                if(board2[i][j] != null){
+                    if(board2[i][j].getAnimals().contains(animal.toUpperCase())){
                         availableTokenPlacement = true;
                         i = max_row;
                         break;
@@ -203,6 +193,17 @@ public class tile2D {
         }
 
         if(availableTokenPlacement){
+            Scanner in = new Scanner(System.in);
+            int x, y;
+
+            System.out.print("enter x: ");
+            x = in.nextInt();
+            System.out.print("\nenter y: ");
+            y = in.nextInt();
+
+            // verify that there is available tiles that can place a token on
+
+
             while (verify_animal_token_placement(x, y, animal)) {
                 System.out.println("Please enter a valid tile that can place this animal token onto it and hasn't been taken already!\n");
                 System.out.print("enter x: ");
@@ -213,10 +214,10 @@ public class tile2D {
 
             board2[x][y].setAnimals(animal);
         }
+
         else{
             System.out.println("No available tiles to place token");
         }
-
 
     }
 
@@ -265,10 +266,10 @@ public class tile2D {
 
     public static boolean verify_animal_token_placement(int x, int y, String animalToken){
 
-        // first check if it's placed on tile
+        // first check if there is a tile present
         if(board2[x][y] != null){
 
-            //check if tile contains the animalToken letter and checks if tile hasn't been taken already
+            //check if tile contains the animalToken letter and checks if tile hasn't been taken already by the animalToken
             if(board2[x][y].getAnimals().contains(animalToken.toUpperCase()) && !board2[x][y].getAnimals().equals(animalToken)){
                 return false;
             }
@@ -309,7 +310,7 @@ public class tile2D {
 
                 if (x % 2 != 0) {
                     return board2[x][y] == null && board2[x][y + 1] == null && board2[x + 1][y] == null && board2[x - 1][y] == null;                 // odd and even rows EXCEPT DUMB ind0ent rows and columns keep changing]
-                    // this so basically useless
+
                 } else {
                     return board2[x][y] == null && board2[x][y + 1] == null && board2[x - 1][y] == null && board2[x - 1][y + 1] == null
                             && board2[x + 1][y] == null && board2[x + 1][y + 1] == null;
@@ -317,6 +318,7 @@ public class tile2D {
             }
         }
 
+            // checks to see if a tile isn't already placed
             if (board2[x][y] != null) {
                 return true;
             }
