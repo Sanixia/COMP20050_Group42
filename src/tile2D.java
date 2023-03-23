@@ -14,6 +14,8 @@ public class tile2D {
 
     private static int checkBoardUpper = 0;
     private static int checkBoardLower = 0;
+
+    private static int checkOddOrEven = 0;
     static tile2D[][] board2 = new tile2D[MAXSIZE][MAXSIZE];
 
     public tile2D(String biome, String animals, int rotation) {
@@ -68,9 +70,20 @@ public class tile2D {
         checkBoardLower++;
     }
 
+    public static int getCheckOddOrEven() {
+        return checkOddOrEven;
+    }
+
+    public static void setChangeOddOrEven(){
+        if(checkOddOrEven == 0) checkOddOrEven = 1;
+        else checkOddOrEven = 0;
+    }
+
+
     public static void changeOdd() {
         if (odd == 1) odd = 0;
         else odd = 1;
+        setChangeOddOrEven();
     }
 
 
@@ -116,6 +129,7 @@ public class tile2D {
     }
 
     public static void setup() {
+        odd = 1;                                            // need this here for my tile placement to work michal lol
         board_add_tile("F", "F", 0, 1, 2);
         //board_add_tile("P", "BES", 0, 2, 2);
         //board_add_tile("RM", "BEH", 1, 2, 3);
@@ -156,10 +170,10 @@ public class tile2D {
                 indent_row();
                 plusRow = 1;
             }
-            setCheckBoardUpper();
+           // setCheckBoardUpper();
             max_row++;
         } else if (row >= max_row - 1) {
-            setCheckBoardLower();
+            //setCheckBoardLower();
             max_row++;
         }
 
@@ -172,7 +186,7 @@ public class tile2D {
         } else if (col + plusOne >= max_col - 1) {
             max_col++;
         }
-        place_slot_tiles(row+plusRow, col+plusCol);
+        place_slot_tiles2(row+plusRow, col+plusCol);
     }
 
     public static void place_animal_token(String animal) { //TODO verify
@@ -286,13 +300,42 @@ public class tile2D {
         }
     }
 
+    public static void place_slot_tiles2(int x, int y) {             // determines where to place slot tiles
+        int plusOne = 1;
+        if (x % 2 == 0 && odd == 1) plusOne = 0;          // NOTE TO MICHAL MAKE VALIDATE ODD FUNCTION USING THIS LINE
+        if (checkOddOrEven == 1 && odd == 0 && x % 2 != 0) plusOne = 0;
+
+        if (y-1>=0 && board2[x][y-1] == null){
+            board2[x][y-1] = new tile2D("slot", "", 0);         // left
+        }
+        if (y-1<=MAXSIZE && board2[x][y+1] == null){
+            board2[x][y+1] = new tile2D("slot", "", 0);         // right
+        }
+        if (y-1+plusOne>=0 && x-1>=0 && board2[x-1][y-1+plusOne] == null){
+            board2[x-1][y-1+plusOne] = new tile2D("slot", "", 0);   // top left
+        }
+        if (y+plusOne<=MAXSIZE && x-1>=0 && board2[x-1][y+plusOne] == null){
+            board2[x-1][y+plusOne] = new tile2D("slot", "", 0);     // top right
+        }
+        if (y-1+plusOne>=0 && x+1<=MAXSIZE && board2[x+1][y-1+plusOne] == null){
+            board2[x+1][y-1+plusOne] = new tile2D("slot", "", 0);   // bottom left
+        }
+        if (y+plusOne<=MAXSIZE && x+1<=MAXSIZE && board2[x+1][y+plusOne] == null){
+            board2[x+1][y+plusOne] = new tile2D("slot", "", 0);     // bottom right
+        }
+    }
+
     public static boolean verify_tile(int x, int y) {
-        if (board2[x][y].getBiome().contains("slot")) {
-            return true;
+        if(x >= 0 && x < MAXSIZE && y >= 0 && y < MAXSIZE){
+            if(board2[x][y] != null){
+                if (board2[x][y].getBiome().contains("slot")) {
+                    return true;
+                }
+            }
         }
-        else {
-            return false;
-        }
+
+        return false;
+
     }
 
 
