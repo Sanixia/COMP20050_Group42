@@ -119,17 +119,8 @@ public class tile2D {
         board_add_tile("F", "F", 0, 1, 2);
         board_add_tile("P", "BES", 0, 2, 2);
         board_add_tile("RM", "BEH", 1, 2, 3);
-        //board_add_tile("slot", "", 0, 1, 1);
-        //board_add_tile("slot", "", 0, 2, 1);
-        //board_add_tile("slot", "", 0, 3, 1);
-        //board_add_tile("slot", "", 0, 3, 2);
-        //board_add_tile("slot", "", 0, 3, 3);
-        //board_add_tile("slot", "", 0, 2, 4);
-        //board_add_tile("slot", "", 0, 1, 3);
-        //board_add_tile("slot", "", 0, 0, 2);
-        //board_add_tile("slot", "", 0, 1, 3);
 
-        odd = 0;
+        odd = 1;                // odd = 1 means every odd row will be pushed in
         max_row = 4;
         max_col = 6;
     }
@@ -142,7 +133,8 @@ public class tile2D {
         System.out.print("\nenter y: ");
         y = in.nextInt();
 
-        while (verify_tile_placement(x, y, getCheckBoardUpper(), getCheckBoardLower())) {
+        //while (verify_tile_placement(x, y, getCheckBoardUpper(), getCheckBoardLower())) {
+        while (!verify_tile(x, y)) {
             System.out.println("Please enter a valid tile placement!\n");
             System.out.print("enter x: ");
             x = in.nextInt();
@@ -156,11 +148,12 @@ public class tile2D {
     public static void board_add_tile(String biome, String animals, int rotation, int row, int col) { //TODO verify
         tile2D tile = new tile2D(biome, animals, rotation);
         board2[row][col] = tile;
+        place_slot_tiles(row, col);
         int plusOne = 0;
         if (col % 2 == 1 && odd == 1 || col % 2 == 0 && odd == 0) plusOne = 1;
 
         if (row == 0) {
-            indent_row();
+            if (!(tile.biome == "slot")) indent_row();
             setCheckBoardUpper();
             max_row++;
         } else if (row >= max_row - 1) {
@@ -174,6 +167,7 @@ public class tile2D {
         } else if (col + plusOne >= max_col - 1) {
             max_col++;
         }
+
     }
 
     public static void place_animal_token(String animal) { //TODO verify
@@ -226,9 +220,9 @@ public class tile2D {
         System.out.println(Ex2D.column_numbers(max_col));
         for (int i = 0; i != max_row; i++) {                // printing the board + 1 empty row boarder
             if (i % 2 == 0 && odd == 1 || i % 2 == 1 && odd == 0) {
-                row = Ex2D.row_printer(board2[i], max_col, 1, String.valueOf(i));      // maxrow specifies lenght
+                row = Ex2D.row_printer(board2[i], max_col, 0, String.valueOf(i));      // maxrow specifies lenght
             } else {
-                row = Ex2D.row_printer(board2[i], max_col, 0, String.valueOf(i));
+                row = Ex2D.row_printer(board2[i], max_col, 1, String.valueOf(i));
             }
             System.out.println(row);
         }
@@ -264,6 +258,30 @@ public class tile2D {
     }
 
 
+    public static void place_slot_tiles(int x, int y) {             // determines where to place slot tiles
+        int plusOne = 0;
+        if (x % 2 == 1 && odd == 0 || x % 2 == 0 && odd == 1) plusOne = 1;          // NOTE TO MICHAL MAKE VALIDATE ODD FUNCTION USING THIS LINE
+        if (board2[x][y-1] == null){
+            board2[x][y-1] = new tile2D("slot", "", 0);
+        }
+        if (board2[x][y+1] == null){
+            board2[x][y+1] = new tile2D("slot", "", 0);
+        }
+        if (board2[x-1][y+plusOne] == null){
+            board2[x-1][y+plusOne] = new tile2D("slot", "", 0);
+        }
+        if (board2[x-1][y-1+plusOne] == null){
+            board2[x-1][y-1+plusOne] = new tile2D("slot", "", 0);
+        }
+        if (board2[x+1][y+plusOne] == null){
+            board2[x+1][y+plusOne] = new tile2D("slot", "", 0);
+        }
+        if (board2[x+1][y-1+plusOne] == null){
+            board2[x+1][y-1+plusOne] = new tile2D("slot", "", 0);
+        }
+    }
+
+
     public static boolean verify_animal_token_placement(int x, int y, String animalToken){
 
         // first check if there is a tile present
@@ -277,8 +295,19 @@ public class tile2D {
         return true;
     }
 
-    public static boolean verify_tile_placement(int x, int y, int checkBoardUpper, int checkBoardLower) {
+    public static boolean verify_tile(int x, int y) {
+        if (board2[x][y].getBiome().contains("slot")) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
+
+
+        public static boolean verify_tile_placement(int x, int y, int checkBoardUpper, int checkBoardLower) {
+        //// :)
         if (checkBoardUpper % 2 == 0) { //even top rows
             if (x == 0 && y == 0) {
                 return board2[x][y] == null && board2[x][y + 1] == null && board2[x + 1][y] == null; //top left corner

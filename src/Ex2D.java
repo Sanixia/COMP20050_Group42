@@ -34,7 +34,7 @@ public class Ex2D
             line_2 += splitter(blank_space(), 1);
             line_3 += splitter(blank_space(), 2);
             line_4 += splitter(blank_space(), 3);
-            max--;
+            //max--;                                        //TODO uncomment later // only visual
         }
 
         for (int i=0; i<max; i++) {
