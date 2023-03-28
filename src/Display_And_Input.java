@@ -215,7 +215,7 @@ public class Display_And_Input {
         System.out.println("\nHabitat Tiles: \n");
 
         for (i = 0; i < 4; i++){
-            System.out.println(Tile_Printer.print_tile_setup(Habitat_Tiles.biome.get(i), 1,  Habitat_Tiles.animals.get(i)));
+            System.out.println((i+1) + ". \n" + Tile_Printer.print_tile_setup(Habitat_Tiles.biome.get(i), 1,  Habitat_Tiles.animals.get(i)));
         }
 
 
@@ -388,7 +388,25 @@ public class Display_And_Input {
         int k;
 
         for (k = 0; k < 4; k++){
-            System.out.println(Starter_Tile_Printer.token_printer(Wildlife_Tokens.tokens.get(k)));
+            String animal = Wildlife_Tokens.tokens.get(k);
+            switch(animal){
+                case "E":
+                    animal = " ----->  Elk";
+                    break;
+                case "H":
+                    animal = " ----->  Hawk";
+                    break;
+                case "B":
+                    animal = " ----->  Bear";
+                    break;
+                case "S":
+                    animal = " ----->  Salmon";
+                    break;
+                case "F":
+                    animal = " ----->  Fox";
+                    break;
+            }
+            System.out.println((k + 1) + ". " + Starter_Tile_Printer.token_printer(Wildlife_Tokens.tokens.get(k)) + animal);
         }
     }
 

@@ -1,4 +1,4 @@
-public class Tile_Score {
+/*public class Tile_Score {
     public static tile2D[][] board;
     public static int score = 0;
     public static int MAXSIZE = 26;
@@ -55,3 +55,5 @@ public class Tile_Score {
         return false;
     }
 }
+
+ */

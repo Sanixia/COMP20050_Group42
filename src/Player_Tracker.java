@@ -57,11 +57,11 @@ public class Player_Tracker {
     }
 
 
-    public static void setup_board(String setup_board){
-        tile2D.setup(setup_board);
+    public void setup_board(String setup_board, tile2D[][] board){
+        tile2D.setup(setup_board, board);
     }
 
-    public static void print_board(tile2D[][] board){
+    public void print_board(tile2D[][] board){
         tile2D.print_board(board);
     }
 

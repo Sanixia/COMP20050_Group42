@@ -23,6 +23,10 @@ public class Cascadia
               command_state = Command_State.get_Input();   // Setting the command state
               if (randomCheck){
                   Display_And_Input.randomise_player_tiles_and_tokens();          // Has to do the randomization once else it will cause errors
+
+                  for(int i = 0; i < Display_And_Input.getPlayer_count(); i++){
+                      Display_And_Input.getPlayers().get(i).setup_board(Display_And_Input.getPlayers().get(i).getStarter_tile(),Display_And_Input.getPlayers().get(i).getBoard() );   //sets up board with starter tile from player
+                  }
                   randomCheck = false;
               }
 
@@ -36,6 +40,7 @@ public class Cascadia
                   if (command_state.getChoice() == 1){
 
                       Display_And_Input.display_tiles_and_tokens(playerNum);
+                      Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard());
                   }
 
                   else if (command_state.getChoice() == 2){
@@ -77,7 +82,9 @@ public class Cascadia
 
 
                       do {
+                          Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard());
                           Display_And_Input.display_tiles_and_tokens(playerNum);
+
                           command_state = Command_State.get_Input();               //will be updated to have options for select tile and token
 
 
