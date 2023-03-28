@@ -215,7 +215,7 @@ public class Display_And_Input {
         System.out.println("\nHabitat Tiles: \n");
 
         for (i = 0; i < 4; i++){
-            System.out.println(Tile_Printer.print_tile_setup(Habitat_Tiles.biome.get(i), 1,  Habitat_Tiles.animals.get(i) ));
+            System.out.println(Tile_Printer.print_tile_setup(Habitat_Tiles.biome.get(i), 1,  Habitat_Tiles.animals.get(i)));
         }
 
 

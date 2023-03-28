@@ -18,6 +18,13 @@ public class Player_Tracker {
 
 
     private int nature_tokens = 0;
+    private static final int MAXSIZE = 26;
+
+
+
+    private tile2D[][] board;
+
+
 
 
 
@@ -37,12 +44,25 @@ public class Player_Tracker {
 
         this.player_turn = player_turn;
         this.nature_tokens = nature_tokens;
+        this.board = new tile2D[MAXSIZE][MAXSIZE];
 
 
 
 
 
 
+
+
+
+    }
+
+
+    public static void setup_board(String setup_board){
+        tile2D.setup(setup_board);
+    }
+
+    public static void print_board(tile2D[][] board){
+        tile2D.print_board(board);
     }
 
 
@@ -95,6 +115,10 @@ public class Player_Tracker {
 
     public void setNature_tokens() {
         this.nature_tokens = nature_tokens;
+    }
+
+    public tile2D[][] getBoard() {
+        return board;
     }
 
 

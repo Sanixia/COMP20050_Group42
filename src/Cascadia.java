@@ -55,6 +55,8 @@ public class Cascadia
                       else{
 
 
+
+
                           Display_And_Input.getPlayers().remove(Display_And_Input.getPlayers().get(playerNum));
 
                           Display_And_Input.setPlayer_count(Display_And_Input.getPlayer_count());
