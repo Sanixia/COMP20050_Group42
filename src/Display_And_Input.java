@@ -166,7 +166,7 @@ public class Display_And_Input {
 
             //Calls the constructor
 
-            players.add(new Player_Tracker(playerNames.get(i), Starter_Habitat.getStarter_Habitat_Tiles().get(i)));
+            players.add(new Player_Tracker(playerNames.get(i), Starter_Habitat.getStarter_Habitat_Tiles().get(i), 0, 0));
 
 
         }

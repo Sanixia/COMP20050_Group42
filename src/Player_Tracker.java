@@ -13,11 +13,11 @@ public class Player_Tracker {
 
 
 
-    private int playerTurn = 0;
+    private int player_turn = 0;
 
 
 
-    private ArrayList<String> nature_tokens = new ArrayList<>();
+    private int nature_tokens = 0;
 
 
 
@@ -28,15 +28,15 @@ public class Player_Tracker {
     //Used in the arraylist to keep track of players and their tiles and tokens
     //public Player_Tracker(String player_name, String starter_tile, ArrayList<String> habitat_tiles, ArrayList<String> animal_tiles){
 
-    public Player_Tracker(String player_name, String starter_tile){
+    public Player_Tracker(String player_name, String starter_tile, int player_turn, int nature_tokens){
 
         this.player_name = player_name;
         this.starter_tile = starter_tile;
         //this.habitat_tiles = habitat_tiles;
         //this.animal_tiles = animal_tiles;
 
-        this.playerTurn = getPlayerTurn();
-        this.nature_tokens = getNature_tokens();
+        this.player_turn = player_turn;
+        this.nature_tokens = nature_tokens;
 
 
 
@@ -82,18 +82,18 @@ public class Player_Tracker {
     }
 
     public int getPlayerTurn() {
-        return playerTurn;
+        return player_turn;
     }
 
     public void setPlayerTurn(int playerTurn) {
-        this.playerTurn = getPlayerTurn() + 1;
+        this.player_turn++;
     }
 
-    public ArrayList<String> getNature_tokens() {
+    public int getNature_tokens() {
         return nature_tokens;
     }
 
-    public void setNature_tokens(ArrayList<String> nature_tokens) {
+    public void setNature_tokens() {
         this.nature_tokens = nature_tokens;
     }
 
