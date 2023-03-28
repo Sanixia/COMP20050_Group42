@@ -34,7 +34,7 @@ public class Ex2D
             line_2 += splitter(blank_space(), 1);
             line_3 += splitter(blank_space(), 2);
             line_4 += splitter(blank_space(), 3);
-            //max--;                                        //TODO uncomment later // only visual
+            max--;                                        //TODO uncomment later // only visual
         }
 
         for (int i=0; i<max; i++) {
@@ -106,7 +106,7 @@ public class Ex2D
 
                 case 5: return long_section(colour1) + body(colour1, colour2, animals) + long_section(colour2);
 
-                case 6: return long_section(colour1) + body(colour2, colour1, animals) + long_section(colour2);
+                case 0: return long_section(colour1) + body(colour2, colour1, animals) + long_section(colour2);
                 default:
                     return long_section(colour1) + body(colour2, colour1, animals) + long_section(colour2);
             }
@@ -208,5 +208,15 @@ public class Ex2D
         } else {
             return str;
         }
+    }
+
+    public static void main(String[] args) {
+        tile2D t = new tile2D("RM", "BEH", 0);
+        System.out.println(print_tile_setup(new tile2D("RM", "BEH", 1)));
+        System.out.println(print_tile_setup(new tile2D("RM", "BEH", 2)));
+        System.out.println(print_tile_setup(new tile2D("RM", "BEH", 3)));
+        System.out.println(print_tile_setup(new tile2D("RM", "BEH", 4)));
+        System.out.println(print_tile_setup(new tile2D("RM", "BEH", 5)));
+        System.out.println(print_tile_setup(new tile2D("RM", "BEH", 6)));
     }
 }
