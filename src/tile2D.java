@@ -7,7 +7,6 @@ public class tile2D {
     private String biome;
     private String animals;
     private int rotation;
-    private String starter_tile;
     private static int max_col;         // adjusts 'length' of board
     private static int max_row;         // adjusts 'height' of board
     private static int odd;          // 1 if odd rows are at the front
@@ -18,11 +17,11 @@ public class tile2D {
     private static int checkOddOrEven = 0;
     static tile2D[][] board2 = new tile2D[MAXSIZE][MAXSIZE];
 
-    public tile2D(String biome, String animals, int rotation, String starter_tile) {
+    public tile2D(String biome, String animals, int rotation) {
         this.biome = biome;
         this.animals = animals;
         this.rotation = rotation;
-        this.starter_tile = starter_tile;
+
 
     }
 
@@ -190,7 +189,7 @@ public class tile2D {
 
 
     public static void board_add_tile(String biome, String animals, int rotation, int row, int col, tile2D[][] board) { //TODO verify
-        tile2D tile = new tile2D(biome, animals, rotation, "");
+        tile2D tile = new tile2D(biome, animals, rotation);
         board[row][col] = tile;
         int plusOne = 0, plusRow = 0, plusCol = 0;
         if (col % 2 == 1 && odd == 1 || col % 2 == 0 && odd == 0) plusOne = 1;
@@ -311,22 +310,22 @@ public class tile2D {
         int plusOne = 0;
         if (x % 2 == 1 && odd == 0 || x % 2 == 0 && odd == 1) plusOne = 1;          // NOTE TO MICHAL MAKE VALIDATE ODD FUNCTION USING THIS LINE
         if (y-1>=0 && board2[x][y-1] == null){
-            board2[x][y-1] = new tile2D("slot", "", 0,"");         // left
+            board2[x][y-1] = new tile2D("slot", "", 0);         // left
         }
         if (y-1<=MAXSIZE && board2[x][y+1] == null){
-            board2[x][y+1] = new tile2D("slot", "", 0,"");         // right
+            board2[x][y+1] = new tile2D("slot", "", 0);         // right
         }
         if (y-1+plusOne>=0 && x-1>=0 && board2[x-1][y-1+plusOne] == null){
-            board2[x-1][y-1+plusOne] = new tile2D("slot", "", 0,"");   // top left
+            board2[x-1][y-1+plusOne] = new tile2D("slot", "", 0);   // top left
         }
         if (y+plusOne<=MAXSIZE && x-1>=0 && board2[x-1][y+plusOne] == null){
-            board2[x-1][y+plusOne] = new tile2D("slot", "", 0,"");     // top right
+            board2[x-1][y+plusOne] = new tile2D("slot", "", 0);     // top right
         }
         if (y-1+plusOne>=0 && x+1<=MAXSIZE && board2[x+1][y-1+plusOne] == null){
-            board2[x+1][y-1+plusOne] = new tile2D("slot", "", 0,"");   // bottom left
+            board2[x+1][y-1+plusOne] = new tile2D("slot", "", 0);   // bottom left
         }
         if (y+plusOne<=MAXSIZE && x+1<=MAXSIZE && board2[x+1][y+plusOne] == null){
-            board2[x+1][y+plusOne] = new tile2D("slot", "", 0,"");     // bottom right
+            board2[x+1][y+plusOne] = new tile2D("slot", "", 0);     // bottom right
         }
     }
 
@@ -336,22 +335,22 @@ public class tile2D {
         if (checkOddOrEven == 1 && odd == 0 && x % 2 != 0) plusOne = 0;
 
         if (y-1>=0 && board2[x][y-1] == null){
-            board2[x][y-1] = new tile2D("slot", "", 0,"");         // left
+            board2[x][y-1] = new tile2D("slot", "", 0);         // left
         }
         if (y-1<=MAXSIZE && board2[x][y+1] == null){
-            board2[x][y+1] = new tile2D("slot", "", 0,"");         // right
+            board2[x][y+1] = new tile2D("slot", "", 0);         // right
         }
         if (y-1+plusOne>=0 && x-1>=0 && board2[x-1][y-1+plusOne] == null){
-            board2[x-1][y-1+plusOne] = new tile2D("slot", "", 0,"");   // top left
+            board2[x-1][y-1+plusOne] = new tile2D("slot", "", 0);   // top left
         }
         if (y+plusOne<=MAXSIZE && x-1>=0 && board2[x-1][y+plusOne] == null){
-            board2[x-1][y+plusOne] = new tile2D("slot", "", 0,"");     // top right
+            board2[x-1][y+plusOne] = new tile2D("slot", "", 0);     // top right
         }
         if (y-1+plusOne>=0 && x+1<=MAXSIZE && board2[x+1][y-1+plusOne] == null){
-            board2[x+1][y-1+plusOne] = new tile2D("slot", "", 0,"");   // bottom left
+            board2[x+1][y-1+plusOne] = new tile2D("slot", "", 0);   // bottom left
         }
         if (y+plusOne<=MAXSIZE && x+1<=MAXSIZE && board2[x+1][y+plusOne] == null){
-            board2[x+1][y+plusOne] = new tile2D("slot", "", 0,"");     // bottom right
+            board2[x+1][y+plusOne] = new tile2D("slot", "", 0);     // bottom right
         }
     }
 
