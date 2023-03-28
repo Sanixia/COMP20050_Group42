@@ -34,13 +34,10 @@ public class Command_State {
                 choice = 3;
             }
             else if(boardMenuInput == 2){
-                state_type = state.BOARD_MENU;
-                choice = 3;
-            }
-            else{
                 state_type = state.MAIN_MENU;
                 choice = 1;
             }
+
         }
 
 
@@ -56,24 +53,16 @@ public class Command_State {
 
         if(choice == 3){
             while(!check){
-                System.out.println("\n\nEnter a command from the menu (1, 2, or 3) ");
-                System.out.println("1) Select a habitat tile to be placed on the board");
-                System.out.println("2) Select a token to be placed on the board");
-                System.out.println("3) Back to main menu");
-
+                board_menu();
                 String user_input_2 = in.nextLine();
 
-                if(isValid(user_input_2)){
+                if(isValid(user_input_2, 2)){
                     if (user_input_2.equals("1")){
                         commandState = new Command_State(0, 1, 0, 1);
                         check = true;
                     }
                     else if(user_input_2.equals("2")){
                         commandState = new Command_State(0, 1, 0, 2);
-                        check = true;
-                    }
-                    else{
-                        commandState = new Command_State(0, 1, 0, 3);
                         check = true;
                     }
                 }
@@ -90,15 +79,10 @@ public class Command_State {
 
         else{
             while(!check){
-                System.out.println("\n\nEnter a command from the menu (1, 2, 3 or 4) ");
-                System.out.println("1) Show current player's starter habitat tile, habitat tiles and tokens");
-                System.out.println("2) Next player's turn");
-                System.out.println("3) Show board");
-                System.out.println("4) Quit");
-
+                main_menu();
                 String user_input = in.nextLine();
 
-                if(isValid(user_input)){                                        //checks for valid user input and then goes through the options by calling the commandState for the type of state
+                if(isValid(user_input, 1)){                                        //checks for valid user input and then goes through the options by calling the commandState for the type of state
                     if (user_input.equals("1")){
                         commandState = new Command_State(1, 0, 1, 0);
                         check = true;
@@ -136,6 +120,34 @@ public class Command_State {
 
     }
 
+    public static void board_menu(){
+        System.out.println("\n\nEnter a command from the menu (1 or 2) ");
+        System.out.println("1) Select a habitat tile to be placed on the board");
+        System.out.print("2) Back to main menu\n-> ");
+    }
+
+    public static void habitat_menu(){
+        System.out.println("\n\nEnter which habitat tile you want to place down (1, 2, 3 or 4) ");
+        System.out.print("-> ");
+    }
+
+    public static void habitat_rotation(){
+        System.out.println("\n\nEnter which way you want to rotate the habitat tile (1,2,3,4,5,6 or 7)");
+        System.out.print("-> ");
+    }
+
+    public static void token_menu(){
+        System.out.println("\n\nDo you want to place down a token (1 for yes or 2 for no)");
+        System.out.print("-> ");
+    }
+
+    public static void main_menu(){
+        System.out.println("\n\nEnter a command from the menu (1, 2, 3 or 4) ");
+        System.out.println("1) Show current player's starter habitat tile, habitat tiles and tokens");
+        System.out.println("2) Next player's turn");
+        System.out.println("3) Show board");
+        System.out.print("4) Quit\n-> ");
+    }
 
 
 
@@ -146,8 +158,18 @@ public class Command_State {
     }
 
 
-    public static boolean isValid(String input){
-        return input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4");
+    public static boolean isValid(String input, int menu){
+        if(menu == 1){
+            return input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4");
+        }
+        else if (menu == 2){
+            return input.equals("1") || input.equals("2");
+        }
+        else if(menu == 3){
+            return input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") || input.equals("5") || input.equals("6") || input.equals("7");
+        }
+        return false;
+
     }
 
     public boolean isQuit(){
