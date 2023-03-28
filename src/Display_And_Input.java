@@ -14,8 +14,13 @@ public class Display_And_Input {
     private static ArrayList<String> playerNames = new ArrayList<>();
 
     private static ArrayList<Player_Tracker> players = new ArrayList<>();   //Array of objects to keep track of players
+
+
     private static int player_count = 0;
 
+    public static void setPlayer_count(int player_count) {
+        Display_And_Input.player_count--;
+    }
 
     public static int getPlayer_count() {
         return player_count;

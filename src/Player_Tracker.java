@@ -85,7 +85,7 @@ public class Player_Tracker {
         return player_turn;
     }
 
-    public void setPlayerTurn(int playerTurn) {
+    public void setPlayerTurn() {
         this.player_turn++;
     }
 

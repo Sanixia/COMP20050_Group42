@@ -40,16 +40,30 @@ public class Cascadia
 
                   else if (command_state.getChoice() == 2){
 
-                      Display_And_Input.getPlayers().get(playerNum).setPlayerTurn(Display_And_Input.getPlayers().get(playerNum).getPlayerTurn());  //increments turn by 1 each time this is called
+                      Display_And_Input.getPlayers().get(playerNum).setPlayerTurn();  //increments turn by 1 each time this is called
 
-
-                      if (playerNum == Display_And_Input.getPlayer_count() - 1){    //resets to the start of the player list
-                          playerNum = 0;
+                      if( Display_And_Input.getPlayers().get(playerNum).getPlayerTurn() < 3){
+                          if (playerNum == Display_And_Input.getPlayer_count() - 1){    //resets to the start of the player list
+                              playerNum = 0;
+                          }
+                          else{
+                              playerNum++;
+                          }
+                          System.out.println(Display_And_Input.getPlayers().get(playerNum).getPlayer_name() + " is up...");
                       }
+
                       else{
-                          playerNum++;
+
+
+                          Display_And_Input.getPlayers().remove(Display_And_Input.getPlayers().get(playerNum));
+
+                          Display_And_Input.setPlayer_count(Display_And_Input.getPlayer_count());
+
+                          System.out.println("You have no more turns left, preparing to calculate your score...");
                       }
-                      System.out.println(Display_And_Input.getPlayers().get(playerNum).getPlayer_name() + " is up...");
+
+
+
 
                   }
 
