@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Cascadia
@@ -20,7 +21,8 @@ public class Cascadia
 
           do{
 
-              command_state = Command_State.get_Input();   // Setting the command state
+              command_state = Command_State.get_input2(1);   // Setting the command state
+
               if (randomCheck){
                   Display_And_Input.randomise_player_tiles_and_tokens();          // Has to do the randomization once else it will cause errors
 
@@ -39,8 +41,12 @@ public class Cascadia
 
                   if (command_state.getChoice() == 1){
 
-                      Display_And_Input.display_tiles_and_tokens(playerNum);
+                      System.out.println("--- " + Display_And_Input.getPlayers().get(playerNum).getPlayer_name()+ "'s  Board --- \n");
+
                       Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard());
+
+                      Display_And_Input.display_tiles_and_tokens(playerNum);
+
                   }
 
                   else if (command_state.getChoice() == 2){
@@ -69,9 +75,6 @@ public class Cascadia
                           System.out.println("You have no more turns left, preparing to calculate your score...");
                       }
 
-
-
-
                   }
 
 
@@ -82,10 +85,53 @@ public class Cascadia
 
 
                       do {
-                          Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard());
-                          Display_And_Input.display_tiles_and_tokens(playerNum);
+                          display_board_tiles_tokens(playerNum, 2, command_state);
 
-                          command_state = Command_State.get_Input();               //will be updated to have options for select tile and token
+
+
+
+                          if(command_state.getChoice() == 1){  // this is for the habitat board menu which will be updated with more options
+
+                              do{
+                                  display_board_tiles_tokens(playerNum, 3, command_state);    // habitat to place down
+
+
+                                  if(command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4){
+
+
+
+
+
+
+
+
+                                      do{
+                                          display_board_tiles_tokens(playerNum, 4, command_state);
+
+
+                                          if(command_state.getChoice() == 1){
+                                              do{
+
+                                                  display_board_tiles_tokens(playerNum, 5, command_state);
+
+
+                                              }while (command_state.isInTokenMenu());
+                                          }
+
+
+
+
+
+                                      }while (command_state.isInHabitatRotationMenu());
+                                  }
+                                  else{
+                                        System.out.println("Invalid input, please try again");
+                                  }
+
+
+
+                              }while (command_state.isInHabitatBoardMenu());
+                          }
 
 
 
@@ -103,6 +149,13 @@ public class Cascadia
           }while (!command_state.isQuit());
 
           Command_State.quitMessage();
+        }
+
+
+        public static void display_board_tiles_tokens(int player_number, int menu_number, Command_State command_state){
+            Display_And_Input.getPlayers().get(player_number).print_board(Display_And_Input.getPlayers().get(player_number).getBoard());
+            Display_And_Input.display_tiles_and_tokens(player_number);
+            command_state = Command_State.get_input2(menu_number);
         }
 
 
