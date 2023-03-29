@@ -208,9 +208,6 @@ public class Display_And_Input {
 
         int i;
 
-        System.out.println("--- " + players.get(player).getPlayer_name() + "'s  Turn --- \n");
-        System.out.println("Starter Tile: \n");
-        Starter_Tile_Printer.starter_tile_printout(players.get(player).getStarter_tile());
 
         System.out.println("\nHabitat Tiles: \n");
 
@@ -221,7 +218,7 @@ public class Display_And_Input {
 
 
 
-        System.out.println("Wildlife Tokens: \n");
+        System.out.println("Corresponding Wildlife Tokens (1 next to a token represents the habitat that is also 1 for example): \n");
         printTokens();
         callTheCulling();
     }

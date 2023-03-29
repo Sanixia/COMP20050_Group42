@@ -20,6 +20,8 @@ public class Tile_Colours {
     public static final String ELK_COLOUR_BACKGROUND = "\033[48;5;9m";  // BLACK
     public static final String SALMON_COLOUR_BACKGROUND = "\033[48;5;160m";    // PINK
 
+    public static final String HIGHLIGHT_SLOT_COLOUR = "\u001B[47m";
+
     // System.out.println("\033[48;5;200m" + "ERROR MESSAGE IN RED");  Change 200 for any colour for background
 
     // Above are the colours for the tiles

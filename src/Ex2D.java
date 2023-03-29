@@ -79,7 +79,7 @@ public class Ex2D
             case "RM": col1=Tile_Colours.RIVER_COLOUR; col2=Tile_Colours.MOUNTAIN_COLOUR; break;
             case "RP": col1=Tile_Colours.RIVER_COLOUR; col2=Tile_Colours.PRAIRIE_COLOUR; break;
             case "MP": col1=Tile_Colours.MOUNTAIN_COLOUR; col2=Tile_Colours.PRAIRIE_COLOUR; break;
-            case "slot": col1=Tile_Colours.MOUNTAIN_COLOUR; break;
+            case "slot": col1=Tile_Colours.HIGHLIGHT_SLOT_COLOUR; break;
             default: break;
         }
         return tile_printout(col1, col2, rotation, animals);
