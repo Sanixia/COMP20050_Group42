@@ -171,6 +171,72 @@ public class tile2D {
         board_add_tile("RM", "BEH", 1, x, y,board);
     }
 
+    public static void place2(int tile_number , tile2D[][] board) {            // temporary place test feature
+
+        Scanner in = new Scanner(System.in);
+        String temp_x, temp_y;
+        int x, y;
+
+        System.out.println("Greyed out tiles are valid placements!\n");
+
+
+        System.out.println("Enter x coordinate: ");
+        temp_x = in.nextLine();
+        while(!verify_valid_number(temp_x)){
+            System.out.println("Please enter a valid number!\n");
+            System.out.println("Enter x coordinate: ");
+            temp_x = in.nextLine();
+        }
+
+        System.out.println("Enter y coordinate: ");
+        temp_y = in.nextLine();
+
+        while (!verify_valid_number(temp_y)) {
+            System.out.println("Please enter a valid number!\n");
+            System.out.println("Enter y coordinate: ");
+            temp_y = in.nextLine();
+        }
+        x = Integer.parseInt(temp_x);
+        y = Integer.parseInt(temp_y);
+
+
+        //while (verify_tile_placement(x, y, getCheckBoardUpper(), getCheckBoardLower())) {
+        while (!verify_tile(x, y,board)) {
+            System.out.println("Please enter a valid tile placement!\n");
+            System.out.println("Enter x coordinate: ");
+            temp_x = in.nextLine();
+            while(!verify_valid_number(temp_x)){
+                System.out.println("Please enter a valid number!\n");
+                System.out.println("Enter x coordinate: ");
+                temp_x = in.nextLine();
+            }
+
+            System.out.println("Enter y coordinate: ");
+            temp_y = in.nextLine();
+
+            while (!verify_valid_number(temp_y)) {
+                System.out.println("Please enter a valid number!\n");
+                System.out.println("Enter y coordinate: ");
+                temp_y = in.nextLine();
+            }
+            x = Integer.parseInt(temp_x);
+            y = Integer.parseInt(temp_y);
+        }
+
+        board_add_tile("RM", "BEH", 1, x, y,board);
+    }
+
+    public static boolean verify_valid_number(String number){
+        try{
+            Integer.parseInt(number);
+            return true;
+        }catch(NumberFormatException e){
+            return false;
+        }
+    }
+
+
+
 
     public static void board_add_tile(String biome, String animals, int rotation, int row, int col, tile2D[][] board) { //TODO verify
         tile2D tile = new tile2D(biome, animals, rotation);

@@ -62,7 +62,7 @@ public class Display_And_Input {
             try{
 
                 player_count = in.nextInt();
-                if (player_count == 2 || player_count == 3 || player_count == 4){
+                if (player_count == 1 || player_count == 2 || player_count == 3 || player_count == 4 ){
                     validNumOfPlayers = true;
                 }
                 else{
@@ -205,22 +205,20 @@ public class Display_And_Input {
 
 
     public static void display_tiles_and_tokens(int player){
+        display_tiles(player);
+        System.out.println("Corresponding Wildlife Tokens (1 next to a token represents the habitat that is also 1 for example): \n");
+        printTokens();
+        callTheCulling();
+    }
+
+    public static void display_tiles(int player){        // TODO
 
         int i;
-
-
         System.out.println("\nHabitat Tiles: \n");
 
         for (i = 0; i < 4; i++){
             System.out.println((i+1) + ". \n" + Tile_Printer.print_tile_setup(Habitat_Tiles.biome.get(i), 1,  Habitat_Tiles.animals.get(i)));
         }
-
-
-
-
-        System.out.println("Corresponding Wildlife Tokens (1 next to a token represents the habitat that is also 1 for example): \n");
-        printTokens();
-        callTheCulling();
     }
 
     public static void callTheCulling(){
@@ -450,6 +448,21 @@ public class Display_And_Input {
         }
 
 
+
+    }
+
+    public static void display_tile_rotation(int tile_number){  // TODO
+        System.out.println("\n\n-- Tile Rotation Options -- ");
+        for (int i = 0; i < 6; i++){
+            tile2D rotate_tile = new tile2D(Habitat_Tiles.biome.get(tile_number-1), Habitat_Tiles.animals.get(tile_number-1), i);
+            System.out.println((i+1) + ". \n" + Ex2D.print_tile_setup(rotate_tile));
+        }
+    }
+
+    public static void place_tile(int tile_number, int rotation, tile2D[][] board){
+
+        tile2D tile = new tile2D(Habitat_Tiles.biome.get(tile_number-1), Habitat_Tiles.animals.get(tile_number-1), rotation);
+        tile2D.place2(tile_number, board);
 
     }
 

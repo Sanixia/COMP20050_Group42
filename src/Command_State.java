@@ -1,4 +1,4 @@
-import java.util.Locale;
+
 import java.util.Scanner;
 
 public class Command_State {
@@ -6,6 +6,11 @@ public class Command_State {
 
     // Choice used for main Cascadia function for different menu options
     private static int choice;
+
+
+
+
+    private static int habitat_tile_choice = 0;
     /*public Command_State(int inputMainMenu, int inputBoardMenu, int mainMenuInput, int boardMenuInput){
 
         if(inputMainMenu == 1){
@@ -83,6 +88,7 @@ public class Command_State {
             if(menuInput == 1 || menuInput == 2 || menuInput == 3 || menuInput == 4){
                 state_type = state.HABITAT_MENU;
                 choice = menuInput;
+                setHabitat_tile_choice(menuInput);
             }
             else{
                 state_type = state.HABITAT_MENU;
@@ -95,10 +101,11 @@ public class Command_State {
             if(menuInput == 1 || menuInput == 2 || menuInput == 3 || menuInput == 4 || menuInput == 5 || menuInput == 6 || menuInput == 7){
                 state_type = state.TOKEN_MENU;
                 choice = menuInput;
+                setHabitat_tile_choice(0);
             }
             else{
                 state_type = state.HABITAT_ROTATION;
-                choice = 0;
+                choice = habitat_tile_choice;
             }
         }
 
@@ -288,7 +295,7 @@ public class Command_State {
 
                 }
                 else{
-                    System.out.println("Please enter 1, 2, 3, 4, 5, 6 or 7.");
+                    System.out.println("Please enter 1, 2, 3, 4, 5 or 6");
                     commandState = new Command_State(4, 0);
                     check = true;
                 }
@@ -360,12 +367,12 @@ public class Command_State {
     }
 
     public static void habitat_rotation(){
-        System.out.println("\n\nEnter which way you want to rotate the habitat tile (1,2,3,4,5,6 or 7)");
+        System.out.println("\n\nEnter which way you want to rotate the habitat tile (1, 2, 3, 4, 5 or 6)");
         System.out.print("-> ");
     }
 
     public static void token_menu(){
-        System.out.println("\n\nDo you want to place down a token (1 for yes or 2 for no)");
+        System.out.println("\n\nDo you want to place down the token from the habitat tile you selected (1 for yes or 2 for no)");
         System.out.print("-> ");
     }
 
@@ -441,6 +448,14 @@ public class Command_State {
 
     public void setChoice(int choice) {
         this.choice = choice;
+    }
+
+    public static int getHabitat_tile_choice() {
+        return habitat_tile_choice;
+    }
+
+    public static void setHabitat_tile_choice(int habitat_tile_choice) {
+        Command_State.habitat_tile_choice = habitat_tile_choice;
     }
 
 

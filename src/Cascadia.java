@@ -1,5 +1,3 @@
-import java.sql.SQLOutput;
-import java.util.Scanner;
 
 public class Cascadia
 {
@@ -96,23 +94,32 @@ public class Cascadia
                                   display_board_tiles_tokens(playerNum, 3, command_state);    // habitat to place down
 
 
+
                                   if(command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4){
 
 
 
 
-
-
-
-
                                       do{
-                                          display_board_tiles_tokens(playerNum, 4, command_state);
+                                          Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard());
+                                          Display_And_Input.display_tiles_and_tokens(playerNum);
+
+                                          Display_And_Input.display_tile_rotation(command_state.getChoice());
+                                          command_state = Command_State.get_input2(4);
 
 
-                                          if(command_state.getChoice() == 1){
+
+
+                                          if(Command_State.getHabitat_tile_choice() == 0 && command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4 || command_state.getChoice() == 5 || command_state.getChoice() == 6 || command_state.getChoice() == 7 ){
+                                              Display_And_Input.place_tile(command_state.getChoice(), 0, Display_And_Input.getPlayers().get(playerNum).getBoard());
+
                                               do{
 
                                                   display_board_tiles_tokens(playerNum, 5, command_state);
+
+                                                  if(command_state.getChoice() == 1){
+
+                                                  }
 
 
                                               }while (command_state.isInTokenMenu());
