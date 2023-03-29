@@ -6,10 +6,16 @@ public class Ex2D
     private static final String sp12_R = "            " + reset;
     private static final String sp6_R = "      " + reset;
     private static final String sp3_R = "   " + reset;
+    private static final String sp16 = "                ";
     private static final String sp6 = "      ";
     private static final String sp3 = "   ";
     private static final String newline = "\n";
 
+    public static String num_printer(int num) {
+        String nums = sp3+" 1)";
+        for (int i=2; i<num+1; i++) nums+= sp16+i+")";
+        return nums;
+    }
     public static String column_numbers(int max_col) {
         String row_str = "  ";
 
@@ -21,7 +27,6 @@ public class Ex2D
         return row_str;
     }
 
-
     public static String row_printer(tile2D[] arr, int max, int space, String row_num) {
         int pos;
         String row_str, line_1 = "\t", line_2 = row_num + "  ", line_3 = "\t", line_4 = "\t", tile_print;
@@ -30,10 +35,10 @@ public class Ex2D
         if (row_num.length() == 1) line_2+=" ";
 
         if (space == 1){
-            line_1 += splitter(blank_space(), 0);
-            line_2 += splitter(blank_space(), 1);
-            line_3 += splitter(blank_space(), 2);
-            line_4 += splitter(blank_space(), 3);
+            line_1 += splitter(blank_half(), 0);
+            line_2 += splitter(blank_half(), 1);
+            line_3 += splitter(blank_half(), 2);
+            line_4 += splitter(blank_half(), 3);
             max--;                                        //TODO uncomment later // only visual
         }
 
@@ -80,6 +85,7 @@ public class Ex2D
             case "RP": col1=Tile_Colours.RIVER_COLOUR; col2=Tile_Colours.PRAIRIE_COLOUR; break;
             case "MP": col1=Tile_Colours.MOUNTAIN_COLOUR; col2=Tile_Colours.PRAIRIE_COLOUR; break;
             case "slot": col1=Tile_Colours.HIGHLIGHT_SLOT_COLOUR; break;
+            case "space": return blank_half();
             default: break;
         }
         return tile_printout(col1, col2, rotation, animals);
@@ -174,7 +180,7 @@ public class Ex2D
     public static String blank_right() {
         return empty_left() + newline + empty_left_side() + newline + empty_left_side() + newline + empty_left();
     }
-    public static String blank_space() {
+    public static String blank_half() {
         return empty() + newline + empty() + newline + empty() + newline + empty();
     }
 

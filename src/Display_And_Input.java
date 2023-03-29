@@ -211,14 +211,17 @@ public class Display_And_Input {
         callTheCulling();
     }
 
-    public static void display_tiles(int player){        // TODO
-
+    public static void display_tiles(int player){        // TODO. done :)
+        int max = 8;
+        tile2D[] row = new tile2D[max];
         int i;
         System.out.println("\nHabitat Tiles: \n");
 
         for (i = 0; i < 4; i++){
-            System.out.println((i+1) + ". \n" + Tile_Printer.print_tile_setup(Habitat_Tiles.biome.get(i), 1,  Habitat_Tiles.animals.get(i)));
+            row[i*2] = new tile2D(Habitat_Tiles.biome.get(i),  Habitat_Tiles.animals.get(i), 1);
+            row[1+i*2] = new tile2D("space", "", 1);
         }
+        System.out.println(Ex2D.num_printer(4) + "\n" + Ex2D.row_printer(row, max, 0, " ")+"\n");
     }
 
     public static void callTheCulling(){
@@ -451,12 +454,19 @@ public class Display_And_Input {
 
     }
 
-    public static void display_tile_rotation(int tile_number){  // TODO
+    public static void display_tile_rotation(int tile_number){  // TODO uses same method as display tiles could be optimised
         System.out.println("\n\n-- Tile Rotation Options -- ");
-        for (int i = 0; i < 6; i++){
-            tile2D rotate_tile = new tile2D(Habitat_Tiles.biome.get(tile_number-1), Habitat_Tiles.animals.get(tile_number-1), i);
-            System.out.println((i+1) + ". \n" + Ex2D.print_tile_setup(rotate_tile));
+
+        int max = 12;
+        tile2D[] row = new tile2D[max];
+        int i;
+        System.out.println("\nHabitat Tiles: \n");
+
+        for (i = 0; i < 6; i++){
+            row[i*2] = new tile2D(Habitat_Tiles.biome.get(tile_number-1),  Habitat_Tiles.animals.get(tile_number-1), i);
+            row[1+i*2] = new tile2D("space", "", 1);
         }
+        System.out.println(Ex2D.num_printer(6) + "\n" + Ex2D.row_printer(row, max, 0, " ")+"\n");
     }
 
     public static void place_tile(int tile_number, int rotation, tile2D[][] board){
