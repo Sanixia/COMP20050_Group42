@@ -9,10 +9,8 @@ public class tile2D {
     private int rotation;
     private static int max_col;         // adjusts 'length' of board
     private static int max_row;         // adjusts 'height' of board
-    private static int odd;          // 1 if odd rows are at the front
+    private static int  odd;         // 1 if odd rows are at the front
 
-    private static int checkBoardUpper = 0;
-    private static int checkBoardLower = 0;
 
     private static int checkOddOrEven = 0;
     //static tile2D[][] board = new tile2D[MAXSIZE][MAXSIZE];

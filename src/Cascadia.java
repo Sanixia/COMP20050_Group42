@@ -111,6 +111,7 @@ public class Cascadia
 
 
                                           if(Command_State.getHabitat_tile_choice() == 0 && command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4 || command_state.getChoice() == 5 || command_state.getChoice() == 6 || command_state.getChoice() == 7 ){
+                                              Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard());
                                               Display_And_Input.place_tile(command_state.getChoice(), 0, Display_And_Input.getPlayers().get(playerNum).getBoard());
 
                                               do{

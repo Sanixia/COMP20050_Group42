@@ -11,44 +11,7 @@ public class Command_State {
 
 
     private static int habitat_tile_choice = 0;
-    /*public Command_State(int inputMainMenu, int inputBoardMenu, int mainMenuInput, int boardMenuInput){
 
-        if(inputMainMenu == 1){
-            if (mainMenuInput == 1){
-                state_type = state.MAIN_MENU;
-                choice = 1;
-            }
-            else if (mainMenuInput == 2){
-                state_type = state.MAIN_MENU;
-                choice = 2;
-            }
-            else if(mainMenuInput == 3){
-                state_type = state.BOARD_MENU;
-                choice = 3;
-            }
-            else if (mainMenuInput == 4){
-                state_type = state.QUIT;
-            }
-        }
-
-
-        else if(inputBoardMenu == 1){
-
-            if(boardMenuInput == 1){
-                state_type = state.BOARD_MENU;
-                choice = 3;
-            }
-            else if(boardMenuInput == 2){
-                state_type = state.MAIN_MENU;
-                choice = 1;
-            }
-
-        }
-
-
-    }
-
-     */
 
     public Command_State(int inputMenu, int menuInput){
 
@@ -84,7 +47,7 @@ public class Command_State {
 
         }
 
-        else if(inputMenu == 3){ //
+        else if(inputMenu == 3){ // habitat menu
             if(menuInput == 1 || menuInput == 2 || menuInput == 3 || menuInput == 4){
                 state_type = state.HABITAT_MENU;
                 choice = menuInput;
@@ -129,84 +92,6 @@ public class Command_State {
 
     private static state state_type;           // Initializes the enum for state of the game
 
-    /*public static Command_State get_Input(){
-        Scanner in = new Scanner(System.in);
-        boolean check = false;
-
-        Command_State commandState = null;
-
-        if(choice == 3){
-
-            while(!check){
-                board_menu();
-                String user_input_2 = in.nextLine();
-
-                if(isValid(user_input_2, 2)){
-                    if (user_input_2.equals("1")){
-                        commandState = new Command_State(0, 1, 0, 1);
-                        check = true;
-                    }
-                    else if(user_input_2.equals("2")){
-                        commandState = new Command_State(0, 1, 0, 2);
-                        check = true;
-                    }
-                }
-
-                else{
-                    System.out.println("Please enter 1, 2 or 3.");
-                }
-
-            }
-
-        }
-
-
-
-
-        else{
-            while(!check){
-                main_menu();
-                String user_input = in.nextLine();
-
-                if(isValid(user_input, 1)){                                        //checks for valid user input and then goes through the options by calling the commandState for the type of state
-                    if (user_input.equals("1")){
-                        commandState = new Command_State(1, 0, 1, 0);
-                        check = true;
-                    }
-                    else if(user_input.equals("2")){
-                        commandState = new Command_State(1, 0, 2, 0);
-                        check = true;
-                    }
-                    else if(user_input.equals("3")){
-
-
-                        commandState = new Command_State(1, 0, 3, 1);
-                        check = true;
-                    }
-
-
-                    else{
-                        commandState = new Command_State(1, 0, 4, 0);
-                        check = true;
-                    }
-
-                }
-                else{
-                    System.out.println("Please enter 1, 2, 3 or 4.");
-
-                }
-            }
-        }
-
-
-        return commandState;
-
-
-
-
-    }
-
-     */
 
 
     public static Command_State get_input2(int type_of_menu) {
