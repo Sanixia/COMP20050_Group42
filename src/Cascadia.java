@@ -25,7 +25,7 @@ public class Cascadia
                   Display_And_Input.randomise_player_tiles_and_tokens();          // Has to do the randomization once else it will cause errors
 
                   for(int i = 0; i < Display_And_Input.getPlayer_count(); i++){
-                      Display_And_Input.getPlayers().get(i).setup_board(Display_And_Input.getPlayers().get(i).getStarter_tile(),Display_And_Input.getPlayers().get(i).getBoard() );   //sets up board with starter tile from player
+                      Display_And_Input.getPlayers().get(i).setup_board(Display_And_Input.getPlayers().get(i).getStarter_tile(),Display_And_Input.getPlayers().get(i).getBoard(),   Display_And_Input.getPlayers().get(i));   //sets up board with starter tile from player
                   }
                   randomCheck = false;
               }
@@ -41,7 +41,7 @@ public class Cascadia
 
                       System.out.println("--- " + Display_And_Input.getPlayers().get(playerNum).getPlayer_name()+ "'s  Board --- \n");
 
-                      Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard());
+                      Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
 
                       Display_And_Input.display_tiles_and_tokens(playerNum);
 
@@ -101,7 +101,7 @@ public class Cascadia
 
 
                                       do{
-                                          Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard());
+                                          Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
                                           Display_And_Input.display_tiles_and_tokens(playerNum);
 
                                           Display_And_Input.display_tile_rotation(command_state.getChoice());
@@ -111,8 +111,8 @@ public class Cascadia
 
 
                                           if(Command_State.getHabitat_tile_choice() == 0 && command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4 || command_state.getChoice() == 5 || command_state.getChoice() == 6 || command_state.getChoice() == 7 ){
-                                              Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard());
-                                              Display_And_Input.place_tile(command_state.getChoice(), 0, Display_And_Input.getPlayers().get(playerNum).getBoard());
+                                              Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                              Display_And_Input.place_tile(command_state.getChoice(), 0, Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
 
                                               do{
 
@@ -161,7 +161,7 @@ public class Cascadia
 
 
         public static void display_board_tiles_tokens(int player_number, int menu_number, Command_State command_state){
-            Display_And_Input.getPlayers().get(player_number).print_board(Display_And_Input.getPlayers().get(player_number).getBoard());
+            Display_And_Input.getPlayers().get(player_number).print_board(Display_And_Input.getPlayers().get(player_number).getBoard(), Display_And_Input.getPlayers().get(player_number));
             Display_And_Input.display_tiles_and_tokens(player_number);
             command_state = Command_State.get_input2(menu_number);
         }

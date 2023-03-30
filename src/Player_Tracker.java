@@ -23,6 +23,10 @@ public class Player_Tracker {
 
 
     private tile2D[][] board;
+    private int max_col;         // adjusts 'length' of board
+    private int max_row;         // adjusts 'height' of board
+    private int  odd;         // 1 if odd rows are at the front
+    private int checkOddOrEven;
 
 
 
@@ -35,7 +39,7 @@ public class Player_Tracker {
     //Used in the arraylist to keep track of players and their tiles and tokens
     //public Player_Tracker(String player_name, String starter_tile, ArrayList<String> habitat_tiles, ArrayList<String> animal_tiles){
 
-    public Player_Tracker(String player_name, String starter_tile, int player_turn, int nature_tokens){
+    public Player_Tracker(String player_name, String starter_tile, int player_turn, int nature_tokens, int max_row, int max_col, int odd, int checkOddOrEven){
 
         this.player_name = player_name;
         this.starter_tile = starter_tile;
@@ -44,7 +48,12 @@ public class Player_Tracker {
 
         this.player_turn = player_turn;
         this.nature_tokens = nature_tokens;
+
         this.board = new tile2D[MAXSIZE][MAXSIZE];
+        this.max_row = max_row;
+        this.max_col = max_col;
+        this.odd = odd;
+        this.checkOddOrEven = checkOddOrEven;
 
 
 
@@ -57,12 +66,12 @@ public class Player_Tracker {
     }
 
 
-    public void setup_board(String setup_board, tile2D[][] board){
-        tile2D.setup(setup_board, board);
+    public void setup_board(String setup_board, tile2D[][] board,  Player_Tracker player){
+        tile2D.setup(setup_board, board, player);
     }
 
-    public void print_board(tile2D[][] board){
-        tile2D.print_board(board);
+    public void print_board(tile2D[][] board, Player_Tracker player){
+        tile2D.print_board(board, player);
     }
 
 
@@ -119,6 +128,54 @@ public class Player_Tracker {
 
     public tile2D[][] getBoard() {
         return board;
+    }
+
+    public void setMax_row_change(int max_row){
+        this.max_row = max_row;
+    }
+    public void setMax_col_change(int max_col){
+        this.max_col = max_col;
+    }
+
+    public void setmax_row() {
+        max_row++;
+    }
+
+    public void setmax_col() {
+        max_col++;
+    }
+
+
+    public int getCheckOddOrEven() {
+        return checkOddOrEven;
+    }
+
+    public void setChangeOddOrEven(){
+        if(checkOddOrEven == 0) checkOddOrEven = 1;
+        else checkOddOrEven = 0;
+    }
+
+
+    public void changeOdd(){
+        if (odd == 1) odd = 0;
+        else odd = 1;
+        setChangeOddOrEven();
+    }
+
+    public int getMax_col() {
+        return max_col;
+    }
+
+    public int getMax_row() {
+        return max_row;
+    }
+
+    public int getOdd() {
+        return odd;
+    }
+
+    public int setOdd(int odd) {
+        return this.odd = odd;
     }
 
 

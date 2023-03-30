@@ -171,7 +171,7 @@ public class Display_And_Input {
 
             //Calls the constructor
 
-            players.add(new Player_Tracker(playerNames.get(i), Starter_Habitat.getStarter_Habitat_Tiles().get(i), 0, 0));
+            players.add(new Player_Tracker(playerNames.get(i), Starter_Habitat.getStarter_Habitat_Tiles().get(i), 0, 0, 0, 0,0, 0));
 
 
         }
@@ -469,10 +469,10 @@ public class Display_And_Input {
         System.out.println(Ex2D.num_printer(6) + "\n" + Ex2D.row_printer(row, max, 0, " ")+"\n");
     }
 
-    public static void place_tile(int tile_number, int rotation, tile2D[][] board){
+    public static void place_tile(int tile_number, int rotation, tile2D[][] board, Player_Tracker player){
 
         tile2D tile = new tile2D(Habitat_Tiles.biome.get(tile_number-1), Habitat_Tiles.animals.get(tile_number-1), rotation);
-        tile2D.place2(tile_number, board);
+        tile2D.place2(tile_number, board, player);
 
     }
 
