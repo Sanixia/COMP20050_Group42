@@ -131,7 +131,7 @@ public class tile2D {
     }
 
 
-    public static void place(int tile_number, tile2D[][] board, Player_Tracker player_tracker) {            // temporary place test feature
+    public static void place(int tile_number, tile2D[][] board, Player_Tracker player_tracker, tile2D tile) {            // temporary place test feature
 
         Scanner in = new Scanner(System.in);
         String temp_x, temp_y;
@@ -183,7 +183,7 @@ public class tile2D {
             y = Integer.parseInt(temp_y);
         }
 
-        board_add_tile("RM", "BEH", 1, x, y,board, player_tracker);
+        board_add_tile(tile.getBiome(), tile.getAnimals(), 1, x, y,board, player_tracker);
     }
 
     public static boolean verify_valid_number(String number){

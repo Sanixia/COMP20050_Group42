@@ -473,7 +473,7 @@ public class Display_And_Input {
     public static void place_tile(int tile_number, int rotation, tile2D[][] board, Player_Tracker player){
 
         tile2D tile = new tile2D(Habitat_Tiles.biome.get(tile_number-1), Habitat_Tiles.animals.get(tile_number-1), rotation);
-        tile2D.place(tile_number, board, player);
+        tile2D.place(tile_number, board, player, tile);
 
     }
 
