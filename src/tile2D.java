@@ -131,7 +131,7 @@ public class tile2D {
     }
 
 
-    public static void place2(int tile_number, tile2D[][] board, Player_Tracker player_tracker) {            // temporary place test feature
+    public static void place(int tile_number, tile2D[][] board, Player_Tracker player_tracker) {            // temporary place test feature
 
         Scanner in = new Scanner(System.in);
         String temp_x, temp_y;
@@ -160,7 +160,7 @@ public class tile2D {
         y = Integer.parseInt(temp_y);
 
 
-        //while (verify_tile_placement(x, y, getCheckBoardUpper(), getCheckBoardLower())) {
+
         while (!verify_tile(x, y,board)) {
             System.out.println("Please enter a valid tile placement!\n");
             System.out.println("Enter x coordinate: ");
@@ -228,7 +228,7 @@ public class tile2D {
         place_slot_tiles2(row+plusRow, col+plusCol, board, player_tracker);
     }
 
-    public void place_animal_token(String animal,tile2D[][] board, Player_Tracker player_tracker) { //TODO verify
+    public static void place_animal_token(String animal,tile2D[][] board, Player_Tracker player_tracker) { //TODO verify
         boolean availableTokenPlacement = false;
 
         for(int i = 0; i < player_tracker.getMax_row(); i++){
@@ -355,7 +355,7 @@ public class tile2D {
     }
 
 
-    public boolean verify_animal_token_placement(int x, int y, String animalToken, tile2D[][] board){
+    public static boolean verify_animal_token_placement(int x, int y, String animalToken, tile2D[][] board){
 
         // first check if there is a tile present
         if(board[x][y] != null){

@@ -19,6 +19,7 @@ public class Cascadia
 
           do{
 
+
               command_state = Command_State.get_input2(1);   // Setting the command state
 
               if (randomCheck){
@@ -34,10 +35,12 @@ public class Cascadia
 
               if (command_state.isInPlay()){
 
+                  boolean check_keystone = false;
+                  int token_tile = -1;
 
 
 
-                  if (command_state.getChoice() == 1){
+                  if (command_state.getChoice() == 1){  // this is for the player menu which will be updated with more options
 
                       System.out.println("--- " + Display_And_Input.getPlayers().get(playerNum).getPlayer_name()+ "'s  Board --- \n");
 
@@ -98,33 +101,47 @@ public class Cascadia
                                   if(command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4){
 
 
+                                      if(Habitat_Tiles.biome.get(command_state.getChoice() - 1).length() == 1) {
+                                          check_keystone = true;
+                                          token_tile = command_state.getChoice() - 1;
+                                      }
 
 
                                       do{
-                                          Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
-                                          Display_And_Input.display_tiles_and_tokens(playerNum);
-
-                                          Display_And_Input.display_tile_rotation(command_state.getChoice());
-                                          command_state = Command_State.get_input2(4);
 
 
+                                          if(check_keystone == false){
+                                              token_tile = command_state.getChoice() - 1;
 
-
-                                          if(Command_State.getHabitat_tile_choice() == 0 && command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4 || command_state.getChoice() == 5 || command_state.getChoice() == 6 || command_state.getChoice() == 7 ){
                                               Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
-                                              Display_And_Input.place_tile(command_state.getChoice(), 0, Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                              Display_And_Input.display_tiles_and_tokens(playerNum);
+
+                                              Display_And_Input.display_tile_rotation(command_state.getChoice());
+                                              command_state = Command_State.get_input2(4);
+
+                                              if(Command_State.getHabitat_tile_choice() == 0 && command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4 || command_state.getChoice() == 5 || command_state.getChoice() == 6 || command_state.getChoice() == 7 ) {
+                                                  Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                                  Display_And_Input.place_tile(command_state.getChoice(), 0, Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                              }
+                                          }
+                                          else{
+                                              Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+
+                                                  Display_And_Input.place_tile(command_state.getChoice(), 0, Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                              }
+
 
                                               do{
 
-                                                  display_board_tiles_tokens(playerNum, 5, command_state);
+                                                  display_board_tiles_tokens(playerNum, 5, command_state);  // token to place down
 
                                                   if(command_state.getChoice() == 1){
-
+                                                      tile2D.place_animal_token( Wildlife_Tokens.tokens.get(token_tile).toLowerCase() , Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
                                                   }
 
 
                                               }while (command_state.isInTokenMenu());
-                                          }
+
 
 
 
@@ -168,3 +185,4 @@ public class Cascadia
 
 
     }
+
