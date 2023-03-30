@@ -21,6 +21,7 @@ public class Cascadia
 
 
               command_state = Command_State.get_input2(1);   // Setting the command state
+              boolean culling = true;
 
               if (randomCheck){
                   Display_And_Input.randomise_player_tiles_and_tokens();          // Has to do the randomization once else it will cause errors
@@ -36,7 +37,8 @@ public class Cascadia
               if (command_state.isInPlay()){
 
                   boolean check_keystone = false;
-                  int token_tile = -1;
+
+                  int place_tile = -1;
 
 
 
@@ -46,7 +48,10 @@ public class Cascadia
 
                       Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
 
-                      Display_And_Input.display_tiles_and_tokens(playerNum);
+                      Display_And_Input.display_tiles_and_tokens(playerNum, culling);
+                      culling = false;
+
+
 
                   }
 
@@ -61,19 +66,26 @@ public class Cascadia
                           else{
                               playerNum++;
                           }
-                          System.out.println(Display_And_Input.getPlayers().get(playerNum).getPlayer_name() + " is up...");
+                          System.out.println(Display_And_Input.getPlayers().get(playerNum).getPlayer_name() + " is up!");
                       }
 
                       else{
 
+                          Display_And_Input.getPlayers_score_calculation().add(Display_And_Input.getPlayers().get(playerNum));  // adds player to the list of players who have finished their turns
 
-
-
-                          Display_And_Input.getPlayers().remove(Display_And_Input.getPlayers().get(playerNum));
+                          Display_And_Input.getPlayers().remove(Display_And_Input.getPlayers().get(playerNum)); // removes player from the list of players who have not finished their turns
 
                           Display_And_Input.setPlayer_count(Display_And_Input.getPlayer_count());
 
-                          System.out.println("You have no more turns left, preparing to calculate your score...");
+                          if(Display_And_Input.getPlayers().size() == 0){
+                              System.out.println("You have no more turns left, calculating score for everyone...");
+                              command_state.setState_type();
+                          }
+                          else{
+                              System.out.println("You have no more turns left, calculating score once everyone is done...");
+                          }
+
+
                       }
 
                   }
@@ -81,6 +93,7 @@ public class Cascadia
 
 
                   else if (command_state.getChoice() == 3){   // this is for the board menu which will be updated with more options
+                      culling = false;
 
 
 
@@ -103,47 +116,83 @@ public class Cascadia
 
                                       if(Habitat_Tiles.biome.get(command_state.getChoice() - 1).length() == 1) {
                                           check_keystone = true;
-                                          token_tile = command_state.getChoice() - 1;
+
                                       }
+                                      place_tile = command_state.getChoice() - 1;
 
 
                                       do{
 
 
                                           if(check_keystone == false){
-                                              token_tile = command_state.getChoice() - 1;
 
                                               Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
-                                              Display_And_Input.display_tiles_and_tokens(playerNum);
+                                              Display_And_Input.display_tiles_and_tokens(playerNum, culling);
 
-                                              Display_And_Input.display_tile_rotation(command_state.getChoice());
+                                              Display_And_Input.display_tile_rotation(place_tile);
                                               command_state = Command_State.get_input2(4);
 
                                               if(Command_State.getHabitat_tile_choice() == 0 && command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4 || command_state.getChoice() == 5 || command_state.getChoice() == 6 || command_state.getChoice() == 7 ) {
 
                                                   Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
-                                                  Display_And_Input.place_tile(command_state.getChoice(), 0, Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                                  Display_And_Input.place_tile(place_tile, command_state.getChoice()-1, Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
                                               }
                                           }
                                           else{
                                               Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
 
-                                                  Display_And_Input.place_tile(command_state.getChoice(), 0, Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                                  Display_And_Input.place_tile(place_tile, 0, Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
                                               }
 
 
 
                                               do{
-                                                  Display_And_Input.remove_tile(token_tile);
+                                                  Display_And_Input.remove_tile(place_tile);
                                                   display_board_tiles_tokens(playerNum, 5, command_state);  // token to place down
 
                                                   if(command_state.getChoice() == 1){
-                                                      tile2D.place_animal_token( Wildlife_Tokens.tokens.get(token_tile) , Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                                      Display_And_Input.display_token(place_tile);
+                                                      tile2D.place_animal_token( Wildlife_Tokens.tokens.get(place_tile) , Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
 
-                                                      Display_And_Input.remove_token(token_tile);
+                                                      Display_And_Input.remove_token(place_tile);
                                                   }
 
 
+                                                  Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                                  Display_And_Input.display_tiles_and_tokens(playerNum, false);
+
+
+
+
+
+
+                                                  // next player turn
+
+                                                  if( Display_And_Input.getPlayers().get(playerNum).getPlayerTurn() < 3){
+                                                      if (playerNum == Display_And_Input.getPlayer_count() - 1){    //resets to the start of the player list
+                                                          playerNum = 0;
+                                                      }
+                                                      else{
+                                                          playerNum++;
+                                                      }
+                                                      System.out.println("\n\n" + Display_And_Input.getPlayers().get(playerNum).getPlayer_name() + " is up!");
+                                                  }
+
+                                                  else {
+
+                                                      Display_And_Input.getPlayers_score_calculation().add(Display_And_Input.getPlayers().get(playerNum));  // adds player to the list of players who have finished their turns
+
+                                                      Display_And_Input.getPlayers().remove(Display_And_Input.getPlayers().get(playerNum)); // removes player from the list of players who have not finished their turns
+
+                                                      Display_And_Input.setPlayer_count(Display_And_Input.getPlayer_count());
+
+                                                      if (Display_And_Input.getPlayers().size() == 0) {
+                                                          System.out.println("You have no more turns left, calculating score for everyone...");
+                                                          command_state.setState_type();
+                                                      } else {
+                                                          System.out.println("You have no more turns left, calculating score once everyone is done...");
+                                                      }
+                                                  }
 
 
                                               }while (command_state.isInTokenMenu());
@@ -185,7 +234,7 @@ public class Cascadia
 
         public static void display_board_tiles_tokens(int player_number, int menu_number, Command_State command_state){
             Display_And_Input.getPlayers().get(player_number).print_board(Display_And_Input.getPlayers().get(player_number).getBoard(), Display_And_Input.getPlayers().get(player_number));
-            Display_And_Input.display_tiles_and_tokens(player_number);
+            Display_And_Input.display_tiles_and_tokens(player_number, false);
             command_state = Command_State.get_input2(menu_number);
         }
 

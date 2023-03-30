@@ -9,10 +9,5 @@ public class Wildlife_Tokens {
                     "s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s")
     );
 
-    static ArrayList<String> natureTokens = new ArrayList<>(
-            Arrays.asList("NT","NT","NT","NT","NT","NT","NT","NT","NT","NT",
-                            "NT","NT","NT","NT","NT","NT","NT","NT","NT","NT")
-    );
-
 
 }
