@@ -10,6 +10,7 @@ public class Display_And_Input {
 
 
 
+    private static ArrayList<Player_Tracker> players_score_calculation = new ArrayList<>();
 
     private static ArrayList<String> playerNames = new ArrayList<>();
 
@@ -33,6 +34,12 @@ public class Display_And_Input {
     public static ArrayList<Player_Tracker> getPlayers() {
         return players;
     }
+
+    public static ArrayList<Player_Tracker> getPlayers_score_calculation() {
+        return players_score_calculation;
+    }
+
+
 
 
 
@@ -204,11 +211,18 @@ public class Display_And_Input {
 
 
 
-    public static void display_tiles_and_tokens(int player){
+    public static void display_tiles_and_tokens(int player, boolean culling){
         display_tiles(player);
         System.out.println("Corresponding Wildlife Tokens (1 next to a token represents the habitat that is also 1 for example): \n");
-        printTokens();
-        callTheCulling();
+
+        if(culling){
+            printTokens();
+            callTheCulling();
+        }
+        else{
+            printTokens();
+        }
+
     }
 
     public static void display_tiles(int player){        // TODO. done :)
@@ -464,7 +478,7 @@ public class Display_And_Input {
         System.out.println("\nHabitat Tiles: \n");
 
         for (i = 0; i < 6; i++){
-            row[i*2] = new tile2D(Habitat_Tiles.biome.get(tile_number-1),  Habitat_Tiles.animals.get(tile_number-1), i);
+            row[i*2] = new tile2D(Habitat_Tiles.biome.get(tile_number),  Habitat_Tiles.animals.get(tile_number), i);
             row[1+i*2] = new tile2D("space", "", 1);
         }
         System.out.println(Ex2D.num_printer(6) + "\n" + Ex2D.row_printer(row, max, 0, " ")+"\n");
@@ -472,7 +486,7 @@ public class Display_And_Input {
 
     public static void place_tile(int tile_number, int rotation, tile2D[][] board, Player_Tracker player){
 
-        tile2D tile = new tile2D(Habitat_Tiles.biome.get(tile_number-1), Habitat_Tiles.animals.get(tile_number-1), rotation);
+        tile2D tile = new tile2D(Habitat_Tiles.biome.get(tile_number), Habitat_Tiles.animals.get(tile_number), rotation);
         tile2D.place(tile_number, board, player, tile);
 
     }
@@ -511,6 +525,11 @@ public class Display_And_Input {
 
 
     }
+
+    public static void display_token(int animal_token){
+        System.out.println("\n" + (animal_token + 1) + ". " + Starter_Tile_Printer.token_printer(Wildlife_Tokens.tokens.get(animal_token)));
+    }
+
 
 
 

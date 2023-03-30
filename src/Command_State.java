@@ -90,6 +90,8 @@ public class Command_State {
 
     }
 
+
+
     private static state state_type;           // Initializes the enum for state of the game
 
 
@@ -280,6 +282,8 @@ public class Command_State {
         HABITAT_ROTATION,
 
         TOKEN_MENU,
+
+        SCORE,
         QUIT
     }
 
@@ -341,6 +345,10 @@ public class Command_State {
 
     public static void setHabitat_tile_choice(int habitat_tile_choice) {
         Command_State.habitat_tile_choice = habitat_tile_choice;
+    }
+
+    public void setState_type() {
+        Command_State.state_type = state.QUIT;
     }
 
 
