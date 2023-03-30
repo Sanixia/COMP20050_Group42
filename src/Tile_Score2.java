@@ -22,11 +22,11 @@ public class Tile_Score2 {
 
     public static void main(String[] args) {
         tile2D[][] b = new tile2D[maxsize][maxsize];
-        //b[0][2] = new tile2D("R", "f", 0);
-        //b[0][3] = new tile2D("R", "f", 0);
-        //b[1][1] = new tile2D("R", "f", 0);
-        //b[1][2] = new tile2D("R", "f", 0);
-        //b[1][3] = new tile2D("R", "f", 0);
+        b[0][2] = new tile2D("R", "f", 0);
+        b[0][3] = new tile2D("R", "f", 0);
+        b[1][1] = new tile2D("R", "f", 0);
+        b[1][2] = new tile2D("R", "f", 0);
+        b[1][3] = new tile2D("R", "f", 0);
         b[2][2] = new tile2D("R", "f", 0);
         b[2][3] = new tile2D("R", "f", 0);
 
@@ -47,11 +47,11 @@ public class Tile_Score2 {
     }
 
     public static int fox_scoring_1(int x, int y) {
-        int fox_score=0, b=0, e=0, f=0, s=0, h=0;
+        int b=0, e=0, f=0, s=0, h=0;
         ArrayList<String> animals = new ArrayList<String>();
 
-        for (int i=0; i<4; i++) {
-            tile2D surrounding_tile = get_surrounding_tile(x, y, i);
+        for (int i=0; i<6; i++) {
+            tile2D surrounding_tile = get_surrounding_tile(x, y, i+1);
             if (surrounding_tile!=null){
                 animals.add(surrounding_tile.getAnimals());
             }
@@ -70,12 +70,26 @@ public class Tile_Score2 {
         int plusOne = calculateSpace(x);
         int row = x;
         int col = y;
-        if (pos==1 && row-1>=0 && col-1+plusOne>=0) row--; col+=plusOne-1;              // top left
-        if (pos==2 && row-1>=0 && col+plusOne<=maxsize) row--; col+=plusOne;            // top right
-        if (pos==3 && col+1<=maxsize) col++;                                            // right
-        if (pos==4 && row+1<=maxsize && col+plusOne<=maxsize) row++; col+=plusOne;      // bottom right
-        if (pos==5 && row+1<=maxsize && col-1+plusOne<=maxsize) row++; col+=plusOne-1;  // bottom left
-        if (pos==6 && col-1>=0) col--;                                                  // left
+        if (pos==1 && row-1>=0 && col-1+plusOne>=0) {
+            row--;
+            col += plusOne - 1;                                     // top left
+        } if (pos==2 && row-1>=0 && col+plusOne<=maxsize) {
+            row--;
+            col += plusOne;                                         // top right
+        } if (pos==3 && col+1<=maxsize) {
+            col++;                                                  // right
+        }
+        if (pos==4 && row+1<=maxsize && col+plusOne<=maxsize) {
+            row++;
+            col += plusOne;                                         // bottom right
+        }
+        if (pos==5 && row+1<=maxsize && col-1+plusOne<=maxsize) {
+            row++;
+            col += plusOne - 1;                                     // bottom left
+        }
+        if (pos==6 && col-1>=0) {
+            col--;                                                  // left
+        }
 
         if (row==x && col==y) return null;
         return board[row][col];
