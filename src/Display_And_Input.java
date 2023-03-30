@@ -211,17 +211,14 @@ public class Display_And_Input {
 
 
 
-    public static void display_tiles_and_tokens(int player, boolean culling){
+    public static void display_tiles_and_tokens(int player){
         display_tiles(player);
         System.out.println("Corresponding Wildlife Tokens (1 next to a token represents the habitat that is also 1 for example): \n");
 
-        if(culling){
-            printTokens();
-            callTheCulling();
-        }
-        else{
-            printTokens();
-        }
+
+        printTokens();
+        callTheCulling();
+
 
     }
 
@@ -528,6 +525,11 @@ public class Display_And_Input {
 
     public static void display_token(int animal_token){
         System.out.println("\n" + (animal_token + 1) + ". " + Starter_Tile_Printer.token_printer(Wildlife_Tokens.tokens.get(animal_token)));
+    }
+
+    public static void nature_token_token_tile(){
+        Scanner in = new Scanner(System.in);
+
     }
 
 

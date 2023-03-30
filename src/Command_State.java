@@ -37,8 +37,12 @@ public class Command_State {
                 choice = 1;
             }
             else if(menuInput == 2){
+                state_type = state.NATURE_TOKEN_MENU;
+                choice = 2;
+            }
+            else if(menuInput == 3){
                 state_type = state.MAIN_MENU;
-                choice = 0;
+                choice = 3;
             }
             else{
                 state_type = state.HABITAT_MENU;
@@ -87,6 +91,17 @@ public class Command_State {
             }
         }
 
+        else if(inputMenu == 6){
+            if(menuInput == 1 || menuInput == 2){
+                state_type = state.HABITAT_MENU;
+                choice = menuInput;
+            }
+            else{
+                state_type = state.HABITAT_MENU;
+                choice = 0;
+            }
+        }
+
 
     }
 
@@ -130,14 +145,14 @@ public class Command_State {
                 board_menu();
                 user_input = in.nextLine();
 
-                if (isValid(user_input, 2)) {
+                if (isValid(user_input, 4)) {
 
                     int_input = Integer.parseInt(user_input);
                     commandState = new Command_State(2, int_input);
                     check = true;
 
                 } else {
-                    System.out.println("Please enter 1 or 2.");
+                    System.out.println("Please enter 1, 2 or 3.");
                     commandState = new Command_State(2, 0);
                     check = true;
                 }
@@ -210,42 +225,36 @@ public class Command_State {
             }
         }
 
+        else if(type_of_menu == 6){
+            while (!check) {
+                nature_token_menu();
+                user_input = in.nextLine();
 
+                if (isValid(user_input, 4)) {
+                    int_input = Integer.parseInt(user_input);
 
+                    commandState = new Command_State(6, int_input);
+                    check = true;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                }
+                else{
+                    System.out.println("Please enter 1, 2 or 3.");
+                    commandState = new Command_State(6, 0);
+                    check = true;
+                }
+            }
+        }
 
 
         return commandState;
 
-
-
-
     }
 
     public static void board_menu(){
-        System.out.println("\n\nEnter a command from the menu (1 or 2) ");
+        System.out.println("\n\nEnter a command from the menu (1, 2 or 3) ");
         System.out.println("1) Select a habitat tile to be placed on the board");
-        System.out.print("2) Back to main menu\n-> ");
+        System.out.println("2) Nature Token Options");
+        System.out.print("3) Back to main menu\n-> ");
     }
 
     public static void habitat_menu(){
@@ -271,6 +280,14 @@ public class Command_State {
         System.out.print("4) Quit\n-> ");
     }
 
+    public static void nature_token_menu(){
+        System.out.println("\n\nEnter a command from the menu (1, 2 or 3) ");
+        System.out.println("1) Pick any habitat and token and place down");
+        System.out.println("2) Pick ANY number of tokens to get rid of");
+        System.out.println("3) Exit this menu");
+
+    }
+
 
 
     private enum state {                    // states for game which can be added to later
@@ -282,6 +299,8 @@ public class Command_State {
         HABITAT_ROTATION,
 
         TOKEN_MENU,
+
+        NATURE_TOKEN_MENU,
 
         SCORE,
         QUIT
@@ -297,6 +316,10 @@ public class Command_State {
         }
         else if(menu == 3){
             return input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") || input.equals("5") || input.equals("6") || input.equals("7");
+
+        }
+        else if(menu == 4){
+            return input.equals("1") || input.equals("2") || input.equals("3");
         }
         return false;
 
@@ -350,6 +373,15 @@ public class Command_State {
     public void setState_type() {
         Command_State.state_type = state.QUIT;
     }
+
+    public void setState_type_habitat_menu(){
+        Command_State.state_type = state.HABITAT_MENU;
+    }
+
+    public boolean isInNatureTokenMenu(){
+        return state_type == state.NATURE_TOKEN_MENU;
+    }
+
 
 
 

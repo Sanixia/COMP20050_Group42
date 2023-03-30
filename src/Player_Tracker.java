@@ -36,15 +36,11 @@ public class Player_Tracker {
 
 
 
-    //Used in the arraylist to keep track of players and their tiles and tokens
-    //public Player_Tracker(String player_name, String starter_tile, ArrayList<String> habitat_tiles, ArrayList<String> animal_tiles){
 
     public Player_Tracker(String player_name, String starter_tile, int player_turn, int nature_tokens, int max_row, int max_col, int odd, int checkOddOrEven){
 
         this.player_name = player_name;
         this.starter_tile = starter_tile;
-        //this.habitat_tiles = habitat_tiles;
-        //this.animal_tiles = animal_tiles;
 
         this.player_turn = player_turn;
         this.nature_tokens = nature_tokens;
@@ -54,13 +50,6 @@ public class Player_Tracker {
         this.max_col = max_col;
         this.odd = odd;
         this.checkOddOrEven = checkOddOrEven;
-
-
-
-
-
-
-
 
 
     }
@@ -122,7 +111,7 @@ public class Player_Tracker {
         return nature_tokens;
     }
 
-    public void setNature_tokens() {
+    public void setNature_tokens(int nature_tokens) {
         this.nature_tokens = nature_tokens;
     }
 

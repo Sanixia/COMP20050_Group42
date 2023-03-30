@@ -1,4 +1,4 @@
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 // tile.java but modified to use 2d array instead of list of lists for board
@@ -91,7 +91,6 @@ public class tile2D {
 
     public static void setup(String setup_board, tile2D[][] board, Player_Tracker player_tracker) {
         player_tracker.setOdd(1);
-        // need this here for my tile placement to work michal lol
 
         switch(setup_board){
             case "Forest":
@@ -120,11 +119,7 @@ public class tile2D {
                 board_add_tile("WM", "FH", 3, 2, 3,board, player_tracker);
                 break;
         }
-        // board_add_tile("F", "F", 0, 1, 2);
-        //board_add_tile("P", "BES", 0, 2, 2);
-        //board_add_tile("RM", "BEH", 1, 2, 3);
 
-        // odd = 1 means every odd row will be pushed in
         player_tracker.setMax_row_change(4);
         player_tracker.setMax_col_change(6);
 
@@ -293,9 +288,12 @@ public class tile2D {
                 y = Integer.parseInt(temp_y);
             }
 
-
-
+            if(board[x][y].getBiome().length() == 1){
+                player_tracker.setNature_tokens(player_tracker.getNature_tokens() + 1);
+                System.out.println("You have gained a nature token, you now have " + player_tracker.getNature_tokens() + "!");
+            }
             board[x][y].setAnimals(animal);
+
         }
 
         else{
