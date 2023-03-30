@@ -246,23 +246,54 @@ public class tile2D {
 
         if(availableTokenPlacement){
             Scanner in = new Scanner(System.in);
+            String temp_x, temp_y;
             int x, y;
 
-            System.out.print("enter x: ");
-            x = in.nextInt();
-            System.out.print("\nenter y: ");
-            y = in.nextInt();
+            System.out.println("Enter x coordinate: ");
+            temp_x = in.nextLine();
+            while(!verify_valid_number(temp_x)){
+                System.out.println("Please enter a valid number!\n");
+                System.out.println("Enter x coordinate: ");
+                temp_x = in.nextLine();
+            }
+
+            System.out.println("Enter y coordinate: ");
+            temp_y = in.nextLine();
+
+            while (!verify_valid_number(temp_y)) {
+                System.out.println("Please enter a valid number!\n");
+                System.out.println("Enter y coordinate: ");
+                temp_y = in.nextLine();
+            }
+            x = Integer.parseInt(temp_x);
+            y = Integer.parseInt(temp_y);
 
             // verify that there is available tiles that can place a token on
 
 
             while (verify_animal_token_placement(x, y, animal, board)) {
                 System.out.println("Please enter a valid tile that can place this animal token onto it and hasn't been taken already!\n");
-                System.out.print("enter x: ");
-                x = in.nextInt();
-                System.out.print("\nenter y: ");
-                y = in.nextInt();
+                System.out.println("Enter x coordinate: ");
+                temp_x = in.nextLine();
+                while(!verify_valid_number(temp_x)){
+                    System.out.println("Please enter a valid number!\n");
+                    System.out.println("Enter x coordinate: ");
+                    temp_x = in.nextLine();
+                }
+
+                System.out.println("Enter y coordinate: ");
+                temp_y = in.nextLine();
+
+                while (!verify_valid_number(temp_y)) {
+                    System.out.println("Please enter a valid number!\n");
+                    System.out.println("Enter y coordinate: ");
+                    temp_y = in.nextLine();
+                }
+                x = Integer.parseInt(temp_x);
+                y = Integer.parseInt(temp_y);
             }
+
+
 
             board[x][y].setAnimals(animal);
         }

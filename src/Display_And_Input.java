@@ -388,19 +388,19 @@ public class Display_And_Input {
         for (k = 0; k < 4; k++){
             String animal = Wildlife_Tokens.tokens.get(k);
             switch(animal){
-                case "E":
+                case "e":
                     animal = " ----->  Elk";
                     break;
-                case "H":
+                case "h":
                     animal = " ----->  Hawk";
                     break;
-                case "B":
+                case "b":
                     animal = " ----->  Bear";
                     break;
-                case "S":
+                case "s":
                     animal = " ----->  Salmon";
                     break;
-                case "F":
+                case "f":
                     animal = " ----->  Fox";
                     break;
             }
@@ -474,6 +474,41 @@ public class Display_And_Input {
 
         tile2D tile = new tile2D(Habitat_Tiles.biome.get(tile_number-1), Habitat_Tiles.animals.get(tile_number-1), rotation);
         tile2D.place(tile_number, board, player);
+
+    }
+
+
+    public static void remove_tile(int tile_number){
+        String temp_biome;
+        String temp_animal;
+
+
+                temp_biome = Habitat_Tiles.biome.get(4);
+                temp_animal = Habitat_Tiles.animals.get(4);
+
+                Habitat_Tiles.biome.set(4, Habitat_Tiles.biome.get(tile_number));
+                Habitat_Tiles.animals.set(4, Habitat_Tiles.animals.get(tile_number));
+
+                Habitat_Tiles.biome.set(tile_number, temp_biome);
+                Habitat_Tiles.animals.set(tile_number, temp_animal);
+
+                Habitat_Tiles.biome.remove(4);
+                Habitat_Tiles.animals.remove(4);
+
+
+    }
+
+
+    public static void remove_token(int token_tile){
+        String temp_token;
+
+        temp_token = Wildlife_Tokens.tokens.get(4);
+
+        Wildlife_Tokens.tokens.set(4, Wildlife_Tokens.tokens.get(token_tile));
+        Wildlife_Tokens.tokens.set(token_tile, temp_token);
+
+        Wildlife_Tokens.tokens.remove(4);
+
 
     }
 

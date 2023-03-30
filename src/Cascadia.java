@@ -120,6 +120,7 @@ public class Cascadia
                                               command_state = Command_State.get_input2(4);
 
                                               if(Command_State.getHabitat_tile_choice() == 0 && command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4 || command_state.getChoice() == 5 || command_state.getChoice() == 6 || command_state.getChoice() == 7 ) {
+
                                                   Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
                                                   Display_And_Input.place_tile(command_state.getChoice(), 0, Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
                                               }
@@ -131,13 +132,18 @@ public class Cascadia
                                               }
 
 
-                                              do{
 
+                                              do{
+                                                  Display_And_Input.remove_tile(token_tile);
                                                   display_board_tiles_tokens(playerNum, 5, command_state);  // token to place down
 
                                                   if(command_state.getChoice() == 1){
-                                                      tile2D.place_animal_token( Wildlife_Tokens.tokens.get(token_tile).toLowerCase() , Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                                      tile2D.place_animal_token( Wildlife_Tokens.tokens.get(token_tile) , Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+
+                                                      Display_And_Input.remove_token(token_tile);
                                                   }
+
+
 
 
                                               }while (command_state.isInTokenMenu());
