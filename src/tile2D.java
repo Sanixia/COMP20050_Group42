@@ -380,11 +380,8 @@ public class tile2D {
                 }
             }
         }
-
         return false;
-
     }
-
 
     public static boolean verify_animal_token_placement(int x, int y, String animalToken, tile2D[][] board){
 
@@ -400,6 +397,18 @@ public class tile2D {
     }
 
 
-
+    // TODO TEMP TEST FEATURE REMOPVE LATERRR
+    public static void print_boards(tile2D[][] board, int Max_col, int Max_row, int odd) {
+        String row;
+        System.out.println(Ex2D.column_numbers(Max_col));
+        for (int i = 0; i != Max_row; i++) {                // printing the board + 1 empty row boarder
+            if (i % 2 == 0 && odd == 1 || i % 2 == 1 && odd == 0) {
+                row = Ex2D.row_printer(board[i], Max_col,0, String.valueOf(i));      // maxrow specifies lenght
+            } else {
+                row = Ex2D.row_printer(board[i], Max_col, 1, String.valueOf(i));
+            }
+            System.out.println(row);
+        }
+        System.out.println("\n");
+    }
 }
-

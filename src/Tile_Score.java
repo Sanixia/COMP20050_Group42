@@ -20,7 +20,7 @@ public class Tile_Score {
         return 1;
     }
 
-    public void scoring_setup(tile2D[][] board, int odd) {
+    public void scoring_setup(tile2D[][]board, int odd) {
         setBoard(board);
         setOdd(odd);
         tile_scoring_setup();
@@ -37,6 +37,20 @@ public class Tile_Score {
         }
     }
 
+    public tile2D get_surrounding_tile(int x, int y, int pos) {     // returns a tile around specified tile
+        int plusOne = calculateSpace(x);
+        int row = x;
+        int col = y;
+        if (pos==1 && row-1>=0 && col-1+plusOne>=0) row--; col+=plusOne-1;              // top left
+        if (pos==2 && row-1>=0 && col+plusOne<=MAXSIZE) row--; col+=plusOne;            // top right
+        if (pos==3 && col+1<=MAXSIZE) col++;                                            // right
+        if (pos==4 && row+1<=MAXSIZE && col+plusOne<=MAXSIZE) row++; col+=plusOne;      // bottom right
+        if (pos==5 && row+1<=MAXSIZE && col-1+plusOne<=MAXSIZE) row++; col+=plusOne-1;  // bottom left
+        if (pos==6 && col-1>=0) col--;                                                  // left
+        return board[row][col];
+    }
+
+
     public void tile_scoring(int x, int y, String biome) {
         int plusOne = calculateSpace(x);
         if (y-1>=0 && checkTile(x, y, biome, 1)) incrementScore();              // left
@@ -52,25 +66,12 @@ public class Tile_Score {
         if (board[x][y].getBiome().charAt(1) == keystoneBiome.charAt(0)) {
             rotation = (rotation+3)%6;
         }
-
         if (pos == rotation || pos == (rotation+1)%6 || pos == (rotation+5%6)) {
             return true;
         }
         return false;
     }
 
-    public tile2D get_surrounding_tile(int x, int y, int pos) {
-        int plusOne = calculateSpace(x);
-        int row = x;
-        int col = y;
-        if (pos==1 && row-1>=0 && col-1+plusOne>=0) row--; col+=plusOne-1;              // top left
-        if (pos==2 && row-1>=0 && col+plusOne<=MAXSIZE) row--; col+=plusOne;            // top right
-        if (pos==3 && col+1<=MAXSIZE) col++;                                            // right
-        if (pos==4 && row+1<=MAXSIZE && col+plusOne<=MAXSIZE) row++; col+=plusOne;      // bottom right
-        if (pos==5 && row+1<=MAXSIZE && col-1+plusOne<=MAXSIZE) row++; col+=plusOne-1;  // bottom left
-        if (pos==6 && col-1>=0) col--;                                                  // left
-        return board[row][col];
-    }
 
 }
 
