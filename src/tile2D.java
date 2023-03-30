@@ -350,7 +350,7 @@ public class tile2D {
     public static void place_slot_tiles2(int x, int y, tile2D[][] board, Player_Tracker player_tracker) {             // determines where to place slot tiles
         int plusOne = 1;
         if (x % 2 == 0 && player_tracker.getOdd() == 1) plusOne = 0;          // NOTE TO MICHAL MAKE VALIDATE ODD FUNCTION USING THIS LINE
-        if (player_tracker.getCheckOddOrEven() == 1 && player_tracker.getOdd() == 0 && x % 2 != 0) plusOne = 0;
+        //if (player_tracker.getCheckOddOrEven() == 1 && player_tracker.getOdd() == 0 && x % 2 != 0) plusOne = 0;
 
         if (y-1>=0 && board[x][y-1] == null){
             board[x][y-1] = new tile2D("slot", "", 0);         // left

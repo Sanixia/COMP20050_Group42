@@ -1,4 +1,4 @@
-/*public class Tile_Score {
+public class Tile_Score {
     public static tile2D[][] board;
     public static int score = 0;
     public static int MAXSIZE = 26;
@@ -13,6 +13,11 @@
 
     public static void incrementScore() {
         score++;
+    }
+
+    public int calculateSpace(int col) {
+        if (col % 2 == 0 && odd == 1) return 0;
+        return 1;
     }
 
     public void scoring_setup(tile2D[][] board, int odd) {
@@ -32,9 +37,8 @@
         }
     }
 
-
     public void tile_scoring(int x, int y, String biome) {
-        int plusOne = tile2D.calculateSpace(x);
+        int plusOne = calculateSpace(x);
         if (y-1>=0 && checkTile(x, y, biome, 1)) incrementScore();              // left
         if (y-1<=MAXSIZE && checkTile(x, y, biome, 4)) incrementScore();        // right
         if (y-1+plusOne>=0 && x-1>=0 && checkTile(x, y, biome, 2)) incrementScore();        // top left
@@ -54,6 +58,20 @@
         }
         return false;
     }
+
+    public tile2D get_surrounding_tile(int x, int y, int pos) {
+        int plusOne = calculateSpace(x);
+        int row = x;
+        int col = y;
+        if (pos==1 && row-1>=0 && col-1+plusOne>=0) row--; col+=plusOne-1;              // top left
+        if (pos==2 && row-1>=0 && col+plusOne<=MAXSIZE) row--; col+=plusOne;            // top right
+        if (pos==3 && col+1<=MAXSIZE) col++;                                            // right
+        if (pos==4 && row+1<=MAXSIZE && col+plusOne<=MAXSIZE) row++; col+=plusOne;      // bottom right
+        if (pos==5 && row+1<=MAXSIZE && col-1+plusOne<=MAXSIZE) row++; col+=plusOne-1;  // bottom left
+        if (pos==6 && col-1>=0) col--;                                                  // left
+        return board[row][col];
+    }
+
 }
 
- */
+
