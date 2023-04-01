@@ -13,6 +13,7 @@ public class Cascadia
             Display_And_Input.randomised_order_players();
 
             boolean randomCheck = true;                     // check for one randomisation of tiles
+            boolean culling_trigger = true;
             int playerNum = 0;
 
 
@@ -51,9 +52,8 @@ public class Cascadia
 
                       Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
 
-                      Display_And_Input.display_tiles_and_tokens(playerNum);
-
-
+                      Display_And_Input.display_tiles_and_tokens(culling_trigger);
+                      culling_trigger = false;
 
 
                   }
@@ -70,6 +70,7 @@ public class Cascadia
                               playerNum++;
                           }
                           System.out.println(Display_And_Input.getPlayers().get(playerNum).getPlayer_name() + " is up!");
+                          culling_trigger = true;
                       }
 
                       else{
@@ -86,6 +87,7 @@ public class Cascadia
                           }
                           else{
                               System.out.println("You have no more turns left, calculating score once everyone is done...");
+                              culling_trigger = true;
                           }
 
 
@@ -100,14 +102,14 @@ public class Cascadia
 
                       do {
                           if(nature_option_menu == false){
-                              display_board_tiles_tokens(playerNum, 2, command_state); // won't display the habitat menu if player already chose something from the nature token menu and skips straight to selecting a habitat tile
+                              display_board_tiles_tokens(playerNum, 2, command_state, culling_trigger); // won't display the habitat menu if player already chose something from the nature token menu and skips straight to selecting a habitat tile
                           }
 
 
                           if(command_state.getChoice() == 1){  // this is for the habitat board menu
 
                               do{
-                                  display_board_tiles_tokens(playerNum, 3, command_state);    // choose habitat to place down
+                                  display_board_tiles_tokens(playerNum, 3, command_state, culling_trigger);    // choose habitat to place down
 
 
 
@@ -127,7 +129,7 @@ public class Cascadia
                                           if(check_keystone == false){
 
                                               Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum)); //prints board
-                                              Display_And_Input.display_tiles_and_tokens(playerNum);
+                                              Display_And_Input.display_tiles_and_tokens(culling_trigger);
 
                                               Display_And_Input.display_tile_rotation(place_tile);
                                               command_state = Command_State.get_input2(4);
@@ -158,7 +160,7 @@ public class Cascadia
 
 
                                                       do{
-                                                          display_board_tiles_tokens(playerNum, 7, command_state);
+                                                          display_board_tiles_tokens(playerNum, 7, command_state, culling_trigger);
 
                                                           if(command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4){
 
@@ -183,9 +185,9 @@ public class Cascadia
 
                                                   }
 
-                                                  else{
+                                                  else{ // if the player did not choose to place a nature token down, then the player will be prompted to place a token down
                                                       if(tile2D.availableTokenPlacement(Wildlife_Tokens.tokens.get(place_tile), Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum))){
-                                                          display_board_tiles_tokens(playerNum, 5, command_state);  // token menu to place down
+                                                          display_board_tiles_tokens(playerNum, 5, command_state, culling_trigger);  // token menu to place down
 
                                                           if (command_state.getChoice() == 1) {
                                                               Display_And_Input.display_token(place_tile);
@@ -194,7 +196,7 @@ public class Cascadia
                                                           }
 
                                                           Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
-                                                          Display_And_Input.display_tiles_and_tokens(playerNum);
+                                                          Display_And_Input.display_tiles_and_tokens(culling_trigger);
                                                       }
                                                       else{
                                                           System.out.println("You can't place that token as there is no available tiles for it");
@@ -231,20 +233,30 @@ public class Cascadia
                                       command_state.setState_type_habitat_menu();
                                   }
                                   else{
-                                      display_board_tiles_tokens(playerNum, 6, command_state);  // nature token menu to place down
+                                      display_board_tiles_tokens(playerNum, 6, command_state, culling_trigger);  // nature token menu to place down
 
                                       if(command_state.getChoice() == 1) {
                                           command_state.setChoice(1);// nature token menu to place down
                                           Display_And_Input.getPlayers().get(playerNum).setNature_tokens(Display_And_Input.getPlayers().get(playerNum).getNature_tokens() - 1);
                                           nature_option_menu = true;
                                       }
+
                                       else if(command_state.getChoice() == 2){
                                           Display_And_Input.getPlayers().get(playerNum).setNature_tokens(Display_And_Input.getPlayers().get(playerNum).getNature_tokens() - 1);
-                                          //
+
+                                          do{
+                                              command_state = Command_State.get_input2(8); // nature token option 2 for selecting any number of tokens to remove
+
+                                              if(command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4){
+                                                  Display_And_Input.nature_token_any_number(command_state.getChoice());
+                                              }
+
+                                          }while(command_state.isInAnyNumberTokenMenu());
+
+                                          next_player_turn(playerNum, command_state);
+
                                       }
                                   }
-
-
 
                               }while(command_state.isInNatureTokenMenu());
                           }
@@ -253,7 +265,6 @@ public class Cascadia
                       }while (!command_state.isInMainMenu());
                   }
 
-
               }
           }while (!command_state.isQuit());
 
@@ -261,13 +272,17 @@ public class Cascadia
         }
 
 
-        public static void display_board_tiles_tokens(int player_number, int menu_number, Command_State command_state){
+        public static void display_board_tiles_tokens(int player_number, int menu_number, Command_State command_state, boolean culling_t){
             Display_And_Input.getPlayers().get(player_number).print_board(Display_And_Input.getPlayers().get(player_number).getBoard(), Display_And_Input.getPlayers().get(player_number));
-            Display_And_Input.display_tiles_and_tokens(player_number);
+            Display_And_Input.display_tiles_and_tokens(culling_t);
             command_state = Command_State.get_input2(menu_number);
+
+            culling_t = false;
         }
 
         public static void next_player_turn(int playerNum, Command_State command_state){
+            Display_And_Input.getPlayers().get(playerNum).setPlayerTurn();  //increments turn by 1 each time this is called
+
             if (Display_And_Input.getPlayers().get(playerNum).getPlayerTurn() < 3) {
                 if (playerNum == Display_And_Input.getPlayer_count() - 1) {    //resets to the start of the player list
                     playerNum = 0;

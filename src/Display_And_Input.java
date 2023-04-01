@@ -1,9 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.Random;
-
+import java.util.*;
 
 
 public class Display_And_Input {
@@ -211,18 +206,21 @@ public class Display_And_Input {
 
 
 
-    public static void display_tiles_and_tokens(int player){
-        display_tiles(player);
+    public static void display_tiles_and_tokens(boolean culling_trigger){
+        display_tiles();
         System.out.println("Corresponding Wildlife Tokens (1 next to a token represents the habitat that is also 1 for example): \n");
 
 
         printTokens();
-        callTheCulling();
+        if(culling_trigger == true){
+            callTheCulling();
+        }
+
 
 
     }
 
-    public static void display_tiles(int player){        // TODO. done :)
+    public static void display_tiles(){        // TODO. done :)
         int max = 8;
         tile2D[] row = new tile2D[max];
         int i;
@@ -252,7 +250,7 @@ public class Display_And_Input {
 
             switch(numForCulling){
                 case 4:
-                    System.out.println("Culling initiated as there has been 4 tokens that are the same, replacing tokens...");
+                    System.out.println("Culling initiated as there has been 4 tokens that are the same, replacing tokens!");
                     culling = "";
 
 
@@ -524,11 +522,48 @@ public class Display_And_Input {
     }
 
     public static void display_token(int animal_token){
-        System.out.println("\n" + (animal_token + 1) + ". " + Starter_Tile_Printer.token_printer(Wildlife_Tokens.tokens.get(animal_token)));
+        System.out.println("\n" + (animal_token + 1) + ". " + Starter_Tile_Printer.token_printer(Wildlife_Tokens.tokens.get(animal_token))); //TODO GET RID OF SATRTER TILE PRINTER
     }
 
-    public static void nature_token_token_tile(){
+    public static void nature_token_any_number(int number_of_tokens){
         Scanner in = new Scanner(System.in);
+        ArrayList<Integer> tokens = new ArrayList<Integer>(Arrays.asList(1,2,3,4));
+        int i;
+        int token_choice_int;
+
+        if(number_of_tokens == 4){
+            System.out.println("Removing all current tokens with new ones!");
+            for(i = 0; i<4;i++){
+                remove_token(i);
+            }
+        }
+
+        else{
+            for(i = 0; i < number_of_tokens; i++){
+
+
+                do{
+                    System.out.println("Please enter the token number you would like to remove that's available and valid: ");
+                    String token_choice = in.nextLine();
+
+                    while (tile2D.verify_valid_number(token_choice) == false) {
+
+                        System.out.println("Please enter a valid number: ");
+                        token_choice = in.nextLine();
+
+                    }
+
+                    token_choice_int = Integer.parseInt(token_choice);
+
+                }while(!tokens.contains(token_choice_int));
+
+
+                tokens.remove(Integer.valueOf(token_choice_int)); // removes the token from the list of available tokens so it wouldn't repeat
+                display_token(token_choice_int-1);
+                System.out.println("Removing that token now!\n\n");
+                remove_token(token_choice_int-1);
+            }
+        }
 
     }
 

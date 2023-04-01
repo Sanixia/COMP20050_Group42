@@ -113,6 +113,17 @@ public class Command_State {
             }
         }
 
+        else if(inputMenu == 8){ // any number of tokens menu
+            if(menuInput == 1 || menuInput == 2 || menuInput == 3 || menuInput == 4){
+                state_type = state.MAIN_MENU;
+                choice = menuInput;
+            }
+            else{
+                state_type = state.ANY_NUMBER_TOKENS;
+                choice = 0;
+            }
+        }
+
 
     }
 
@@ -276,6 +287,26 @@ public class Command_State {
             }
         }
 
+        else if(type_of_menu == 8){  // picking any token selection
+            while (!check) {
+                any_number_tokens();
+                user_input = in.nextLine();
+
+                if (isValid(user_input, 1)) {
+                    int_input = Integer.parseInt(user_input);
+
+                    commandState = new Command_State(8, int_input);
+                    check = true;
+
+                }
+                else{
+                    System.out.println("Please enter 1, 2, 3 or 4.");
+                    commandState = new Command_State(8, 0);
+                    check = true;
+                }
+            }
+        }
+
 
         return commandState;
 
@@ -321,8 +352,14 @@ public class Command_State {
 
     public static void any_token(){
         System.out.println("\n\nWhich animal token do you want to place down (1, 2, 3 or 4)? ");
-        System.out.println("-> ");
+        System.out.print("-> ");
     }
+
+    public static void any_number_tokens(){
+        System.out.println("\n\nPlease enter the number of tokens you would like to replace (1,2,3 or 4) ");
+        System.out.print("-> ");
+    }
+
 
 
 
@@ -339,6 +376,8 @@ public class Command_State {
         NATURE_TOKEN_MENU,
 
         ANY_TOKEN,
+
+        ANY_NUMBER_TOKENS,
 
         SCORE,
         QUIT
@@ -427,6 +466,10 @@ public class Command_State {
 
     public boolean isInNatureTokenMenu(){
         return state_type == state.NATURE_TOKEN_MENU;
+    }
+
+    public boolean isInAnyNumberTokenMenu(){
+        return state_type == state.ANY_NUMBER_TOKENS;
     }
 
 

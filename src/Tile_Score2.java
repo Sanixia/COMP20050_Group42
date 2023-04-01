@@ -25,11 +25,11 @@ public class Tile_Score2 {
         b[0][1] = new tile2D("R", "h", 0);
         b[0][2] = new tile2D("R", "b", 0);
         b[0][3] = new tile2D("R", "f", 0);
-        b[1][1] = new tile2D("R", "s", 0);
+        b[1][1] = new tile2D("R", "b", 0);
         b[1][2] = new tile2D("R", "b", 0);
         b[1][3] = new tile2D("R", "h", 0);
         b[2][2] = new tile2D("R", "h", 0);
-        b[2][3] = new tile2D("R", "f", 0);
+        b[2][3] = new tile2D("R", "b", 0);
         b[3][2] = new tile2D("R", "s", 0);
 
         tile2D.print_boards(b, 6, 4, 1);
@@ -53,7 +53,7 @@ public class Tile_Score2 {
                 }
                 if(t!=null && t.getAnimals().charAt(0)=='b') {
                     System.out.println("bear ["+i+"]["+j+"] " +bear_scoring_1(i, j));
-                    bear_num += hawk_scoring_1(i, j);
+                    bear_num += bear_scoring_1(i, j);
                 }
             }
         }
@@ -93,8 +93,8 @@ public class Tile_Score2 {
             }
         }
         if (positions.size()==1) {
-            int x2 = get__surrounding_row(x, y, positions.get(0));
-            int y2 = get__surrounding_row(x, y, positions.get(0));
+            int x2 = get_surrounding_row(x, y, positions.get(0));
+            int y2 = get_surrounding_col(x, y, positions.get(0));
 
             for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
                 tile2D surrounding_tile = get_surrounding_tile(x2, y2, i+1);
@@ -166,7 +166,7 @@ public class Tile_Score2 {
         return board[row][col];
     }
 
-    public static int get__surrounding_row(int x, int y, int pos) {     // returns row of specified surround tile
+    public static int get_surrounding_row(int x, int y, int pos) {     // returns row of specified surround tile
         int row = x;
         if (pos==1||pos==2) return row-1;
         if (pos==4||pos==5) return row+1;
