@@ -6,6 +6,9 @@ public class Command_State {
 
     // Choice used for main Cascadia function for different menu options
     private static int choice;
+    static Command_State commandState = new Command_State(0,0);
+
+
 
 
 
@@ -133,183 +136,84 @@ public class Command_State {
 
 
 
-    public static Command_State get_input2(int type_of_menu) {
-        Scanner in = new Scanner(System.in);
-        int int_input;
-        boolean check = false;
-        String user_input;
-
-        Command_State commandState = null;
+    public static Command_State get_input(int type_of_menu) {
 
 
-        if (type_of_menu == 1) {
-
-            while (!check) {
-                main_menu();
-                user_input = in.nextLine();
-
-                if (isValid(user_input, 1)) {
-
-                    int_input = Integer.parseInt(user_input);
-                    commandState = new Command_State(1, int_input);
-                    check = true;
-
-                } else {
-                    System.out.println("Please enter 1, 2, 3 or 4.");
-                }
-            }
-
-
-
-        } else if (type_of_menu == 2) {
-
-            while (!check) {
-                board_menu();
-                user_input = in.nextLine();
-
-                if (isValid(user_input, 4)) {
-
-                    int_input = Integer.parseInt(user_input);
-                    commandState = new Command_State(2, int_input);
-                    check = true;
-
-                } else {
-                    System.out.println("Please enter 1, 2 or 3.");
-                    commandState = new Command_State(2, 0);
-                    check = true;
-                }
-
-            }
-
-
-        } else if (type_of_menu == 3) {      // habitat select menu
-
-
-            while (!check) {
-                habitat_menu();
-                user_input = in.nextLine();
-
-                if (isValid(user_input, 1)) {
-                    int_input = Integer.parseInt(user_input);
-
-                    commandState = new Command_State(3, int_input);
-                    check = true;
-
-                }
-                else{
-                    System.out.println("Please enter 1, 2, 3 or 4.");
-                    commandState = new Command_State(3, 0);
-                    check = true;
-                }
-
-
-            }
-        }
-        else if (type_of_menu == 4) {      // habitat rotation menu
-
-            while (!check) {
-                habitat_rotation();
-                user_input = in.nextLine();
-
-                if (isValid(user_input, 3)) {
-                    int_input = Integer.parseInt(user_input);
-
-                    commandState = new Command_State(4, int_input);
-                    check = true;
-
-                }
-                else{
-                    System.out.println("Please enter 1, 2, 3, 4, 5 or 6");
-                    commandState = new Command_State(4, 0);
-                    check = true;
-                }
-            }
-
-        }
-
-        else if(type_of_menu == 5){ // token menu
-            while (!check) {
-                token_menu();
-                user_input = in.nextLine();
-
-                if (isValid(user_input, 2)) {
-                    int_input = Integer.parseInt(user_input);
-
-                    commandState = new Command_State(5, int_input);
-                    check = true;
-
-                }
-                else{
-                    System.out.println("Please enter 1 or 2.");
-                    commandState = new Command_State(5, 0);
-                    check = true;
-                }
-            }
-        }
-
-        else if(type_of_menu == 6){ // nature token menu
-            while (!check) {
-                nature_token_menu();
-                user_input = in.nextLine();
-
-                if (isValid(user_input, 4)) {
-                    int_input = Integer.parseInt(user_input);
-
-                    commandState = new Command_State(6, int_input);
-                    check = true;
-
-                }
-                else{
-                    System.out.println("Please enter 1, 2 or 3.");
-                    commandState = new Command_State(6, 0);
-                    check = true;
-                }
-            }
-        }
-
-        else if(type_of_menu == 7){  // picking any token selection
-            while (!check) {
-                any_token();
-                user_input = in.nextLine();
-
-                if (isValid(user_input, 4)) {
-                    int_input = Integer.parseInt(user_input);
-
-                    commandState = new Command_State(7, int_input);
-                    check = true;
-
-                }
-                else{
-                    System.out.println("Please enter 1, 2, 3 or 4.");
-                    commandState = new Command_State(7, 0);
-                    check = true;
-                }
-            }
-        }
-
-        else if(type_of_menu == 8){  // picking any token selection
-            while (!check) {
-                any_number_tokens();
-                user_input = in.nextLine();
-
-                if (isValid(user_input, 1)) {
-                    int_input = Integer.parseInt(user_input);
-
-                    commandState = new Command_State(8, int_input);
-                    check = true;
-
-                }
-                else{
-                    System.out.println("Please enter 1, 2, 3 or 4.");
-                    commandState = new Command_State(8, 0);
-                    check = true;
-                }
-            }
-        }
-
-
+        menu_type(type_of_menu, commandState);
         return commandState;
 
+    }
+
+    public static Command_State menu_type(int type_of_menu, Command_State commandState){
+        Scanner in = new Scanner(System.in);
+        int int_input;
+        String user_input;
+        int menu_type = 0;
+        String menu_type_string = "";
+
+            switch(type_of_menu){
+                case 1:
+                    main_menu();
+                    menu_type = 1;
+                    menu_type_string = "Please enter 1, 2, 3 or 4.";
+                    break;
+                case 2:
+                    board_menu();
+                    menu_type = 4;
+                    menu_type_string = "Please enter 1, 2 or 3.";
+                    break;
+                case 3:
+                    habitat_menu();
+                    menu_type = 1;
+                    menu_type_string = "Please enter 1, 2, 3 or 4.";
+                    break;
+                case 4:
+                    habitat_rotation();
+                    menu_type = 3;
+                    menu_type_string = "Please enter 1, 2, 3, 4, 5 or 6.";
+                    break;
+                case 5:
+                    token_menu();
+                    menu_type = 2;
+                    menu_type_string = "Please enter 1 or 2.";
+                    break;
+                case 6:
+                    nature_token_menu();
+                    menu_type = 4;
+                    menu_type_string = "Please enter 1, 2 or 3.";
+                    break;
+                case 7:
+                    any_token();
+                    menu_type = 4;
+                    menu_type_string = "Please enter 1, 2, 3 or 4.";
+                    break;
+                case 8:
+                    any_number_tokens();
+                    menu_type = 1;
+                    menu_type_string = "Please enter 1, 2, 3 or 4.";
+                    break;
+            }
+
+            user_input = in.nextLine();
+
+            if (isValid(user_input, menu_type)) {
+
+                int_input = Integer.parseInt(user_input);
+                commandState = new Command_State(type_of_menu, int_input);
+
+                return commandState;
+
+            } else {
+                System.out.println(menu_type_string);
+                if(type_of_menu != 1){
+                    commandState = new Command_State(type_of_menu, 0);
+
+                    return commandState;
+                }
+
+            }
+
+        return null;
     }
 
     public static void board_menu(){

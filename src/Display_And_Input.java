@@ -139,9 +139,7 @@ public class Display_And_Input {
 
     public static void randomise_player_tiles_and_tokens(){
 
-        int i, k;
-       // ArrayList<String> temp_biomes = new ArrayList<>();
-        //ArrayList<String> temp_animals = new ArrayList<>();
+        int i;
 
 
         long seed = System.nanoTime();                                          // To have the same randomised list order for animals and biome tiles
@@ -153,74 +151,25 @@ public class Display_And_Input {
 
 
         for (i = 0; i < player_count; i++){
-            /*
-            temp_biomes.clear();                                                                    // Needs to be cleared every i loop
-            temp_animals.clear();
-
-            for (k = 0; k < 20; k++){
-                temp_biomes.add(Habitat_Tiles.biome.get(0));                                        // adds tiles to temp and removes them from the original
-
-                Habitat_Tiles.biome.remove(0);
-
-                temp_animals.add(Habitat_Tiles.animals.get(0));
-                Habitat_Tiles.animals.remove(0);
-
-            }
-
-         */
-
-
-
-            //Calls the constructor
 
             players.add(new Player_Tracker(playerNames.get(i), Starter_Habitat.getStarter_Habitat_Tiles().get(i), 0, 0, 0, 0,0, 0));
 
-
         }
     }
-
-/*
-    public static void display_board(int player){
-        int i;
-
-
-        System.out.println("Board: \n");
-        Starter_Tile_Printer.starter_tile_printout(players.get(player).getStarter_tile());
-
-        System.out.println("\nHabitat Tiles: \n");
-
-        for (i = 0; i < 4; i++){
-            System.out.println(Tile_Printer.print_tile_setup(Habitat_Tiles.biome.get(i), 1, Habitat_Tiles.animals.get(i)));
-        }
-
-
-        System.out.println("Wildlife Tokens: \n");
-        printTokens();
-        callTheCulling();
-    }
-
- */
-
-
-
-
 
 
     public static void display_tiles_and_tokens(boolean culling_trigger){
         display_tiles();
         System.out.println("Corresponding Wildlife Tokens (1 next to a token represents the habitat that is also 1 for example): \n");
 
-
         printTokens();
         if(culling_trigger == true){
             callTheCulling();
         }
 
-
-
     }
 
-    public static void display_tiles(){        // TODO. done :)
+    public static void display_tiles(){                                    // Displays the habitat tiles
         int max = 8;
         tile2D[] row = new tile2D[max];
         int i;
@@ -233,7 +182,7 @@ public class Display_And_Input {
         System.out.println(Ex2D.num_printer(4) + "\n" + Ex2D.row_printer(row, max, 0, " ")+"\n");
     }
 
-    public static void callTheCulling(){
+    public static void callTheCulling(){                                 // Calls the culling method
 
         String culling = "";
         int numForCulling, j;
@@ -246,20 +195,16 @@ public class Display_And_Input {
         while(numForCulling != 5){
 
 
-
-
             switch(numForCulling){
                 case 4:
                     System.out.println("Culling initiated as there has been 4 tokens that are the same, replacing tokens!");
                     culling = "";
 
-
                     for (j = 0; j < 4; j++){
-                        Wildlife_Tokens.tokens.remove(0);
+                        remove_token(j);
                     }
                     culling = getCulling(culling);
                     break;
-
 
 
                 case 3:
@@ -267,9 +212,9 @@ public class Display_And_Input {
                     cullingChoice = getCullingChoice(cullingChoice);
                     if(cullingChoice == 1){
                         culling = "";
-                        Wildlife_Tokens.tokens.remove(0);
-                        Wildlife_Tokens.tokens.remove(0);
-                        Wildlife_Tokens.tokens.remove(0);
+                        for(j = 0; j < 3; j++){
+                            remove_token(j);
+                        }
                         culling = getCulling(culling);
                     }
                     else{
@@ -284,9 +229,10 @@ public class Display_And_Input {
                     cullingChoice = getCullingChoice(cullingChoice);
                     if(cullingChoice == 1){
                         culling = "";
-                        Wildlife_Tokens.tokens.remove(0);
-                        Wildlife_Tokens.tokens.remove(0);
-                        Wildlife_Tokens.tokens.remove(1);
+                        for(j=0; j < 2; j++){
+                            remove_token(j);
+                        }
+                        remove_token(3);
                         culling = getCulling(culling);
                     }
                     else{
@@ -300,9 +246,11 @@ public class Display_And_Input {
                     cullingChoice = getCullingChoice(cullingChoice);
                     if(cullingChoice == 1){
                         culling = "";
-                        Wildlife_Tokens.tokens.remove(0);
-                        Wildlife_Tokens.tokens.remove(1);
-                        Wildlife_Tokens.tokens.remove(1);
+
+                        for(j = 2; j < 4; j++){
+                            remove_token(j);
+                        }
+                        remove_token(0);
                         culling = getCulling(culling);
                     }
                     else{

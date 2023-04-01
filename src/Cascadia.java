@@ -20,7 +20,7 @@ public class Cascadia
           do{
 
 
-              command_state = Command_State.get_input2(1);   // Setting the command state
+              command_state = Command_State.get_input(1);   // Setting the command state
 
 
 
@@ -130,7 +130,7 @@ public class Cascadia
                                               Display_And_Input.display_tiles_and_tokens(culling_trigger);
 
                                               Display_And_Input.display_tile_rotation(place_tile);
-                                              command_state = Command_State.get_input2(4);
+                                              command_state = Command_State.get_input(4);
 
                                               //selects the rotation of the tile
                                               if(Command_State.getHabitat_tile_choice() == 0 && (command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4 || command_state.getChoice() == 5 || command_state.getChoice() == 6 || command_state.getChoice() == 7 )) {
@@ -243,7 +243,7 @@ public class Cascadia
                                           Display_And_Input.getPlayers().get(playerNum).setNature_tokens(Display_And_Input.getPlayers().get(playerNum).getNature_tokens() - 1);
 
                                           do{
-                                              command_state = Command_State.get_input2(8); // nature token option 2 for selecting any number of tokens to remove
+                                              command_state = Command_State.get_input(8); // nature token option 2 for selecting any number of tokens to remove
 
                                               if(command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4){
                                                   Display_And_Input.nature_token_any_number(command_state.getChoice());
@@ -271,7 +271,7 @@ public class Cascadia
         public static void display_board_tiles_tokens(int player_number, int menu_number, Command_State command_state, boolean culling_t){
             Display_And_Input.getPlayers().get(player_number).print_board(Display_And_Input.getPlayers().get(player_number).getBoard(), Display_And_Input.getPlayers().get(player_number));
             Display_And_Input.display_tiles_and_tokens(culling_t);
-            command_state = Command_State.get_input2(menu_number);
+            command_state = Command_State.get_input(menu_number);
 
             culling_t = false;
         }
