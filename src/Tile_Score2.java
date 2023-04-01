@@ -14,7 +14,6 @@ public class Tile_Score2 {
     public static void setOdd(int odd) {
         Tile_Score2.odd = odd;
     }
-
     public static int calculateSpace(int col) {
         if (col % 2 == 0 && odd == 1) return 0;
         return 1;
@@ -26,10 +25,10 @@ public class Tile_Score2 {
         b[0][2] = new tile2D("R", "b", 0);
         b[0][3] = new tile2D("R", "f", 0);
         b[1][1] = new tile2D("R", "b", 0);
-        b[1][2] = new tile2D("R", "b", 0);
+        b[1][2] = new tile2D("R", "f", 0);
         b[1][3] = new tile2D("R", "h", 0);
         b[2][2] = new tile2D("R", "h", 0);
-        b[2][3] = new tile2D("R", "b", 0);
+        b[2][3] = new tile2D("R", "s", 0);
         b[3][2] = new tile2D("R", "s", 0);
 
         tile2D.print_boards(b, 6, 4, 1);
@@ -44,24 +43,28 @@ public class Tile_Score2 {
             for (int j=0; j<maxsize; j++) {
                 tile2D t = board[i][j];
                 if(t!=null && t.getAnimals().charAt(0)=='f') {
-                    System.out.println("fox ["+i+"]["+j+"] " +fox_scoring_1(i, j)) ;
+                    System.out.println("fox    ["+i+"]["+j+"] " +fox_scoring_1(i, j)) ;
                     fox_score += fox_scoring_1(i, j);
                 }
                 if(t!=null && t.getAnimals().charAt(0)=='h') {
-                    System.out.println("hawk ["+i+"]["+j+"] " +hawk_scoring_1(i, j));
+                    System.out.println("hawk   ["+i+"]["+j+"] " +hawk_scoring_1(i, j));
                     hawk_num += hawk_scoring_1(i, j);
                 }
                 if(t!=null && t.getAnimals().charAt(0)=='b') {
-                    System.out.println("bear ["+i+"]["+j+"] " +bear_scoring_1(i, j));
+                    System.out.println("bear   ["+i+"]["+j+"] " +bear_scoring_1(i, j));
                     bear_num += bear_scoring_1(i, j);
+                }
+                if(t!=null && t.getAnimals().charAt(0)=='s') {
+                    System.out.println("salmon ["+i+"]["+j+"] " +salmon_scoring_1(i, j));
+                    bear_num += salmon_scoring_1(i, j);
                 }
             }
         }
         int hawk_score = hawk_score_calculate(hawk_num);
-        int bear_score = bear_num;                              // insert bear scoring
+        int bear_score = bear_score_calculate(bear_num);                              // insert bear scoring
         System.out.println("\nTotal Fox score:" + fox_score);
-        System.out.println("\nTotal Hawk score:" + hawk_score);
-        System.out.println("\nTotal Bear score:" + bear_score);
+        System.out.println("Total Hawk score:" + hawk_score);
+        System.out.println("Total Bear score:" + bear_score);
     }
 
     public static int fox_scoring_1(int x, int y) {         // returns the score of fox tile specified
@@ -86,7 +89,7 @@ public class Tile_Score2 {
     public static int bear_scoring_1(int x, int y) {                   // returns 1 if it's a pair of bears
         ArrayList<Integer> positions = new ArrayList<Integer>();
 
-        for (int i=2; i<5; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
+        for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
             tile2D surrounding_tile = get_surrounding_tile(x, y, i+1);
             if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'b'){
                 positions.add(i+1);
@@ -109,15 +112,44 @@ public class Tile_Score2 {
         return 0;
     }
 
+    public static int salmon_scoring_1(int x, int y) {
+        ArrayList<Integer> positions = new ArrayList<Integer>();
+
+        for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
+            tile2D surrounding_tile = get_surrounding_tile(x, y, i+1);
+            if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 's'){
+                positions.add(i+1);
+            }
+        }
+        if (positions.size()==0) return 1;
+        if (positions.size()==1) {
+            int salmon_count=0;
+            while (positions.size()<3) {
+                salmon_count++;
+                positions.clear();
+                int x2 = get_surrounding_row(x, y, positions.get(0));
+                int y2 = get_surrounding_col(x, y, positions.get(0));
+
+                for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
+                    tile2D surrounding_tile = get_surrounding_tile(x2, y2, i+1);
+                    if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 's'){
+                        positions.add(i+1);
+                    }
+                }
+            }
+            return salmon_count;
+
+        }
+        return 0;
+    }
+
+
+
     public static int elk_scoring_1(int x, int y) {
         int score=0;
         return score;
     }
 
-    public static int salmon_scoring_1(int x, int y) {
-        int score=0;
-        return score;
-    }
 
     public static int hawk_scoring_1(int x, int y) {     // returns 1 if hawk tile specified is valid and 0 otherwise
         int num_hawks=1;
@@ -134,10 +166,20 @@ public class Tile_Score2 {
     }
 
     public static int hawk_score_calculate(int h) {
+        if (h==0) return 0;
         if (h>7) return 26;
         else {
             if (h>5) return 4*(h-2)+2;
             else return 3*(h-1)+2;
+        }
+    }
+
+    public static int bear_score_calculate(int b) {
+        if (b==0) return 0;
+        b = b/2;
+        if (b>3) return 27;
+        else {
+            return 7*(b-1)+4;
         }
     }
 
@@ -183,10 +225,7 @@ public class Tile_Score2 {
     }
 
 
-
-    public static void tile_scoring(int x, int y, int maxsize) {
+    public static void tile_scoring(int x, int y, int maxsize) {        // todo implement last
         String biome = board[x][y].getBiome();
     }
 }
-
-
