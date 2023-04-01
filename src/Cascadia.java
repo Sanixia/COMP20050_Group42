@@ -100,7 +100,7 @@ public class Cascadia
 
                       do {
                           if(nature_option_menu == false){
-                              display_board_tiles_tokens(playerNum, 2, command_state);
+                              display_board_tiles_tokens(playerNum, 2, command_state); // won't display the habitat menu if player already chose something from the nature token menu and skips straight to selecting a habitat tile
                           }
 
 
@@ -118,7 +118,7 @@ public class Cascadia
                                           check_keystone = true;
 
                                       }
-                                      place_tile = command_state.getChoice() - 1;
+                                      place_tile = command_state.getChoice() - 1; // sets the tile to be placed
 
 
                                       do{
@@ -155,50 +155,57 @@ public class Cascadia
 
                                                   if(nature_option_menu == true){
 
-                                                      display_board_tiles_tokens(playerNum, 2, command_state);
+
+
+                                                      do{
+                                                          display_board_tiles_tokens(playerNum, 7, command_state);
+
+                                                          if(command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4){
+
+                                                                place_tile = command_state.getChoice() - 1;
+
+                                                              if(tile2D.availableTokenPlacement(Wildlife_Tokens.tokens.get(place_tile), Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum))){
+                                                                  Display_And_Input.display_token(place_tile);
+                                                                  tile2D.place_animal_token(Wildlife_Tokens.tokens.get(place_tile), Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                                                  Display_And_Input.remove_token(place_tile);
+
+                                                              }
+                                                              else{
+                                                                  System.out.println("You can't place that token as there is no available tiles for it");
+                                                              }
+
+                                                              next_player_turn(playerNum, command_state);
+
+                                                            }
+
+
+                                                      }while(command_state.isInAnyTokenMenu());
+
                                                   }
 
-
                                                   else{
-                                                      display_board_tiles_tokens(playerNum, 5, command_state);  // token menu to place down
+                                                      if(tile2D.availableTokenPlacement(Wildlife_Tokens.tokens.get(place_tile), Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum))){
+                                                          display_board_tiles_tokens(playerNum, 5, command_state);  // token menu to place down
 
+                                                          if (command_state.getChoice() == 1) {
+                                                              Display_And_Input.display_token(place_tile);
+                                                              tile2D.place_animal_token(Wildlife_Tokens.tokens.get(place_tile), Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                                              Display_And_Input.remove_token(place_tile);
+                                                          }
 
-                                                      if (command_state.getChoice() == 1) {
-                                                          Display_And_Input.display_token(place_tile);
-                                                          tile2D.place_animal_token(Wildlife_Tokens.tokens.get(place_tile), Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
-
-                                                          Display_And_Input.remove_token(place_tile);
+                                                          Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                                          Display_And_Input.display_tiles_and_tokens(playerNum);
                                                       }
+                                                      else{
+                                                          System.out.println("You can't place that token as there is no available tiles for it");
 
-
-                                                      Display_And_Input.getPlayers().get(playerNum).print_board(Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
-                                                      Display_And_Input.display_tiles_and_tokens(playerNum);
+                                                      }
 
 
                                                       // next player turn
 
-                                                      if (Display_And_Input.getPlayers().get(playerNum).getPlayerTurn() < 3) {
-                                                          if (playerNum == Display_And_Input.getPlayer_count() - 1) {    //resets to the start of the player list
-                                                              playerNum = 0;
-                                                          } else {
-                                                              playerNum++;
-                                                          }
-                                                          System.out.println("\n\n" + Display_And_Input.getPlayers().get(playerNum).getPlayer_name() + " is up!");
-                                                      } else {
+                                                      next_player_turn(playerNum, command_state);
 
-                                                          Display_And_Input.getPlayers_score_calculation().add(Display_And_Input.getPlayers().get(playerNum));  // adds player to the list of players who have finished their turns
-
-                                                          Display_And_Input.getPlayers().remove(Display_And_Input.getPlayers().get(playerNum)); // removes player from the list of players who have not finished their turns
-
-                                                          Display_And_Input.setPlayer_count(Display_And_Input.getPlayer_count());
-
-                                                          if (Display_And_Input.getPlayers().size() == 0) {
-                                                              System.out.println("You have no more turns left, calculating score for everyone...");
-                                                              command_state.setState_type();
-                                                          } else {
-                                                              System.out.println("You have no more turns left, calculating score once everyone is done...");
-                                                          }
-                                                      }
                                                   }
 
 
@@ -213,7 +220,7 @@ public class Cascadia
 
                           }
 
-                          else if (command_state.getChoice() == 2){
+                          else if (command_state.getChoice() == 2){ // nature token menu
 
 
                               do{
@@ -228,10 +235,12 @@ public class Cascadia
 
                                       if(command_state.getChoice() == 1) {
                                           command_state.setChoice(1);// nature token menu to place down
+                                          Display_And_Input.getPlayers().get(playerNum).setNature_tokens(Display_And_Input.getPlayers().get(playerNum).getNature_tokens() - 1);
                                           nature_option_menu = true;
                                       }
                                       else if(command_state.getChoice() == 2){
-                                          // TODO
+                                          Display_And_Input.getPlayers().get(playerNum).setNature_tokens(Display_And_Input.getPlayers().get(playerNum).getNature_tokens() - 1);
+                                          //
                                       }
                                   }
 
@@ -256,6 +265,31 @@ public class Cascadia
             Display_And_Input.getPlayers().get(player_number).print_board(Display_And_Input.getPlayers().get(player_number).getBoard(), Display_And_Input.getPlayers().get(player_number));
             Display_And_Input.display_tiles_and_tokens(player_number);
             command_state = Command_State.get_input2(menu_number);
+        }
+
+        public static void next_player_turn(int playerNum, Command_State command_state){
+            if (Display_And_Input.getPlayers().get(playerNum).getPlayerTurn() < 3) {
+                if (playerNum == Display_And_Input.getPlayer_count() - 1) {    //resets to the start of the player list
+                    playerNum = 0;
+                } else {
+                    playerNum++;
+                }
+                System.out.println("\n\n" + Display_And_Input.getPlayers().get(playerNum).getPlayer_name() + " is up!");
+            } else {
+
+                Display_And_Input.getPlayers_score_calculation().add(Display_And_Input.getPlayers().get(playerNum));  // adds player to the list of players who have finished their turns
+
+                Display_And_Input.getPlayers().remove(Display_And_Input.getPlayers().get(playerNum)); // removes player from the list of players who have not finished their turns
+
+                Display_And_Input.setPlayer_count(Display_And_Input.getPlayer_count());
+
+                if (Display_And_Input.getPlayers().size() == 0) {
+                    System.out.println("You have no more turns left, calculating score for everyone...");
+                    command_state.setState_type();
+                } else {
+                    System.out.println("You have no more turns left, calculating score once everyone is done...");
+                }
+            }
         }
 
 

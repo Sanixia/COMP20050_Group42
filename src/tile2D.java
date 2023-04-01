@@ -223,23 +223,25 @@ public class tile2D {
         place_slot_tiles2(row+plusRow, col+plusCol, board, player_tracker);
     }
 
-    public static void place_animal_token(String animal,tile2D[][] board, Player_Tracker player_tracker) { //TODO verify
-        boolean availableTokenPlacement = false;
-
+    public static boolean availableTokenPlacement(String animal, tile2D[][] board, Player_Tracker player_tracker){
         for(int i = 0; i < player_tracker.getMax_row(); i++){
 
             for(int j = 0; j < player_tracker.getMax_col(); j++){
                 if(board[i][j] != null){
                     if(board[i][j].getAnimals().contains(animal.toUpperCase())){
-                        availableTokenPlacement = true;
-                        i = player_tracker.getMax_row();
-                        break;
+                        return true;
                     }
                 }
             }
         }
+        return false;
+    }
 
-        if(availableTokenPlacement){
+
+
+    public static void place_animal_token(String animal,tile2D[][] board, Player_Tracker player_tracker) { //TODO verify
+
+        if(availableTokenPlacement(animal, board, player_tracker)){
             Scanner in = new Scanner(System.in);
             String temp_x, temp_y;
             int x, y;
@@ -295,9 +297,8 @@ public class tile2D {
             board[x][y].setAnimals(animal);
 
         }
-
         else{
-            System.out.println("No available tiles to place token");
+            System.out.println("No available tiles to place token!\n");
         }
 
     }
@@ -348,7 +349,7 @@ public class tile2D {
     public static void place_slot_tiles2(int x, int y, tile2D[][] board, Player_Tracker player_tracker) {             // determines where to place slot tiles
         int plusOne = 1;
         if (x % 2 == 0 && player_tracker.getOdd() == 1) plusOne = 0;          // NOTE TO MICHAL MAKE VALIDATE ODD FUNCTION USING THIS LINE
-        //if (player_tracker.getCheckOddOrEven() == 1 && player_tracker.getOdd() == 0 && x % 2 != 0) plusOne = 0;
+        if (player_tracker.getCheckOddOrEven() == 1 && player_tracker.getOdd() == 0 && x % 2 != 0) plusOne = 0;
 
         if (y-1>=0 && board[x][y-1] == null){
             board[x][y-1] = new tile2D("slot", "", 0);         // left

@@ -20,11 +20,11 @@ public class Habitat_Tiles
     );
 
     static ArrayList<String> animals = new ArrayList<>(
-            Arrays.asList("E","B","B","F","F",  "H","F","F","S","S",  "S","B","B","E","E",  "B","E","E","H","H",  "F","E","E","S","S",
-                    "BES","BF","BS","FH","ES","EH",  "EFH","FS","BE","EH","BF","BS",  "BEF","BEH","EF","EH","BF","BH",
-                    "EFS","BF","FS","BE","EF","ES",  "BHS","BS","HS","FH","BH","FS",  "BHS","BES","BS","HS","EH","EF",
-                    "EFS","FHS","FH","EF","ES","HS",  "BHS","BE","BH","EH","HS","BS",  "BFS","BFH","FH","EH","ES","BF",
-                    "BEF","BFS","BS","EH","FH","ES")
+            Arrays.asList("E","B","B","F","F",  "B","B","F","F","F","F",  "B","B","F","F","F","F",  "B","B","F","F","F","F",  "B","B","F","F","F","F",
+                    "B","B","F","F","F","F",  "B","B","F","F","F","F",  "B","B","F","F","F","F",
+                    "B","B","F","F","F","F",  "B","B","F","F","F","F",  "B","B","F","F","F","F",
+                    "B","B","F","F","F","F",  "B","B","F","F","F","F",  "B","B","F","F","F","F",
+                    "B","B","F","F","F","F")
     );
 
 

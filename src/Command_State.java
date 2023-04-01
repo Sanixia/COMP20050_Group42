@@ -91,13 +91,24 @@ public class Command_State {
             }
         }
 
-        else if(inputMenu == 6){
+        else if(inputMenu == 6){ // nature token menu
             if(menuInput == 1 || menuInput == 2){
                 state_type = state.HABITAT_MENU;
                 choice = menuInput;
             }
             else{
                 state_type = state.HABITAT_MENU;
+                choice = 0;
+            }
+        }
+
+        else if(inputMenu == 7){ // any token menu
+            if(menuInput == 1 || menuInput == 2 || menuInput == 3 || menuInput == 4){
+                state_type = state.MAIN_MENU;
+                choice = menuInput;
+            }
+            else{
+                state_type = state.ANY_TOKEN;
                 choice = 0;
             }
         }
@@ -205,7 +216,7 @@ public class Command_State {
 
         }
 
-        else if(type_of_menu == 5){
+        else if(type_of_menu == 5){ // token menu
             while (!check) {
                 token_menu();
                 user_input = in.nextLine();
@@ -225,7 +236,7 @@ public class Command_State {
             }
         }
 
-        else if(type_of_menu == 6){
+        else if(type_of_menu == 6){ // nature token menu
             while (!check) {
                 nature_token_menu();
                 user_input = in.nextLine();
@@ -240,6 +251,26 @@ public class Command_State {
                 else{
                     System.out.println("Please enter 1, 2 or 3.");
                     commandState = new Command_State(6, 0);
+                    check = true;
+                }
+            }
+        }
+
+        else if(type_of_menu == 7){  // picking any token selection
+            while (!check) {
+                any_token();
+                user_input = in.nextLine();
+
+                if (isValid(user_input, 4)) {
+                    int_input = Integer.parseInt(user_input);
+
+                    commandState = new Command_State(7, int_input);
+                    check = true;
+
+                }
+                else{
+                    System.out.println("Please enter 1, 2, 3 or 4.");
+                    commandState = new Command_State(7, 0);
                     check = true;
                 }
             }
@@ -268,7 +299,7 @@ public class Command_State {
     }
 
     public static void token_menu(){
-        System.out.println("\n\nDo you want to place down the token from the habitat tile you selected (1 for yes or 2 for no)");
+        System.out.println("\n\nDo you want to place down the token from the habitat tile you selected (1 for yes or 2 for no)?");
         System.out.print("-> ");
     }
 
@@ -288,6 +319,11 @@ public class Command_State {
 
     }
 
+    public static void any_token(){
+        System.out.println("\n\nWhich animal token do you want to place down (1, 2, 3 or 4)? ");
+        System.out.println("-> ");
+    }
+
 
 
     private enum state {                    // states for game which can be added to later
@@ -301,6 +337,8 @@ public class Command_State {
         TOKEN_MENU,
 
         NATURE_TOKEN_MENU,
+
+        ANY_TOKEN,
 
         SCORE,
         QUIT
@@ -349,6 +387,10 @@ public class Command_State {
         return state_type == state.TOKEN_MENU;
     }
 
+    public boolean isInAnyTokenMenu(){
+        return state_type == state.ANY_TOKEN;
+    }
+
     public static void quitMessage(){
         System.out.println("\nYou have quit the game.");
     }
@@ -373,6 +415,11 @@ public class Command_State {
     public void setState_type() {
         Command_State.state_type = state.QUIT;
     }
+    public void setState_habitat_menu(){
+        Command_State.state_type = state.HABITAT_MENU;
+    }
+
+
 
     public void setState_type_habitat_menu(){
         Command_State.state_type = state.HABITAT_MENU;
