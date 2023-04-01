@@ -264,9 +264,9 @@ public class Display_And_Input {
                     cullingChoice = getCullingChoice(cullingChoice);
                     if(cullingChoice == 1){
                         culling = "";
-                        Wildlife_Tokens.tokens.remove(1);
-                        Wildlife_Tokens.tokens.remove(1);
-                        Wildlife_Tokens.tokens.remove(1);
+                        for(j = 1; j < 4; j++){
+                            remove_token(j);
+                        }
                         culling = getCulling(culling);
                     }
                     else{
