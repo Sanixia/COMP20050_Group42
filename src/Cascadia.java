@@ -1,7 +1,8 @@
 
 public class Cascadia
 {
-
+    static int playerNum = 0;
+    static boolean culling_trigger = true;
 
     public static void main(String[] args)
     {
@@ -13,8 +14,6 @@ public class Cascadia
             Display_And_Input.randomised_order_players();
 
             boolean randomCheck = true;                     // check for one randomisation of tiles
-            boolean culling_trigger = true;
-            int playerNum = 0;
 
 
 
@@ -22,6 +21,7 @@ public class Cascadia
 
 
               command_state = Command_State.get_input2(1);   // Setting the command state
+
 
 
               if (randomCheck){
@@ -36,7 +36,6 @@ public class Cascadia
 
 
               if (command_state.isInPlay()){ // this is for the main game so it loops to not quit unless option 4 or players turns have all been ended
-
                   boolean check_keystone = false;
                   boolean nature_option_menu = false;
 
@@ -47,6 +46,7 @@ public class Cascadia
 
 
                   if (command_state.getChoice() == 1){  // this is to check what the current player's board, habitat tiles and tokens are
+
 
                       System.out.println("--- " + Display_And_Input.getPlayers().get(playerNum).getPlayer_name()+ "'s  Board --- \n");
 
@@ -59,7 +59,6 @@ public class Cascadia
                   }
 
                   else if (command_state.getChoice() == 2){    // this is for the player to end their turn without placing a tile and token
-
                       Display_And_Input.getPlayers().get(playerNum).setPlayerTurn();  //increments turn by 1 each time this is called
 
                       if( Display_And_Input.getPlayers().get(playerNum).getPlayerTurn() < 3){
@@ -98,7 +97,6 @@ public class Cascadia
 
 
                   else if (command_state.getChoice() == 3){   // this is for the board menu
-
 
                       do {
                           if(nature_option_menu == false){
@@ -176,7 +174,7 @@ public class Cascadia
                                                                   System.out.println("You can't place that token as there is no available tiles for it");
                                                               }
 
-                                                              next_player_turn(playerNum, command_state);
+                                                              next_player_turn(command_state);
 
                                                             }
 
@@ -206,7 +204,7 @@ public class Cascadia
 
                                                       // next player turn
 
-                                                      next_player_turn(playerNum, command_state);
+                                                      next_player_turn(command_state);
 
                                                   }
 
@@ -253,7 +251,7 @@ public class Cascadia
 
                                           }while(command_state.isInAnyNumberTokenMenu());
 
-                                          next_player_turn(playerNum, command_state);
+                                          next_player_turn(command_state);
 
                                       }
                                   }
@@ -261,10 +259,8 @@ public class Cascadia
                               }while(command_state.isInNatureTokenMenu());
                           }
 
-
                       }while (!command_state.isInMainMenu());
                   }
-
               }
           }while (!command_state.isQuit());
 
@@ -280,7 +276,7 @@ public class Cascadia
             culling_t = false;
         }
 
-        public static void next_player_turn(int playerNum, Command_State command_state){
+        public static void next_player_turn(Command_State command_state){
             Display_And_Input.getPlayers().get(playerNum).setPlayerTurn();  //increments turn by 1 each time this is called
 
             if (Display_And_Input.getPlayers().get(playerNum).getPlayerTurn() < 3) {
@@ -290,6 +286,7 @@ public class Cascadia
                     playerNum++;
                 }
                 System.out.println("\n\n" + Display_And_Input.getPlayers().get(playerNum).getPlayer_name() + " is up!");
+                culling_trigger = true;
             } else {
 
                 Display_And_Input.getPlayers_score_calculation().add(Display_And_Input.getPlayers().get(playerNum));  // adds player to the list of players who have finished their turns
@@ -300,12 +297,17 @@ public class Cascadia
 
                 if (Display_And_Input.getPlayers().size() == 0) {
                     System.out.println("You have no more turns left, calculating score for everyone...");
+                    culling_trigger = true;
                     command_state.setState_type();
+
                 } else {
                     System.out.println("You have no more turns left, calculating score once everyone is done...");
                 }
             }
         }
+
+
+
 
 
     }
