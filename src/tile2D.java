@@ -13,7 +13,6 @@ public class tile2D {
     private int max_row;         // adjusts 'height' of board
     private int  odd;         // 1 if odd rows are at the front
 
-
     private int checkOddOrEven;
     //static tile2D[][] board = new tile2D[MAXSIZE][MAXSIZE];
 
@@ -21,8 +20,6 @@ public class tile2D {
         this.biome = biome;
         this.animals = animals;
         this.rotation = rotation;
-
-
     }
 
     public String getBiome() {
