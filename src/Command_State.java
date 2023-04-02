@@ -8,6 +8,8 @@ public class Command_State {
     private static int choice;
     static Command_State commandState = new Command_State(0,0);
 
+    static int[] scoring_array = new int[5];
+
 
 
 
