@@ -4,6 +4,8 @@ public class Cascadia
     static int playerNum = 0;
     static boolean culling_trigger = true;
 
+    static int[] player_scoring_card = new int[5];
+
     public static void main(String[] args)
     {
         Command_State command_state;
@@ -12,6 +14,7 @@ public class Cascadia
             Display_And_Input.num_players();
             Display_And_Input.player_names();
             Display_And_Input.randomised_order_players();
+            WildLife_Scoring_Card.print_scoring_card(player_scoring_card);
 
             boolean randomCheck = true;                     // check for one randomisation of tiles
 
@@ -262,6 +265,8 @@ public class Cascadia
                       }while (!command_state.isInMainMenu());
                   }
               }
+
+              System.out.println("SDf");
           }while (!command_state.isQuit());
 
           Command_State.quitMessage();
@@ -273,7 +278,7 @@ public class Cascadia
             Display_And_Input.display_tiles_and_tokens(culling_t);
             command_state = Command_State.get_input(menu_number);
 
-            culling_t = false;
+            culling_trigger = false;
         }
 
         public static void next_player_turn(Command_State command_state){
