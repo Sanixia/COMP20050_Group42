@@ -26,13 +26,14 @@ public class Scoring_Setup extends tile2D{
     public static void main(String[] args) {
         tile2D[][] b = new tile2D[MAXSIZE][MAXSIZE];
         b[0][1] = new tile2D("R", "h", 0);
-        b[0][2] = new tile2D("R", "h", 0);
+        b[0][2] = new tile2D("R", "b", 0);
         b[0][3] = new tile2D("R", "f", 0);
-        b[1][1] = new tile2D("R", "b", 0);
-        b[1][2] = new tile2D("R", "f", 0);
+        b[0][4] = new tile2D("R", "f", 0);
+        b[1][1] = new tile2D("R", "s", 0);
+        b[1][2] = new tile2D("R", "b", 0);
         b[1][3] = new tile2D("R", "h", 0);
-        b[2][2] = new tile2D("R", "h", 0);
-        b[2][3] = new tile2D("R", "s", 0);
+        b[2][2] = new tile2D("R", "b", 0);
+        b[2][3] = new tile2D("R", "b", 0);
         b[3][2] = new tile2D("R", "s", 0);
         // todo                b e f h s
         int[] scoring_cards = {1,1,1,1,1};
@@ -62,8 +63,8 @@ public class Scoring_Setup extends tile2D{
                     bear_num += bear_scoring_cards(i, j, 1);
                 }
                 if(t!=null && t.getAnimals().charAt(0)=='s') {
-                    System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, 1));
-                    bear_num += salmon_scoring_cards(i, j, 1);
+                    //System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, 1));
+                    //bear_num += salmon_scoring_cards(i, j, 1);
                 }
             }
         }

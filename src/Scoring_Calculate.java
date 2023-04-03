@@ -131,6 +131,19 @@ public class Scoring_Calculate extends Scoring_Setup
 
 
     public static int elk_scoring_1(int x, int y) {         // TODO
+        ArrayList<Integer> positions = new ArrayList<Integer>();
+
+        for (int i=2; i<5; i++) {
+            tile2D surrounding_tile = get_surrounding_tile(x, y, i+1);
+            if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'e'){
+                positions.add(i+1);
+            }
+        }
+        if (positions.size()==0) return 1;  // base case
+
+        if (positions.size()>1) {
+        }
+
         return 0;
     }
 
