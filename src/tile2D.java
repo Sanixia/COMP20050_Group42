@@ -132,20 +132,20 @@ public class tile2D {
         System.out.println("Greyed out tiles are valid placements!\n");
 
 
-        System.out.println("Enter x coordinate: ");
+        System.out.print("Which row? : ");
         temp_x = in.nextLine();
         while(!verify_valid_number(temp_x)){
             System.out.println("Please enter a valid number!\n");
-            System.out.println("Enter x coordinate: ");
+            System.out.print("Which row? : ");
             temp_x = in.nextLine();
         }
 
-        System.out.println("Enter y coordinate: ");
+        System.out.print("Which column? :  ");
         temp_y = in.nextLine();
 
         while (!verify_valid_number(temp_y)) {
             System.out.println("Please enter a valid number!\n");
-            System.out.println("Enter y coordinate: ");
+            System.out.print("Which column? : ");
             temp_y = in.nextLine();
         }
         x = Integer.parseInt(temp_x);
@@ -155,20 +155,20 @@ public class tile2D {
 
         while (!verify_tile(x, y,board)) {
             System.out.println("Please enter a valid tile placement!\n");
-            System.out.println("Enter x coordinate: ");
+            System.out.print("Which row? : ");
             temp_x = in.nextLine();
             while(!verify_valid_number(temp_x)){
                 System.out.println("Please enter a valid number!\n");
-                System.out.println("Enter x coordinate: ");
+                System.out.print("Which row? : ");
                 temp_x = in.nextLine();
             }
 
-            System.out.println("Enter y coordinate: ");
+            System.out.print("Which column? :  ");
             temp_y = in.nextLine();
 
             while (!verify_valid_number(temp_y)) {
                 System.out.println("Please enter a valid number!\n");
-                System.out.println("Enter y coordinate: ");
+                System.out.print("Which column? : ");
                 temp_y = in.nextLine();
             }
             x = Integer.parseInt(temp_x);
@@ -243,20 +243,20 @@ public class tile2D {
             String temp_x, temp_y;
             int x, y;
 
-            System.out.println("Enter x coordinate: ");
+            System.out.print("Which row? : ");
             temp_x = in.nextLine();
             while(!verify_valid_number(temp_x)){
                 System.out.println("Please enter a valid number!\n");
-                System.out.println("Enter x coordinate: ");
+                System.out.print("Which row? : ");
                 temp_x = in.nextLine();
             }
 
-            System.out.println("Enter y coordinate: ");
+            System.out.print("Which column? :  ");
             temp_y = in.nextLine();
 
             while (!verify_valid_number(temp_y)) {
                 System.out.println("Please enter a valid number!\n");
-                System.out.println("Enter y coordinate: ");
+                System.out.print("Which column? : ");
                 temp_y = in.nextLine();
             }
             x = Integer.parseInt(temp_x);
@@ -267,20 +267,20 @@ public class tile2D {
 
             while (verify_animal_token_placement(x, y, animal, board)) {
                 System.out.println("Please enter a valid tile that can place this animal token onto it and hasn't been taken already!\n");
-                System.out.println("Enter x coordinate: ");
+                System.out.print("Which row? : ");
                 temp_x = in.nextLine();
                 while(!verify_valid_number(temp_x)){
                     System.out.println("Please enter a valid number!\n");
-                    System.out.println("Enter x coordinate: ");
+                    System.out.print("Which row? : ");
                     temp_x = in.nextLine();
                 }
 
-                System.out.println("Enter y coordinate: ");
+                System.out.print("Which column? :  ");
                 temp_y = in.nextLine();
 
                 while (!verify_valid_number(temp_y)) {
                     System.out.println("Please enter a valid number!\n");
-                    System.out.println("Enter y coordinate: ");
+                    System.out.print("Which column? : ");
                     temp_y = in.nextLine();
                 }
                 x = Integer.parseInt(temp_x);

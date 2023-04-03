@@ -8,12 +8,6 @@ public class Command_State {
     private static int choice;
     static Command_State commandState = new Command_State(0,0);
 
-    static int[] scoring_array = new int[5];
-
-
-
-
-
 
     private static int habitat_tile_choice = 0;
 
@@ -31,6 +25,10 @@ public class Command_State {
             }
             else if (menuInput == 4){
                 state_type = state.QUIT;
+            }
+            else{
+                state_type = state.MAIN_MENU;
+                choice = 0;
             }
         }
 
@@ -101,8 +99,12 @@ public class Command_State {
                 state_type = state.HABITAT_MENU;
                 choice = menuInput;
             }
-            else{
+            else if(menuInput == 3){
                 state_type = state.HABITAT_MENU;
+                choice = 0;
+            }
+            else{
+                state_type = state.NATURE_TOKEN_MENU;
                 choice = 0;
             }
         }
@@ -154,6 +156,10 @@ public class Command_State {
         String menu_type_string = "";
 
             switch(type_of_menu){
+                case 0:
+                    main_menu();
+                    menu_type_string = "Please enter 1, 2, 3 or 4.";
+                    break;
                 case 1:
                     main_menu();
                     menu_type = 1;
@@ -207,15 +213,13 @@ public class Command_State {
 
             } else {
                 System.out.println(menu_type_string);
-                if(type_of_menu != 1){
+                if(type_of_menu != 1) {
                     commandState = new Command_State(type_of_menu, 0);
-
                     return commandState;
                 }
-
             }
 
-        return null;
+        return commandState = new Command_State(type_of_menu, 0);
     }
 
     public static void board_menu(){
