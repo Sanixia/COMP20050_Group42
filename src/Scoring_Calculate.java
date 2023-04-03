@@ -130,6 +130,7 @@ public class Scoring_Calculate extends Scoring_Setup
     }
 
 
+
     public static int elk_scoring_1(int x, int y) {         // TODO
         ArrayList<Integer> positions = new ArrayList<Integer>();
 

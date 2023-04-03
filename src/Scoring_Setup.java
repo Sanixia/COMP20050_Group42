@@ -23,6 +23,7 @@ public class Scoring_Setup extends tile2D{
         return 1;
     }
 
+
     public static void main(String[] args) {
         tile2D[][] b = new tile2D[MAXSIZE][MAXSIZE];
         b[0][1] = new tile2D("R", "h", 0);
