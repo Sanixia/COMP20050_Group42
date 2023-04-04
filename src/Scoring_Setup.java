@@ -55,6 +55,7 @@ public class Scoring_Setup extends Board
         setBoard(player.getBoard());
         setOdd(player.getOdd());
         print_board(board, player);
+
         remove_slot();
         print_board(board, player);
         int fox_score=0, hawk_num=0, bear_num=0, salmon_score=0;
