@@ -28,7 +28,7 @@ public class Scoring_Calculate extends Scoring_Setup
         for (int i=0; i<6; i++) {
             tile2D surrounding_tile = get_surrounding_tile(x, y, i+1);
             if (surrounding_tile!=null){
-                if(surrounding_tile.getAnimals().charAt(0) == 'f') f++;
+                //if(surrounding_tile.getAnimals().charAt(0) == 'f') f++;
                 if(surrounding_tile.getAnimals().charAt(0) == 'e') e++;
                 if(surrounding_tile.getAnimals().charAt(0) == 'b') b++;
                 if(surrounding_tile.getAnimals().charAt(0) == 's') s++;
@@ -37,7 +37,7 @@ public class Scoring_Calculate extends Scoring_Setup
         }
         if (b>=2) pairs++;
         if (e>=2) pairs++;
-        if (f>=2) pairs++;
+        //if (f>=2) pairs++;
         if (s>=2) pairs++;
         if (h>=2) pairs++;
         return pairs;
@@ -48,14 +48,14 @@ public class Scoring_Calculate extends Scoring_Setup
         for (int i=0; i<6; i++) {
             tile2D surrounding_tile = get_surrounding_tile(x, y, i+1);
             if (surrounding_tile!=null){
-                if(surrounding_tile.getAnimals().charAt(0) == 'f') f++;
+                //if(surrounding_tile.getAnimals().charAt(0) == 'f') f++;
                 if(surrounding_tile.getAnimals().charAt(0) == 'e') e++;
                 if(surrounding_tile.getAnimals().charAt(0) == 'b') b++;
                 if(surrounding_tile.getAnimals().charAt(0) == 's') s++;
                 if(surrounding_tile.getAnimals().charAt(0) == 'h') h++;
             }
         }
-        return Math.max(b, Math.max(e, Math.max(f, Math.max(s, h))));
+        return Math.max(b, Math.max(e, Math.max(s, h)));
     }
 
     public static int bear_scoring_1(int x, int y) {                   // returns 1 if it's a pair of bears
@@ -243,7 +243,21 @@ public class Scoring_Calculate extends Scoring_Setup
         return num_hawks;
     }
 
-    public static int hawk_scoring_2(int x, int y) {        // TODO
+    public static int hawk_scoring_2(int x, int y, boolean firstOne) {        // TODO
+        int num_hawks=1;
+        int x2 = x, y2 = y;
+        ArrayList<String> hawks_found = new ArrayList<String>();
+        tile2D surrounding_tile = null;
+
+        for (int i=0; i<6; i++) {
+            surrounding_tile = get_surrounding_tile(x, y, i+1);
+            if (surrounding_tile!=null && surrounding_tile.getAnimals().length() != 1){
+                for(int j=0; j<6 ;j++){
+
+                }
+            }
+        }
+
         return 0;
     }
 

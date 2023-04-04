@@ -130,7 +130,7 @@ public class Scoring_Setup extends tile2D{
     public static int hawk_scoring_cards(int x, int y, int card) {
         return switch (card) {
             case 1 -> Scoring_Calculate.hawk_scoring_1(x, y);
-            case 2 -> Scoring_Calculate.hawk_scoring_2(x, y);
+            case 2 -> Scoring_Calculate.hawk_scoring_2(x, y, true);
             default -> Scoring_Calculate.hawk_scoring_3(x, y);
         };
     }
@@ -188,6 +188,34 @@ public class Scoring_Setup extends tile2D{
         }
         if (row==x && col==y) return null;
         return board[row][col];
+    }
+
+    public static int[] get_surrounding_tile_hawk(int x, int y, int pos) {     // returns a tile around specified tile
+        int plusOne = calculateSpace(x);
+        int row = x;
+        int col = y;
+        int[] arr = {-1,-1};
+        if (pos==1 && row-1>=0 && col-1+plusOne>=0) {
+            row -= 2;
+            col -= 1;                                     // top left
+        } if (pos==2 && row-1>=0 && col+plusOne<=MAXSIZE) {
+            row -= 2;
+            col += 1;                                         // top right
+        } if (pos==3 && col+1<=MAXSIZE) {
+            col += 2;                                                  // right
+        }if (pos==4 && row+1<=MAXSIZE && col+plusOne<=MAXSIZE) {
+            row += 2;
+            col += 1;                                         // bottom right
+        }if (pos==5 && row+1<=MAXSIZE && col-1+plusOne<=MAXSIZE) {
+            row += 2;
+            col -= 1;                                     // bottom left
+        }if (pos==6 && col-1>=0) {
+            col -= 2;                                                  // left
+        }
+
+        if (row==x && col==y) return new int[] {-1, -1};
+
+        return new int[] {row, col};
     }
 
     public static int[] get_surrounding_tile_coordinates(int x, int y, int pos) {     // returns a tile around specified tile
