@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Scoring_Calculate extends Scoring_Setup
 {
@@ -176,21 +177,47 @@ public class Scoring_Calculate extends Scoring_Setup
     }
 
 
-    public static int elk_scoring_1(int x, int y) {         // TODO
+    public static int elk_scoring_1(int x, int y, int pos) {         // TODO
         ArrayList<Integer> positions = new ArrayList<Integer>();
-
+        int elk_score = 1;
+        int x2 = x, y2 = y;
+        int[] coordinates = new int[2];
+        tile2D surrounding_tile = null;
         for (int i=2; i<5; i++) {
-            tile2D surrounding_tile = get_surrounding_tile(x, y, i+1);
-            if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'e'){
-                positions.add(i+1);
+            if(pos == -1){
+                surrounding_tile = get_surrounding_tile(x2, y2, i);
+                coordinates = get_surrounding_tile_coordinates(x2, y2, i);
             }
-        }
-        if (positions.size()==0) return 1;  // base case
+            else{
+                i = 4;
+                surrounding_tile = get_surrounding_tile(x2, y2, pos);
+                coordinates = get_surrounding_tile_coordinates(x2, y2, pos);
 
-        if (positions.size()>1) {
+            }
+            if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'e'){
+                if(pos == -1){
+                    positions.add(i);
+                }
+                else{
+                    positions.add(pos);
+                }
+                break;
+            }
+
+        }
+        if (positions.size()==0){
+            changeBoard(x2, y2);
+            return elk_score;  // base case
         }
 
-        return 0;
+        else{
+
+            changeBoard(x2, y2); // makes current tile null
+            x2 = coordinates[0];
+            y2 = coordinates[1];
+
+            return elk_score + elk_scoring_1(x2, y2, positions.get(0));
+        }
     }
 
     public static int elk_scoring_2(int x, int y) {         // TODO

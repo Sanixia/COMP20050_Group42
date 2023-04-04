@@ -15,7 +15,6 @@ public class WildLife_Scoring_Card {
     }
 
     public static void print_scoring_card(int[] array){
-        scoring_card_array(array);
         System.out.println("\n\n----- SCORING CARDS FOR EACH WILDLIFE -----\n\n");
 
         for(int i = 0; i < 5; i++){
@@ -109,7 +108,7 @@ public class WildLife_Scoring_Card {
         if(type_of_card == 1){
             System.out.println("----- SALMON SCORING CARD (A) -----\n");
             System.out.println("Score points for each run of Salmon, depending on the number/length of Salmon in the run.");
-            System.out.println("A run if defined as a group of adjacent Salmon where each Salmon is adjacent to no more than no more than two other Salmon.");
+            System.out.println("A run is defined as a group of adjacent Salmon where each Salmon is adjacent to no more than no more than two other Salmon.");
             System.out.println("A group of three Salmon in a triangle shape may count as a run, but no other Salmon may be attached to this run.");
             System.out.println("Each run of Salmon may not have any other Salmon adjacent to it.\n\n");
         }

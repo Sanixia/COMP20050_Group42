@@ -3,10 +3,17 @@ public class Scoring_Setup extends tile2D{
     public static int MAXSIZE = 26;
     public static int totalscore = 0;
     public static int odd;
-    public static tile2D[][] board;
+
+    private static tile2D[][] board;
 
     public Scoring_Setup(String biome, String animals, int rotation) {
         super(biome, animals, rotation);
+    }
+    public static tile2D[][] getBoard() {
+        return board;
+    }
+    public static void changeBoard(int x, int y) {
+        Scoring_Setup.board[x][y] = null;
     }
 
     public static void increaseScore() {
@@ -27,18 +34,19 @@ public class Scoring_Setup extends tile2D{
         System.out.println(check_beside(1, 3));
 
         tile2D[][] b = new tile2D[MAXSIZE][MAXSIZE];
-        b[0][1] = new tile2D("R", "s", 0);
-        b[0][2] = new tile2D("R", "b", 0);
-        b[0][3] = new tile2D("R", "f", 0);
-        b[0][4] = new tile2D("R", "f", 0);
-        b[1][1] = new tile2D("R", "s", 0);
-        b[1][2] = new tile2D("R", "s", 0);
-        b[1][3] = new tile2D("R", "s", 0);
-        b[1][4] = new tile2D("R", "s", 0);
+        b[0][1] = new tile2D("R", "e", 0);
+        b[0][2] = new tile2D("R", "f", 0);
+        b[0][3] = new tile2D("R", "s", 0);
+        b[0][4] = new tile2D("R", "s", 0);
+        b[1][1] = new tile2D("R", "e", 0);
+        b[1][2] = new tile2D("R", "e", 0);
+        b[1][3] = new tile2D("R", "e", 0);
+        b[1][4] = new tile2D("R", "e", 0);
         b[1][5] = new tile2D("R", "s", 0);
-        b[2][2] = new tile2D("R", "b", 0);
-        b[2][3] = new tile2D("R", "b", 0);
-        b[2][5] = new tile2D("R", "s", 0);
+        b[2][2] = new tile2D("R", "e", 0);
+        b[2][3] = new tile2D("R", "e", 0);
+        b[2][4] = new tile2D("R", "e", 0);
+        b[2][5] = new tile2D("R", "e", 0);
         b[3][2] = new tile2D("R", "s", 0);
         // todo                b e f h s
         int[] scoring_cards = {1,1,1,1,1};
@@ -51,7 +59,7 @@ public class Scoring_Setup extends tile2D{
     public static void scoring_setup(tile2D[][]board, int odd, int[] scoring_cards) {
         setBoard(board);
         setOdd(odd);
-        int fox_score=0, hawk_num=0, bear_num=0, salmon_score=0;
+        int fox_score=0, hawk_num=0, bear_num=0, salmon_score=0, elk_num=0;
         for (int i=0; i<MAXSIZE; i++) {
             for (int j=0; j<MAXSIZE; j++) {
                 tile2D t = board[i][j];
@@ -71,13 +79,20 @@ public class Scoring_Setup extends tile2D{
                     System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, 1));
                     salmon_score += salmon_scoring_cards(i, j, 1);
                 }
+                if(t!=null && t.getAnimals().charAt(0)=='e') {
+                    //System.out.println("elk    ["+i+"]["+j+"] " + elk_scoring_cards(i, j, 1, 1));
+                    elk_num += elk_scoring_cards(i, j, 1, -1);
+                }
             }
         }
         int hawk_score = hawk_score_calculate(hawk_num);
         int bear_score = bear_score_calculate(bear_num);                              // insert bear scoring
+
         System.out.println("\nTotal Fox score:" + fox_score);
         System.out.println("Total Hawk score:" + hawk_score);
         System.out.println("Total Bear score:" + bear_score);
+        System.out.println("Total Salmon score:" + salmon_score);
+        System.out.println("Total Elk score:" + elk_num);
     }
 
     public static int fox_scoring_cards(int x, int y, int card) {
@@ -88,12 +103,16 @@ public class Scoring_Setup extends tile2D{
         };
     }
 
-    public static int elk_scoring_cards(int x, int y, int card) {
-        return switch (card) {
-            case 1 -> Scoring_Calculate.elk_scoring_1(x, y);
-            case 2 -> Scoring_Calculate.elk_scoring_2(x, y);
-            default -> Scoring_Calculate.elk_scoring_3(x, y);
-        };
+    public static int elk_scoring_cards(int x, int y, int card, int pos) {
+        switch (card) {
+            case 1:
+                return elk_score_calculate(Scoring_Calculate.elk_scoring_1(x, y, pos));
+            case 2:
+                return elk_score_calculate(Scoring_Calculate.elk_scoring_2(x, y));
+
+            default:
+                return elk_score_calculate(Scoring_Calculate.elk_scoring_3(x, y));
+        }
     }
 
     public static int bear_scoring_cards(int x, int y, int card) {
@@ -136,6 +155,16 @@ public class Scoring_Setup extends tile2D{
         }
     }
 
+    public static int elk_score_calculate(int e) {
+        if (e>3) return 13;
+        else {
+            if (e == 1) return 2;
+            if (e == 2) return 5;
+            if (e == 3) return 9;
+        }
+        return 0;
+    }
+
     public static tile2D get_surrounding_tile(int x, int y, int pos) {     // returns a tile around specified tile
         int plusOne = calculateSpace(x);
         int row = x;
@@ -159,6 +188,32 @@ public class Scoring_Setup extends tile2D{
         }
         if (row==x && col==y) return null;
         return board[row][col];
+    }
+
+    public static int[] get_surrounding_tile_coordinates(int x, int y, int pos) {     // returns a tile around specified tile
+        int plusOne = calculateSpace(x);
+        int row = x;
+        int col = y;
+        if (pos==1 && row-1>=0 && col-1+plusOne>=0) {
+            row--;
+            col += plusOne - 1;                                     // top left
+        } if (pos==2 && row-1>=0 && col+plusOne<=MAXSIZE) {
+            row--;
+            col += plusOne;                                         // top right
+        } if (pos==3 && col+1<=MAXSIZE) {
+            col++;                                                  // right
+        }if (pos==4 && row+1<=MAXSIZE && col+plusOne<=MAXSIZE) {
+            row++;
+            col += plusOne;                                         // bottom right
+        }if (pos==5 && row+1<=MAXSIZE && col-1+plusOne<=MAXSIZE) {
+            row++;
+            col += plusOne - 1;                                     // bottom left
+        }if (pos==6 && col-1>=0) {
+            col--;                                                  // left
+        }
+        if (row==x && col==y) return new int[] {-1, -1};
+
+        return new int[] {row, col};
     }
 
     public static int get_surrounding_row(int x, int y, int pos) {     // returns row of specified surround tile

@@ -57,7 +57,7 @@ public class Display_And_Input {
 
 
         Scanner in = new Scanner(System.in);
-        
+
         boolean validNumOfPlayers = false;
 
         do{
@@ -300,31 +300,31 @@ public class Display_And_Input {
         System.out.println("Optional culling identified as 3 tiles are the same, would you like to get rid of the 3 or continue?");
         System.out.print("Please enter 1 for yes or 2 to continue (1/2): ");
 
-            boolean validInput = false;
+        boolean validInput = false;
 
-            do{
-                try{
+        do{
+            try{
 
-                    cullingChoice = in.nextInt();
-                    if (cullingChoice == 1 || cullingChoice == 2){
+                cullingChoice = in.nextInt();
+                if (cullingChoice == 1 || cullingChoice == 2){
 
-                        validInput = true;
-                    }
-
-                    else{
-                        System.out.print("Please enter a number that is either 1 for yes or 2 to continue: ");
-                    }
-
+                    validInput = true;
                 }
 
-                catch (InputMismatchException ex) {
-                    System.out.print("Please enter a valid number (1 for yes and 2 to continue): ");
-                    in.nextLine();
+                else{
+                    System.out.print("Please enter a number that is either 1 for yes or 2 to continue: ");
                 }
+
             }
-            while (!validInput);
 
-            return cullingChoice;
+            catch (InputMismatchException ex) {
+                System.out.print("Please enter a valid number (1 for yes and 2 to continue): ");
+                in.nextLine();
+            }
+        }
+        while (!validInput);
+
+        return cullingChoice;
 
     }
 
@@ -361,7 +361,7 @@ public class Display_And_Input {
                     animal = " ----->  Fox";
                     break;
             }
-            System.out.println((k + 1) + ". " + Starter_Tile_Printer.token_printer(Wildlife_Tokens.tokens.get(k)) + animal);
+            System.out.println((k + 1) + ". " + Ex2D.middle_section(Wildlife_Tokens.tokens.get(k).charAt(0)) + animal);
         }
     }
 
@@ -440,17 +440,17 @@ public class Display_And_Input {
         String temp_animal;
 
 
-                temp_biome = Habitat_Tiles.biome.get(4);
-                temp_animal = Habitat_Tiles.animals.get(4);
+        temp_biome = Habitat_Tiles.biome.get(4);
+        temp_animal = Habitat_Tiles.animals.get(4);
 
-                Habitat_Tiles.biome.set(4, Habitat_Tiles.biome.get(tile_number));
-                Habitat_Tiles.animals.set(4, Habitat_Tiles.animals.get(tile_number));
+        Habitat_Tiles.biome.set(4, Habitat_Tiles.biome.get(tile_number));
+        Habitat_Tiles.animals.set(4, Habitat_Tiles.animals.get(tile_number));
 
-                Habitat_Tiles.biome.set(tile_number, temp_biome);
-                Habitat_Tiles.animals.set(tile_number, temp_animal);
+        Habitat_Tiles.biome.set(tile_number, temp_biome);
+        Habitat_Tiles.animals.set(tile_number, temp_animal);
 
-                Habitat_Tiles.biome.remove(4);
-                Habitat_Tiles.animals.remove(4);
+        Habitat_Tiles.biome.remove(4);
+        Habitat_Tiles.animals.remove(4);
 
 
     }
@@ -470,7 +470,7 @@ public class Display_And_Input {
     }
 
     public static void display_token(int animal_token){
-        System.out.println("\n" + (animal_token + 1) + ". " + Starter_Tile_Printer.token_printer(Wildlife_Tokens.tokens.get(animal_token))); //TODO GET RID OF SATRTER TILE PRINTER
+        System.out.println("\n" + (animal_token + 1) + ". " + Ex2D.middle_section(Wildlife_Tokens.tokens.get(animal_token).charAt(0)));
     }
 
     public static void nature_token_any_number(int number_of_tokens){
