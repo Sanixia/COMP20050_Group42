@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 public class Scoring_Setup extends Board
 {
-    public static int MAXSIZE = 26;
-    public static int totalscore = 0;
-    public static int odd;
-    public static Board[][] board;
+    private static int MAXSIZE = 26;
+    private static int totalscore = 0;
+    private static int odd;
+    private static Board[][] board;
 
     public Scoring_Setup(String biome, String animals, int rotation) {
         super(biome, animals, rotation);
@@ -19,6 +19,7 @@ public class Scoring_Setup extends Board
     public static void setOdd(int odd) {
         Scoring_Setup.odd = odd;
     }
+
     public static int calculateSpace(int col) {
         if (col % 2 == 0 && odd == 1) return 0;
         return 1;
@@ -43,32 +44,36 @@ public class Scoring_Setup extends Board
         b[3][2] = new Board("R", "s", 0);
         // todo                b e f h s
         int[] scoring_cards = {1,1,1,1,1};
-        Board.print_boards(b, 8, 4, 1);
-        scoring_setup(b, 1, scoring_cards);
+        Board.print_boards(b, 8, 5, 1);
+        //scoring_setup(scoring_cards);
     }
 
 
 
-    public static void scoring_setup(Board[][]board, int odd, int[] scoring_cards) {
-        setBoard(board);
-        setOdd(odd);
+    //public static void scoring_setup(Board[][]board, int odd, int[] scoring_cards) {
+    public static void scoring_setup(Player_Tracker player,  int[] scoring_cards) {
+        setBoard(player.getBoard());
+        setOdd(player.getOdd());
+        print_board(board, player);
+        remove_slot();
+        print_board(board, player);
         int fox_score=0, hawk_num=0, bear_num=0, salmon_score=0;
         for (int i=0; i<MAXSIZE; i++) {
             for (int j=0; j<MAXSIZE; j++) {
                 Board t = board[i][j];
-                if(t!=null && t.getAnimals().charAt(0)=='f') {
+                if( t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='f') {
                     System.out.println("fox    ["+i+"]["+j+"] " + fox_scoring_cards(i, j, 1));
                     fox_score += fox_scoring_cards(i, j, 1);
                 }
-                if(t!=null && t.getAnimals().charAt(0)=='h') {
+                if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='h') {
                     System.out.println("hawk   ["+i+"]["+j+"] " + hawk_scoring_cards(i, j, 1));
                     hawk_num += hawk_scoring_cards(i, j, 1);
                 }
-                if(t!=null && t.getAnimals().charAt(0)=='b') {
+                if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='b') {
                     System.out.println("bear   ["+i+"]["+j+"] " + bear_scoring_cards(i, j, 1));
                     bear_num += bear_scoring_cards(i, j, 1);
                 }
-                if(t!=null && t.getAnimals().charAt(0)=='s') {
+                if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='s') {
                     System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, 1));
                     salmon_score += salmon_scoring_cards(i, j, 1);
                 }
@@ -79,6 +84,17 @@ public class Scoring_Setup extends Board
         System.out.println("\nTotal Fox score:" + fox_score);
         System.out.println("Total Hawk score:" + hawk_score);
         System.out.println("Total Bear score:" + bear_score);
+        System.out.println("Total Salmon score:" + salmon_score);
+    }
+
+    public static void remove_slot() {
+        for (int i = 0; i < MAXSIZE; i++) {
+            for (int j = 0; j < MAXSIZE; j++) {
+                if (board[i][j]!=null && board[i][j].getBiome() == "slot") {
+                    board[i][j] = null;
+                }
+            }
+        }
     }
 
     public static int fox_scoring_cards(int x, int y, int card) {
@@ -162,7 +178,7 @@ public class Scoring_Setup extends Board
         return board[row][col];
     }
 
-    public static int[] get_surrounding_tile_hawk(int x, int y, int pos) {     // returns a tile around specified tile
+    public static Printer get_surrounding_tile_hawk(int x, int y, int pos) {     // returns a tile around specified tile
         int plusOne = calculateSpace(x);
         int row = x;
         int col = y;
@@ -185,9 +201,8 @@ public class Scoring_Setup extends Board
             col -= 2;                                                  // left
         }
 
-        if (row==x && col==y) return new int[] {-1, -1};
-
-        return new int[] {row, col};
+        if (row==x && col==y) return null;
+        return board[row][col];
     }
 
     public static int get_surrounding_row(int x, int y, int pos) {     // returns row of specified surround tile

@@ -272,7 +272,7 @@ public class Cascadia
             if (Display_And_Input.getPlayers().size() == 0) {
                 System.out.println("You have no more turns left, calculating score for everyone...");
                 for(int i = 0; i < Display_And_Input.getPlayers_score_calculation().size(); i++){
-                    Scoring_Setup.scoring_setup(Display_And_Input.getPlayers_score_calculation().get(i).getBoard(),1, player_scoring_card );
+                    Scoring_Setup.scoring_setup(  Display_And_Input.getPlayers_score_calculation().get(i), player_scoring_card);
                 }
 
                 command_state.setState_type();

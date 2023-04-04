@@ -96,7 +96,7 @@ public class Printer
             case "RP": col1=Tile_Colours.RIVER_COLOUR; col2=Tile_Colours.PRAIRIE_COLOUR; break;
             case "MP": col1=Tile_Colours.MOUNTAIN_COLOUR; col2=Tile_Colours.PRAIRIE_COLOUR; break;
             case "slot": col1=Tile_Colours.HIGHLIGHT_SLOT_COLOUR; break;        // visible indication of valid tile placement locations
-            //case "space": return blank_half();                                // half an empty space
+            case "space": return blank_half();                                // half an empty space
             default: break;
         }
         return tile_printout(col1, col2, rotation, animals);
