@@ -1,9 +1,7 @@
-import java.util.Arrays;
 import java.util.Random;
 
-public class WildLife_Scoring_Card {
-
-
+public class WildLife_Scoring_Setup
+{
     public static int[] scoring_card_array(int[] array){
         long seed = System.nanoTime();
         Random random = new Random(seed);

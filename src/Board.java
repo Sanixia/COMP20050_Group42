@@ -1,8 +1,8 @@
 
 import java.util.Scanner;
 
-// tile.java but modified to use 2d array instead of list of lists for board
-public class tile2D {
+public class Board extends Printer // todo comments
+{
     private static final int MAXSIZE = 26;
     private String biome;
     private String animals;
@@ -14,9 +14,9 @@ public class tile2D {
     private int  odd;         // 1 if odd rows are at the front
 
     private int checkOddOrEven;
-    //static tile2D[][] board = new tile2D[MAXSIZE][MAXSIZE];
+    //static Board[][] board = new Board[MAXSIZE][MAXSIZE];
 
-    public tile2D(String biome, String animals, int rotation) {
+    public Board(String biome, String animals, int rotation) {
         this.biome = biome;
         this.animals = animals;
         this.rotation = rotation;
@@ -46,8 +46,8 @@ public class tile2D {
 
 
     public static void main(String[] args) {
-        //tile2D t = new tile2D("F", "BES", 0);           // can test printing out individual tiles
-        //System.out.println(Ex2D.print_tile_setup(t));
+        //Board t = new Board("F", "BES", 0);           // can test printing out individual tiles
+        //System.out.println(Board.print_tile_setup(t));
 
         /*
         board_add_tile("F", "BES", 0, 0, 0);
@@ -86,7 +86,7 @@ public class tile2D {
         }
     }
 
-    public static void setup(String setup_board, tile2D[][] board, Player_Tracker player_tracker) {
+    public static void setup(String setup_board, Board[][] board, Player_Tracker player_tracker) {
         player_tracker.setOdd(1);
 
         switch(setup_board){
@@ -123,7 +123,7 @@ public class tile2D {
     }
 
 
-    public static void place(int tile_number, tile2D[][] board, Player_Tracker player_tracker, tile2D tile) {
+    public static void place(int tile_number, Board[][] board, Player_Tracker player_tracker, Board tile) {
 
         Scanner in = new Scanner(System.in);
         String temp_x, temp_y;
@@ -190,8 +190,8 @@ public class tile2D {
 
 
 
-    public static void board_add_tile(String biome, String animals, int rotation, int row, int col, tile2D[][] board, Player_Tracker player_tracker) { //TODO verify
-        tile2D tile = new tile2D(biome, animals, rotation);
+    public static void board_add_tile(String biome, String animals, int rotation, int row, int col, Board[][] board, Player_Tracker player_tracker) { //TODO verify
+        Board tile = new Board(biome, animals, rotation);
         board[row][col] = tile;
         int plusOne = 0, plusRow = 0, plusCol = 0;
         if (col % 2 == 1 && player_tracker.getOdd() == 1 || col % 2 == 0 && player_tracker.getOdd() == 0) plusOne = 1;
@@ -220,7 +220,7 @@ public class tile2D {
         place_slot_tiles2(row+plusRow, col+plusCol, board, player_tracker);
     }
 
-    public static boolean availableTokenPlacement(String animal, tile2D[][] board, Player_Tracker player_tracker){
+    public static boolean availableTokenPlacement(String animal, Board[][] board, Player_Tracker player_tracker){
         for(int i = 0; i < player_tracker.getMax_row(); i++){
 
             for(int j = 0; j < player_tracker.getMax_col(); j++){
@@ -236,7 +236,7 @@ public class tile2D {
 
 
 
-    public static void place_animal_token(String animal,tile2D[][] board, Player_Tracker player_tracker) { //TODO verify
+    public static void place_animal_token(String animal,Board[][] board, Player_Tracker player_tracker) { //TODO verify
 
         if(availableTokenPlacement(animal, board, player_tracker)){
             Scanner in = new Scanner(System.in);
@@ -300,14 +300,14 @@ public class tile2D {
 
     }
 
-    public static void print_board(tile2D[][] board, Player_Tracker player_tracker) {
+    public static void print_board(Board[][] board, Player_Tracker player_tracker) {
         String row;
-        System.out.println(Ex2D.column_numbers(player_tracker.getMax_col()));
+        System.out.println(column_numbers(player_tracker.getMax_col()));
         for (int i = 0; i != player_tracker.getMax_row(); i++) {                // printing the board + 1 empty row boarder
             if (i % 2 == 0 && player_tracker.getOdd() == 1 || i % 2 == 1 && player_tracker.getOdd() == 0) {
-                row = Ex2D.row_printer(board[i], player_tracker.getMax_col(),0, String.valueOf(i));      // maxrow specifies lenght
+                row = row_printer(board[i], player_tracker.getMax_col(),0, String.valueOf(i));      // maxrow specifies lenght
             } else {
-                row = Ex2D.row_printer(board[i], player_tracker.getMax_col(), 1, String.valueOf(i));
+                row = row_printer(board[i], player_tracker.getMax_col(), 1, String.valueOf(i));
             }
             System.out.println(row);
         }
@@ -315,10 +315,10 @@ public class tile2D {
     }
 
 
-    public static void indent_col(tile2D[][] board, Player_Tracker player_tracker) {
+    public static void indent_col(Board[][] board, Player_Tracker player_tracker) {
         for (int i = 0; i < player_tracker.getMax_row() + 1; i++) {
-            tile2D curr = board[i][0];
-            tile2D next;
+            Board curr = board[i][0];
+            Board next;
             board[i][0] = null;
             for (int j = 0; j < player_tracker.getMax_col(); j++) {
                 next = board[i][j + 1];
@@ -328,10 +328,10 @@ public class tile2D {
         }
     }
 
-    public static void indent_row(tile2D[][] board, Player_Tracker player_tracker) {
+    public static void indent_row(Board[][] board, Player_Tracker player_tracker) {
         for (int i = 0; i < player_tracker.getMax_col() + 1; i++) {
-            tile2D curr = board[0][i];
-            tile2D next;
+            Board curr = board[0][i];
+            Board next;
             board[0][i] = null;
             for (int j = 0; j < player_tracker.getMax_row(); j++) {
                 next = board[j + 1][i];
@@ -343,32 +343,32 @@ public class tile2D {
     }
 
 
-    public static void place_slot_tiles2(int x, int y, tile2D[][] board, Player_Tracker player_tracker) {             // determines where to place slot tiles
+    public static void place_slot_tiles2(int x, int y, Board[][] board, Player_Tracker player_tracker) {             // determines where to place slot tiles
         int plusOne = 1;
         if (x % 2 == 0 && player_tracker.getOdd() == 1) plusOne = 0;          // NOTE TO MICHAL MAKE VALIDATE ODD FUNCTION USING THIS LINE
         if (player_tracker.getCheckOddOrEven() == 1 && player_tracker.getOdd() == 0 && x % 2 != 0) plusOne = 0;
 
         if (y-1>=0 && board[x][y-1] == null){
-            board[x][y-1] = new tile2D("slot", "", 0);         // left
+            board[x][y-1] = new Board("slot", "", 0);         // left
         }
         if (y-1<=MAXSIZE && board[x][y+1] == null){
-            board[x][y+1] = new tile2D("slot", "", 0);         // right
+            board[x][y+1] = new Board("slot", "", 0);         // right
         }
         if (y-1+plusOne>=0 && x-1>=0 && board[x-1][y-1+plusOne] == null){
-            board[x-1][y-1+plusOne] = new tile2D("slot", "", 0);   // top left
+            board[x-1][y-1+plusOne] = new Board("slot", "", 0);   // top left
         }
         if (y+plusOne<=MAXSIZE && x-1>=0 && board[x-1][y+plusOne] == null){
-            board[x-1][y+plusOne] = new tile2D("slot", "", 0);     // top right
+            board[x-1][y+plusOne] = new Board("slot", "", 0);     // top right
         }
         if (y-1+plusOne>=0 && x+1<=MAXSIZE && board[x+1][y-1+plusOne] == null){
-            board[x+1][y-1+plusOne] = new tile2D("slot", "", 0);   // bottom left
+            board[x+1][y-1+plusOne] = new Board("slot", "", 0);   // bottom left
         }
         if (y+plusOne<=MAXSIZE && x+1<=MAXSIZE && board[x+1][y+plusOne] == null){
-            board[x+1][y+plusOne] = new tile2D("slot", "", 0);     // bottom right
+            board[x+1][y+plusOne] = new Board("slot", "", 0);     // bottom right
         }
     }
 
-    public static boolean verify_tile(int x, int y, tile2D[][] board) {
+    public static boolean verify_tile(int x, int y, Board[][] board) {
         if(x >= 0 && x < MAXSIZE && y >= 0 && y < MAXSIZE){
             if(board[x][y] != null){
                 if (board[x][y].getBiome().contains("slot")) {
@@ -379,7 +379,7 @@ public class tile2D {
         return false;
     }
 
-    public static boolean verify_animal_token_placement(int x, int y, String animalToken, tile2D[][] board){
+    public static boolean verify_animal_token_placement(int x, int y, String animalToken, Board[][] board){
 
         // first check if there is a tile present
         if(board[x][y] != null){
@@ -394,14 +394,14 @@ public class tile2D {
 
 
     // TODO TEMP TEST FEATURE REMOPVE LATERRR
-    public static void print_boards(tile2D[][] board, int Max_col, int Max_row, int odd) {
+    public static void print_boards(Board[][] board, int Max_col, int Max_row, int odd) {
         String row;
-        System.out.println(Ex2D.column_numbers(Max_col));
+        System.out.println(column_numbers(Max_col));
         for (int i = 0; i != Max_row; i++) {                // printing the board + 1 empty row boarder
             if (i % 2 == 0 && odd == 1 || i % 2 == 1 && odd == 0) {
-                row = Ex2D.row_printer(board[i], Max_col,0, String.valueOf(i));      // maxrow specifies lenght
+                row = row_printer(board[i], Max_col,0, String.valueOf(i));      // maxrow specifies lenght
             } else {
-                row = Ex2D.row_printer(board[i], Max_col, 1, String.valueOf(i));
+                row = row_printer(board[i], Max_col, 1, String.valueOf(i));
             }
             System.out.println(row);
         }

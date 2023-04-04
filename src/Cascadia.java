@@ -14,8 +14,8 @@ public class Cascadia
         Display_And_Input.num_players();
         Display_And_Input.player_names();
         Display_And_Input.randomised_order_players();
-        WildLife_Scoring_Card.scoring_card_array(player_scoring_card);
-        WildLife_Scoring_Card.print_scoring_card(player_scoring_card);
+        WildLife_Scoring_Setup.scoring_card_array(player_scoring_card);
+        WildLife_Scoring_Setup.print_scoring_card(player_scoring_card);
 
         boolean randomCheck = true;                     // check for one randomisation of tiles
 
@@ -137,9 +137,9 @@ public class Cascadia
 
                                                             place_tile = command_state.getChoice() - 1;
 
-                                                            if(tile2D.availableTokenPlacement(Wildlife_Tokens.tokens.get(place_tile), Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum))){
+                                                            if(Board.availableTokenPlacement(Wildlife_Tokens.tokens.get(place_tile), Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum))){
                                                                 Display_And_Input.display_token(place_tile);
-                                                                tile2D.place_animal_token(Wildlife_Tokens.tokens.get(place_tile), Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                                                Board.place_animal_token(Wildlife_Tokens.tokens.get(place_tile), Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
                                                                 Display_And_Input.remove_token(place_tile);
 
                                                             }
@@ -157,12 +157,12 @@ public class Cascadia
                                                 }
 
                                                 else{ // if the player did not choose to place a nature token down, then the player will be prompted to place a token down
-                                                    if(tile2D.availableTokenPlacement(Wildlife_Tokens.tokens.get(place_tile), Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum))){
+                                                    if(Board.availableTokenPlacement(Wildlife_Tokens.tokens.get(place_tile), Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum))){
                                                         display_board_tiles_tokens(playerNum, 5, command_state, culling_trigger);  // token menu to place down
 
                                                         if (command_state.getChoice() == 1) {
                                                             Display_And_Input.display_token(place_tile);
-                                                            tile2D.place_animal_token(Wildlife_Tokens.tokens.get(place_tile), Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
+                                                            Board.place_animal_token(Wildlife_Tokens.tokens.get(place_tile), Display_And_Input.getPlayers().get(playerNum).getBoard(), Display_And_Input.getPlayers().get(playerNum));
                                                             Display_And_Input.remove_token(place_tile);
                                                         }
 

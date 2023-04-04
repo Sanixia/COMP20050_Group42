@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
-public class Player_Tracker {
+public class Player_Tracker     // todo optimisations
+{
 
     private String player_name;
 
@@ -22,7 +23,7 @@ public class Player_Tracker {
 
 
 
-    private tile2D[][] board;
+    private Board[][] board;
     private int max_col;         // adjusts 'length' of board
     private int max_row;         // adjusts 'height' of board
     private int  odd;         // 1 if odd rows are at the front
@@ -45,7 +46,7 @@ public class Player_Tracker {
         this.player_turn = player_turn;
         this.nature_tokens = nature_tokens;
 
-        this.board = new tile2D[MAXSIZE][MAXSIZE];
+        this.board = new Board[MAXSIZE][MAXSIZE];
         this.max_row = max_row;
         this.max_col = max_col;
         this.odd = odd;
@@ -55,12 +56,12 @@ public class Player_Tracker {
     }
 
 
-    public void setup_board(String setup_board, tile2D[][] board,  Player_Tracker player){
-        tile2D.setup(setup_board, board, player);
+    public void setup_board(String setup_board, Board[][] board,  Player_Tracker player){
+        Board.setup(setup_board, board, player);
     }
 
-    public void print_board(tile2D[][] board, Player_Tracker player){
-        tile2D.print_board(board, player);
+    public void print_board(Board[][] board, Player_Tracker player){
+        Board.print_board(board, player);
     }
 
 
@@ -115,7 +116,7 @@ public class Player_Tracker {
         this.nature_tokens = nature_tokens;
     }
 
-    public tile2D[][] getBoard() {
+    public Board[][] getBoard() {
         return board;
     }
 

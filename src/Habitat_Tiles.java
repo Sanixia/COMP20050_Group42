@@ -9,7 +9,8 @@ public class Habitat_Tiles
        For biomes:  F - Forest, W - Wetland, R - River, M - Mountain, P - Prairie
        For animals: B - Grizzly Bear, E - Roosevelt Elk, F - Red Fox, H - Red Tailed Hawk, S - Chinook Salmon
 
-       All tiles are exact to the ones from the original game */
+       All tiles are exact to the ones from the original game
+    */
 
     static ArrayList<String> biome = new ArrayList<>(
             Arrays.asList("F","F","F","F","F",  "W","W","W","W","W",  "R","R","R","R","R",  "M","M","M","M","M",  "P","P","P","P","P",

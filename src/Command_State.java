@@ -1,9 +1,8 @@
 
 import java.util.Scanner;
 
-public class Command_State {
-
-
+public class Command_State
+{
     // Choice used for main Cascadia function for different menu options
     private static int choice;
     static Command_State commandState = new Command_State(0,0);

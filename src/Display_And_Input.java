@@ -1,9 +1,8 @@
 import java.util.*;
 
 
-public class Display_And_Input {
-
-
+public class Display_And_Input
+{
 
     private static ArrayList<Player_Tracker> players_score_calculation = new ArrayList<>();
 
@@ -171,15 +170,15 @@ public class Display_And_Input {
 
     public static void display_tiles(){                                    // Displays the habitat tiles
         int max = 8;
-        tile2D[] row = new tile2D[max];
+        Board[] row = new Board[max];
         int i;
         System.out.println("\nHabitat Tiles: \n");
 
         for (i = 0; i < 4; i++){
-            row[i*2] = new tile2D(Habitat_Tiles.biome.get(i),  Habitat_Tiles.animals.get(i), 1);
-            row[1+i*2] = new tile2D("space", "", 1);
+            row[i*2] = new Board(Habitat_Tiles.biome.get(i),  Habitat_Tiles.animals.get(i), 1);
+            row[1+i*2] = new Board("space", "", 1);
         }
-        System.out.println(Ex2D.num_printer(4) + "\n" + Ex2D.row_printer(row, max, 0, " ")+"\n");
+        System.out.println(Board.num_printer(4) + "\n" + Board.row_printer(row, max, 0, " ")+"\n");
     }
 
     public static void callTheCulling(){                                 // Calls the culling method
@@ -361,7 +360,7 @@ public class Display_And_Input {
                     animal = " ----->  Fox";
                     break;
             }
-            System.out.println((k + 1) + ". " + Ex2D.middle_section(Wildlife_Tokens.tokens.get(k).charAt(0)) + animal);
+            System.out.println((k + 1) + ". " + Board.middle_section(Wildlife_Tokens.tokens.get(k).charAt(0)) + animal);
         }
     }
 
@@ -416,21 +415,21 @@ public class Display_And_Input {
         System.out.println("\n\n-- Tile Rotation Options -- ");
 
         int max = 12;
-        tile2D[] row = new tile2D[max];
+        Board[] row = new Board[max];
         int i;
         System.out.println("\nHabitat Tiles: \n");
 
         for (i = 0; i < 6; i++){
-            row[i*2] = new tile2D(Habitat_Tiles.biome.get(tile_number),  Habitat_Tiles.animals.get(tile_number), i);
-            row[1+i*2] = new tile2D("space", "", 1);
+            row[i*2] = new Board(Habitat_Tiles.biome.get(tile_number),  Habitat_Tiles.animals.get(tile_number), i);
+            row[1+i*2] = new Board("space", "", 1);
         }
-        System.out.println(Ex2D.num_printer(6) + "\n" + Ex2D.row_printer(row, max, 0, " ")+"\n");
+        System.out.println(Board.num_printer(6) + "\n" + Board.row_printer(row, max, 0, " ")+"\n");
     }
 
-    public static void place_tile(int tile_number, int rotation, tile2D[][] board, Player_Tracker player){
+    public static void place_tile(int tile_number, int rotation, Board[][] board, Player_Tracker player){
 
-        tile2D tile = new tile2D(Habitat_Tiles.biome.get(tile_number), Habitat_Tiles.animals.get(tile_number), rotation);
-        tile2D.place(tile_number, board, player, tile);
+        Board tile = new Board(Habitat_Tiles.biome.get(tile_number), Habitat_Tiles.animals.get(tile_number), rotation);
+        Board.place(tile_number, board, player, tile);
 
     }
 
@@ -470,7 +469,7 @@ public class Display_And_Input {
     }
 
     public static void display_token(int animal_token){
-        System.out.println("\n" + (animal_token + 1) + ". " + Ex2D.middle_section(Wildlife_Tokens.tokens.get(animal_token).charAt(0)));
+        System.out.println("\n" + (animal_token + 1) + ". " + Board.middle_section(Wildlife_Tokens.tokens.get(animal_token).charAt(0)));
     }
 
     public static void nature_token_any_number(int number_of_tokens){
@@ -494,7 +493,7 @@ public class Display_And_Input {
                     System.out.println("Please enter the token number you would like to remove that's available and valid: ");
                     String token_choice = in.nextLine();
 
-                    while (tile2D.verify_valid_number(token_choice) == false) {
+                    while (Board.verify_valid_number(token_choice) == false) {
 
                         System.out.println("Please enter a valid number: ");
                         token_choice = in.nextLine();
@@ -506,7 +505,7 @@ public class Display_And_Input {
                 }while(!tokens.contains(token_choice_int));
 
 
-                tokens.remove(Integer.valueOf(token_choice_int)); // removes the token from the list of available tokens so it wouldn't repeat
+                tokens.remove(Integer.valueOf(token_choice_int)); // removes the token from the list of available tokens, so it wouldn't repeat
                 display_token(token_choice_int-1);
                 System.out.println("Removing that token now!\n\n");
                 remove_token(token_choice_int-1);

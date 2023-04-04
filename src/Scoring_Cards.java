@@ -1,16 +1,15 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Scoring_Calculate extends Scoring_Setup
+public class Scoring_Cards extends Scoring_Setup
 {
-    public Scoring_Calculate(String biome, String animals, int rotation) {
+    public Scoring_Cards(String biome, String animals, int rotation) {
         super(biome, animals, rotation);
     }
 
     public static int fox_scoring_1(int x, int y) {         // returns the number of unique animals around fox tile specified
         int score, b=0, e=0, f=0, s=0, h=0;
         for (int i=0; i<6; i++) {
-            tile2D surrounding_tile = get_surrounding_tile(x, y, i+1);
+            Board surrounding_tile = get_surrounding_tile(x, y, i+1);
             if (surrounding_tile!=null){
                 if (surrounding_tile.getAnimals().charAt(0) == 'f') f=1;
                 if (surrounding_tile.getAnimals().charAt(0) == 'e') e=1;
@@ -26,7 +25,7 @@ public class Scoring_Calculate extends Scoring_Setup
     public static int fox_scoring_2(int x, int y) {         // returns the number of unique pairs around fox tile specified
         int pairs=0, b=0, e=0, f=0, s=0, h=0;
         for (int i=0; i<6; i++) {
-            tile2D surrounding_tile = get_surrounding_tile(x, y, i+1);
+            Board surrounding_tile = get_surrounding_tile(x, y, i+1);
             if (surrounding_tile!=null){
                 //if(surrounding_tile.getAnimals().charAt(0) == 'f') f++;
                 if(surrounding_tile.getAnimals().charAt(0) == 'e') e++;
@@ -46,7 +45,7 @@ public class Scoring_Calculate extends Scoring_Setup
     public static int fox_scoring_3(int x, int y) {         // returns the score of fox tile specified
         int b=0, e=0, f=0, s=0, h=0;
         for (int i=0; i<6; i++) {
-            tile2D surrounding_tile = get_surrounding_tile(x, y, i+1);
+            Board surrounding_tile = get_surrounding_tile(x, y, i+1);
             if (surrounding_tile!=null){
                 //if(surrounding_tile.getAnimals().charAt(0) == 'f') f++;
                 if(surrounding_tile.getAnimals().charAt(0) == 'e') e++;
@@ -62,7 +61,7 @@ public class Scoring_Calculate extends Scoring_Setup
         ArrayList<Integer> positions = new ArrayList<Integer>();
 
         for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
-            tile2D surrounding_tile = get_surrounding_tile(x, y, i+1);
+            Board surrounding_tile = get_surrounding_tile(x, y, i+1);
             if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'b'){
                 positions.add(i+1);
             }
@@ -72,7 +71,7 @@ public class Scoring_Calculate extends Scoring_Setup
             int y2 = get_surrounding_col(x, y, positions.get(0));
 
             for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
-                tile2D surrounding_tile = get_surrounding_tile(x2, y2, i+1);
+                Board surrounding_tile = get_surrounding_tile(x2, y2, i+1);
                 if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'b'){
                     positions.add(i+1);
                 }
@@ -95,7 +94,7 @@ public class Scoring_Calculate extends Scoring_Setup
         ArrayList<Integer> positions = new ArrayList<Integer>();
 
         for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
-            tile2D surrounding_tile = get_surrounding_tile(x, y, i+1);
+            Board surrounding_tile = get_surrounding_tile(x, y, i+1);
             if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 's'){
                 positions.add(i+1);
             }
@@ -110,7 +109,7 @@ public class Scoring_Calculate extends Scoring_Setup
                 positions.clear();
 
                 for (int i=0; i<6; i++) {
-                    tile2D surrounding_tile = get_surrounding_tile(x2, y2, i+1);
+                    Board surrounding_tile = get_surrounding_tile(x2, y2, i+1);
                     if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 's'){
                         positions.add(i+1);
                     }
@@ -127,12 +126,11 @@ public class Scoring_Calculate extends Scoring_Setup
         int num_salmon=0, previous;
 
         for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
-            tile2D surrounding_tile = get_surrounding_tile(x, y, i+1);
+            Board surrounding_tile = get_surrounding_tile(x, y, i+1);
             if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 's'){
                 positions.add(i+1);
             }
         }
-        System.out.println("a");
         if (positions.size()==0) return 1;
         if (positions.size()==1) {
             int temp;
@@ -141,14 +139,14 @@ public class Scoring_Calculate extends Scoring_Setup
             previous = reverse_position(positions.get(0));
             positions.add(0);
             num_salmon++;
-            System.out.println("b");
+            System.out.println("a" + num_salmon);
 
             while(positions.size()>1) {
-                System.out.println("c");
                 num_salmon++;
+                System.out.println("b" + num_salmon);
                 positions.clear();
                 for (int i=0; i<6; i++) {
-                    tile2D surrounding_tile = get_surrounding_tile(x2, y2, i+1);
+                    Board surrounding_tile = get_surrounding_tile(x2, y2, i+1);
                     if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 's'){
                         positions.add(i+1);
                     }
@@ -177,12 +175,13 @@ public class Scoring_Calculate extends Scoring_Setup
     }
 
 
+    /*
     public static int elk_scoring_1(int x, int y, int pos) {         // TODO
         ArrayList<Integer> positions = new ArrayList<Integer>();
         int elk_score = 1;
         int x2 = x, y2 = y;
         int[] coordinates = new int[2];
-        tile2D surrounding_tile = null;
+        Board surrounding_tile = null;
         for (int i=2; i<5; i++) {
             if(pos == -1){
                 surrounding_tile = get_surrounding_tile(x2, y2, i);
@@ -220,6 +219,8 @@ public class Scoring_Calculate extends Scoring_Setup
         }
     }
 
+     */
+
     public static int elk_scoring_2(int x, int y) {         // TODO
         return 0;
     }
@@ -234,7 +235,7 @@ public class Scoring_Calculate extends Scoring_Setup
         ArrayList<String> animals = new ArrayList<String>();
 
         for (int i=0; i<6; i++) {
-            tile2D surrounding_tile = get_surrounding_tile(x, y, i+1);
+            Board surrounding_tile = get_surrounding_tile(x, y, i+1);
             if (surrounding_tile!=null){
                 animals.add(surrounding_tile.getAnimals());
             }
@@ -247,7 +248,7 @@ public class Scoring_Calculate extends Scoring_Setup
         int num_hawks=1;
         int x2 = x, y2 = y;
         ArrayList<String> hawks_found = new ArrayList<String>();
-        tile2D surrounding_tile = null;
+        Board surrounding_tile = null;
 
         for (int i=0; i<6; i++) {
             surrounding_tile = get_surrounding_tile(x, y, i+1);
