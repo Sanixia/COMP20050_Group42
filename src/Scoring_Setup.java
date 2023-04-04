@@ -23,22 +23,26 @@ public class Scoring_Setup extends tile2D{
         return 1;
     }
 
-
     public static void main(String[] args) {
+        System.out.println(check_beside(1, 3));
+
         tile2D[][] b = new tile2D[MAXSIZE][MAXSIZE];
-        b[0][1] = new tile2D("R", "h", 0);
+        b[0][1] = new tile2D("R", "s", 0);
         b[0][2] = new tile2D("R", "b", 0);
         b[0][3] = new tile2D("R", "f", 0);
         b[0][4] = new tile2D("R", "f", 0);
         b[1][1] = new tile2D("R", "s", 0);
-        b[1][2] = new tile2D("R", "b", 0);
-        b[1][3] = new tile2D("R", "h", 0);
+        b[1][2] = new tile2D("R", "s", 0);
+        b[1][3] = new tile2D("R", "s", 0);
+        b[1][4] = new tile2D("R", "s", 0);
+        b[1][5] = new tile2D("R", "s", 0);
         b[2][2] = new tile2D("R", "b", 0);
         b[2][3] = new tile2D("R", "b", 0);
+        b[2][5] = new tile2D("R", "s", 0);
         b[3][2] = new tile2D("R", "s", 0);
         // todo                b e f h s
         int[] scoring_cards = {1,1,1,1,1};
-        tile2D.print_boards(b, 6, 4, 1);
+        tile2D.print_boards(b, 8, 4, 1);
         scoring_setup(b, 1, scoring_cards);
     }
 
@@ -47,7 +51,7 @@ public class Scoring_Setup extends tile2D{
     public static void scoring_setup(tile2D[][]board, int odd, int[] scoring_cards) {
         setBoard(board);
         setOdd(odd);
-        int fox_score=0, hawk_num=0, bear_num=0;
+        int fox_score=0, hawk_num=0, bear_num=0, salmon_score=0;
         for (int i=0; i<MAXSIZE; i++) {
             for (int j=0; j<MAXSIZE; j++) {
                 tile2D t = board[i][j];
@@ -64,8 +68,8 @@ public class Scoring_Setup extends tile2D{
                     bear_num += bear_scoring_cards(i, j, 1);
                 }
                 if(t!=null && t.getAnimals().charAt(0)=='s') {
-                    //System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, 1));
-                    //bear_num += salmon_scoring_cards(i, j, 1);
+                    System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, 1));
+                    salmon_score += salmon_scoring_cards(i, j, 1);
                 }
             }
         }
@@ -101,11 +105,7 @@ public class Scoring_Setup extends tile2D{
     }
 
     public static int salmon_scoring_cards(int x, int y, int card) {
-        return switch (card) {
-            case 1 -> Scoring_Calculate.salmon_scoring_1(x, y);
-            case 2 -> Scoring_Calculate.salmon_scoring_2(x, y);
-            default -> Scoring_Calculate.salmon_scoring_3(x, y);
-        };
+        return Scoring_Calculate.salmon_scoring_1(x, y);
     }
 
     public static int hawk_scoring_cards(int x, int y, int card) {
@@ -175,5 +175,13 @@ public class Scoring_Setup extends tile2D{
         if (pos==1 || pos==5 || pos==6) return col-1;
         else if (pos==3) return col+1;
         return col;
+    }
+
+    public static int reverse_position(int x) {
+        return (x+3)%6;
+    }
+
+    public static boolean check_beside(int a, int b) {
+        return (a != 5 || b != 0) && (a != 0 || b != 5) && a - b != 1 && b - a != 1;
     }
 }
