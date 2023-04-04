@@ -69,13 +69,13 @@ public class Scoring_Setup extends Board
                     bear_num += bear_scoring_cards(i, j, 1);
                 }
                 if(t!=null && t.getAnimals().charAt(0)=='s') {
-                    System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, 1));
-                    salmon_score += salmon_scoring_cards(i, j, 1);
+                    //System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, 1));
+                    //salmon_score += salmon_scoring_cards(i, j, 1);
                 }
             }
         }
-        int hawk_score = hawk_score_calculate(hawk_num);
-        int bear_score = bear_score_calculate(bear_num);                              // insert bear scoring
+        int hawk_score = hawk_score_calculate(hawk_num, 1);
+        int bear_score = bear_score_calculate(bear_num, 2);                              // insert bear scoring
         System.out.println("\nTotal Fox score:" + fox_score);
         System.out.println("Total Hawk score:" + hawk_score);
         System.out.println("Total Bear score:" + bear_score);
@@ -119,21 +119,40 @@ public class Scoring_Setup extends Board
 
 
 
-    public static int hawk_score_calculate(int h) {
-        if (h==0) return 0;
-        if (h>7) return 26;
-        else {
-            if (h>5) return 4*(h-2)+2;
-            else return 3*(h-1)+2;
+    public static int hawk_score_calculate(int h, int choice) {
+        switch (choice) {
+            case (1):
+                if (h == 0) return 0;
+                if (h == 1) return 2;
+                if (h == 2) return 5;
+                if (h == 3) return 8;
+                if (h == 4) return 11;
+                if (h == 5) return 14;
+                if (h == 6) return 18;
+                if (h == 7) return 22;
+                return 26;
+            case(2):
+                return 1; //todo
+            default:
+                return 0; //todo
         }
     }
 
-    public static int bear_score_calculate(int b) {
-        if (b==0) return 0;
-        b = b/2;
-        if (b>3) return 27;
-        else {
-            return 7*(b-1)+4;
+    public static int bear_score_calculate(int b, int choice) {
+        switch (choice) {
+            case (1):
+                if (b == 0) return 0;
+                b = b / 2;
+                if (b == 1) return 4;
+                if (b == 2) return 11;
+                if (b == 3) return 19;
+                return 27;
+            case(2):
+                if (b == 0) return 0;
+                b = b / 3;
+                return b*10;
+            default:
+                return 0; //todo
         }
     }
 
@@ -204,6 +223,21 @@ public class Scoring_Setup extends Board
         if (pos==1 || pos==5 || pos==6) return col-1;
         else if (pos==3) return col+1;
         return col;
+    }
+
+    public static int get_surrounding_row_hawk(int x, int y, int pos) {     // returns row of specified surround tile
+        int row = x;
+        if (pos==1||pos==2) return row-2;
+        if (pos==4||pos==5) return row+2;
+        return row;
+    }
+
+    public static int get_surrounding_col_hawk(int x, int y, int pos) {     // returns row of specified surround tile
+        int col = y;
+        if (pos==1||pos==5) return col-1;
+        if (pos==2||pos==4) return col+1;
+        if (pos==0) return col-2;
+        return col+2;
     }
 
     public static int reverse_position(int x) {
