@@ -4,6 +4,9 @@ public class Scoring_Setup extends Board
     private static int MAXSIZE = 26;
     private static int totalscore = 0;
     private static int odd;
+
+
+
     private static Board[][] board;
 
     public Scoring_Setup(String biome, String animals, int rotation) {
@@ -12,6 +15,13 @@ public class Scoring_Setup extends Board
 
     public static void increaseScore() {
         Scoring_Setup.totalscore++;
+    }
+
+    public static void changeToNull(Board[][] board, int row, int col) {
+        Scoring_Setup.board[row][col] = null;
+    }
+    public static Board[][] getBoard() {
+        return board;
     }
     public static void setBoard(Board[][] board) {
         Scoring_Setup.board = board;
@@ -151,7 +161,7 @@ public class Scoring_Setup extends Board
     public static int hawk_scoring_cards(int x, int y, int card) {
         return switch (card) {
             case 1 -> Scoring_Cards.hawk_scoring_1(x, y);
-            case 2 -> Scoring_Cards.hawk_scoring_2(x, y, true);
+            case 2 -> Scoring_Cards.hawk_scoring_2(x, y);
             default -> Scoring_Cards.hawk_scoring_3(x, y);
         };
     }
@@ -245,7 +255,32 @@ public class Scoring_Setup extends Board
         return board[row][col];
     }
 
-    public static Printer get_surrounding_tile_hawk(int x, int y, int pos) {     // returns a tile around specified tile
+    public static int[] get_surrounding_tile_coordinates(int x, int y, int pos) {     // returns a tile around specified tile
+        int plusOne = calculateSpace(x);
+        int row = x;
+        int col = y;
+        if (pos==1 && row-1>=0 && col-1+plusOne>=0) {
+            row--;
+            col += plusOne - 1;                                     // top left
+        } if (pos==2 && row-1>=0 && col+plusOne<=MAXSIZE) {
+            row--;
+            col += plusOne;                                         // top right
+        } if (pos==3 && col+1<=MAXSIZE) {
+            col++;                                                  // right
+        }if (pos==4 && row+1<=MAXSIZE && col+plusOne<=MAXSIZE) {
+            row++;
+            col += plusOne;                                         // bottom right
+        }if (pos==5 && row+1<=MAXSIZE && col-1+plusOne<=MAXSIZE) {
+            row++;
+            col += plusOne - 1;                                     // bottom left
+        }if (pos==6 && col-1>=0) {
+            col--;                                                  // left
+        }
+        if (row==x && col==y) return new int[] {-1,-1};
+        return new int[] {row, col};
+    }
+
+    public static int[] get_surrounding_tile_hawk(int x, int y, int pos) {     // returns a tile around specified tile
         int plusOne = calculateSpace(x);
         int row = x;
         int col = y;
@@ -268,8 +303,8 @@ public class Scoring_Setup extends Board
             col -= 2;                                                  // left
         }
 
-        if (row==x && col==y) return null;
-        return board[row][col];
+        if (row==x && col==y) return new int[] {-1,-1};
+        return new int[] {row, col};
     }
 
     public static int get_surrounding_row(int x, int y, int pos) {     // returns row of specified surround tile

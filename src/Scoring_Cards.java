@@ -219,7 +219,7 @@ public class Scoring_Cards extends Scoring_Setup
     }
 
 
-    /*
+
     public static int elk_scoring_1(int x, int y, int pos) {         // TODO
         ArrayList<Integer> positions = new ArrayList<Integer>();
         int elk_score = 1;
@@ -249,21 +249,22 @@ public class Scoring_Cards extends Scoring_Setup
 
         }
         if (positions.size()==0){
-            changeBoard(x2, y2);
+
+             changeToNull(getBoard(), x2, y2);
+//            changeToNull(board, x2, y2);
             return elk_score;  // base case
         }
 
         else{
 
-            changeBoard(x2, y2); // makes current tile null
+             changeToNull(getBoard(), x, y); // makes current tile null // may need to change to x2, y2
+            //changeToNull(board, x2, y2);
             x2 = coordinates[0];
             y2 = coordinates[1];
 
             return elk_score + elk_scoring_1(x2, y2, positions.get(0));
         }
     }
-
-     */
 
     public static int elk_scoring_2(int x, int y) {         // TODO
         return 0;
@@ -288,27 +289,66 @@ public class Scoring_Cards extends Scoring_Setup
         return num_hawks;
     }
 
-    public static int hawk_scoring_2(int x, int y, boolean firstOne) {        // TODO
-        int num_hawks=1;
+    public static int hawk_scoring_2(int x, int y) {        // TODO
+        int num_hawks=0;
+        int check = 0;
+
+
         int x2 = x, y2 = y;
-        ArrayList<String> hawks_found = new ArrayList<String>();
+
         Board surrounding_tile = null;
+        int[] coordinates = new int[2];
+        ArrayList<Integer> animals = new ArrayList<Integer>();
 
         for (int i=0; i<6; i++) {
-            surrounding_tile = get_surrounding_tile(x, y, i+1);
-            if (surrounding_tile!=null && surrounding_tile.getAnimals().length() != 1){
-                for(int j=0; j<6 ;j++){
+            surrounding_tile = get_surrounding_tile(x2, y2, i + 1);
+            if (surrounding_tile != null && surrounding_tile.getAnimals().charAt(0) == 'h') {
+                return 0;
 
-                }
+            } else if (surrounding_tile != null && Character.isUpperCase(surrounding_tile.getAnimals().charAt(0))) {
+                animals.add(i + 1);
             }
         }
 
-        return 0;
+        if(animals.size() == 0) {
+            return 0;
+        }
+
+        for(int j = 0; j < animals.size(); j++) {
+
+            coordinates = get_surrounding_tile_hawk(x2, y2, animals.get(j));
+            if (coordinates[0] == -1 || coordinates[1] == -1) {
+                continue;
+            }
+
+
+            for(int k = 0; k < 6; k++) {
+                surrounding_tile = get_surrounding_tile(coordinates[0], coordinates[1], k + 1);
+
+                if ((k + 1 != reverse_position(animals.get(j))) && (surrounding_tile == null || surrounding_tile.getAnimals().charAt(0) != 'h')) {
+                    check++;
+                }
+            }
+
+            if(check < 5){
+                check = 0;
+                continue;
+            }
+            else{
+                num_hawks = 1;
+            }
+            check = 0;
+
+        }
+        return num_hawks;
+
+
     }
 
     public static int hawk_scoring_3(int x, int y) {        // TODO
         return 0;
     }
+
 
 
     public static void tile_scoring(int x, int y, int MAXSIZE) {        // todo implement last
