@@ -39,20 +39,21 @@ public class Scoring_Setup extends Board
         System.out.println(check_beside(1, 3));
 
         Board[][] b = new Board[MAXSIZE][MAXSIZE];
-        b[0][1] = new Board("RM", "s", 0);
+        b[0][1] = new Board("RM", "e", 0);
         b[0][2] = new Board("RM", "b", 0);
-        b[0][3] = new Board("RM", "f", 0);
-        b[1][1] = new Board("RM", "e", 0);
-        b[1][2] = new Board("R", "e", 0);
-        b[1][3] = new Board("R", "e", 0);
-        b[2][2] = new Board("R", "e", 0);
-        b[2][3] = new Board("R", "f", 0);
+        b[0][3] = new Board("RM", "F", 0);
+        b[1][1] = new Board("RM", "h", 0);
+        b[1][2] = new Board("R", "E", 0);
+        b[1][3] = new Board("R", "H", 0);
+        b[2][2] = new Board("R", "E", 0);
+        b[2][3] = new Board("R", "F", 0);
         b[2][5] = new Board("R", "b", 0);
-        b[3][2] = new Board("R", "f", 0);
+        b[3][2] = new Board("R", "h", 0);
         b[3][3] = new Board("R", "b", 0);
         b[3][4] = new Board("R", "b", 0);
         b[3][5] = new Board("R", "s", 0);
         b[4][3] = new Board("R", "b", 0);
+        b[1][4] = new Board("R", "h", 0);
 
         // todo                b e f h s
         int[] scoring_cards = {2,1,1,1,1};
@@ -73,8 +74,8 @@ public class Scoring_Setup extends Board
                     fox_num += fox_scoring_cards(i, j, 1);
                 }
                 else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='h') {
-                    System.out.println("hawk   ["+i+"]["+j+"] " + hawk_scoring_cards(i, j, scoring_cards[3]));
-                    hawk_num += hawk_scoring_cards(i, j, 1);
+                    System.out.println("hawk   ["+i+"]["+j+"] " + hawk_scoring_cards(i, j, 3));
+                    hawk_num += hawk_scoring_cards(i, j, 3);
                 }
                 else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='b') {
                     System.out.println("bear   ["+i+"]["+j+"] " + bear_scoring_cards(i, j, scoring_cards[0]));
@@ -91,7 +92,7 @@ public class Scoring_Setup extends Board
             }
         }
         int fox_score = fox_score_calculate(fox_num, scoring_cards[2]);
-        int hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
+        int hawk_score = hawk_score_calculate(hawk_num, 3);
         int bear_score = bear_score_calculate(bear_num, scoring_cards[0]);                             // insert bear scoring
         System.out.println("\nTotal Fox score:" + fox_score);
         System.out.println("Total Hawk score:" + hawk_score);
@@ -204,7 +205,8 @@ public class Scoring_Setup extends Board
                 if (h == 7) return 24;
                 return 28;
             default:
-                return 1;
+                if(h==0) return 0;
+                return h*3;
         }
 
     }

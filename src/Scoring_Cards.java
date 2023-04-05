@@ -27,7 +27,6 @@ public class Scoring_Cards extends Scoring_Setup
         for (int i=0; i<6; i++) {
             Board surrounding_tile = get_surrounding_tile(x, y, i+1);
             if (surrounding_tile!=null){
-                //if(surrounding_tile.getAnimals().charAt(0) == 'f') f++;
                 if(surrounding_tile.getAnimals().charAt(0) == 'e') e++;
                 if(surrounding_tile.getAnimals().charAt(0) == 'b') b++;
                 if(surrounding_tile.getAnimals().charAt(0) == 's') s++;
@@ -36,7 +35,6 @@ public class Scoring_Cards extends Scoring_Setup
         }
         if (b>=2) pairs++;
         if (e>=2) pairs++;
-        //if (f>=2) pairs++;
         if (s>=2) pairs++;
         if (h>=2) pairs++;
         return pairs;
@@ -47,7 +45,6 @@ public class Scoring_Cards extends Scoring_Setup
         for (int i=0; i<6; i++) {
             Board surrounding_tile = get_surrounding_tile(x, y, i+1);
             if (surrounding_tile!=null){
-                //if(surrounding_tile.getAnimals().charAt(0) == 'f') f++;
                 if(surrounding_tile.getAnimals().charAt(0) == 'e') e++;
                 if(surrounding_tile.getAnimals().charAt(0) == 'b') b++;
                 if(surrounding_tile.getAnimals().charAt(0) == 's') s++;
@@ -335,7 +332,7 @@ public class Scoring_Cards extends Scoring_Setup
                 continue;
             }
             else{
-                num_hawks = 1;
+                num_hawks += 1;
             }
             check = 0;
 
@@ -346,7 +343,64 @@ public class Scoring_Cards extends Scoring_Setup
     }
 
     public static int hawk_scoring_3(int x, int y) {        // TODO
-        return 0;
+
+        int num_hawks=0;
+
+        int x2 = x, y2 = y;
+
+        int[] surrounding_tile_original = {x2,y2};
+        Board surrounding_tile = null;
+        int[] coordinates = new int[2];
+        ArrayList<Integer> animals = new ArrayList<Integer>();
+
+        for (int i=0; i<6; i++) {
+            surrounding_tile = get_surrounding_tile(x2, y2, i + 1);
+            if (surrounding_tile != null && surrounding_tile.getAnimals().charAt(0) == 'h') {
+                return 0;
+
+            } else if (surrounding_tile != null && Character.isUpperCase(surrounding_tile.getAnimals().charAt(0))) {
+                animals.add(i + 1);
+            }
+        }
+
+        if(animals.size() == 0) {
+            return 0;
+        }
+
+
+        for(int j = 0; j < animals.size(); j++) {
+
+            surrounding_tile = get_surrounding_tile(x2, y2, animals.get(j));
+            coordinates = get_surrounding_tile_coordinates(x2, y2, animals.get(j));
+            x2 = coordinates[0];
+            y2 = coordinates[1];
+
+            if (coordinates[0] == -1 || coordinates[1] == -1) {
+                continue;
+            }
+
+            while (surrounding_tile != null && Character.isUpperCase(surrounding_tile.getAnimals().charAt(0))) {
+                coordinates = get_surrounding_tile_coordinates(x2, y2, animals.get(j));
+                surrounding_tile = get_surrounding_tile(x2, y2, animals.get(j));
+
+                if (coordinates[0] == -1 || coordinates[1] == -1) {
+
+                    x2 = surrounding_tile_original[0];
+                    y2 = surrounding_tile_original[1];
+                    break;
+                }
+
+                if (surrounding_tile != null && surrounding_tile.getAnimals().charAt(0) == 'h') {
+                    return num_hawks = 1;
+                }
+
+                x2 = coordinates[0];
+                y2 = coordinates[1];
+            }
+        }
+
+        return num_hawks;
+
     }
 
 
