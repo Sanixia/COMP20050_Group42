@@ -3,7 +3,9 @@ import java.util.Scanner;
 
 public class Board extends Printer // todo comments
 {
-    private static final int MAXSIZE = 26;
+
+    protected static final int MAXSIZE = 26;
+
     private String biome;
     private String animals;
     private int rotation;

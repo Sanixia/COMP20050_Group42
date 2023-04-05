@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Scoring_Cards extends Scoring_Setup
 {
@@ -264,7 +266,54 @@ public class Scoring_Cards extends Scoring_Setup
     }
 
     public static int elk_scoring_2(int x, int y) {         // TODO
-        return 0;
+        int check = 0;
+        int elk_total = 1;
+
+
+        ArrayList<Integer[]> elk_found = new ArrayList<Integer[]>();
+        int[] surrounding_tile = {-1,-1};
+
+        int[] original_tile = {-1,-1};
+
+
+        changeToNull(getBoard(), x, y);
+
+        for (int i=0; i<6; i++) {
+            surrounding_tile = get_surrounding_tile_coordinates(x, y, i+1);
+            if (!(surrounding_tile[0] < 0 || surrounding_tile[1] < 0 || surrounding_tile[0] > Board.MAXSIZE || surrounding_tile[1] > Board.MAXSIZE) && getBoard()[surrounding_tile[0]][surrounding_tile[1]] != null && getBoard()[surrounding_tile[0]][surrounding_tile[1]].getAnimals().charAt(0) == 'e'){
+
+                elk_found.add(new Integer [] {surrounding_tile[0], surrounding_tile[1]});
+                elk_total++;
+            }
+        }
+
+
+        while(check < elk_found.size()){
+
+            for (int j=0; j<6; j++) {
+                surrounding_tile = get_surrounding_tile_coordinates(elk_found.get(check)[0], elk_found.get(check)[1], j+1);
+
+                original_tile[0] = elk_found.get(check)[0];
+                original_tile[1] = elk_found.get(check)[1];
+
+                if (!(surrounding_tile[0] < 0 || surrounding_tile[1] < 0 || surrounding_tile[0] > Board.MAXSIZE || surrounding_tile[1] > Board.MAXSIZE) &&
+                        getBoard()[surrounding_tile[0]][surrounding_tile[1]] != null &&
+                        getBoard()[surrounding_tile[0]][surrounding_tile[1]].getAnimals().charAt(0) == 'e' &&
+                        !deepContains(elk_found, new Integer[] {surrounding_tile[0], surrounding_tile[1]})) {
+
+                    elk_found.add(new Integer[] {surrounding_tile[0], surrounding_tile[1]});
+                    changeToNull(getBoard(), surrounding_tile[0], surrounding_tile[1]);
+                    elk_total++;
+
+                }
+
+            }
+            changeToNull(getBoard(), elk_found.get(check)[0],  elk_found.get(check)[1]);
+            check++;
+        }
+
+
+        return elk_score_calculate(elk_total, 2);
     }
 
     public static int elk_scoring_3(int x, int y) {         // TODO
@@ -403,6 +452,14 @@ public class Scoring_Cards extends Scoring_Setup
 
     }
 
+    public static boolean deepContains(List<Integer[]> list, Integer[] probe) {
+        for (Integer[] element : list) {
+            if (Arrays.deepEquals(element, probe)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     public static void tile_scoring(int x, int y, int MAXSIZE) {        // todo implement last

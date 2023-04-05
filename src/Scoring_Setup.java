@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 public class Scoring_Setup extends Board
 {
-    private static int MAXSIZE = 26;
+    private static final int MAXSIZE = 26;
     private static int totalscore = 0;
     private static int odd;
 
@@ -40,17 +40,17 @@ public class Scoring_Setup extends Board
 
         Board[][] b = new Board[MAXSIZE][MAXSIZE];
         b[0][1] = new Board("RM", "e", 0);
-        b[0][2] = new Board("RM", "b", 0);
-        b[0][3] = new Board("RM", "F", 0);
-        b[1][1] = new Board("RM", "h", 0);
-        b[1][2] = new Board("R", "E", 0);
-        b[1][3] = new Board("R", "H", 0);
-        b[2][2] = new Board("R", "E", 0);
+        b[0][2] = new Board("RM", "e", 0);
+        b[0][3] = new Board("RM", "h", 0);
+        b[1][1] = new Board("RM", "e", 0);
+        b[1][2] = new Board("R", "e", 0);
+        b[1][3] = new Board("R", "e", 0);
+        b[2][2] = new Board("R", "e", 0);
         b[2][3] = new Board("R", "F", 0);
         b[2][5] = new Board("R", "b", 0);
-        b[3][2] = new Board("R", "h", 0);
-        b[3][3] = new Board("R", "b", 0);
-        b[3][4] = new Board("R", "b", 0);
+        b[3][2] = new Board("R", "f", 0);
+        b[3][3] = new Board("R", "e", 0);
+        b[3][4] = new Board("R", "e", 0);
         b[3][5] = new Board("R", "s", 0);
         b[4][3] = new Board("R", "b", 0);
         b[1][4] = new Board("R", "h", 0);
@@ -65,7 +65,7 @@ public class Scoring_Setup extends Board
     public static void scoring_setups(Board[][]board, int odd, int[] scoring_cards) {       // temporary for testing purposes
         setBoard(board);
         setOdd(odd);
-        int fox_num=0, hawk_num=0, bear_num=0, salmon_score=0, elk_score=0;
+        int fox_num=0, hawk_num=0, bear_num=0, salmon_score=0, elk_score=0, elk_score2 = 0;
         for (int i=0; i<MAXSIZE; i++) {
             for (int j=0; j<MAXSIZE; j++) {
                 Board t = board[i][j];
@@ -86,19 +86,21 @@ public class Scoring_Setup extends Board
                     salmon_score += salmon_scoring_cards(i, j, 1);
                 }
                 if(t!=null && t.getAnimals().charAt(0)=='e') {
-                    //System.out.println("elk    ["+i+"]["+j+"] " + elk_scoring_cards(i, j, 1, 1));
-                    elk_score += elk_scoring_cards(i, j, 1, -1);
+                    //System.out.println("elk    ["+i+"]["+j+"] " + elk_scoring_cards(i, j, 2, -1));
+                    elk_score2 += elk_scoring_cards(i, j, 2, -1);
+                    //elk_score += elk_scoring_cards(i, j, 2, -1);
                 }
             }
         }
         int fox_score = fox_score_calculate(fox_num, scoring_cards[2]);
         int hawk_score = hawk_score_calculate(hawk_num, 3);
         int bear_score = bear_score_calculate(bear_num, scoring_cards[0]);                             // insert bear scoring
+        int elk_score_total = elk_score_calculate(elk_score2, 2);                                       // insert elk scoring
         System.out.println("\nTotal Fox score:" + fox_score);
         System.out.println("Total Hawk score:" + hawk_score);
         System.out.println("Total Bear score:" + bear_score);
         System.out.println("Total Salmon score:" + salmon_score);
-        System.out.println("Total Elk score:" + elk_score);
+        System.out.println("Total Elk score:" + elk_score2);
     }
 
 
@@ -149,15 +151,11 @@ public class Scoring_Setup extends Board
     }
 
     public static int elk_scoring_cards(int x, int y, int card, int pos) {
-        switch (card) {
-            case 1:
-                return elk_score_calculate(Scoring_Cards.elk_scoring_1(x, y, pos));
-            case 2:
-                return elk_score_calculate(Scoring_Cards.elk_scoring_2(x, y));
-
-            default:
-                return elk_score_calculate(Scoring_Cards.elk_scoring_3(x, y));
-        }
+        return switch (card) {
+            case 1 -> elk_score_calculate(Scoring_Cards.elk_scoring_1(x, y, pos), card);
+            case 2 -> Scoring_Cards.elk_scoring_2(x, y);
+            default -> Scoring_Cards.elk_scoring_3(x, y);
+        };
     }
 
     public static int bear_scoring_cards(int x, int y, int card) {
@@ -195,7 +193,9 @@ public class Scoring_Setup extends Board
                 if (h == 7) return 22;
                 return 26;
             case 2:
+
                 if (h == 0) return 0;
+
                 if (h == 1) return 2;
                 if (h == 2) return 5;
                 if (h == 3) return 9;
@@ -241,14 +241,28 @@ public class Scoring_Setup extends Board
         }
     }
 
-    public static int elk_score_calculate(int e) {
-        if (e>3) return 13;
-        else {
-            if (e == 1) return 2;
-            if (e == 2) return 5;
-            if (e == 3) return 9;
+    public static int elk_score_calculate(int e, int card) {
+
+        switch(card) {
+            case 2:
+
+                if (e == 0) return 0;
+                if (e == 1) return 2;
+                if (e == 2) return 4;
+                if (e == 3) return 7;
+                if (e == 4) return 10;
+                if (e == 5) return 14;
+                if (e == 6) return 18;
+                if (e == 7) return 23;
+                return 28;
+            default:
+                if(e == 0) return 0;
+                if (e == 1) return 2;
+                if (e == 2) return 5;
+                if (e == 3) return 9;
+                return 13;
         }
-        return 0;
+
     }
 
     public static Board get_surrounding_tile(int x, int y, int pos) {     // returns a tile around specified tile
