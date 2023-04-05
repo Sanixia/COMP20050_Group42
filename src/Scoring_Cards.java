@@ -95,41 +95,41 @@ public class Scoring_Cards extends Scoring_Setup
         }
 
         if (positions.size()==2) {
-            if (check_beside(positions.get(0), positions.get(1))) {
-                return 1;
-            } else {
-                int x1=get_surrounding_row(x,y,positions.get(0));
-                int y1=get_surrounding_col(x,y,positions.get(0));
-                int x2=get_surrounding_row(x,y,positions.get(1));
-                int y2=get_surrounding_col(x,y,positions.get(1));
-                ArrayList<Integer> positions1 = new ArrayList<Integer>();
-                ArrayList<Integer> positions2 = new ArrayList<Integer>();
+            int x1 = get_surrounding_row(x, y, positions.get(0));
+            int y1 = get_surrounding_col(x, y, positions.get(0));
+            int x2 = get_surrounding_row(x, y, positions.get(1));
+            int y2 = get_surrounding_col(x, y, positions.get(1));
+            ArrayList<Integer> positions1 = new ArrayList<Integer>();
+            ArrayList<Integer> positions2 = new ArrayList<Integer>();
 
 
-                for (int i=0; i<6; i++) {
-                    Board surrounding_tile = get_surrounding_tile(x1, y1, i+1);
-                    if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'b'){
-                        positions1.add(i+1);
-                    }
-                }
-
-                for (int i=0; i<6; i++) {
-                    Board surrounding_tile = get_surrounding_tile(x2, y2, i+1);
-                    if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'b'){
-                        positions2.add(i+1);
-                    }
-                }
-
-                if (positions1.size()==1 && positions2.size()==1) return 3;
-                else if (positions1.size()==2 && positions2.size()==2) {
-                    if (positions1.contains(reverse_position(positions.get(0))) || positions1.contains(reverse_position(positions.get(1))) &&
-                    positions1.contains(reverse_position(positions2.get(0))) || positions1.contains(reverse_position(positions2.get(1)))) return 1;
+            for (int i = 0; i < 6; i++) {
+                Board surrounding_tile = get_surrounding_tile(x1, y1, i + 1);
+                if (surrounding_tile != null && surrounding_tile.getAnimals().charAt(0) == 'b') {
+                    positions1.add(i + 1);
                 }
             }
-        }
 
+            for (int i = 0; i < 6; i++) {
+                Board surrounding_tile = get_surrounding_tile(x2, y2, i + 1);
+                if (surrounding_tile != null && surrounding_tile.getAnimals().charAt(0) == 'b') {
+                    positions2.add(i + 1);
+                }
+            }
+
+            if (check_beside(positions.get(0), positions.get(1)) && positions1.size()==2 && positions2.size()==2) {
+                return 1;
+            }
+            if (positions1.size() == 1 && positions2.size() == 1) {
+                return 3;
+            }
+
+        }
         return 0;
     }
+
+
+
     public static int bear_scoring_3(int x, int y) {        // TODO
         return 0;
     }
