@@ -10,14 +10,14 @@ public class Scoring_Cards extends Scoring_Setup
 
     public static int fox_scoring_1(int x, int y) {         // returns the number of unique animals around fox tile specified
         int score, b=0, e=0, f=0, s=0, h=0;
-        for (int i=0; i<6; i++) {
-            Board surrounding_tile = get_surrounding_tile(x, y, i+1);
+        for (int i=1; i<=6; i++) {
+            Board surrounding_tile = get_surrounding_tile(x, y, i);
             if (surrounding_tile!=null){
                 if (surrounding_tile.getAnimals().charAt(0) == 'f') f=1;
-                if (surrounding_tile.getAnimals().charAt(0) == 'e') e=1;
-                if (surrounding_tile.getAnimals().charAt(0) == 'b') b=1;
-                if (surrounding_tile.getAnimals().charAt(0) == 's') s=1;
-                if (surrounding_tile.getAnimals().charAt(0) == 'h') h=1;
+                else if (surrounding_tile.getAnimals().charAt(0) == 'e') e=1;
+                else if (surrounding_tile.getAnimals().charAt(0) == 'b') b=1;
+                else if (surrounding_tile.getAnimals().charAt(0) == 's') s=1;
+                else if (surrounding_tile.getAnimals().charAt(0) == 'h') h=1;
             }
         }
         score = b+e+f+s+h;
@@ -26,13 +26,13 @@ public class Scoring_Cards extends Scoring_Setup
 
     public static int fox_scoring_2(int x, int y) {         // returns the number of unique pairs around fox tile specified
         int pairs=0, b=0, e=0, f=0, s=0, h=0;
-        for (int i=0; i<6; i++) {
-            Board surrounding_tile = get_surrounding_tile(x, y, i+1);
+        for (int i=1; i<=6; i++) {
+            Board surrounding_tile = get_surrounding_tile(x, y, i);
             if (surrounding_tile!=null){
                 if(surrounding_tile.getAnimals().charAt(0) == 'e') e++;
-                if(surrounding_tile.getAnimals().charAt(0) == 'b') b++;
-                if(surrounding_tile.getAnimals().charAt(0) == 's') s++;
-                if(surrounding_tile.getAnimals().charAt(0) == 'h') h++;
+                else if(surrounding_tile.getAnimals().charAt(0) == 'b') b++;
+                else if(surrounding_tile.getAnimals().charAt(0) == 's') s++;
+                else if(surrounding_tile.getAnimals().charAt(0) == 'h') h++;
             }
         }
         if (b>=2) pairs++;
@@ -44,21 +44,22 @@ public class Scoring_Cards extends Scoring_Setup
 
     public static int fox_scoring_3(int x, int y) {         // returns the score of fox tile specified
         int b=0, e=0, f=0, s=0, h=0;
-        for (int i=0; i<6; i++) {
-            Board surrounding_tile = get_surrounding_tile(x, y, i+1);
+        for (int i=1; i<=6; i++) {
+            Board surrounding_tile = get_surrounding_tile(x, y, i);
             if (surrounding_tile!=null){
                 if(surrounding_tile.getAnimals().charAt(0) == 'e') e++;
-                if(surrounding_tile.getAnimals().charAt(0) == 'b') b++;
-                if(surrounding_tile.getAnimals().charAt(0) == 's') s++;
-                if(surrounding_tile.getAnimals().charAt(0) == 'h') h++;
+                else if(surrounding_tile.getAnimals().charAt(0) == 'b') b++;
+                else if(surrounding_tile.getAnimals().charAt(0) == 's') s++;
+                else if(surrounding_tile.getAnimals().charAt(0) == 'h') h++;
             }
         }
         return Math.max(b, Math.max(e, Math.max(s, h)));
     }
 
     public static int bear_scoring_1(int x, int y) {                   // returns 1 if it's a pair of bears
-        ArrayList<Integer> positions = new ArrayList<Integer>();
 
+        /*
+        ArrayList<Integer> positions = new ArrayList<Integer>();
 
         for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
             Board surrounding_tile = get_surrounding_tile(x, y, i+1);
@@ -66,16 +67,26 @@ public class Scoring_Cards extends Scoring_Setup
                 positions.add(i+1);
             }
         }
+         */
+
+        ArrayList<Integer> positions = get_surround_array(x, y, 1, 6, 'b');
+
         if (positions.size()==1) {
             int x2 = get_surrounding_row(x, y, positions.get(0));
             int y2 = get_surrounding_col(x, y, positions.get(0));
 
+            /*
             for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
                 Board surrounding_tile = get_surrounding_tile(x2, y2, i+1);
                 if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'b'){
                     positions.add(i+1);
                 }
             }
+
+             */
+
+
+            positions.addAll(get_surround_array(x2, y2, 1, 6, 'b'));
 
             if (positions.size()==2) return 1;
         }
@@ -84,14 +95,7 @@ public class Scoring_Cards extends Scoring_Setup
     }
 
     public static int bear_scoring_2(int x, int y) {        // TODO
-        ArrayList<Integer> positions = new ArrayList<Integer>();
-
-        for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
-            Board surrounding_tile = get_surrounding_tile(x, y, i+1);
-            if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'b'){
-                positions.add(i+1);
-            }
-        }
+        ArrayList<Integer> positions = get_surround_array(x, y, 1, 6, 'b');
 
         if (positions.size()==2) {
             int x1 = get_surrounding_row(x, y, positions.get(0));
@@ -130,6 +134,22 @@ public class Scoring_Cards extends Scoring_Setup
 
 
     public static int bear_scoring_3(int x, int y) {        // TODO
+        ArrayList<Integer> positions = new ArrayList<Integer>();
+
+        for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
+            Board surrounding_tile = get_surrounding_tile(x, y, i+1);
+            if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 's'){
+                positions.add(i+1);
+            }
+        }
+
+        if (positions.size()==0) return 1;
+        if (positions.size()==1) {
+            return 1;
+        }
+        if (positions.size()==2) {
+            return 1;
+        }
         return 0;
     }
 
@@ -406,7 +426,6 @@ public class Scoring_Cards extends Scoring_Setup
             surrounding_tile = get_surrounding_tile(x2, y2, i + 1);
             if (surrounding_tile != null && surrounding_tile.getAnimals().charAt(0) == 'h') {
                 return 0;
-
             } else if (surrounding_tile != null && Character.isUpperCase(surrounding_tile.getAnimals().charAt(0))) {
                 animals.add(i + 1);
             }
@@ -459,6 +478,17 @@ public class Scoring_Cards extends Scoring_Setup
             }
         }
         return false;
+    }
+
+    public static ArrayList<Integer> get_surround_array(int x, int y, int start, int end, char animal) {
+        ArrayList<Integer> surround_positions = new ArrayList<Integer>();
+        for (int i=start; i<=end; i++) {
+            Board surrounding_tile = get_surrounding_tile(x, y, i);
+            if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == animal){
+                surround_positions.add(i+1);
+            }
+        }
+        return surround_positions;
     }
 
 
