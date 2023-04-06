@@ -151,9 +151,9 @@ public class Scoring_Setup extends Board
 
     public static int fox_scoring_cards(int x, int y, int card) {
         return switch (card) {
-            case 1 -> Scoring_Cards.fox_scoring_1(x, y);
-            case 2 -> Scoring_Cards.fox_scoring_2(x, y);
-            default -> Scoring_Cards.fox_scoring_3(x, y);
+            case 1 -> Scoring_Fox.fox_scoring_1(x, y);
+            case 2 -> Scoring_Fox.fox_scoring_2(x, y);
+            default -> Scoring_Fox.fox_scoring_3(x, y);
         };
     }
 
@@ -169,25 +169,25 @@ public class Scoring_Setup extends Board
 
     public static int bear_scoring_cards(int x, int y, int card) {
         return switch (card) {
-            case 1 -> Scoring_Cards.bear_scoring_1(x, y);
-            case 2 -> Scoring_Cards.bear_scoring_2(x, y);
-            default -> Scoring_Cards.bear_scoring_3(x, y);
+            case 1 -> Scoring_Bear.bear_scoring_1(x, y);
+            case 2 -> Scoring_Bear.bear_scoring_2(x, y);
+            default -> Scoring_Bear.bear_scoring_3(x, y);
         };
     }
 
     public static int hawk_scoring_cards(int x, int y, int card) {
         return switch (card) {
-            case 1 -> Scoring_Cards.hawk_scoring_1(x, y);
-            case 2 -> Scoring_Cards.hawk_scoring_2(x, y);
-            default -> Scoring_Cards.hawk_scoring_3(x, y);
+            case 1 -> Scoring_Hawk.hawk_scoring_1(x, y);
+            case 2 -> Scoring_Hawk.hawk_scoring_2(x, y);
+            default -> Scoring_Hawk.hawk_scoring_3(x, y);
         };
     }
 
     public static int salmon_scoring_cards(int x, int y, int card) {
         return switch (card) {
-            case 1 -> Scoring_Cards.salmon_scoring_1(x, y);
-            case 2 -> Scoring_Cards.salmon_scoring_2(x, y);
-            default -> Scoring_Cards.salmon_scoring_3(x, y);
+            case 1 -> Scoring_Salmon.salmon_scoring_1(x, y);
+            case 2 -> Scoring_Salmon.salmon_scoring_2(x, y);
+            default -> Scoring_Salmon.salmon_scoring_3(x, y);
         };
     }
 
