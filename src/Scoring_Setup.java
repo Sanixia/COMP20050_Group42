@@ -41,14 +41,14 @@ public class Scoring_Setup extends Board
         Board[][] b = new Board[MAXSIZE][MAXSIZE];
         b[0][1] = new Board("RM", "s", 0);
         b[0][2] = new Board("RM", "b", 0);
-        b[0][3] = new Board("RM", "b", 0);
+        b[0][3] = new Board("RM", "s", 0);
         b[0][4] = new Board("RM", "b", 0);
-        b[1][1] = new Board("RM", "e", 0);
-        b[1][2] = new Board("R", "e", 0);
-        b[1][3] = new Board("R", "e", 0);
+        b[1][1] = new Board("RM", "s", 0);
+        b[1][2] = new Board("R", "s", 0);
+        b[1][3] = new Board("R", "s", 0);
         b[2][1] = new Board("R", "b", 0);
         b[2][2] = new Board("R", "b", 0);
-        b[2][3] = new Board("R", "f", 0);
+        b[2][3] = new Board("R", "s", 0);
         b[2][5] = new Board("R", "b", 0);
         b[3][1] = new Board("R", "b", 0);
         b[3][2] = new Board("R", "f", 0);
@@ -86,8 +86,8 @@ public class Scoring_Setup extends Board
                     else bear_num += bear_scoring_cards(i, j, scoring_cards[0]);
                 }
                 else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='s') {
-                    System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, scoring_cards[1]));
-                    salmon_score += salmon_scoring_cards(i, j, 1);
+                    System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, 3));
+                    salmon_score += salmon_scoring_cards(i, j, 3);
                 }
                 if(t!=null && t.getAnimals().charAt(0)=='e') {
                     //System.out.println("elk    ["+i+"]["+j+"] " + elk_scoring_cards(i, j, 2, -1));
@@ -100,6 +100,7 @@ public class Scoring_Setup extends Board
         int hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
         int bear_score = bear_score_calculate(bear_num, bear_shapes, scoring_cards[0]);
         int elk_score = elk_score_calculate(elk_num, scoring_cards[1]); // insert bear scoring
+        int salmon_score2 = salmon_score_calculate(salmon_score, 3);
         System.out.println("\nTotal Fox score:" + fox_score);
         System.out.println("Total Hawk score:" + hawk_score);
         System.out.println("Total Bear score:" + bear_score);
@@ -130,17 +131,18 @@ public class Scoring_Setup extends Board
                 }
                 if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='b') {
                     System.out.println("bear   ["+i+"]["+j+"] " + bear_scoring_cards(i, j, scoring_cards[0]));
-                    bear_num += bear_scoring_cards(i, j, scoring_cards[0]);
+                    bear_num += bear_scoring_cards(i, j, 3);
                 }
                 if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='s') {
-                    System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, scoring_cards[1]));
-                    salmon_score += salmon_scoring_cards(i, j, scoring_cards[1]);
+                    System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, 3));
+                    salmon_score += salmon_scoring_cards(i, j, 3);
                 }
             }
         }
         int fox_score = fox_score_calculate(fox_num, scoring_cards[2]);
         int hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
         int bear_score = bear_score_calculate(bear_num, bear_shapes, scoring_cards[0]);                            // insert bear scoring
+        int salmon_score2 = salmon_score_calculate(salmon_score, 3);
         System.out.println("\nTotal Fox score:" + fox_score);
         System.out.println("Total Hawk score:" + hawk_score);
         System.out.println("Total Bear score:" + bear_score);
@@ -182,7 +184,11 @@ public class Scoring_Setup extends Board
     }
 
     public static int salmon_scoring_cards(int x, int y, int card) {
-        return Scoring_Cards.salmon_scoring_1(x, y);
+        return switch (card) {
+            case 1 -> Scoring_Cards.salmon_scoring_1(x, y);
+            case 2 -> Scoring_Cards.salmon_scoring_2(x, y);
+            default -> Scoring_Cards.salmon_scoring_3(x, y);
+        };
     }
 
 
@@ -272,6 +278,34 @@ public class Scoring_Setup extends Board
                 return 28;
             default:
                 return  0;
+        }
+
+    }
+
+    public static int salmon_score_calculate(int s, int card) {
+        switch(card){
+            case 1:
+                if (s == 0) return 0;
+                if (s == 1) return 2;
+                if (s == 2) return 4;
+                if (s == 3) return 7;
+                if (s == 4) return 11;
+                if (s == 5) return 15;
+                if (s == 6) return 20;
+                return 26;
+            case 2:
+                if (s == 0) return 0;
+                if (s == 1) return 2;
+                if (s == 2) return 4;
+                if (s == 3) return 8;
+                return 12;
+            default:
+                if (s == 0) return 0;
+                if (s == 1) return 2;
+                if (s == 2) return 4;
+                if (s == 3) return 9;
+                if (s == 4) return 11;
+                return 17;
         }
 
     }
