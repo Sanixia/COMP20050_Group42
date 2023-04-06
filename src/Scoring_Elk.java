@@ -39,14 +39,14 @@ public class Scoring_Elk extends Scoring_Cards
         if (positions.size()==0){
 
             changeToNull(getBoard(), x2, y2);
-//            changeToNull(board, x2, y2);
+//
             return elk_score;  // base case
         }
 
         else{
 
             changeToNull(getBoard(), x, y); // makes current tile null // may need to change to x2, y2
-            //changeToNull(board, x2, y2);
+
             x2 = coordinates[0];
             y2 = coordinates[1];
 

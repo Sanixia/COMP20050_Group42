@@ -17,13 +17,13 @@ public class Tile_Colours
     public static final String HAWK_COLOUR = "\033[38;5;69m";   // CYAN
     public static final String BEAR_COLOUR = "\033[38;5;94m";  // GOLDEN BROWN
     public static final String FOX_COLOUR = "\033[38;5;166m";  // ORANGE
-    public static final String ELK_COLOUR = "\033[38;5;9m";  // BLACK
-    public static final String SALMON_COLOUR = "\033[38;5;160m";    // PINK
+    public static final String ELK_COLOUR = "\033[38;5;106m";  // GREEN
+    public static final String SALMON_COLOUR = "\033[38;5;160m";    // RED
 
     // Background colours
     public static final String HAWK_COLOUR_BACKGROUND = "\033[48;5;69m";   // CYAN
     public static final String BEAR_COLOUR_BACKGROUND = "\033[48;5;94m";  // GOLDEN BROWN
     public static final String FOX_COLOUR_BACKGROUND = "\033[48;5;166m";  // ORANGE
-    public static final String ELK_COLOUR_BACKGROUND = "\033[48;5;9m";  // BLACK
-    public static final String SALMON_COLOUR_BACKGROUND = "\033[48;5;160m";    // PINK
+    public static final String ELK_COLOUR_BACKGROUND = "\033[48;5;106m";  // GREEN
+    public static final String SALMON_COLOUR_BACKGROUND = "\033[48;5;160m";    // RED
 }

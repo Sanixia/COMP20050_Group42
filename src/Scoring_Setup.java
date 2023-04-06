@@ -3,11 +3,8 @@ import java.util.Objects;
 
 public class Scoring_Setup extends Board
 {
-    //private static int MAXSIZE = 26;          //TODO UNCOMMENT IF NEED BE
     private static int totalscore = 0;
     private static int odd;
-
-
 
     private static Board[][] board;
 
@@ -38,18 +35,17 @@ public class Scoring_Setup extends Board
     }
 
     public static void main(String[] args) {
-        System.out.println(check_beside(1, 3));
 
         Board[][] b = new Board[MAXSIZE][MAXSIZE];
         b[0][1] = new Board("RM", "s", 0);
-        b[0][2] = new Board("RM", "b", 0);
+        b[0][2] = new Board("RM", "e", 0);
         b[0][3] = new Board("RM", "s", 0);
         b[0][4] = new Board("RM", "b", 0);
         b[1][1] = new Board("RM", "s", 0);
         b[1][2] = new Board("R", "s", 0);
-        b[1][3] = new Board("R", "s", 0);
+        b[1][3] = new Board("R", "e", 0);
         b[2][1] = new Board("R", "b", 0);
-        b[2][2] = new Board("R", "b", 0);
+        b[2][2] = new Board("R", "e", 0);
         b[2][3] = new Board("R", "s", 0);
         b[2][5] = new Board("R", "b", 0);
         b[3][1] = new Board("R", "b", 0);
@@ -92,8 +88,8 @@ public class Scoring_Setup extends Board
                     else bear_num += bear_scoring_cards(i, j, scoring_cards[0]);
                 }
                 else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='s') {
-                    System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, 3));
-                    salmon_score += salmon_scoring_cards(i, j, 3);
+                  //  System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, 3));
+                    salmon_score += salmon_score_calculate(salmon_scoring_cards(i, j, 2), 2);
                 }
                 if(t!=null && t.getAnimals().charAt(0)=='e') {
                     //System.out.println("elk    ["+i+"]["+j+"] " + elk_scoring_cards(i, j, 2, -1));
@@ -115,10 +111,10 @@ public class Scoring_Setup extends Board
     }
 
 
-    public static void scoring_setup(Player_Tracker player,  int[] scoring_cards) {
-        setBoard(player.getBoard());
-        setOdd(player.getOdd());
-        print_board(board, player);
+    public static void scoring_setup(Board[][] board, int odd, int max_row, int max_col, int[] scoring_cards) { //TODO replace playertracker with  board, odd, max row, maxcol
+        setBoard(board);
+        setOdd(odd);
+        print_board(board);
 
         remove_slot();
         print_board(board, player);
@@ -190,11 +186,7 @@ public class Scoring_Setup extends Board
     }
 
     public static int salmon_scoring_cards(int x, int y, int card) {
-        return switch (card) {
-            case 1 -> Scoring_Salmon.salmon_scoring_1(x, y);
-            case 2 -> Scoring_Salmon.salmon_scoring_2(x, y);
-            default -> Scoring_Salmon.salmon_scoring_3(x, y);
-        };
+        return Scoring_Salmon.salmon_scoring(x, y, card);
     }
 
 
