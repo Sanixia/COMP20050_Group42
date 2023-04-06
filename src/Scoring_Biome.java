@@ -1,7 +1,7 @@
-public class Scoring_Tile extends  Scoring_Cards
+public class Scoring_Biome extends  Scoring_Cards
 {
 
-    public Scoring_Tile(String biome, String animals, int rotation) {
+    public Scoring_Biome(String biome, String animals, int rotation) {
         super(biome, animals, rotation);
     }
 

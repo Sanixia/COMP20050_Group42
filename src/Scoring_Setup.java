@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Objects;
+
 public class Scoring_Setup extends Board
 {
     private static int MAXSIZE = 26;
@@ -406,7 +408,7 @@ public class Scoring_Setup extends Board
     public static void remove_slot() {
         for (int i = 0; i < MAXSIZE; i++) {
             for (int j = 0; j < MAXSIZE; j++) {
-                if (board[i][j]!=null && board[i][j].getBiome() == "slot") {
+                if (board[i][j]!=null && Objects.equals(board[i][j].getBiome(), "slot")) {
                     board[i][j] = null;
                 }
             }
