@@ -3,7 +3,7 @@ import java.util.Objects;
 
 public class Scoring_Setup extends Board
 {
-    private static int MAXSIZE = 26;
+    //private static int MAXSIZE = 26;          //TODO UNCOMMENT IF NEED BE
     private static int totalscore = 0;
     private static int odd;
 
@@ -60,7 +60,7 @@ public class Scoring_Setup extends Board
         b[4][3] = new Board("R", "b", 0);
 
         // TODO                b e f h s
-        int[] scoring_cards = {1,1,1,1,1};
+        int[] scoring_cards = {3,1,1,1,1};
         Board.print_boards(b, 8, 5, 1);
         scoring_setups(b, 1,  scoring_cards);
     }
@@ -70,7 +70,8 @@ public class Scoring_Setup extends Board
         setBoard(board);
         setOdd(odd);
         int fox_num=0, hawk_num=0, bear_num=0, salmon_score=0, elk_num=0;
-        int bear_shapes[] = new int[0], b=0;
+        int[] bear_shapes = new int[20];
+        int b=0;
         for (int i=0; i<MAXSIZE; i++) {
             for (int j=0; j<MAXSIZE; j++) {
                 Board t = board[i][j];
@@ -84,7 +85,10 @@ public class Scoring_Setup extends Board
                 }
                 else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='b') {
                     System.out.println("bear   ["+i+"]["+j+"] " + bear_scoring_cards(i, j, scoring_cards[0]));
-                    if (scoring_cards[0]==3) bear_shapes[b] = bear_scoring_cards(i, j, scoring_cards[0]);
+                    if (scoring_cards[0]==3) {
+                        bear_shapes[b] = bear_scoring_cards(i, j, scoring_cards[0]);
+                        b++;
+                    }
                     else bear_num += bear_scoring_cards(i, j, scoring_cards[0]);
                 }
                 else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='s') {
@@ -120,8 +124,8 @@ public class Scoring_Setup extends Board
         print_board(board, player);
         int fox_num=0, hawk_num=0, bear_num=0, salmon_score=0;
         int bear_shapes[] = new int[0];
-        for (int i=0; i<MAXSIZE; i++) {
-            for (int j=0; j<MAXSIZE; j++) {
+        for (int i=0; i< player.getMax_row(); i++) {
+            for (int j=0; j< player.getMax_col(); j++) {
                 Board t = board[i][j];
                 if( t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='f') {
                     System.out.println("fox    ["+i+"]["+j+"] " + fox_scoring_cards(i, j, scoring_cards[2]));
