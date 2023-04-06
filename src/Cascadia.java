@@ -253,7 +253,7 @@ public class Cascadia
     public static void next_player_turn(Command_State command_state){
         Display_And_Input.getPlayers().get(playerNum).setPlayerTurn();  //increments turn by 1 each time this is called
 
-        if (Display_And_Input.getPlayers().get(playerNum).getPlayerTurn() < 3) {
+        if (Display_And_Input.getPlayers().get(playerNum).getPlayerTurn() < 2) {
             if (playerNum == Display_And_Input.getPlayer_count() - 1) {    //resets to the start of the player list
                 playerNum = 0;
             } else {
@@ -261,21 +261,31 @@ public class Cascadia
             }
             System.out.println("\n\n" + Display_And_Input.getPlayers().get(playerNum).getPlayer_name() + " is up!");
             culling_trigger = true;
+
         } else {
 
             Display_And_Input.getPlayers_score_calculation().add(Display_And_Input.getPlayers().get(playerNum));  // adds player to the list of players who have finished their turns
 
             Display_And_Input.getPlayers().remove(Display_And_Input.getPlayers().get(playerNum)); // removes player from the list of players who have not finished their turns
 
-            Display_And_Input.setPlayer_count(Display_And_Input.getPlayer_count());
+            Display_And_Input.setPlayer_count(Display_And_Input.getPlayer_count()); // decrements the player count by 1
 
             if (Display_And_Input.getPlayers().size() == 0) {
-                System.out.println("You have no more turns left, calculating score for everyone...");
+                System.out.println("You have no more turns left, calculating score for everyone...\n\n");
+                WildLife_Scoring_Setup.print_scoring_card(player_scoring_card);
                 for(int i = 0; i < Display_And_Input.getPlayers_score_calculation().size(); i++){
-                    Scoring_Setup.scoring_setup(  Display_And_Input.getPlayers_score_calculation().get(i), player_scoring_card);
+
+                    Scoring_Setup.scoring_setup(  Display_And_Input.getPlayers_score_calculation().get(i).getBoard(), // scoring setup
+                            Display_And_Input.getPlayers_score_calculation().get(i).getOdd(),
+                            Display_And_Input.getPlayers_score_calculation().get(i).getMax_col(),
+                            Display_And_Input.getPlayers_score_calculation().get(i).getMax_row(),
+                            player_scoring_card,
+                            Display_And_Input.getPlayers_score_calculation().get(i).getPlayer_name(),
+                            Display_And_Input.getPlayers_score_calculation().get(i).getNature_tokens());
+
                 }
 
-                command_state.setState_type();
+                command_state.setToQuit();
 
             } else {
                 System.out.println("You have no more turns left, calculating score once everyone is done...");

@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 
-public class Scoring_Hawk extends  Scoring_Cards
+public class Scoring_Hawk extends Scoring_Cards
 {
     public Scoring_Hawk(String biome, String animals, int rotation) {
         super(biome, animals, rotation);
     }
+
+    private static ArrayList<Integer[]> hawk_found = new ArrayList<Integer[]>();
 
     public static int hawk_scoring_1(int x, int y) {     // returns 1 if hawk tile specified is valid and 0 otherwise
         int num_hawks=1;
@@ -20,7 +22,7 @@ public class Scoring_Hawk extends  Scoring_Cards
         return num_hawks;
     }
 
-    public static int hawk_scoring_2(int x, int y) {        // TODO
+    public static int hawk_scoring_2(int x, int y) {    // returns 1 if hawk tile specified is valid and 0 otherwise
         int num_hawks=0;
         int check = 0;
 
@@ -48,7 +50,10 @@ public class Scoring_Hawk extends  Scoring_Cards
         for(int j = 0; j < animals.size(); j++) {
 
             coordinates = get_surrounding_tile_hawk(x2, y2, animals.get(j));
-            if (coordinates[0] == -1 || coordinates[1] == -1) {
+            if (coordinates[0] < 0 || coordinates[1] < 0 || coordinates[0] > MAXSIZE || coordinates[1] > MAXSIZE) {
+                continue;
+            }
+            if(getBoard()[coordinates[0]][coordinates[1]]  == null  || getBoard()[coordinates[0]][coordinates[1]].getAnimals().charAt(0) != 'h'){
                 continue;
             }
 
@@ -66,7 +71,7 @@ public class Scoring_Hawk extends  Scoring_Cards
                 continue;
             }
             else{
-                num_hawks += 1;
+                num_hawks = 1;
             }
             check = 0;
 
@@ -76,7 +81,7 @@ public class Scoring_Hawk extends  Scoring_Cards
 
     }
 
-    public static int hawk_scoring_3(int x, int y) {        // TODO
+    public static int hawk_scoring_3(int x, int y) {
 
         int num_hawks=0;
 
@@ -86,6 +91,8 @@ public class Scoring_Hawk extends  Scoring_Cards
         Board surrounding_tile = null;
         int[] coordinates = new int[2];
         ArrayList<Integer> animals = new ArrayList<Integer>();
+
+
 
         for (int i=0; i<6; i++) {
             surrounding_tile = get_surrounding_tile(x2, y2, i + 1);
@@ -104,19 +111,23 @@ public class Scoring_Hawk extends  Scoring_Cards
         for(int j = 0; j < animals.size(); j++) {
 
             surrounding_tile = get_surrounding_tile(x2, y2, animals.get(j));
+
+
+
             coordinates = get_surrounding_tile_coordinates(x2, y2, animals.get(j));
+            if (coordinates[0] < 0 || coordinates[1] < 0 || coordinates[0] > MAXSIZE || coordinates[1] > MAXSIZE) {
+                continue;
+            }
             x2 = coordinates[0];
             y2 = coordinates[1];
 
-            if (coordinates[0] == -1 || coordinates[1] == -1) {
-                continue;
-            }
+
 
             while (surrounding_tile != null && Character.isUpperCase(surrounding_tile.getAnimals().charAt(0))) {
                 coordinates = get_surrounding_tile_coordinates(x2, y2, animals.get(j));
                 surrounding_tile = get_surrounding_tile(x2, y2, animals.get(j));
 
-                if (coordinates[0] == -1 || coordinates[1] == -1) {
+                if (coordinates[0] < 0 || coordinates[1] < 0 || coordinates[0] > MAXSIZE || coordinates[1] > MAXSIZE) {
 
                     x2 = surrounding_tile_original[0];
                     y2 = surrounding_tile_original[1];
@@ -124,14 +135,27 @@ public class Scoring_Hawk extends  Scoring_Cards
                 }
 
                 if (surrounding_tile != null && surrounding_tile.getAnimals().charAt(0) == 'h') {
-                    return num_hawks = 1;
+                    if(!deepContains(hawk_found, new Integer[]{coordinates[0], coordinates[1]})){
+                        num_hawks++;
+                    }
+                    x2 = surrounding_tile_original[0];
+                    y2 = surrounding_tile_original[1];
+                    break;
+                }
+
+                if(surrounding_tile == null){
+                    x2 = surrounding_tile_original[0];
+                    y2 = surrounding_tile_original[1];
+                    break;
                 }
 
                 x2 = coordinates[0];
                 y2 = coordinates[1];
             }
+
         }
 
+        hawk_found.add(new Integer[]{x, y});
         return num_hawks;
 
     }

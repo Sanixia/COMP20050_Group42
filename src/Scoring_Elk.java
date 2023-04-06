@@ -8,7 +8,7 @@ public class Scoring_Elk extends Scoring_Cards
     }
 
 
-    public static int elk_scoring_1(int x, int y, int pos) {         // TODO
+    public static int elk_scoring_1(int x, int y, int pos) {
         ArrayList<Integer> positions = new ArrayList<Integer>();
         int elk_score = 1;
         int x2 = x, y2 = y;
@@ -54,7 +54,7 @@ public class Scoring_Elk extends Scoring_Cards
         }
     }
 
-    public static int elk_scoring_2(int x, int y) {         // TODO
+    public static int elk_scoring_2(int x, int y) {
         int check = 0;
         int elk_total = 1;
 

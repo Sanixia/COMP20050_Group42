@@ -360,7 +360,7 @@ public class Command_State
         Command_State.habitat_tile_choice = habitat_tile_choice;
     }
 
-    public void setState_type() {
+    public void setToQuit() {
         Command_State.state_type = state.QUIT;
     }
     public void setState_habitat_menu(){

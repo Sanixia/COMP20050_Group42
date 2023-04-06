@@ -410,7 +410,7 @@ public class Display_And_Input
 
     }
 
-    public static void display_tile_rotation(int tile_number){  // TODO uses same method as display tiles could be optimised also change for keystone tile to display one rotation
+    public static void display_tile_rotation(int tile_number){
 
         System.out.println("\n\n-- Tile Rotation Options -- ");
 
@@ -493,7 +493,7 @@ public class Display_And_Input
                     System.out.println("Please enter the token number you would like to remove that's available and valid: ");
                     String token_choice = in.nextLine();
 
-                    while (Board.verify_valid_number(token_choice) == false) {
+                    while (!Board.verify_valid_number(token_choice)) {
 
                         System.out.println("Please enter a valid number: ");
                         token_choice = in.nextLine();

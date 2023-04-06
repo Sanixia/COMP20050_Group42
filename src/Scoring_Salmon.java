@@ -19,7 +19,7 @@ public class Scoring_Salmon extends Scoring_Cards
         Scoring_Salmon.index_salmon++;
     }
 
-    public static int salmon_scoring(int x, int y, int scoring_card) {      // TODO
+    public static int salmon_scoring(int x, int y, int scoring_card) {
 
         int x2 = x, y2 = y;
         int amount_of_salmon = 0;

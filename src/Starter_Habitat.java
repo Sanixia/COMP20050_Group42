@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Starter_Habitat
 {
-    //array split for animal colour print out
+
 
     public static ArrayList<String> getStarter_Habitat_Tiles() {
         return Starter_Habitat_Tiles;
