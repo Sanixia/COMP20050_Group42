@@ -169,14 +169,15 @@ public class Scoring_Setup extends Board
 
         int hawk_score = 0;
 
-        if(scoring_cards[3]==3) {
+        if(scoring_cards[3]==3 || scoring_cards[3]==1) {
             hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
             System.out.println("Total Hawk score:" + hawk_score);
         }
-        else {
-            hawk_score = hawk_num;
+        else if(scoring_cards[3]==2){
+            hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
             System.out.println("Total Hawk score:" + hawk_score);
         }
+
 
         System.out.println("Total Bear score:" + bear_score);
         System.out.println("Total Salmon score:" + salmon_score);
@@ -187,7 +188,7 @@ public class Scoring_Setup extends Board
             elk_score = elk_num;
             System.out.println("Total Elk score:" + elk_score);
         }
-        else if(scoring_cards[1]==3) {
+        else{
             elk_score = elk_score_calculate(elk_num, elk_shapes, scoring_cards[1]);
             System.out.println("Total Elk score:" + elk_score);
         }
@@ -489,12 +490,16 @@ public class Scoring_Setup extends Board
 
         int hawk_score = 0;
 
-        if(scoring_cards[3]==3) {
+        if(scoring_cards[3]==3 ) {
             hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
             System.out.println("Total Hawk score:" + hawk_score);
         }
-        else {
-            hawk_score = hawk_num;
+        if(scoring_cards[3]==3 || scoring_cards[3]==1) {
+            hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
+            System.out.println("Total Hawk score:" + hawk_score);
+        }
+        else if(scoring_cards[3]==2){
+            hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
             System.out.println("Total Hawk score:" + hawk_score);
         }
 
@@ -507,7 +512,7 @@ public class Scoring_Setup extends Board
             elk_score = elk_num;
             System.out.println("Total Elk score:" + elk_score);
         }
-        else if(scoring_cards[1]==3) {
+        else {
             elk_score = elk_score_calculate(elk_num, elk_shapes, scoring_cards[1]);
             System.out.println("Total Elk score:" + elk_score);
         }
