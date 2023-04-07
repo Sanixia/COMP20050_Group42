@@ -169,12 +169,12 @@ public class Scoring_Setup extends Board
 
         int hawk_score = 0;
 
-        if(scoring_cards[3]==3 || scoring_cards[3]==1) {
+        if(scoring_cards[3]==1 || scoring_cards[3]==2) {
             hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
             System.out.println("Total Hawk score:" + hawk_score);
         }
-        else if(scoring_cards[3]==2){
-            hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
+        else{
+            hawk_score = hawk_num;
             System.out.println("Total Hawk score:" + hawk_score);
         }
 
@@ -494,12 +494,13 @@ public class Scoring_Setup extends Board
             hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
             System.out.println("Total Hawk score:" + hawk_score);
         }
-        if(scoring_cards[3]==3 || scoring_cards[3]==1) {
+
+        if(scoring_cards[3]==1 || scoring_cards[3]==2) {
             hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
             System.out.println("Total Hawk score:" + hawk_score);
         }
-        else if(scoring_cards[3]==2){
-            hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
+        else{
+            hawk_score = hawk_num;
             System.out.println("Total Hawk score:" + hawk_score);
         }
 
