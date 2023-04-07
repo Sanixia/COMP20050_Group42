@@ -39,13 +39,13 @@ public class Scoring_Elk extends Scoring_Cards
         if (positions.size()==0){
 
             changeToNull(getBoard(), x2, y2);
-//
+
             return elk_score;  // base case
         }
 
         else{
 
-            changeToNull(getBoard(), x, y); // makes current tile null // may need to change to x2, y2
+            changeToNull(getBoard(), x, y); // makes current tile null so it doesn't count it again
 
             x2 = coordinates[0];
             y2 = coordinates[1];
@@ -62,14 +62,16 @@ public class Scoring_Elk extends Scoring_Cards
         ArrayList<Integer[]> elk_found = new ArrayList<Integer[]>();
         int[] surrounding_tile = {-1,-1};
 
-        int[] original_tile = {-1,-1};
+        int[] original_tile = {-1,-1}; // used to check if the tile is the same as the original tile
 
 
-        changeToNull(getBoard(), x, y);
+        changeToNull(getBoard(), x, y); // makes current tile null so it doesn't count it again
 
         for (int i=0; i<6; i++) {
             surrounding_tile = get_surrounding_tile_coordinates(x, y, i+1);
-            if (!(surrounding_tile[0] < 0 || surrounding_tile[1] < 0 || surrounding_tile[0] > Board.MAXSIZE || surrounding_tile[1] > Board.MAXSIZE) && getBoard()[surrounding_tile[0]][surrounding_tile[1]] != null && getBoard()[surrounding_tile[0]][surrounding_tile[1]].getAnimals().charAt(0) == 'e'){
+            if (!(surrounding_tile[0] < 0 || surrounding_tile[1] < 0 || surrounding_tile[0] > Board.MAXSIZE || surrounding_tile[1] > Board.MAXSIZE) &&
+                    getBoard()[surrounding_tile[0]][surrounding_tile[1]] != null &&
+                    getBoard()[surrounding_tile[0]][surrounding_tile[1]].getAnimals().charAt(0) == 'e'){
 
                 elk_found.add(new Integer [] {surrounding_tile[0], surrounding_tile[1]});
                 elk_total++;
@@ -77,7 +79,7 @@ public class Scoring_Elk extends Scoring_Cards
         }
 
 
-        while(check < elk_found.size()){
+        while(check < elk_found.size()){ // while there are still tiles to check
 
             for (int j=0; j<6; j++) {
                 surrounding_tile = get_surrounding_tile_coordinates(elk_found.get(check)[0], elk_found.get(check)[1], j+1);

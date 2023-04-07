@@ -50,7 +50,7 @@ public class Scoring_Hawk extends Scoring_Cards
         for(int j = 0; j < animals.size(); j++) {
 
             coordinates = get_surrounding_tile_hawk(x2, y2, animals.get(j));
-            if (coordinates[0] < 0 || coordinates[1] < 0 || coordinates[0] > MAXSIZE || coordinates[1] > MAXSIZE) {
+            if (coordinates[0] < 0 || coordinates[1] < 0 || coordinates[0] >= MAXSIZE || coordinates[1] >= MAXSIZE) {
                 continue;
             }
             if(getBoard()[coordinates[0]][coordinates[1]]  == null  || getBoard()[coordinates[0]][coordinates[1]].getAnimals().charAt(0) != 'h'){
@@ -115,7 +115,7 @@ public class Scoring_Hawk extends Scoring_Cards
 
 
             coordinates = get_surrounding_tile_coordinates(x2, y2, animals.get(j));
-            if (coordinates[0] < 0 || coordinates[1] < 0 || coordinates[0] > MAXSIZE || coordinates[1] > MAXSIZE) {
+            if (coordinates[0] < 0 || coordinates[1] < 0 || coordinates[0] >= MAXSIZE || coordinates[1] >= MAXSIZE) {
                 continue;
             }
             x2 = coordinates[0];
@@ -127,7 +127,7 @@ public class Scoring_Hawk extends Scoring_Cards
                 coordinates = get_surrounding_tile_coordinates(x2, y2, animals.get(j));
                 surrounding_tile = get_surrounding_tile(x2, y2, animals.get(j));
 
-                if (coordinates[0] < 0 || coordinates[1] < 0 || coordinates[0] > MAXSIZE || coordinates[1] > MAXSIZE) {
+                if (coordinates[0] < 0 || coordinates[1] < 0 || coordinates[0] >= MAXSIZE || coordinates[1] >= MAXSIZE) {
 
                     x2 = surrounding_tile_original[0];
                     y2 = surrounding_tile_original[1];

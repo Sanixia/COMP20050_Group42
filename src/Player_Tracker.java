@@ -2,15 +2,11 @@ import java.util.ArrayList;
 
 public class Player_Tracker
 {
-    private String player_name;
-    private String starter_tile;
-    private ArrayList<String> habitat_tiles = new ArrayList<>();
-
-    private ArrayList<String> animal_tiles = new ArrayList<>();
+    private final String player_name;
+    private final String starter_tile;
     private int player_turn = 0;
     private int nature_tokens = 0;
     private static final int MAXSIZE = 26;
-
 
 
     private Board[][] board;
@@ -18,14 +14,6 @@ public class Player_Tracker
     private int max_row;         // adjusts 'height' of board
     private int  odd;         // 1 if odd rows are at the front
     private int checkOddOrEven;
-
-
-
-
-
-
-
-
 
 
     public Player_Tracker(String player_name, String starter_tile, int player_turn, int nature_tokens, int max_row, int max_col, int odd, int checkOddOrEven){
@@ -45,38 +33,21 @@ public class Player_Tracker
 
     }
 
-
     public void setup_board(String setup_board, Board[][] board,  Player_Tracker player){
         Board.setup(setup_board, board, player);
     }
 
     public void print_board(Board[][] board, Player_Tracker player){
-        Board.print_board(board, player);
+        Board.print_boards(board, player.max_col, player.max_row, player.odd);
     }
-
-
 
     public String getPlayer_name() {
         return player_name;
     }
 
-
     public  String getStarter_tile() {
         return starter_tile;
     }
-
-    public void setStarter_tile(String starter_tile) {
-        this.starter_tile = starter_tile;
-    }
-
-    public ArrayList<String> getHabitat_tiles() {
-        return this.habitat_tiles;
-    }
-
-    public void setHabitat_tiles(ArrayList<String> habitat_tiles) {
-        this.habitat_tiles = habitat_tiles;
-    }
-
 
     public int getPlayerTurn() {
         return player_turn;
@@ -122,7 +93,6 @@ public class Player_Tracker
         if(checkOddOrEven == 0) checkOddOrEven = 1;
         else checkOddOrEven = 0;
     }
-
 
     public void changeOdd(){
         if (odd == 1) odd = 0;

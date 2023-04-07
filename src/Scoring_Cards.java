@@ -8,7 +8,7 @@ public class Scoring_Cards extends Scoring_Setup
         super(biome, animals, rotation);
     }
 
-    public static ArrayList<Integer> get_surround_array(int x, int y, int start, int end, char animal) {
+    public static ArrayList<Integer> get_surround_array(int x, int y, int start, int end, char animal) {    // returns a tile around specified tile
         ArrayList<Integer> surround_positions = new ArrayList<Integer>();
         for (int i=start; i<=end; i++) {
             Board surrounding_tile = get_surrounding_tile(x, y, i);
@@ -88,11 +88,11 @@ public class Scoring_Cards extends Scoring_Setup
         return col;
     }
 
-    public static boolean check_beside(int a, int b) {
+    public static boolean check_beside(int a, int b) {   // checks if two positions are beside each other
         return (a == 6 && b == 1) || (a == 1 && b == 6) || (a - b == 1 || b - a == 1);
     }
 
-    public static int reverse_position(int x) {
+    public static int reverse_position(int x) {    // returns the opposite position
         return switch (x) {
             case 1 -> 4;
             case 2 -> 5;

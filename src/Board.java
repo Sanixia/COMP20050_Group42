@@ -5,19 +5,9 @@ public class Board extends Printer // todo comments
 {
 
     protected static final int MAXSIZE = 26;
-
     private String biome;
     private String animals;
     private int rotation;
-
-
-    private int max_col;         // adjusts 'length' of board
-    private int max_row;         // adjusts 'height' of board
-    private int  odd;         // 1 if odd rows are at the front
-
-    private int checkOddOrEven;
-    //static Board[][] board = new Board[MAXSIZE][MAXSIZE];
-
     public Board(String biome, String animals, int rotation) {
         this.biome = biome;
         this.animals = animals;
@@ -127,57 +117,51 @@ public class Board extends Printer // todo comments
 
     public static void place(int tile_number, Board[][] board, Player_Tracker player_tracker, Board tile) {
 
-        Scanner in = new Scanner(System.in);
-        String temp_x, temp_y;
+        String temp_x = "", temp_y = "";
         int x, y;
 
         System.out.println("Greyed out tiles are valid placements!\n");
 
-
-        System.out.print("Which row? : ");
-        temp_x = in.nextLine();
-        while(!verify_valid_number(temp_x)){
-            System.out.println("Please enter a valid number!\n");
-            System.out.print("Which row? : ");
-            temp_x = in.nextLine();
-        }
-
-        System.out.print("Which column? :  ");
-        temp_y = in.nextLine();
-
-        while (!verify_valid_number(temp_y)) {
-            System.out.println("Please enter a valid number!\n");
-            System.out.print("Which column? : ");
-            temp_y = in.nextLine();
-        }
-        x = Integer.parseInt(temp_x);
-        y = Integer.parseInt(temp_y);
+        x = Integer.parseInt(valid_row_column(temp_x, 1));
+        y = Integer.parseInt(valid_row_column(temp_y, 2));
 
 
 
         while (!verify_tile(x, y,board)) {
             System.out.println("Please enter a valid tile placement!\n");
-            System.out.print("Which row? : ");
-            temp_x = in.nextLine();
-            while(!verify_valid_number(temp_x)){
-                System.out.println("Please enter a valid number!\n");
-                System.out.print("Which row? : ");
-                temp_x = in.nextLine();
-            }
 
-            System.out.print("Which column? :  ");
-            temp_y = in.nextLine();
 
-            while (!verify_valid_number(temp_y)) {
-                System.out.println("Please enter a valid number!\n");
-                System.out.print("Which column? : ");
-                temp_y = in.nextLine();
-            }
-            x = Integer.parseInt(temp_x);
-            y = Integer.parseInt(temp_y);
+            x = Integer.parseInt(  valid_row_column(temp_x, 1));
+            y = Integer.parseInt(valid_row_column(temp_y, 2));
         }
 
         board_add_tile(tile.getBiome(), tile.getAnimals(), tile.getRotation(), x, y,board, player_tracker);
+    }
+
+    public static String valid_row_column(String temp, int row_or_column){
+        Scanner in = new Scanner(System.in);
+
+        if(row_or_column == 1){
+            System.out.print("Which row? : ");
+            temp = in.nextLine();
+            while(!verify_valid_number(temp)){
+                System.out.println("Please enter a valid number!\n");
+                System.out.print("Which row? : ");
+                temp = in.nextLine();
+            }
+        }
+        else if(row_or_column == 2){
+            System.out.print("Which column? :  ");
+            temp = in.nextLine();
+
+            while (!verify_valid_number(temp)) {
+                System.out.println("Please enter a valid number!\n");
+                System.out.print("Which column? : ");
+                temp = in.nextLine();
+            }
+        }
+
+        return temp;
     }
 
     public static boolean verify_valid_number(String number){
@@ -192,7 +176,7 @@ public class Board extends Printer // todo comments
 
 
 
-    public static void board_add_tile(String biome, String animals, int rotation, int row, int col, Board[][] board, Player_Tracker player_tracker) { //TODO verify
+    public static void board_add_tile(String biome, String animals, int rotation, int row, int col, Board[][] board, Player_Tracker player_tracker) {
         Board tile = new Board(biome, animals, rotation);
         board[row][col] = tile;
         int plusOne = 0, plusRow = 0, plusCol = 0;
@@ -211,7 +195,7 @@ public class Board extends Printer // todo comments
         }
 
         if (col == 0) {
-            if (!(tile.getBiome() == "slot")) { // todo
+            if (!(tile.getBiome() == "slot")) {
                 indent_col(board, player_tracker);
                 plusCol = 1;
             }
@@ -219,7 +203,7 @@ public class Board extends Printer // todo comments
         } else if (col + plusOne >= player_tracker.getMax_col() - 1) {
             player_tracker.setmax_col();
         }
-        place_slot_tiles2(row+plusRow, col+plusCol, board, player_tracker);
+        place_slot_tiles(row+plusRow, col+plusCol, board, player_tracker);
     }
 
     public static boolean availableTokenPlacement(String animal, Board[][] board, Player_Tracker player_tracker){
@@ -242,56 +226,24 @@ public class Board extends Printer // todo comments
 
         if(availableTokenPlacement(animal, board, player_tracker)){
             Scanner in = new Scanner(System.in);
-            String temp_x, temp_y;
+            String temp_x = "", temp_y = "";
             int x, y;
 
-            System.out.print("Which row? : ");
-            temp_x = in.nextLine();
-            while(!verify_valid_number(temp_x)){
-                System.out.println("Please enter a valid number!\n");
-                System.out.print("Which row? : ");
-                temp_x = in.nextLine();
-            }
-
-            System.out.print("Which column? :  ");
-            temp_y = in.nextLine();
-
-            while (!verify_valid_number(temp_y)) {
-                System.out.println("Please enter a valid number!\n");
-                System.out.print("Which column? : ");
-                temp_y = in.nextLine();
-            }
-            x = Integer.parseInt(temp_x);
-            y = Integer.parseInt(temp_y);
+            x = Integer.parseInt(  valid_row_column(temp_x, 1));
+            y = Integer.parseInt(valid_row_column(temp_y, 2));
 
             // verify that there is available tiles that can place a token on
 
 
             while (verify_animal_token_placement(x, y, animal, board)) {
                 System.out.println("Please enter a valid tile that can place this animal token onto it and hasn't been taken already!\n");
-                System.out.print("Which row? : ");
-                temp_x = in.nextLine();
-                while(!verify_valid_number(temp_x)){
-                    System.out.println("Please enter a valid number!\n");
-                    System.out.print("Which row? : ");
-                    temp_x = in.nextLine();
-                }
-
-                System.out.print("Which column? :  ");
-                temp_y = in.nextLine();
-
-                while (!verify_valid_number(temp_y)) {
-                    System.out.println("Please enter a valid number!\n");
-                    System.out.print("Which column? : ");
-                    temp_y = in.nextLine();
-                }
-                x = Integer.parseInt(temp_x);
-                y = Integer.parseInt(temp_y);
+                x = Integer.parseInt(  valid_row_column(temp_x, 1));
+                y = Integer.parseInt(valid_row_column(temp_y, 2));
             }
 
             if(board[x][y].getBiome().length() == 1){
                 player_tracker.setNature_tokens(player_tracker.getNature_tokens() + 1);
-                System.out.println("You have gained a nature token, you now have " + player_tracker.getNature_tokens() + "!");
+                System.out.println("\nYou have gained a nature token, you now have " + player_tracker.getNature_tokens() + "!");
             }
             board[x][y].setAnimals(animal);
 
@@ -301,21 +253,6 @@ public class Board extends Printer // todo comments
         }
 
     }
-
-    public static void print_board(Board[][] board, Player_Tracker player_tracker) {
-        String row;
-        System.out.println(column_numbers(player_tracker.getMax_col()));
-        for (int i = 0; i != player_tracker.getMax_row(); i++) {                // printing the board + 1 empty row boarder
-            if (i % 2 == 0 && player_tracker.getOdd() == 1 || i % 2 == 1 && player_tracker.getOdd() == 0) {
-                row = row_printer(board[i], player_tracker.getMax_col(),0, String.valueOf(i));      // maxrow specifies lenght
-            } else {
-                row = row_printer(board[i], player_tracker.getMax_col(), 1, String.valueOf(i));
-            }
-            System.out.println(row);
-        }
-        System.out.println("\n");
-    }
-
 
     public static void indent_col(Board[][] board, Player_Tracker player_tracker) {
         for (int i = 0; i < player_tracker.getMax_row() + 1; i++) {
@@ -345,9 +282,9 @@ public class Board extends Printer // todo comments
     }
 
 
-    public static void place_slot_tiles2(int x, int y, Board[][] board, Player_Tracker player_tracker) {             // determines where to place slot tiles
+    public static void place_slot_tiles(int x, int y, Board[][] board, Player_Tracker player_tracker) {             // determines where to place slot tiles
         int plusOne = 1;
-        if (x % 2 == 0 && player_tracker.getOdd() == 1) plusOne = 0;          // NOTE TO MICHAL MAKE VALIDATE ODD FUNCTION USING THIS LINE
+        if (x % 2 == 0 && player_tracker.getOdd() == 1) plusOne = 0;
         if (player_tracker.getCheckOddOrEven() == 1 && player_tracker.getOdd() == 0 && x % 2 != 0) plusOne = 0;
 
         if (y-1>=0 && board[x][y-1] == null){
@@ -395,7 +332,6 @@ public class Board extends Printer // todo comments
     }
 
 
-    // TODO TEMP TEST FEATURE REMOPVE LATERRR
     public static void print_boards(Board[][] board, int Max_col, int Max_row, int odd) {
         String row;
         System.out.println(column_numbers(Max_col));

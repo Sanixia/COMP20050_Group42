@@ -432,19 +432,24 @@ public class Scoring_Setup extends Board
 
                     salmon_score += salmon_score_calculate(salmon_scoring_cards(i, j, scoring_cards[4]), scoring_cards[4]);
                 }
-                if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='e') {
-
-                    elk_num += elk_scoring_cards(i, j, scoring_cards[1], -1);
-
-
-                }
             }
         }
+
+        for (int i=0; i< max_row; i++) {
+            for (int j = 0; j < max_col; j++) {
+
+                Board t = board[i][j];
+
+                if (t != null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0) == 'e') {
+
+                    elk_num += elk_scoring_cards(i, j, scoring_cards[1], -1);
+                }
+
+            }
+        }
+
         int fox_score = fox_score_calculate(fox_num, scoring_cards[2]);
-
         int bear_score = bear_score_calculate(bear_num, bear_shapes, scoring_cards[0]);                       // insert bear scoring
-
-
         System.out.println("\n\nTotal Fox score:" + fox_score);
 
         int hawk_score = 0;
@@ -457,19 +462,21 @@ public class Scoring_Setup extends Board
             hawk_score = hawk_num;
             System.out.println("Total Hawk score:" + hawk_score);
         }
+
         System.out.println("Total Bear score:" + bear_score);
         System.out.println("Total Salmon score:" + salmon_score);
 
         int elk_score = 0;
 
-        if(scoring_cards[1]==1) {
+        if(scoring_cards[1]==2) {
             elk_score = elk_num;
             System.out.println("Total Elk score:" + elk_score);
         }
         else {
-            elk_score= elk_score_calculate(elk_num, null, scoring_cards[1]);
+            elk_score += elk_score_calculate(elk_num, null, scoring_cards[1]);
             System.out.println("Total Elk score:" + elk_score + "\n");
         }
+        System.out.println("Total Nature Tokens:" + nature_tokens);
 
         System.out.println("\nTotal score for " + name + " is: " + (fox_score + hawk_score + bear_score + salmon_score + elk_score + nature_tokens + "\n\n\n\n"));
 

@@ -33,7 +33,7 @@ public class Scoring_Salmon extends Scoring_Cards
         for(int i=0; i<6; i++){
             surrounding_tile = get_surrounding_tile_coordinates(x2, y2, i+1);
 
-            if (!(surrounding_tile[0] < 0 || surrounding_tile[1] < 0 || surrounding_tile[0] > Board.MAXSIZE || surrounding_tile[1] > Board.MAXSIZE) &&
+            if (!(surrounding_tile[0] < 0 || surrounding_tile[1] < 0 || surrounding_tile[0] >= Board.MAXSIZE || surrounding_tile[1] >= Board.MAXSIZE) &&
                     getBoard()[surrounding_tile[0]][surrounding_tile[1]] != null && getBoard()[surrounding_tile[0]][surrounding_tile[1]].getAnimals().charAt(0) == 's'){
 
 
@@ -92,7 +92,7 @@ public class Scoring_Salmon extends Scoring_Cards
                 for(int j = 0; j < 6; j++){
                     surrounding_tile = get_surrounding_tile_coordinates(x2, y2, j+1);
 
-                    if (!(surrounding_tile[0] < 0 || surrounding_tile[1] < 0 || surrounding_tile[0] > Board.MAXSIZE || surrounding_tile[1] > Board.MAXSIZE) &&
+                    if (!(surrounding_tile[0] < 0 || surrounding_tile[1] < 0 || surrounding_tile[0] >= Board.MAXSIZE || surrounding_tile[1] >= Board.MAXSIZE) &&
                             getBoard()[surrounding_tile[0]][surrounding_tile[1]] != null &&
                             getBoard()[surrounding_tile[0]][surrounding_tile[1]].getAnimals().charAt(0) == 's' &&
                             !deepContains(salmon_found, new Integer[]{surrounding_tile [0], surrounding_tile [1]})){
