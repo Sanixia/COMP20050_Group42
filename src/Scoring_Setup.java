@@ -60,14 +60,10 @@ public class Scoring_Setup extends Board
         b[0][5] = new Board("RM", "e", 0);
         b[0][6] = new Board("RM", "e", 0);
         b[0][7] = new Board("RM", "e", 0);
-        b[2][0] = new Board("RM", "e", 0);
-        b[2][1] = new Board("RM", "e", 0);
         b[2][2] = new Board("RM", "e", 0);
         b[2][3] = new Board("RM", "e", 0);
-        b[2][6] = new Board("RM", "e", 0);
-        b[2][7] = new Board("RM", "e", 0);
         b[3][4] = new Board("RM", "e", 0);
-        b[3][6] = new Board("RM", "e", 0);
+        b[3][2] = new Board("RM", "e", 0);
         b[4][0] = new Board("RM", "e", 0);
         b[4][1] = new Board("RM", "e", 0);
         b[4][4] = new Board("RM", "e", 0);
@@ -75,6 +71,26 @@ public class Scoring_Setup extends Board
         b[5][0] = new Board("RM", "e", 0);
         b[5][1] = new Board("RM", "e", 0);
         b[5][4] = new Board("RM", "e", 0);
+
+
+        /*
+        b[0][0] = new Board("RM", "b", 0);
+        b[0][2] = new Board("RM", "b", 0);
+        b[0][3] = new Board("RM", "b", 0);
+        b[0][5] = new Board("RM", "b", 0);
+        b[0][6] = new Board("RM", "b", 0);
+        b[0][7] = new Board("RM", "b", 0);
+        b[2][2] = new Board("RM", "b", 0);
+        b[2][3] = new Board("RM", "b", 0);
+        b[3][4] = new Board("RM", "b", 0);
+        b[3][2] = new Board("RM", "b", 0);
+        b[4][0] = new Board("RM", "b", 0);
+        b[4][1] = new Board("RM", "b", 0);
+        b[4][4] = new Board("RM", "b", 0);
+        b[4][5] = new Board("RM", "b", 0);
+        b[5][0] = new Board("RM", "b", 0);
+        b[5][1] = new Board("RM", "b", 0);
+         */
 
 
         // TODO                b e f h s
@@ -108,7 +124,7 @@ public class Scoring_Setup extends Board
                     //hawk_num += hawk_scoring_cards(i, j, 3);
                 }
                 else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='b') {        // BEAR
-                    //System.out.println("bear   ["+i+"]["+j+"] " + bear_scoring_cards(i, j, scoring_cards[0]));
+                    System.out.println("bear   ["+i+"]["+j+"] " + bear_scoring_cards(i, j, scoring_cards[0]));
                     if (scoring_cards[0]==3) {
                         bear_shapes[b] = bear_scoring_cards(i, j, scoring_cards[0]);
                         b++;
@@ -133,7 +149,7 @@ public class Scoring_Setup extends Board
         int fox_score = fox_score_calculate(fox_num, scoring_cards[2]);
         int hawk_score = hawk_score_calculate(hawk_num, 2);
         int bear_score = bear_score_calculate(bear_num, bear_shapes, scoring_cards[0]);
-        int elk_score = elk_score_calculate(elk_num, scoring_cards[1]); // insert bear scoring
+        int elk_score = elk_score_calculate(elk_num, elk_shapes, scoring_cards[1]); // insert bear scoring
         int salmon_score2 = salmon_score_calculate(salmon_score, 3);
         System.out.println("\nTotal Fox score:" + fox_score);
         System.out.println("Total Hawk score:" + hawk_num);
@@ -177,9 +193,9 @@ public class Scoring_Setup extends Board
     public static int elk_scoring_cards(int x, int y, int card, int pos) {
 
         return switch (card) {
-            case 1 -> elk_score_calculate(Scoring_Elk.elk_scoring_1(x, y, pos), card);
-            case 2 -> elk_score_calculate(Scoring_Elk.elk_scoring_2(x, y), card);
-            default -> elk_score_calculate(Scoring_Elk.elk_scoring_3(x, y), card);
+            case 1 -> elk_score_calculate(Scoring_Elk.elk_scoring_1(x, y, pos), null, card);
+            case 2 -> elk_score_calculate(Scoring_Elk.elk_scoring_2(x, y), null, card);
+            default -> Scoring_Elk.elk_scoring_3(x, y);
         };
     }
 
@@ -248,29 +264,46 @@ public class Scoring_Setup extends Board
                     if (bear_shape == 3) three++;
                     if (bear_shape == 4) three_b++;
                 }
-                three += three_b/3;
+                three = three/3;
+                two = two/2;
+                three += three_b;
                 if (one>0 && two>0 && three>0) bonus=3;
                 return one*2 + two*5 + three*8 + bonus;
         }
     }
 
-    public static int elk_score_calculate(int e, int card) {
-        if (card == 2) {
-            if (e == 0) return 0;
-            if (e == 1) return 2;
-            if (e == 2) return 4;
-            if (e == 3) return 7;
-            if (e == 4) return 10;
-            if (e == 5) return 14;
-            if (e == 6) return 18;
-            if (e == 7) return 23;
-            return 28;
+    public static int elk_score_calculate(int e, int[] elk_shapes, int card) {
+        switch(card){
+            case 1:
+                if (e == 0) return 0;
+                if (e == 1) return 2;
+                if (e == 2) return 5;
+                if (e == 3) return 9;
+                return 13;
+            case 2:
+                if (e == 0) return 0;
+                if (e == 1) return 2;
+                if (e == 2) return 4;
+                if (e == 3) return 7;
+                if (e == 4) return 10;
+                if (e == 5) return 14;
+                if (e == 6) return 18;
+                if (e == 7) return 23;
+                return 28;
+            default:
+                int one=0, two=0, three=0, four=0;
+                for (int elk_shape : elk_shapes) {
+                    if (elk_shape == 1) one++;
+                    if (elk_shape == 2) two++;
+                    if (elk_shape == 3) three++;
+                    if (elk_shape == 4) four++;
+                }
+                two = two/2;
+                three = three/3;
+                four = four/2;
+                return one*2 + two*5 + three*9 + four*13;
+
         }
-        if (e == 0) return 0;
-        if (e == 1) return 2;
-        if (e == 2) return 5;
-        if (e == 3) return 9;
-        return 13;
     }
 
     public static int salmon_score_calculate(int s, int card) {
@@ -417,7 +450,7 @@ public class Scoring_Setup extends Board
             System.out.println("Total Elk score:" + elk_score);
         }
         else {
-            elk_score= elk_score_calculate(elk_num, scoring_cards[1]);
+            elk_score= elk_score_calculate(elk_num, null, scoring_cards[1]);
             System.out.println("Total Elk score:" + elk_score + "\n");
         }
 

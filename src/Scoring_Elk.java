@@ -102,7 +102,7 @@ public class Scoring_Elk extends Scoring_Cards
         }
 
 
-        return elk_score_calculate(elk_total, 2);
+        return elk_score_calculate(elk_total, null, 2);
     }
 
 
@@ -117,7 +117,7 @@ public class Scoring_Elk extends Scoring_Cards
         }
 
         if (positions.size()==0) {
-            System.out.println("\n1");
+            //System.out.println("\n1");
             return 1;
         }
 
@@ -134,7 +134,7 @@ public class Scoring_Elk extends Scoring_Cards
             }
 
             if (positions1.size() == 1) {
-                System.out.println("\n2");
+                //System.out.println("\n2");
                 return 2;
             }
             return 0;
@@ -160,7 +160,7 @@ public class Scoring_Elk extends Scoring_Cards
 
         if (positions.size()==2) {
             if (check_beside(positions.get(0), positions.get(1)) && positions1.size()==2 && positions2.size()==2) {
-                System.out.println("\n3");
+                //System.out.println("\n3");
                 return 3;
             }
         }
@@ -177,8 +177,13 @@ public class Scoring_Elk extends Scoring_Cards
                 }
             }
 
-            if (check_beside(positions.get(0),positions.get(1)) && check_beside(positions.get(1),positions.get(2)) && positions1.size() + positions2.size() + positions3.size() == 7) {
-                System.out.println("\n4");
+            int beside = 0;
+            if (check_beside(positions.get(0),positions.get(1))) beside ++;
+            if (check_beside(positions.get(0),positions.get(2))) beside ++;
+            if (check_beside(positions.get(1),positions.get(2))) beside ++;
+
+            if (beside==2 && positions1.size() + positions2.size() + positions3.size() == 7) {
+                //System.out.println("\n4");
                 return 4;
             }
         }
