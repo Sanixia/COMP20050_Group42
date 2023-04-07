@@ -115,18 +115,17 @@ public class Scoring_Setup extends Board
             for (int j=0; j<MAXSIZE; j++) {
                 Board t = board[i][j];
                 if( t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='f') {            // FOX
-                    System.out.println("fox    ["+i+"]["+j+"] " + fox_scoring_cards(i, j, scoring_cards[2]));
-                    fox_num += fox_scoring_cards(i, j, 1);
+                    //System.out.println("fox    ["+i+"]["+j+"] " + fox_scoring_cards(i, j, scoring_cards[2]));
+                    fox_num += fox_scoring_cards(i, j, scoring_cards[2]);
                 }
                 else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='h') {        // HAWK
-                    System.out.println("hawk   ["+i+"]["+j+"] " + hawk_scoring_cards(i, j, scoring_cards[3]));
+                   // System.out.println("hawk   ["+i+"]["+j+"] " + hawk_scoring_cards(i, j, scoring_cards[3]));
                     if(scoring_cards[3]==3) {
                         hawk_num += hawk_score_calculate(hawk_scoring_cards(i, j, scoring_cards[3]), scoring_cards[3]);
                     }
                     else{
-                        hawk_num += hawk_scoring_cards(i, j, 2);
+                        hawk_num += hawk_scoring_cards(i, j, scoring_cards[3]);
                     }
-                    hawk_num += hawk_scoring_cards(i, j, 3);
                 }
                 else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='b') {        // BEAR
                     System.out.println("bear   ["+i+"]["+j+"] " + bear_scoring_cards(i, j, scoring_cards[0]));
@@ -137,33 +136,63 @@ public class Scoring_Setup extends Board
                     else bear_num += bear_scoring_cards(i, j, scoring_cards[0]);
                 }
                 else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='s') {        // SALMON
-                    System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, 3));
-                    salmon_score += salmon_score_calculate(salmon_scoring_cards(i, j, 2), 2);
+                    //System.out.println("salmon ["+i+"]["+j+"] " + salmon_scoring_cards(i, j, 3));
+                    salmon_score += salmon_score_calculate(salmon_scoring_cards(i, j, scoring_cards[4]), scoring_cards[4]);
                 }
-                if(t!=null && t.getAnimals().charAt(0)=='e') {                                          // ELK
-                    System.out.println("elk    ["+i+"]["+j+"] " + elk_scoring_cards(i, j, scoring_cards[1], -1));
+            }
+        }
+
+        for (int i=0; i< MAXSIZE; i++) {
+            for (int j = 0; j < MAXSIZE; j++) {
+
+                Board t = board[i][j];
+
+                if (t != null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0) == 'e') {       // ELK
                     if (scoring_cards[1]==3) {
                         elk_shapes[e] = elk_scoring_cards(i, j, scoring_cards[1], 0);
                         e++;
                     }
-                    else elk_num += elk_scoring_cards(i, j, 2, -1);
-                    //elk_score += elk_scoring_cards(i, j, 2, -1);
+                    else{
+                        elk_num += elk_scoring_cards(i, j, scoring_cards[1], -1);
+                    }
+
                 }
+
             }
         }
+
+
+
         int fox_score = fox_score_calculate(fox_num, scoring_cards[2]);
-        int hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
         int bear_score = bear_score_calculate(bear_num, bear_shapes, scoring_cards[0]);
-        int elk_score = elk_score_calculate(elk_num, elk_shapes, scoring_cards[1]); // insert bear scoring
-        int salmon_score2 = salmon_score_calculate(salmon_score, scoring_cards[4]);
-        System.out.println("\nTotal Fox score:" + fox_score);
-        System.out.println("Total Hawk score:" + hawk_num);
+        System.out.println("\n\nTotal Fox score:" + fox_score);
+
+        int hawk_score = 0;
+
+        if(scoring_cards[3]==3) {
+            hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
+            System.out.println("Total Hawk score:" + hawk_score);
+        }
+        else {
+            hawk_score = hawk_num;
+            System.out.println("Total Hawk score:" + hawk_score);
+        }
+
         System.out.println("Total Bear score:" + bear_score);
         System.out.println("Total Salmon score:" + salmon_score);
-        System.out.println("Total Elk score:" + elk_score);
-        System.out.println("Total Elk num:" + elk_num);
 
-        return fox_score + hawk_score + bear_score + elk_score + salmon_score2;
+        int elk_score = 0;
+
+        if(scoring_cards[1]==2 || scoring_cards[1]==1){
+            elk_score = elk_num;
+            System.out.println("Total Elk score:" + elk_score);
+        }
+        else if(scoring_cards[1]==3) {
+            elk_score = elk_score_calculate(elk_num, elk_shapes, scoring_cards[1]);
+            System.out.println("Total Elk score:" + elk_score);
+        }
+
+        return fox_score + hawk_score + bear_score + elk_score + salmon_score;
     }
 
 
