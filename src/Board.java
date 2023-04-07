@@ -222,7 +222,7 @@ public class Board extends Printer // todo comments
 
 
 
-    public static void place_animal_token(String animal,Board[][] board, Player_Tracker player_tracker) { //TODO verify
+    public static void place_animal_token(String animal,Board[][] board, Player_Tracker player_tracker) {
 
         if(availableTokenPlacement(animal, board, player_tracker)){
             Scanner in = new Scanner(System.in);

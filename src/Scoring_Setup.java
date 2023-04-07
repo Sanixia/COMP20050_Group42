@@ -200,7 +200,7 @@ public class Scoring_Setup extends Board
 
         return switch (card) {
             case 1 -> elk_score_calculate(Scoring_Elk.elk_scoring_1(x, y, pos), null, card);
-            case 2 -> elk_score_calculate(Scoring_Elk.elk_scoring_2(x, y), null, card);
+            case 2 -> Scoring_Elk.elk_scoring_2(x, y);
             case 3 -> Scoring_Elk.elk_scoring_3(x, y);
             default -> 0;
         };
@@ -399,8 +399,8 @@ public class Scoring_Setup extends Board
 
         int fox_num=0, hawk_num=0, bear_num=0, salmon_score=0, elk_num=0;
 
-        int[] bear_shapes = new int[20];
-        int b=0;
+        int[] bear_shapes = new int[20],  elk_shapes = new int[22];;
+        int b=0, e=0;
 
         for (int i=0; i< max_row; i++) {
             for (int j=0; j< max_col; j++) {
@@ -441,8 +441,14 @@ public class Scoring_Setup extends Board
                 Board t = board[i][j];
 
                 if (t != null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0) == 'e') {
+                    if (scoring_cards[1]==3) {
+                        elk_shapes[e] = elk_scoring_cards(i, j, scoring_cards[1], 0);
+                        e++;
+                    }
+                    else{
+                        elk_num += elk_scoring_cards(i, j, scoring_cards[1], -1);
+                    }
 
-                    elk_num += elk_scoring_cards(i, j, scoring_cards[1], -1);
                 }
 
             }
@@ -468,14 +474,15 @@ public class Scoring_Setup extends Board
 
         int elk_score = 0;
 
-        if(scoring_cards[1]==2) {
+        if(scoring_cards[1]==2 || scoring_cards[1]==1){
             elk_score = elk_num;
             System.out.println("Total Elk score:" + elk_score);
         }
-        else {
-            elk_score += elk_score_calculate(elk_num, null, scoring_cards[1]);
-            System.out.println("Total Elk score:" + elk_score + "\n");
+        else if(scoring_cards[1]==3) {
+            elk_score = elk_score_calculate(elk_num, elk_shapes, scoring_cards[1]);
+            System.out.println("Total Elk score:" + elk_score);
         }
+
         System.out.println("Total Nature Tokens:" + nature_tokens);
 
         System.out.println("\nTotal score for " + name + " is: " + (fox_score + hawk_score + bear_score + salmon_score + elk_score + nature_tokens + "\n\n\n\n"));

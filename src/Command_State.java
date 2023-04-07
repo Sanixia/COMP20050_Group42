@@ -340,7 +340,7 @@ public class Command_State
     }
 
     public static void quitMessage(){
-        System.out.println("\nYou have quit the game.");
+        System.out.println("\nGame ended! Thanks for playing!");
     }
 
 
@@ -363,10 +363,6 @@ public class Command_State
     public void setToQuit() {
         Command_State.state_type = state.QUIT;
     }
-    public void setState_habitat_menu(){
-        Command_State.state_type = state.HABITAT_MENU;
-    }
-
 
 
     public void setState_type_habitat_menu(){
