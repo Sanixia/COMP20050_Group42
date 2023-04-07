@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class Scoring_HawkTest {
 
     @Test
-    public void hawk_scoring_1() {
+    public void hawk_scoring_A() {
         int[] scoring_cards = {0,0,0,1,0};
 
         Board[][] b = new Board[26][26];
@@ -40,7 +40,7 @@ class Scoring_HawkTest {
     }
 
     @Test
-    public void hawk_scoring_2() {
+    public void hawk_scoring_B() {
         int[] scoring_cards = {0,0,0,2,0};
 
         Board[][] b = new Board[26][26];
@@ -80,7 +80,7 @@ class Scoring_HawkTest {
     }
 
     @Test
-    public void hawk_scoring_3() {
+    public void hawk_scoring_C() {
 
         int[] scoring_cards = {0,0,0,3,0};
 
