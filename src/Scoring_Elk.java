@@ -107,6 +107,81 @@ public class Scoring_Elk extends Scoring_Cards
 
 
     public static int elk_scoring_3(int x, int y) {         // TODO
+        ArrayList<Integer> positions = new ArrayList<Integer>();
+
+        for (int i = 1; i <= 6; i++) {             // will only check to the right, bottom right, bottom left to not count any tiles that were before it
+            Board surrounding_tile = get_surrounding_tile(x, y, i);
+            if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'e'){
+                positions.add(i);
+            }
+        }
+
+        if (positions.size()==0) {
+            System.out.println("\n1");
+            return 1;
+        }
+
+        int x1 = get_surrounding_row(x, y, positions.get(0));
+        int y1 = get_surrounding_col(x, y, positions.get(0));
+        ArrayList<Integer> positions1 = new ArrayList<Integer>();
+
+        if (positions.size()==1) {
+            for (int i = 1; i <= 6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
+                Board surrounding_tile = get_surrounding_tile(x1, y1, i);
+                if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'e'){
+                    positions1.add(i);
+                }
+            }
+
+            if (positions1.size() == 1) {
+                System.out.println("\n2");
+                return 2;
+            }
+            return 0;
+        }
+
+        int x2 = get_surrounding_row(x, y, positions.get(1));
+        int y2 = get_surrounding_col(x, y, positions.get(1));
+        ArrayList<Integer> positions2 = new ArrayList<Integer>();
+
+        for (int i = 1; i <= 6; i++) {
+            Board surrounding_tile = get_surrounding_tile(x1, y1, i);
+            if (surrounding_tile != null && surrounding_tile.getAnimals().charAt(0) == 'e') {
+                positions1.add(i);
+            }
+        }
+
+        for (int i = 1; i <= 6; i++) {
+            Board surrounding_tile = get_surrounding_tile(x2, y2, i);
+            if (surrounding_tile != null && surrounding_tile.getAnimals().charAt(0) == 'e') {
+                positions2.add(i);
+            }
+        }
+
+        if (positions.size()==2) {
+            if (check_beside(positions.get(0), positions.get(1)) && positions1.size()==2 && positions2.size()==2) {
+                System.out.println("\n3");
+                return 3;
+            }
+        }
+
+        if (positions.size()==3) {
+            int x3 = get_surrounding_row(x, y, positions.get(2));
+            int y3 = get_surrounding_col(x, y, positions.get(2));
+            ArrayList<Integer> positions3 = new ArrayList<Integer>();
+
+            for (int i = 1; i <= 6; i++) {
+                Board surrounding_tile = get_surrounding_tile(x3, y3, i);
+                if (surrounding_tile != null && surrounding_tile.getAnimals().charAt(0) == 'e') {
+                    positions3.add(i);
+                }
+            }
+
+            if (check_beside(positions.get(0),positions.get(1)) && check_beside(positions.get(1),positions.get(2)) && positions1.size() + positions2.size() + positions3.size() == 7) {
+                System.out.println("\n4");
+                return 4;
+            }
+        }
         return 0;
     }
 }
