@@ -7,9 +7,21 @@ public class Scoring_Salmon extends Scoring_Cards
         super(biome, animals, rotation);
     }
 
+
+
     private static ArrayList<Integer[]> salmon_found = new ArrayList<Integer[]>();
 
+
+
     private static int index_salmon = 1;
+
+    public static ArrayList<Integer[]> getSalmon_found() {
+        return salmon_found;
+    }
+
+    public static void setIndex_salmon(int index_salmon) {
+        Scoring_Salmon.index_salmon = index_salmon;
+    }
 
     public static int getIndex_salmon() {
         return index_salmon;

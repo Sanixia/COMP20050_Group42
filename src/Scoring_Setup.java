@@ -132,7 +132,7 @@ public class Scoring_Setup extends Board
                     }
                 }
                 else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='b') {        // BEAR
-                    System.out.println("bear   ["+i+"]["+j+"] " + bear_scoring_cards(i, j, scoring_cards[0]));
+                    // System.out.println("bear   ["+i+"]["+j+"] " + bear_scoring_cards(i, j, scoring_cards[0]));
                     if (scoring_cards[0]==3) {
                         bear_arr[b] = bear_scoring_cards(i, j, scoring_cards[0]);
                         b++;
@@ -145,7 +145,7 @@ public class Scoring_Setup extends Board
                 }
             }
         }
-        // seperate loop for elks to not affect other tiles as elk are removed after scoring
+        // separate loop for elks to not affect other tiles as elk are removed after scoring
         for (int i=0; i< MAXSIZE; i++) {
             for (int j = 0; j < MAXSIZE; j++) {
 
@@ -443,15 +443,15 @@ public class Scoring_Setup extends Board
 
                 Board t = board[i][j];
                 if( t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='f') {            // FOX
-                    //System.out.println("fox    ["+i+"]["+j+"] " + fox_scoring_cards(i, j, scoring_cards[2]));
+
                     if (scoring_cards[2]==2) {
-                        fox_arr[f] = fox_scoring_cards(i, j, scoring_cards[0]);
+                        fox_arr[f] = fox_scoring_cards(i, j, scoring_cards[2]);
                         f++;
                     }
                     else fox_num += fox_scoring_cards(i, j, scoring_cards[2]);
                 }
 
-                if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='h') {
+                if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='h') {           // HAWK
                     if(scoring_cards[3]==3) {
                         hawk_num += hawk_score_calculate(hawk_scoring_cards(i, j, scoring_cards[3]), scoring_cards[3]);
                     }
@@ -460,7 +460,7 @@ public class Scoring_Setup extends Board
                     }
                 }
 
-                if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='b') {
+                if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='b') {          // BEAR
 
                     if (scoring_cards[0]==3) {
                         bear_arr[b] = bear_scoring_cards(i, j, scoring_cards[0]);
@@ -475,7 +475,7 @@ public class Scoring_Setup extends Board
             }
         }
 
-        for (int i=0; i< max_row; i++) {
+        for (int i=0; i< max_row; i++) {           // ELK
             for (int j = 0; j < max_col; j++) {
 
                 Board t = board[i][j];
@@ -495,7 +495,7 @@ public class Scoring_Setup extends Board
         }
 
         int fox_score = fox_score_calculate(fox_num, scoring_cards[2], fox_arr);
-        int bear_score = bear_score_calculate(bear_num, bear_arr, scoring_cards[0]);                       // insert bear scoring
+        int bear_score = bear_score_calculate(bear_num, bear_arr, scoring_cards[0]);
         System.out.println("\n\nTotal Fox score:" + fox_score);
 
         int hawk_score = 0;
