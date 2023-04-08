@@ -2,7 +2,7 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class Scoring_Test_Board {
+class Scoring_Board_Test {
         @Test
         void Test_Example_Board_All_A() {
                 int[] scoring_cards = {1,1,1,1,1};

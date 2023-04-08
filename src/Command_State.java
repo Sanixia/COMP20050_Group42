@@ -199,7 +199,7 @@ public class Command_State {
                     break;
                 case 7:
                     any_token();
-                    menu_type = 4;
+                    menu_type = 1;
                     menu_type_string = "Please enter 1, 2, 3 or 4.";
                     break;
                 case 8:
