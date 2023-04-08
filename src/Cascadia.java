@@ -5,6 +5,7 @@ public class Cascadia extends Display_And_Input{
      * This is the main class for the Cascadia game
      * It will run the game and call all the other classes
      * Use Command_State to get the input from the user and set the state of the game with ease using do while loops
+     * You can select 1 player for quickly checking how the game works
      */
 
 
@@ -294,7 +295,7 @@ public class Cascadia extends Display_And_Input{
     public static void next_player_turn(){
         getPlayers().get(playerNum).setPlayerTurn();  //increments turn by 1 each time this is called
 
-        if (getPlayers().get(playerNum).getPlayerTurn() < 1) {
+        if (getPlayers().get(playerNum).getPlayerTurn() < 20) {
             if (playerNum == getPlayer_count() - 1) {    //resets to the start of the player list
                 playerNum = 0;
             } else {
