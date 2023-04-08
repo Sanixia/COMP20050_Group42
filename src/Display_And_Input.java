@@ -1,8 +1,11 @@
 import java.util.*;
 
 
-public class Display_And_Input
-{
+public class Display_And_Input {
+
+    /**
+     * This class is used to display output to users like tiles and habitats and receives input from users too
+     */
 
     private static ArrayList<Player_Tracker> players_score_calculation = new ArrayList<>();
 

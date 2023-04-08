@@ -1,8 +1,16 @@
 
 import java.util.Scanner;
 
-public class Command_State
-{
+
+public class Command_State {
+
+    /**
+     * This class is used to determine the state of the game
+     */
+
+
+
+
     // Choice used for main Cascadia function for different menu options
     private static int choice;
     static Command_State commandState = new Command_State(0,0);
@@ -360,7 +368,11 @@ public class Command_State
         Command_State.habitat_tile_choice = habitat_tile_choice;
     }
 
-    public void setToQuit() {
+    public static void setToMainMenu(Command_State command_state) {
+        Command_State.state_type = state.MAIN_MENU;
+    }
+
+    public static void setToQuit(Command_State command_state) {
         Command_State.state_type = state.QUIT;
     }
 

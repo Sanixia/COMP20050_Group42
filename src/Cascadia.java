@@ -1,5 +1,16 @@
 
 public class Cascadia extends Display_And_Input{
+
+    /**
+     * This is the main class for the Cascadia game
+     * It will run the game and call all the other classes
+     * Use Command_State to get the input from the user and set the state of the game with ease using do while loops
+     * You can select 1 player for quickly checking how the game works
+     */
+
+
+
+
     private static int playerNum = 0;
     private static boolean culling_trigger = true;
 
@@ -8,8 +19,6 @@ public class Cascadia extends Display_And_Input{
     private static int player_turns_over = 0;
 
     private static Command_State command_state;
-
-    // fix issue with game over
 
     public static void main(String[] args)
     {
@@ -111,7 +120,7 @@ public class Cascadia extends Display_And_Input{
                                     do{
                                         boolean proper_input = true;
 
-                                        if(!check_keystone){
+                                        if(!check_keystone){ // if the tile is not a keystone
 
                                             getPlayers().get(playerNum).print_board(getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum)); //prints board
                                             display_tiles_and_tokens(culling_trigger);
@@ -129,9 +138,9 @@ public class Cascadia extends Display_And_Input{
 
                                         }
 
-                                        else{
-                                            getPlayers().get(playerNum).print_board(getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
+                                        else{ // if the tile is a keystone
 
+                                            getPlayers().get(playerNum).print_board(getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
                                             place_tile(place_tile, 0, getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
                                             proper_input = false;
                                         }
@@ -201,12 +210,6 @@ public class Cascadia extends Display_And_Input{
                                                         next_player_turn();
 
                                                     }
-
-
-                                                    // next player turn
-
-
-
                                                 }
 
 
@@ -292,7 +295,7 @@ public class Cascadia extends Display_And_Input{
     public static void next_player_turn(){
         getPlayers().get(playerNum).setPlayerTurn();  //increments turn by 1 each time this is called
 
-        if (getPlayers().get(playerNum).getPlayerTurn() < 3) {
+        if (getPlayers().get(playerNum).getPlayerTurn() < 20) {
             if (playerNum == getPlayer_count() - 1) {    //resets to the start of the player list
                 playerNum = 0;
             } else {
@@ -301,7 +304,9 @@ public class Cascadia extends Display_And_Input{
             System.out.println("\n\n" + getPlayers().get(playerNum).getPlayer_name() + " is up!");
             culling_trigger = true;
 
-        } else {
+            Command_State.setToMainMenu(command_state);
+        }
+        else {
 
             player_turns_over++;
 
@@ -320,11 +325,10 @@ public class Cascadia extends Display_And_Input{
 
                 }
 
-               command_state.setToQuit();
+               Command_State.setToQuit(command_state);
 
-
-
-            } else {
+            }
+            else {
                 System.out.println("You have no more turns left, calculating score once everyone is done...");
                 if (playerNum == getPlayer_count() - 1) {    //resets to the start of the player list
                     playerNum = 0;
