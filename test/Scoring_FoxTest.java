@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class Scoring_FoxTest
 {
     @Test
-    public void fox_scorecard1() {
+    public void fox_scorecard_A() {
         Board[][] b = new  Board[26][26];
         int[] scoring_cards = {0,0,1,0,0};
 
@@ -35,7 +35,7 @@ class Scoring_FoxTest
     }
 
     @Test
-    public void fox_scorecard2() {
+    public void fox_scorecard_B() {
         Board[][] b = new  Board[26][26];
         int[] scoring_cards = {0,0,2,0,0};
 
@@ -67,7 +67,7 @@ class Scoring_FoxTest
     }
 
     @Test
-    public void fox_scorecard3() {
+    public void fox_scorecard_C() {
         Board[][] b = new  Board[26][26];
         int[] scoring_cards = {0,0,3,0,0};
 

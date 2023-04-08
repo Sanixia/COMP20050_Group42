@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class Scoring_BearTest
 {
     @Test
-    public void bear_scorecard1() {
+    public void bear_scorecard_A() {
         Board[][] b = new  Board[26][26];
         int[] scoring_cards = {1, 0, 0, 0, 0};  // b e f h s
 
@@ -37,7 +37,7 @@ class Scoring_BearTest
     }
 
     @Test
-    public void bear_scorecard2() {
+    public void bear_scorecard_B() {
         Board[][] b1 = new  Board[26][26];
         Board[][] b2 = new  Board[26][26];
         int[] scoring_cards = {2, 0, 0, 0, 0};  // b e f h s
@@ -77,7 +77,7 @@ class Scoring_BearTest
     }
 
     @Test
-    public void bear_scorecard3() {
+    public void bear_scorecard_C() {
         Board[][] b1 = new  Board[26][26];
         Board[][] b2 = new  Board[26][26];
         int[] scoring_cards = {3, 0, 0, 0, 0};  // b e f h s
