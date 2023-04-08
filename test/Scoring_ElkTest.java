@@ -119,6 +119,7 @@ public class Scoring_ElkTest {
         assertEquals(48, elk_score);
     }
 
+    /*
     @Test
     void elk_scoring_C() {
         Board[][] b = new  Board[26][26];
@@ -178,5 +179,81 @@ public class Scoring_ElkTest {
 
         // 2 + 5 + 9 + 13 + 9 + 5 + 5 = 48
         assertEquals(0, elk_score);
+    }
+     */
+
+    @Test
+    void elk_scoring_C() {
+        Board[][] b = new  Board[26][26];
+        Board[][] b1 = new  Board[26][26];
+        Board[][] b2 = new  Board[26][26];
+        int[] scoring_cards = {0,3,0,0,0};
+
+        b[0][0] = new Board("W", "e", 0);
+        b[0][1] = new Board("W", "e", 0);
+        b[0][3] = new Board("W", "e", 0);
+        b[0][5] = new Board("W", "e", 0);
+        b[0][6] = new Board("W", "e", 0);
+        b[1][0] = new Board("W", "e", 0);
+        b[1][1] = new Board("W", "e", 0);
+        b[1][3] = new Board("W", "S", 0);
+        b[1][4] = new Board("W", "e", 0);
+        b[1][5] = new Board("W", "e", 0);
+        b[2][1] = new Board("W", "B", 0);
+        b[2][2] = new Board("W", "H", 0);
+        b[2][3] = new Board("W", "e", 0);
+        b[3][0] = new Board("W", "e", 0);
+        b[3][2] = new Board("W", "e", 0);
+        b[3][3] = new Board("W", "e", 0);
+        b[3][4] = new Board("W", "F", 0);
+        b[3][5] = new Board("W", "e", 0);
+        b[3][6] = new Board("W", "e", 0);
+        b[4][1] = new Board("W", "e", 0);
+        b[4][3] = new Board("W", "e", 0);
+        b[4][6] = new Board("W", "e", 0);
+
+        Board.print_boards(b, 8, 5, 1);
+        int elk_score = Scoring_Setup.scoring_setups(b, 1,  scoring_cards);
+        assertEquals(55, elk_score);
+
+        b1[0][0] = new Board("W", "e", 0);
+        b1[0][3] = new Board("W", "e", 0);
+        b1[0][8] = new Board("W", "e", 0);
+        b1[1][0] = new Board("W", "e", 0);
+        b1[1][1] = new Board("W", "e", 0);
+        b1[1][3] = new Board("W", "e", 0);
+        b1[1][4] = new Board("W", "e", 0);
+        b1[1][5] = new Board("W", "e", 0);
+        b1[1][7] = new Board("W", "e", 0);
+        b1[2][0] = new Board("W", "e", 0);
+        b1[2][7] = new Board("W", "e", 0);
+        b1[3][2] = new Board("W", "e", 0);
+        b1[3][3] = new Board("W", "e", 0);
+        b1[3][6] = new Board("W", "e", 0);
+        b1[4][2] = new Board("W", "e", 0);
+
+
+        b2[0][0] = new Board("W", "e", 0);
+        b2[0][1] = new Board("W", "e", 0);
+        b2[0][4] = new Board("W", "e", 0);
+        b2[0][5] = new Board("W", "e", 0);
+        b2[1][0] = new Board("W", "e", 0);
+        b2[1][1] = new Board("W", "e", 0);
+        b2[1][3] = new Board("W", "e", 0);
+        b2[1][4] = new Board("W", "e", 0);
+        b2[1][7] = new Board("W", "e", 0);
+        b2[2][7] = new Board("W", "e", 0);
+        b2[2][8] = new Board("W", "e", 0);
+        b2[3][2] = new Board("W", "e", 0);
+        b2[3][3] = new Board("W", "e", 0);
+        b2[3][7] = new Board("W", "e", 0);
+        b2[4][3] = new Board("W", "e", 0);
+
+        Board.print_boards(b1, 9, 5, 1);
+        int elk_score1 = Scoring_Setup.scoring_setups(b1, 1,  scoring_cards);
+
+        Board.print_boards(b2, 9, 5, 1);
+        int elk_score2 = Scoring_Setup.scoring_setups(b2, 1,  scoring_cards);
+        assertNotEquals(elk_score2, elk_score1);
     }
 }
