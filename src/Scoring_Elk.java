@@ -14,13 +14,13 @@ public class Scoring_Elk extends Scoring_Cards
         int x2 = x, y2 = y;
         int[] coordinates = new int[2];
         Board surrounding_tile = null;
-        for (int i=2; i<5; i++) {
+        for (int i=2; i<6; i++) {
             if(pos == -1){
                 surrounding_tile = get_surrounding_tile(x2, y2, i);
                 coordinates = get_surrounding_tile_coordinates(x2, y2, i);
             }
             else{
-                i = 4;
+                i = 5;
                 surrounding_tile = get_surrounding_tile(x2, y2, pos);
                 coordinates = get_surrounding_tile_coordinates(x2, y2, pos);
 

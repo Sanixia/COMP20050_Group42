@@ -7,6 +7,9 @@ public class Scoring_Hawk extends Scoring_Cards
     }
 
     private static ArrayList<Integer[]> hawk_found = new ArrayList<Integer[]>();
+    public static ArrayList<Integer[]> getHawk_found() {
+        return hawk_found;
+    }
 
     public static int hawk_scoring_1(int x, int y) {     // returns 1 if hawk tile specified is valid and 0 otherwise
         int num_hawks=1;
