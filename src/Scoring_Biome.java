@@ -1,3 +1,6 @@
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 public class Scoring_Biome extends  Scoring_Cards
 {
 

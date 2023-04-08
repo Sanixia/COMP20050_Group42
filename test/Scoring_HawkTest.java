@@ -2,6 +2,9 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 class Scoring_HawkTest {
 
     @Test

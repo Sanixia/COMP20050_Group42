@@ -1,5 +1,7 @@
 import java.util.ArrayList;
-
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 public class Scoring_Bear extends Scoring_Cards
 {
     public Scoring_Bear(String biome, String animals, int rotation) {

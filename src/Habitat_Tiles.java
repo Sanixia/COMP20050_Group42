@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 public class Habitat_Tiles
 {
     /* System of using 2 arrays to create the habitat tiles, one for biomes, the other for the animals that can be placed

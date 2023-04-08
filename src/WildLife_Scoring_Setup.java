@@ -1,5 +1,7 @@
 import java.util.Random;
-
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 public class WildLife_Scoring_Setup {
 
     /**

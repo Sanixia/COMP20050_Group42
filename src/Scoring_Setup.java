@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Objects;
-
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 public class Scoring_Setup extends Board {
 
     /**

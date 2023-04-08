@@ -1,3 +1,6 @@
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 public class Scoring_Fox extends Scoring_Cards
 {
     public Scoring_Fox(String biome, String animals, int rotation) {

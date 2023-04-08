@@ -1,5 +1,7 @@
 import java.util.*;
-
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 
 public class Display_And_Input {
 

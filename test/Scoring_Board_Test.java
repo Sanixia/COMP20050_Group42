@@ -1,7 +1,9 @@
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 class Scoring_Board_Test {
         @Test
         void Test_Example_Board_All_A() {

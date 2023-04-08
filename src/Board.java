@@ -1,4 +1,6 @@
-
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 import java.util.Scanner;
 
 public class Board extends Printer // todo comments
