@@ -8,7 +8,7 @@ class Scoring_HawkTest {
     public void hawk_scoring_A() {
         int[] scoring_cards = {0,0,0,1,0};
 
-        Board[][] b = new Board[26][26];
+        Board[][] b = new  Board[26][26];;
 
         // Should equal 1 because hawk is on its own
         b[0][2] = new Board("F", "h", 0);
@@ -43,7 +43,7 @@ class Scoring_HawkTest {
     public void hawk_scoring_B() {
         int[] scoring_cards = {0,0,0,2,0};
 
-        Board[][] b = new Board[26][26];
+        Board[][] b = new  Board[26][26];
 
         // Should equal 1 because hawk as line of sight to only 2, 4
         b[0][3] = new Board("F", "h", 0);
@@ -84,7 +84,7 @@ class Scoring_HawkTest {
 
         int[] scoring_cards = {0,0,0,3,0};
 
-        Board[][] b = new Board[26][26];
+        Board[][] b = new  Board[26][26];
 
         // Should equal 1 because hawk as line of sight to only 2, 4
         b[0][3] = new Board("F", "h", 0);

@@ -132,7 +132,7 @@ public class Scoring_Setup extends Board
                     }
                 }
                 else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='b') {        // BEAR
-                    //System.out.println("bear   ["+i+"]["+j+"] " + bear_scoring_cards(i, j, scoring_cards[0]));
+                    System.out.println("bear   ["+i+"]["+j+"] " + bear_scoring_cards(i, j, scoring_cards[0]));
                     if (scoring_cards[0]==3) {
                         bear_arr[b] = bear_scoring_cards(i, j, scoring_cards[0]);
                         b++;

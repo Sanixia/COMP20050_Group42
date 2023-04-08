@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class Scoring_SetupTest {
         @Test
         void FoxTest() {
-                Board[][] b = new Board[26][26];
+                Board[][] b = new  Board[26][26];
 
                 b[0][2] = new Board("F", "f", 0);
                 b[0][3] = new Board("F", "f", 0);

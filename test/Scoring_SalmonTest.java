@@ -9,7 +9,7 @@ public class Scoring_SalmonTest {
     public void salmon_scoring_A() {
         int[] scoring_cards = {0,0,0,0,1};
 
-        Board[][] b = new Board[26][26];
+        Board[][] b = new  Board[26][26];
 
         // Gives 6 because they are not adjacent to more than 1 salmon for the run
         b[0][0] = new Board("P", "s", 0);

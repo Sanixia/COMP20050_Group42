@@ -2,11 +2,11 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class Scoring_FoxTest {
-
+class Scoring_FoxTest
+{
     @Test
     public void fox_scorecard1() {
-        Board[][] b = new Board[26][26];
+        Board[][] b = new  Board[26][26];
         int[] scoring_cards = {0,0,1,0,0};
 
         b[1][2] = new Board("F", "h", 0);
@@ -36,7 +36,7 @@ class Scoring_FoxTest {
 
     @Test
     public void fox_scorecard2() {
-        Board[][] b = new Board[26][26];
+        Board[][] b = new  Board[26][26];
         int[] scoring_cards = {0,0,2,0,0};
 
         b[1][1] = new Board("F", "h", 0);
@@ -68,7 +68,7 @@ class Scoring_FoxTest {
 
     @Test
     public void fox_scorecard3() {
-        Board[][] b = new Board[26][26];
+        Board[][] b = new  Board[26][26];
         int[] scoring_cards = {0,0,3,0,0};
 
         b[1][2] = new Board("F", "h", 0);

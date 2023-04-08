@@ -45,7 +45,14 @@ public class Scoring_Bear extends Scoring_Cards
     }
 
     public static int bear_scoring_2(int x, int y) {        // TODO
-        ArrayList<Integer> positions = get_surround_array(x, y, 1, 6, 'b');
+        ArrayList<Integer> positions = new ArrayList<Integer>();
+
+        for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
+            Board surrounding_tile = get_surrounding_tile(x, y, i+1);
+            if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'b'){
+                positions.add(i+1);
+            }
+        }
 
         if (positions.size()==2) {
             int x1 = get_surrounding_row(x, y, positions.get(0));
