@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Scoring_Setup extends Board
-{
+public class Scoring_Setup extends Board {
+
+    /**
+     * This class is used to calculate the score of the board
+     */
     private static int odd;
 
     private static Board[][] board;
@@ -426,7 +429,7 @@ public class Scoring_Setup extends Board
 
 
 
-    public static void scoring_setup(Board[][] board, int odd, int max_col, int max_row, int[] scoring_cards, String name, int nature_tokens) { //TODO replace playertracker with  board, odd, max row, maxcol
+    public static void scoring_setup(Board[][] board, int odd, int max_col, int max_row, int[] scoring_cards, String name, int nature_tokens) {
         setBoard(board);
         setOdd(odd);
 
@@ -496,39 +499,34 @@ public class Scoring_Setup extends Board
 
         int fox_score = fox_score_calculate(fox_num, scoring_cards[2], fox_arr);
         int bear_score = bear_score_calculate(bear_num, bear_arr, scoring_cards[0]);
-        System.out.println("\n\nTotal Fox score:" + fox_score);
+        System.out.println("\n\nTotal Fox score: " + fox_score);
 
         int hawk_score = 0;
 
-        if(scoring_cards[3]==3 ) {
-            hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
-            System.out.println("Total Hawk score:" + hawk_score);
-        }
-
         if(scoring_cards[3]==1 || scoring_cards[3]==2) {
             hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
-            System.out.println("Total Hawk score:" + hawk_score);
+            System.out.println("Total Hawk score: " + hawk_score);
         }
         else{
             hawk_score = hawk_num;
-            System.out.println("Total Hawk score:" + hawk_score);
+            System.out.println("Total Hawk score: " + hawk_score);
         }
 
-        System.out.println("Total Bear score:" + bear_score);
-        System.out.println("Total Salmon score:" + salmon_score);
+        System.out.println("Total Bear score: " + bear_score);
+        System.out.println("Total Salmon score: " + salmon_score);
 
         int elk_score = 0;
 
         if(scoring_cards[1]==2 || scoring_cards[1]==1){
             elk_score = elk_num;
-            System.out.println("Total Elk score:" + elk_score);
+            System.out.println("Total Elk score: " + elk_score);
         }
         else {
             elk_score = elk_score_calculate(elk_num, elk_arr, scoring_cards[1]);
-            System.out.println("Total Elk score:" + elk_score);
+            System.out.println("Total Elk score: " + elk_score);
         }
 
-        System.out.println("Total Nature Tokens:" + nature_tokens);
+        System.out.println("Total Nature Tokens: " + nature_tokens);
 
         System.out.println("\nTotal score for " + name + " is: " + (fox_score + hawk_score + bear_score + salmon_score + elk_score + nature_tokens + "\n\n\n\n"));
 

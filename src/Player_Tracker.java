@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 
-public class Player_Tracker
-{
+public class Player_Tracker {
+
+    /**
+     * Player_Tracker class is used to keep track of the player's name, starter tile, player turn, nature tokens, and board
+     */
+
     private final String player_name;
     private final String starter_tile;
     private int player_turn = 0;

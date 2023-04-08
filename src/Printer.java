@@ -1,5 +1,9 @@
-public class Printer
-{
+public class Printer {
+
+    /**
+     * This class is used to print out the board and other information to the user
+     */
+
     /// Declaring constants to make printing more efficient
     // Naming scheme: sp6_R refers to 6 empty spaces with a reset
     private static final String reset = Tile_Colours.RESET;

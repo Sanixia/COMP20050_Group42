@@ -1,7 +1,11 @@
 import java.util.Random;
 
-public class WildLife_Scoring_Setup
-{
+public class WildLife_Scoring_Setup {
+
+    /**
+     *
+     * This class is used to generate the scoring cards for each wildlife
+     */
     public static int[] scoring_card_array(int[] array){
         long seed = System.nanoTime();
         Random random = new Random(seed);
