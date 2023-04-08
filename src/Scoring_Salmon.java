@@ -119,6 +119,8 @@ public class Scoring_Salmon extends Scoring_Cards
 
                 }
                 else if(amount_of_salmon == original_salmon_amount){
+                    increaseSalmonIndex();
+                    increaseSalmonIndex();
                     amount_of_salmon++;
                     break;
                 }
