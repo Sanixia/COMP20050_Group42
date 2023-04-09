@@ -22,8 +22,6 @@ public class Cascadia extends Display_And_Input{
 
     public static void main(String[] args)
     {
-
-
         welcome();
         num_players();
         player_names();

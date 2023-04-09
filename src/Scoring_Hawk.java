@@ -11,11 +11,11 @@ public class Scoring_Hawk extends Scoring_Cards
         return hawk_found;
     }
 
-    public static int hawk_scoring_1(int x, int y) {     // returns 1 if hawk tile specified is valid and 0 otherwise
+    public static int hawk_scoring_A(int x, int y) {     // returns 1 if hawk tile specified is valid and 0 otherwise
         int num_hawks=1;
         ArrayList<String> animals = new ArrayList<String>();
 
-        for (int i=0; i<6; i++) {
+        for (int i=0; i<6; i++) {                       // gets the surrounding animals of board[x][y] into array
             Board surrounding_tile = get_surrounding_tile(x, y, i+1);
             if (surrounding_tile!=null){
                 animals.add(surrounding_tile.getAnimals());
@@ -25,7 +25,7 @@ public class Scoring_Hawk extends Scoring_Cards
         return num_hawks;
     }
 
-    public static int hawk_scoring_2(int x, int y) {    // returns 1 if hawk tile specified is valid and 0 otherwise
+    public static int hawk_scoring_B(int x, int y) {    // returns 1 if hawk tile specified is valid and 0 otherwise
         int num_hawks=0;
         int check = 0;
 
@@ -84,7 +84,7 @@ public class Scoring_Hawk extends Scoring_Cards
 
     }
 
-    public static int hawk_scoring_3(int x, int y) {
+    public static int hawk_scoring_C(int x, int y) {
 
         int num_hawks=0;
 

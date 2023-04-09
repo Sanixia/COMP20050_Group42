@@ -8,7 +8,7 @@ public class Scoring_Elk extends Scoring_Cards
     }
 
 
-    public static int elk_scoring_1(int x, int y, int pos) {
+    public static int elk_scoring_A(int x, int y, int pos) {
         ArrayList<Integer> positions = new ArrayList<Integer>();
         int elk_score = 1;
         int x2 = x, y2 = y;
@@ -50,11 +50,11 @@ public class Scoring_Elk extends Scoring_Cards
             x2 = coordinates[0];
             y2 = coordinates[1];
 
-            return elk_score + elk_scoring_1(x2, y2, positions.get(0));
+            return elk_score + elk_scoring_A(x2, y2, positions.get(0));
         }
     }
 
-    public static int elk_scoring_2(int x, int y) {
+    public static int elk_scoring_B(int x, int y) {
         int check = 0;
         int elk_total = 1;
 
@@ -108,37 +108,37 @@ public class Scoring_Elk extends Scoring_Cards
     }
 
 
-    public static int elk_scoring_3(int x, int y) {         // TODO
+    public static int elk_scoring_C(int x, int y) {         // Lets call our tile at Board[x][y] T
         ArrayList<Integer> positions = new ArrayList<Integer>();
 
-        for (int i = 1; i <= 6; i++) {             // will only check to the right, bottom right, bottom left to not count any tiles that were before it
+        for (int i = 1; i <= 6; i++) {
             Board surrounding_tile = get_surrounding_tile(x, y, i);
             if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'e'){
                 positions.add(i);
             }
         }
 
-        if (positions.size()==0) {
+        if (positions.size()==0) {                      // case 1: T has no surround tiles
             //System.out.println("\n1");
             return 1;
         }
 
-        int x1 = get_surrounding_row(x, y, positions.get(0));
+        int x1 = get_surrounding_row(x, y, positions.get(0));       // gets coordinates of t1 and declares new surround array for it
         int y1 = get_surrounding_col(x, y, positions.get(0));
         ArrayList<Integer> positions1 = new ArrayList<Integer>();
 
-        if (positions.size()==1) {
-            for (int i = 1; i <= 6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
-                Board surrounding_tile = get_surrounding_tile(x1, y1, i);
+        if (positions.size()==1) {                      // case 2: 1 surround tiles t1
+            for (int i = 1; i <= 6; i++) {
+                Board surrounding_tile = get_surrounding_tile(x1, y1, i);                           // checks surrounding tiles of t1
                 if (surrounding_tile!=null && surrounding_tile.getAnimals().charAt(0) == 'e'){
                     positions1.add(i);
                 }
             }
 
-            if (positions1.size() == 1) {
+            if (positions1.size() == 1) {               // if t1 has 1 surrounding tile it can only be T
                 //System.out.println("\n2");
                 return 2;
-            }
+            }           // NOTE* this will be valid returned twice by each tile in the pair so the score for it is divided by 2 when calculated
             return 0;
         }
 
@@ -160,14 +160,14 @@ public class Scoring_Elk extends Scoring_Cards
             }
         }
 
-        if (positions.size()==2) {
-            if (check_beside(positions.get(0), positions.get(1)) && positions1.size()==2 && positions2.size()==2) {
-                //System.out.println("\n3");
+        if (positions.size()==2) {          // case 3: 2 surround tiles t1, t2
+            if (check_beside(positions.get(0), positions.get(1)) && positions1.size()==2 && positions2.size()==2)
+            { // if t1 and t2 are beside each other, they are in a correct shape + checks if all tiles have 2 other surrounding tiles
                 return 3;
             }
-        }
+        }       // NOTE* divided by 3 when calculated
 
-        if (positions.size()==3) {
+        if (positions.size()==3) {          // case 4: 3 surround tiles t1, t2, t3, only triggered for the 2 inner tiles of the 4 elk shape
             int x3 = get_surrounding_row(x, y, positions.get(2));
             int y3 = get_surrounding_col(x, y, positions.get(2));
             ArrayList<Integer> positions3 = new ArrayList<Integer>();
@@ -184,10 +184,10 @@ public class Scoring_Elk extends Scoring_Cards
             if (check_beside(positions.get(0),positions.get(2))) beside ++;
             if (check_beside(positions.get(1),positions.get(2))) beside ++;
 
-            if (beside==2 && positions1.size() + positions2.size() + positions3.size() == 7) {
+            if (beside==2 && positions1.size() + positions2.size() + positions3.size() == 7) {  // checks if 2 of the above beside stateents hold and if the total surround = 7
                 //System.out.println("\n4");
                 return 4;
-            }
+            }   // score will be div by 2 in the end
         }
         return 0;
     }

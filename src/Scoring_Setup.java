@@ -32,88 +32,18 @@ public class Scoring_Setup extends Board {
         return 1;
     }
 
-    public static void main(String[] args) {
-
-        Board[][] b = new Board[MAXSIZE][MAXSIZE];
-        /*
-        b[0][1] = new Board("RM", "s", 0);
-        b[0][2] = new Board("RM", "e", 0);
-        b[0][3] = new Board("RM", "s", 0);
-        b[0][4] = new Board("RM", "b", 0);
-        b[1][0] = new Board("RM", "e", 0);
-        b[1][1] = new Board("RM", "s", 0);
-        b[1][2] = new Board("R", "s", 0);
-        b[1][3] = new Board("R", "e", 0);
-        b[2][1] = new Board("R", "b", 0);
-        b[2][2] = new Board("R", "e", 0);
-        b[2][3] = new Board("R", "s", 0);
-        b[2][5] = new Board("R", "b", 0);
-        b[3][1] = new Board("R", "b", 0);
-        b[3][2] = new Board("R", "f", 0);
-        b[3][3] = new Board("R", "b", 0);
-        b[3][4] = new Board("R", "b", 0);
-        b[3][5] = new Board("R", "s", 0);
-        b[4][3] = new Board("R", "b", 0);
-         */
-
-
-        b[0][0] = new Board("RM", "e", 0);
-        b[0][2] = new Board("RM", "e", 0);
-        b[0][3] = new Board("RM", "e", 0);
-        b[0][4] = new Board("RM", "d", 0);
-        b[0][5] = new Board("RM", "e", 0);
-        b[0][6] = new Board("RM", "e", 0);
-        b[0][7] = new Board("RM", "e", 0);
-        b[2][1] = new Board("RM", "h", 0);
-        b[2][2] = new Board("RM", "e", 0);
-        b[2][3] = new Board("RM", "e", 0);
-        b[2][5] = new Board("RM", "b", 0);
-        b[3][3] = new Board("RM", "f", 0);
-        b[3][4] = new Board("RM", "e", 0);
-        b[3][2] = new Board("RM", "e", 0);
-        b[4][0] = new Board("RM", "e", 0);
-        b[4][1] = new Board("RM", "e", 0);
-        b[4][3] = new Board("RM", "s", 0);
-        b[4][4] = new Board("RM", "e", 0);
-        b[4][5] = new Board("RM", "e", 0);
-        b[5][0] = new Board("RM", "e", 0);
-        b[5][1] = new Board("RM", "e", 0);
-        b[5][4] = new Board("RM", "e", 0);
-
-
-        /*
-        b[0][0] = new Board("RM", "b", 0);
-        b[0][2] = new Board("RM", "b", 0);
-        b[0][3] = new Board("RM", "b", 0);
-        b[0][5] = new Board("RM", "b", 0);
-        b[0][6] = new Board("RM", "b", 0);
-        b[0][7] = new Board("RM", "b", 0);
-        b[2][2] = new Board("RM", "b", 0);
-        b[2][3] = new Board("RM", "b", 0);
-        b[3][4] = new Board("RM", "b", 0);
-        b[3][2] = new Board("RM", "b", 0);
-        b[4][0] = new Board("RM", "b", 0);
-        b[4][1] = new Board("RM", "b", 0);
-        b[4][4] = new Board("RM", "b", 0);
-        b[4][5] = new Board("RM", "b", 0);
-        b[5][0] = new Board("RM", "b", 0);
-        b[5][1] = new Board("RM", "b", 0);
-         */
-
-
-        // TODO                b e f h s
-        int[] scoring_cards = {0,3,0,0,0};
-        Board.print_boards(b, 8, 6, 1);
-        int score = scoring_setups(b, 1,  scoring_cards);
-    }
-
+    /*  Scoring main function used for unit tests
+        - loops through the board and calculates the score of the current tile based on type and card
+        - arrays are used as memory to keep track of group based scoring cards
+        - a seperate loop is run for elk 1 and 2 as they are removed from the board and would affect fox and hawk scoring
+     */
 
     public static int scoring_setups(Board[][]board, int odd, int[] scoring_cards) {       // temporary for testing purposes
         setBoard(board);
         setOdd(odd);
         int fox_num=0, hawk_num=0, bear_num=0, salmon_score=0, elk_num=0;
         int[] bear_arr = new int[20], elk_arr = new int[20], fox_arr = new int[20];
-        int b=0, e=0, f=0;
+        int b=0, e=0, f=0;      // indexes
         for (int i=0; i<MAXSIZE; i++) {
             for (int j=0; j<MAXSIZE; j++) {
                 Board t = board[i][j];
@@ -204,31 +134,32 @@ public class Scoring_Setup extends Board {
     }
 
 
-
+    /* Pass on to animal scoring cards
+     */
 
     public static int fox_scoring_cards(int x, int y, int card) {
         return switch (card) {
-            case 1 -> Scoring_Fox.fox_scoring_1(x, y);
-            case 2 -> Scoring_Fox.fox_scoring_2(x, y);
-            case 3 -> Scoring_Fox.fox_scoring_3(x, y);
+            case 1 -> Scoring_Fox.fox_scoring_A(x, y);
+            case 2 -> Scoring_Fox.fox_scoring_B(x, y);
+            case 3 -> Scoring_Fox.fox_scoring_C(x, y);
             default -> 0;
         };
     }
 
     public static int hawk_scoring_cards(int x, int y, int card) {
         return switch (card) {
-            case 1 -> Scoring_Hawk.hawk_scoring_1(x, y);
-            case 2 -> Scoring_Hawk.hawk_scoring_2(x, y);
-            case 3 -> Scoring_Hawk.hawk_scoring_3(x, y);
+            case 1 -> Scoring_Hawk.hawk_scoring_A(x, y);
+            case 2 -> Scoring_Hawk.hawk_scoring_B(x, y);
+            case 3 -> Scoring_Hawk.hawk_scoring_C(x, y);
             default -> 0;
         };
     }
 
     public static int bear_scoring_cards(int x, int y, int card) {
         return switch (card) {
-            case 1 -> Scoring_Bear.bear_scoring_1(x, y);
-            case 2 -> Scoring_Bear.bear_scoring_2(x, y);
-            case 3 -> Scoring_Bear.bear_scoring_3(x, y);
+            case 1 -> Scoring_Bear.bear_scoring_A(x, y);
+            case 2 -> Scoring_Bear.bear_scoring_B(x, y);
+            case 3 -> Scoring_Bear.bear_scoring_C(x, y);
             default -> 0;
         };
     }
@@ -236,9 +167,9 @@ public class Scoring_Setup extends Board {
     public static int elk_scoring_cards(int x, int y, int card, int pos) {
 
         return switch (card) {
-            case 1 -> elk_score_calculate(Scoring_Elk.elk_scoring_1(x, y, pos), null, card);
-            case 2 -> Scoring_Elk.elk_scoring_2(x, y);
-            case 3 -> Scoring_Elk.elk_scoring_3(x, y);
+            case 1 -> elk_score_calculate(Scoring_Elk.elk_scoring_A(x, y, pos), null, card);
+            case 2 -> Scoring_Elk.elk_scoring_B(x, y);
+            case 3 -> Scoring_Elk.elk_scoring_C(x, y);
             default -> 0;
         };
     }
@@ -248,6 +179,8 @@ public class Scoring_Setup extends Board {
     }
 
 
+    /*  Animal score calculations
+     */
     public static int fox_score_calculate(int f, int card, int[] fox_arr) {
         switch (card) {
             case 0:
@@ -389,6 +322,11 @@ public class Scoring_Setup extends Board {
         }
     }
 
+    /* Function that takes in coordinates x and y and position                       1     2
+        returns the tile in the desired position                                  6    tile   3
+        in relation to the tile provided                                             5     4
+     */
+
     public static Board get_surrounding_tile(int x, int y, int pos) {     // returns a tile around specified tile
         int plusOne = calculateSpace(x);
         int row = x;
@@ -416,6 +354,8 @@ public class Scoring_Setup extends Board {
     }
 
 
+    /*      Function that removes all slot spaces on the board
+     */
 
     public static void remove_slot() {
         for (int i = 0; i < MAXSIZE; i++) {
@@ -428,12 +368,13 @@ public class Scoring_Setup extends Board {
     }
 
 
-
+    /*      Actual main scoring function that's used in game
+     */
     public static void scoring_setup(Board[][] board, int odd, int max_col, int max_row, int[] scoring_cards, String name, int nature_tokens) {
         setBoard(board);
         setOdd(odd);
 
-        remove_slot();
+        remove_slot();         // slots are also counted as tiles so they need to be removed at the start
         print_boards(board, max_col, max_row, odd);
 
         int fox_num=0, hawk_num=0, bear_num=0, salmon_score=0, elk_num=0;

@@ -41,7 +41,7 @@ public class Printer {
      */
     public static String row_printer(Board[] arr, int max, int space, String row_num) {
         int pos;
-        String row_str, line_1 = "\t", line_2 = row_num + "  ", line_3 = "\t", line_4 = "\t", tile_print;
+        String row_str, line_1 = "    ", line_2 = row_num + "  ", line_3 = "    ", line_4 = "    ", tile_print;
         Board t;
 
         if (row_num.length() == 1) line_2+=" ";           // prints row number
@@ -226,10 +226,10 @@ public class Printer {
     public static void main(String[] args) {        // demo of the same tile in different rotations
         //Board t = new Board("RM", "BEH", 0);
         System.out.println(print_tile_setup(new Board("RM", "BEH", 0)));
-        System.out.println(print_tile_setup(new Board("RM", "BEH", 1)));
+        System.out.println(print_tile_setup(new Board("RM", "b", 1)));
         System.out.println(print_tile_setup(new Board("RM", "BEH", 2)));
-        System.out.println(print_tile_setup(new Board("RM", "BEH", 3)));
+        System.out.println(print_tile_setup(new Board("RM", "e", 3)));
         System.out.println(print_tile_setup(new Board("RM", "BEH", 4)));
-        System.out.println(print_tile_setup(new Board("RM", "BEH", 5)));
+        System.out.println(print_tile_setup(new Board("RP", "BH", 5)));
     }
 }

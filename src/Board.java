@@ -3,11 +3,21 @@ import java.util.Scanner;
 
 public class Board extends Printer // todo comments
 {
+    /* board is a 26x26 adaptive board
+       - it will extend itself or move everything once it reaches the limit
+       - may have a tile or null
+       - tiles can either be (game) tiles or spaces which are valid placement indicators
+       - will always have a border when displayed
+     */
 
     protected static final int MAXSIZE = 26;
     private String biome;
     private String animals;
     private int rotation;
+
+    /*  Constructor for a tile on the board
+        contains the biome(s) animal(s) and rotation
+     */
     public Board(String biome, String animals, int rotation) {
         this.biome = biome;
         this.animals = animals;
@@ -36,48 +46,8 @@ public class Board extends Printer // todo comments
         this.rotation = rotation;
     }
 
-
-    public static void main(String[] args) {
-        //Board t = new Board("F", "BES", 0);           // can test printing out individual tiles
-        //System.out.println(Board.print_tile_setup(t));
-
-        /*
-        board_add_tile("F", "BES", 0, 0, 0);
-        board_add_tile("F", "BES", 0, 0, 3);
-
-        board_add_tile("RM", "BEH", 1, 1, 0);
-        board_add_tile("WP", "FS", 0, 1, 2);
-
-        board_add_tile("P", "E", 1, 2, 1);
-        board_add_tile("P", "E", 3, 2, 2);
-
-        board_add_tile("P", "E", 1, 3, 1);
-        board_add_tile("P", "E", 3, 4, 2);
-        print_board();
-        place_animal_token("s", 0, 0);
-        indent();
-        print_board();
-         */
-
-
-        //setup("River");
-
-        //place_animal_token("e", 2, 3);
-        //print_board(board);
-        //place_animal_token("b");
-        //System.out.println(Arrays.deepToString(board));
-
-
-        for (int i = 0; i < 20; i++) {
-            //place();
-            //print_board(board);
-            //place_animal_token("f");
-            //System.out.println(Arrays.deepToString(board));
-            //System.out.println(max_col);
-            //System.out.println(max_row);
-        }
-    }
-
+    /*      Getting initial starter tiles
+     */
     public static void setup(String setup_board, Board[][] board, Player_Tracker player_tracker) {
         player_tracker.setOdd(1);
 
@@ -176,34 +146,36 @@ public class Board extends Printer // todo comments
 
 
 
+    /*  Function to place a tile
+     */
     public static void board_add_tile(String biome, String animals, int rotation, int row, int col, Board[][] board, Player_Tracker player_tracker) {
         Board tile = new Board(biome, animals, rotation);
         board[row][col] = tile;
         int plusOne = 0, plusRow = 0, plusCol = 0;
         if (col % 2 == 1 && player_tracker.getOdd() == 1 || col % 2 == 0 && player_tracker.getOdd() == 0) plusOne = 1;
 
-        if (row == 0) {
+        if (row == 0) {                                     // case: upperbounds of board
             if (!(tile.getBiome() == "slot")) { //TODO
-                indent_row(board, player_tracker);
+                indent_row(board, player_tracker);          // everything will be pushed (indented) downwards
                 plusRow = 1;
             }
 
             player_tracker.setmax_row();
         } else if (row >= player_tracker.getMax_row() - 1) {
 
-            player_tracker.setmax_row();
+            player_tracker.setmax_row();                    // normal case
         }
 
-        if (col == 0) {
+        if (col == 0) {                                     // case: leftbounds of board
             if (!(tile.getBiome() == "slot")) {
-                indent_col(board, player_tracker);
+                indent_col(board, player_tracker);          // everything will be pushed (indented) rightwards
                 plusCol = 1;
             }
             player_tracker.setmax_col();
-        } else if (col + plusOne >= player_tracker.getMax_col() - 1) {
+        } else if (col + plusOne >= player_tracker.getMax_col() - 1) {  // normal case
             player_tracker.setmax_col();
         }
-        place_slot_tiles(row+plusRow, col+plusCol, board, player_tracker);
+        place_slot_tiles(row+plusRow, col+plusCol, board, player_tracker);  // places slot tiles around the new tile
     }
 
     public static boolean availableTokenPlacement(String animal, Board[][] board, Player_Tracker player_tracker){
@@ -254,6 +226,8 @@ public class Board extends Printer // todo comments
 
     }
 
+    // Moves every tile by 1 to the right
+
     public static void indent_col(Board[][] board, Player_Tracker player_tracker) {
         for (int i = 0; i < player_tracker.getMax_row() + 1; i++) {
             Board curr = board[i][0];
@@ -267,6 +241,7 @@ public class Board extends Printer // todo comments
         }
     }
 
+    // Moves every tile by 1 down
     public static void indent_row(Board[][] board, Player_Tracker player_tracker) {
         for (int i = 0; i < player_tracker.getMax_col() + 1; i++) {
             Board curr = board[0][i];
@@ -278,9 +253,14 @@ public class Board extends Printer // todo comments
                 curr = next;
             }
         }
-        player_tracker.changeOdd();
+        player_tracker.changeOdd();         // has to account for it by changing if odd are indented
     }
 
+
+    /*      Function that places down slot tiles
+            - gets tile at board[x][y]
+            - places slot tiles on the surrounding tiles that are null
+     */
 
     public static void place_slot_tiles(int x, int y, Board[][] board, Player_Tracker player_tracker) {             // determines where to place slot tiles
         int plusOne = 1;
@@ -331,6 +311,11 @@ public class Board extends Printer // todo comments
         return true;
     }
 
+    /*      Print board function
+            - send the board in row by row to be printed
+            - odd is sent in for the offset
+            - will only print up until max row, max col
+     */
 
     public static void print_boards(Board[][] board, int Max_col, int Max_row, int odd) {
         String row;

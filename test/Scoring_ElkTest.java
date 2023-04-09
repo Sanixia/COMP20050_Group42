@@ -150,7 +150,7 @@ public class Scoring_ElkTest {
 
         Board.print_boards(b, 8, 5, 1);
         int elk_score = Scoring_Setup.scoring_setups(b, 1,  scoring_cards);
-        assertEquals(55, elk_score);
+        assertEquals(55, elk_score);    // demonstrating different shapes rotated and still valid
 
         b1[0][0] = new Board("W", "e", 0);
         b1[0][3] = new Board("W", "e", 0);
@@ -190,6 +190,6 @@ public class Scoring_ElkTest {
 
         Board.print_boards(b2, 9, 5, 1);
         int elk_score2 = Scoring_Setup.scoring_setups(b2, 1,  scoring_cards);
-        assertNotEquals(elk_score2, elk_score1);
+        assertNotEquals(elk_score2, elk_score1);    // b1 should not equal b2 as it doesnt have valid shapes
     }
 }

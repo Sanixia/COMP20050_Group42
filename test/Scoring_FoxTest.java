@@ -31,7 +31,7 @@ class Scoring_FoxTest
 
         Board.print_boards(b, 6, 5, 1);
         fox_score = Scoring_Setup.scoring_setups(b, 1,  scoring_cards);
-        assertEquals(12, fox_score);
+        assertEquals(12, fox_score); // 0 + 5 + 5 + 2
     }
 
     @Test
@@ -63,7 +63,7 @@ class Scoring_FoxTest
 
         Board.print_boards(b, 6, 5, 1);
         fox_score = Scoring_Setup.scoring_setups(b, 1,  scoring_cards);
-        assertEquals(12, fox_score);
+        assertEquals(12, fox_score); // 5 + 5 + 2
     }
 
     @Test
@@ -99,6 +99,6 @@ class Scoring_FoxTest
 
         Board.print_boards(b, 6, 5, 1);
         fox_score = Scoring_Setup.scoring_setups(b, 1,  scoring_cards);
-        assertEquals(7, fox_score);
+        assertEquals(7, fox_score); // 1 + 3 + 3
     }
 }
