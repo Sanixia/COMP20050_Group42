@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 public class Wildlife_Tokens
 {
     // Arraylist with all available tokens in game

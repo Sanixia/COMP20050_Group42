@@ -1,5 +1,7 @@
 import java.util.ArrayList;
-
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 public class Scoring_Hawk extends Scoring_Cards
 {
     public Scoring_Hawk(String biome, String animals, int rotation) {

@@ -1,6 +1,8 @@
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 public class Scoring_SalmonTest {
 
     @Test

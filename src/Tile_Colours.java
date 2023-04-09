@@ -1,3 +1,6 @@
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 public class Tile_Colours
 {
     //// File that contains all colours for Biomes and Animals

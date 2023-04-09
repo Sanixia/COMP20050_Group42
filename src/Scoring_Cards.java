@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 public class Scoring_Cards extends Scoring_Setup
 {
     public Scoring_Cards(String biome, String animals, int rotation) {

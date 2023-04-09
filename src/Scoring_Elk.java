@@ -1,5 +1,7 @@
 import java.util.ArrayList;
-
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
 public class Scoring_Elk extends Scoring_Cards
 {
 
