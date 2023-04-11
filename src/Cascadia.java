@@ -28,8 +28,14 @@ public class Cascadia extends Display_And_Input{
         num_players();
         player_names();
         randomised_order_players();
-        WildLife_Scoring_Setup.scoring_card_array(player_scoring_card);
-        WildLife_Scoring_Setup.print_scoring_card(player_scoring_card);
+        if(isBot_players()){
+            WildLife_Scoring_Setup.print_scoring_card(new int[]{1,1,1,1,1});
+        }
+        else{
+            WildLife_Scoring_Setup.scoring_card_array(player_scoring_card);
+            WildLife_Scoring_Setup.print_scoring_card(player_scoring_card);
+        }
+
 
         boolean randomCheck = true;                     // check for one randomisation of tiles
 
@@ -312,16 +318,34 @@ public class Cascadia extends Display_And_Input{
 
             if (getPlayers().size() == player_turns_over) {
                 System.out.println("You have no more turns left, calculating score for everyone...\n\n");
-                WildLife_Scoring_Setup.print_scoring_card(player_scoring_card);
+
+                if(isBot_players()){
+                    WildLife_Scoring_Setup.print_scoring_card(new int[]{1,1,1,1,1});
+                }
+                else{
+                    WildLife_Scoring_Setup.print_scoring_card(player_scoring_card);
+                }
+
                 for(int i = 0; i < getPlayers().size(); i++){
 
-                    Scoring_Setup.scoring_setup(  getPlayers().get(i).getBoard(), // scoring setup
-                            getPlayers().get(i).getOdd(),
-                            getPlayers().get(i).getMax_col(),
-                            getPlayers().get(i).getMax_row(),
-                            player_scoring_card,
-                            getPlayers().get(i).getPlayer_name(),
-                            getPlayers().get(i).getNature_tokens());
+                    if(isBot_players()){
+                        Scoring_Setup.scoring_setup(  getPlayers().get(i).getBoard(), // scoring setup
+                                getPlayers().get(i).getOdd(),
+                                getPlayers().get(i).getMax_col(),
+                                getPlayers().get(i).getMax_row(),
+                                new int[]{1,1,1,1,1},
+                                getPlayers().get(i).getPlayer_name(),
+                                getPlayers().get(i).getNature_tokens());
+                    }
+                    else{
+                        Scoring_Setup.scoring_setup(  getPlayers().get(i).getBoard(), // scoring setup
+                                getPlayers().get(i).getOdd(),
+                                getPlayers().get(i).getMax_col(),
+                                getPlayers().get(i).getMax_row(),
+                                player_scoring_card,
+                                getPlayers().get(i).getPlayer_name(),
+                                getPlayers().get(i).getNature_tokens());
+                    }
 
                 }
 
