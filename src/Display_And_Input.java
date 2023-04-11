@@ -16,10 +16,16 @@ public class Display_And_Input {
     private static ArrayList<Player_Tracker> players = new ArrayList<>();   //Array of objects to keep track of players
 
 
+    private static boolean bot_players = false;
     private static int player_count = 0;
 
+    public static boolean isBot_players() {
+        return bot_players;
+    }
+
+
     public static void setPlayer_count(int player_count) {
-        Display_And_Input.player_count--;
+        Display_And_Input.player_count = player_count;
     }
 
     public static int getPlayer_count() {
@@ -51,7 +57,7 @@ public class Display_And_Input {
         /* ask how many players */
 
         System.out.println("Welcome to Cascadia!");
-        System.out.print("How many people are playing? Please enter 2, 3 or 4: ");
+        System.out.print("How many people are playing? Please enter 2, 3 or 4 or enter 5 for bot vs bot: ");
     }
 
 
@@ -68,16 +74,20 @@ public class Display_And_Input {
             try{
 
                 player_count = in.nextInt();
-                if (player_count == 1 || player_count == 2 || player_count == 3 || player_count == 4 ){
+                if (player_count == 1 || player_count == 2 || player_count == 3 || player_count == 4 || player_count == 5){
+                    if(player_count == 5){
+                        setPlayer_count(2);
+                        bot_players = true;
+                    }
                     validNumOfPlayers = true;
                 }
                 else{
-                    System.out.print("Please enter a number that is either 2, 3 or 4: ");
+                    System.out.print("Please enter a number that is either 2, 3, 4 or 5: ");
                 }
 
             }
             catch (InputMismatchException ex) {
-                System.out.print("Please enter a valid number (2, 3 or 4): ");
+                System.out.print("Please enter a valid number (2, 3, 4 or 5): ");
                 in.nextLine();
             }
         }
@@ -102,6 +112,14 @@ public class Display_And_Input {
 
 
         for (i = 0; i < getPlayer_count(); i++){
+
+            if(bot_players == true){
+                playerNames.add("Bot 1");
+                playerNames.add("Bot 2");
+                break;
+            }
+
+
             checkValidName = false;
             System.out.print("\nPlayer " + (i+1) + " please enter your name: ");
 
@@ -301,6 +319,14 @@ public class Display_And_Input {
 
         Scanner in = new Scanner(System.in);
 
+        if(bot_players){
+            long seed = System.nanoTime();
+            Random random = new Random(seed);
+
+            cullingChoice = random.nextInt(2) + 1;
+            return cullingChoice;
+        }
+
         System.out.println("Optional culling identified as 3 tiles are the same, would you like to get rid of the 3 or continue?");
         System.out.print("Please enter 1 for yes or 2 to continue (1/2): ");
 
@@ -431,10 +457,10 @@ public class Display_And_Input {
         System.out.println(Board.num_printer(6) + "\n" + Board.row_printer(row, max, 0, " ")+"\n");
     }
 
-    public static void place_tile(int tile_number, int rotation, Board[][] board, Player_Tracker player){
+    public static void place_tile(int tile_number, boolean bot_players, int rotation, Board[][] board, Player_Tracker player){
 
         Board tile = new Board(Habitat_Tiles.biome.get(tile_number), Habitat_Tiles.animals.get(tile_number), rotation);
-        Board.place(tile_number, board, player, tile);
+        Board.place(bot_players, board, player, tile);
 
     }
 

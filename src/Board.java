@@ -1,6 +1,7 @@
 // Group 42
 // Roshan, Michal
 // Sanixia, glucoseIntolerant
+import java.util.Random;
 import java.util.Scanner;
 
 public class Board extends Printer // todo comments
@@ -87,27 +88,45 @@ public class Board extends Printer // todo comments
     }
 
 
-    public static void place(int tile_number, Board[][] board, Player_Tracker player_tracker, Board tile) {
-
+    public static void place(boolean bot_player, Board[][] board, Player_Tracker player_tracker, Board tile) {
+        long seed = System.nanoTime();
+        Random random = new Random(seed);
         String temp_x = "", temp_y = "";
+        int bot_x = 0, bot_y = 0;
         int x, y;
 
-        System.out.println("Greyed out tiles are valid placements!\n");
+        if(bot_player){
+            bot_x = random.nextInt(MAXSIZE) + 1;
+            bot_y = random.nextInt(MAXSIZE) + 1;
 
-        x = Integer.parseInt(valid_row_column(temp_x, 1));
-        y = Integer.parseInt(valid_row_column(temp_y, 2));
-
-
-
-        while (!verify_tile(x, y,board)) {
-            System.out.println("Please enter a valid tile placement!\n");
-
-
-            x = Integer.parseInt(  valid_row_column(temp_x, 1));
-            y = Integer.parseInt(valid_row_column(temp_y, 2));
+            while (!verify_tile(bot_x, bot_y,board)) {
+                bot_x = random.nextInt(MAXSIZE) + 1;
+                bot_y = random.nextInt(MAXSIZE) + 1;
+            }
+            board_add_tile(tile.getBiome(), tile.getAnimals(), tile.getRotation(), bot_x, bot_y,board, player_tracker);
         }
 
-        board_add_tile(tile.getBiome(), tile.getAnimals(), tile.getRotation(), x, y,board, player_tracker);
+        else{
+            System.out.println("Greyed out tiles are valid placements!\n");
+
+            x = Integer.parseInt(valid_row_column(temp_x, 1));
+            y = Integer.parseInt(valid_row_column(temp_y, 2));
+
+
+
+            while (!verify_tile(x, y,board)) {
+                System.out.println("Please enter a valid tile placement!\n");
+
+
+                x = Integer.parseInt(  valid_row_column(temp_x, 1));
+                y = Integer.parseInt(valid_row_column(temp_y, 2));
+            }
+
+            board_add_tile(tile.getBiome(), tile.getAnimals(), tile.getRotation(), x, y,board, player_tracker);
+        }
+
+
+
     }
 
     public static String valid_row_column(String temp, int row_or_column){
@@ -196,30 +215,51 @@ public class Board extends Printer // todo comments
 
 
 
-    public static void place_animal_token(String animal,Board[][] board, Player_Tracker player_tracker) {
-
+    public static void place_animal_token(boolean bot_player, String animal,Board[][] board, Player_Tracker player_tracker) {
+        long seed = System.nanoTime();
+        Random random = new Random(seed);
+        int bot_x = 0;
+        int bot_y = 0;
         if(availableTokenPlacement(animal, board, player_tracker)){
-            Scanner in = new Scanner(System.in);
-            String temp_x = "", temp_y = "";
-            int x, y;
 
-            x = Integer.parseInt(  valid_row_column(temp_x, 1));
-            y = Integer.parseInt(valid_row_column(temp_y, 2));
+            if(bot_player){
+                bot_x = random.nextInt(MAXSIZE) + 1;
+                bot_y = random.nextInt(MAXSIZE) + 1;
 
-            // verify that there is available tiles that can place a token on
+                while (verify_animal_token_placement(bot_x, bot_y, animal, board)) {
+                    bot_x = random.nextInt(MAXSIZE) + 1;
+                    bot_y = random.nextInt(MAXSIZE) + 1;
+                }
+                if(board[bot_x][bot_y].getBiome().length() == 1){
+                    player_tracker.setNature_tokens(player_tracker.getNature_tokens() + 1);
+                    System.out.println("\nYou have gained a nature token, you now have " + player_tracker.getNature_tokens() + "!");
+                }
+                board[bot_x][bot_y].setAnimals(animal);
+            }
+            else{
+                Scanner in = new Scanner(System.in);
+                String temp_x = "", temp_y = "";
+                int x, y;
 
-
-            while (verify_animal_token_placement(x, y, animal, board)) {
-                System.out.println("Please enter a valid tile that can place this animal token onto it and hasn't been taken already!\n");
                 x = Integer.parseInt(  valid_row_column(temp_x, 1));
                 y = Integer.parseInt(valid_row_column(temp_y, 2));
+
+                // verify that there is available tiles that can place a token on
+
+
+                while (verify_animal_token_placement(x, y, animal, board)) {
+                    System.out.println("Please enter a valid tile that can place this animal token onto it and hasn't been taken already!\n");
+                    x = Integer.parseInt(  valid_row_column(temp_x, 1));
+                    y = Integer.parseInt(valid_row_column(temp_y, 2));
+                }
+
+                if(board[x][y].getBiome().length() == 1){
+                    player_tracker.setNature_tokens(player_tracker.getNature_tokens() + 1);
+                    System.out.println("\nYou have gained a nature token, you now have " + player_tracker.getNature_tokens() + "!");
+                }
+                board[x][y].setAnimals(animal);
             }
 
-            if(board[x][y].getBiome().length() == 1){
-                player_tracker.setNature_tokens(player_tracker.getNature_tokens() + 1);
-                System.out.println("\nYou have gained a nature token, you now have " + player_tracker.getNature_tokens() + "!");
-            }
-            board[x][y].setAnimals(animal);
 
         }
         else{
@@ -303,13 +343,16 @@ public class Board extends Printer // todo comments
     public static boolean verify_animal_token_placement(int x, int y, String animalToken, Board[][] board){
 
         // first check if there is a tile present
-        if(board[x][y] != null){
+        if(x > 0 && x < MAXSIZE && y > 0 && y < MAXSIZE){
+            if(board[x][y] != null){
 
-            //check if tile contains the animalToken letter and checks if tile hasn't been taken already by the animalToken
-            if(board[x][y].getAnimals().contains(animalToken.toUpperCase()) && !board[x][y].getAnimals().equals(animalToken)){
-                return false;
+                //check if tile contains the animalToken letter and checks if tile hasn't been taken already by the animalToken
+                if(board[x][y].getAnimals().contains(animalToken.toUpperCase()) && !board[x][y].getAnimals().equals(animalToken)){
+                    return false;
+                }
             }
         }
+
         return true;
     }
 

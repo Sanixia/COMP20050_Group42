@@ -1,6 +1,9 @@
 // Group 42
 // Roshan, Michal
 // Sanixia, glucoseIntolerant
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -149,22 +152,27 @@ public class Command_State {
 
 
 
-    public static Command_State get_input(int type_of_menu) {
+    public static Command_State get_input(int type_of_menu, boolean bot_players) {
 
 
-        menu_type(type_of_menu, commandState);
+        menu_type(type_of_menu, commandState, bot_players);
         return commandState;
 
     }
 
-    public static Command_State menu_type(int type_of_menu, Command_State commandState){
+
+
+    public static Command_State menu_type(int type_of_menu, Command_State commandState, boolean bot_players){
         Scanner in = new Scanner(System.in);
         int int_input;
-        String user_input;
+        String user_input = "";
+        int bot_input = 0;
         int menu_type = 0;
         String menu_type_string = "";
+        long seed = System.nanoTime();
+        Random random = new Random(seed);
 
-            switch(type_of_menu){
+        switch(type_of_menu){
                 case 0:
                     main_menu();
                     menu_type_string = "Please enter 1, 2, 3 or 4.";
@@ -173,26 +181,46 @@ public class Command_State {
                     main_menu();
                     menu_type = 1;
                     menu_type_string = "Please enter 1, 2, 3 or 4.";
+                    if(bot_players){
+                        bot_input = 3;
+                        break;
+                    }
                     break;
                 case 2:
                     board_menu();
                     menu_type = 4;
                     menu_type_string = "Please enter 1, 2 or 3.";
+                    if(bot_players){
+                        bot_input = 1;
+                        break;
+                    }
                     break;
                 case 3:
                     habitat_menu();
                     menu_type = 1;
                     menu_type_string = "Please enter 1, 2, 3 or 4.";
+                    if(bot_players){
+                        bot_input = random.nextInt(4) + 1;
+                        break;
+                    }
                     break;
                 case 4:
                     habitat_rotation();
                     menu_type = 3;
                     menu_type_string = "Please enter 1, 2, 3, 4, 5 or 6.";
+                    if(bot_players){
+                        bot_input = random.nextInt(6) + 1;
+                        break;
+                    }
                     break;
                 case 5:
                     token_menu();
                     menu_type = 2;
                     menu_type_string = "Please enter 1 or 2.";
+                    if(bot_players){
+                        bot_input = 1;
+                        break;
+                    }
                     break;
                 case 6:
                     nature_token_menu();
@@ -211,9 +239,16 @@ public class Command_State {
                     break;
             }
 
-            user_input = in.nextLine();
+            if(bot_players == false){
+                user_input = in.nextLine();
+            }
 
-            if (isValid(user_input, menu_type)) {
+
+            if (isValid(user_input, menu_type,bot_players)) {
+                if(bot_players){
+                    commandState = new Command_State(type_of_menu, bot_input);
+                    return commandState;
+                }
 
                 int_input = Integer.parseInt(user_input);
                 commandState = new Command_State(type_of_menu, int_input);
@@ -303,7 +338,10 @@ public class Command_State {
     }
 
 
-    public static boolean isValid(String input, int menu){
+    public static boolean isValid(String input, int menu, boolean bot_players){
+        if(bot_players == true){
+            return true;
+        }
         if(menu == 1){
             return input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4");
         }

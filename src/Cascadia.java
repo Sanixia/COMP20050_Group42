@@ -39,7 +39,7 @@ public class Cascadia extends Display_And_Input{
 
 
 
-            command_state = Command_State.get_input(1);   // Setting the command state
+            command_state = Command_State.get_input(1,isBot_players());   // Setting the command state
 
 
             if (randomCheck){
@@ -126,13 +126,13 @@ public class Cascadia extends Display_And_Input{
                                             display_tiles_and_tokens(culling_trigger);
 
                                             display_tile_rotation(place_tile);
-                                            command_state = Command_State.get_input(4);
+                                            command_state = Command_State.get_input(4, isBot_players());
 
                                             //selects the rotation of the tile
                                             if(Command_State.getHabitat_tile_choice() == 0 && (command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4 || command_state.getChoice() == 5 || command_state.getChoice() == 6 || command_state.getChoice() == 7 )) {
 
                                                 getPlayers().get(playerNum).print_board(getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
-                                                place_tile(place_tile, command_state.getChoice()-1, getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
+                                                place_tile(place_tile, isBot_players(), command_state.getChoice()-1, getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
                                                 proper_input = false;
                                             }
 
@@ -141,7 +141,7 @@ public class Cascadia extends Display_And_Input{
                                         else{ // if the tile is a keystone
 
                                             getPlayers().get(playerNum).print_board(getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
-                                            place_tile(place_tile, 0, getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
+                                            place_tile(place_tile, isBot_players(), 0, getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
                                             proper_input = false;
                                         }
 
@@ -166,7 +166,7 @@ public class Cascadia extends Display_And_Input{
 
                                                             if(Board.availableTokenPlacement(Wildlife_Tokens.tokens.get(place_tile), getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum))){
                                                                 display_token(place_tile);
-                                                                Board.place_animal_token(Wildlife_Tokens.tokens.get(place_tile), getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
+                                                                Board.place_animal_token(isBot_players(), Wildlife_Tokens.tokens.get(place_tile), getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
                                                                 remove_token(place_tile);
 
 
@@ -196,7 +196,7 @@ public class Cascadia extends Display_And_Input{
 
                                                         if (command_state.getChoice() == 1) {
                                                             display_token(place_tile);
-                                                            Board.place_animal_token(Wildlife_Tokens.tokens.get(place_tile), getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
+                                                            Board.place_animal_token(isBot_players(), Wildlife_Tokens.tokens.get(place_tile), getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
                                                             remove_token(place_tile);
                                                         }
 
@@ -258,7 +258,7 @@ public class Cascadia extends Display_And_Input{
                                                 break;
                                             }
 
-                                            command_state = Command_State.get_input(8); // nature token option 2 for selecting any number of tokens to remove
+                                            command_state = Command_State.get_input(8, isBot_players()); // nature token option 2 for selecting any number of tokens to remove
 
                                             if(command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4){
                                                 nature_token_any_number(command_state.getChoice());
@@ -287,7 +287,7 @@ public class Cascadia extends Display_And_Input{
     public static void display_board_tiles_tokens(int player_number, int menu_number, Command_State command_state, boolean culling_t){
         getPlayers().get(player_number).print_board(getPlayers().get(player_number).getBoard(), getPlayers().get(player_number));
         display_tiles_and_tokens(culling_t);
-        command_state = Command_State.get_input(menu_number);
+        command_state = Command_State.get_input(menu_number,isBot_players());
 
         culling_trigger = false;
     }
@@ -342,6 +342,7 @@ public class Cascadia extends Display_And_Input{
 
 
     }
+
 
 
 
