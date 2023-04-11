@@ -96,12 +96,12 @@ public class Board extends Printer // todo comments
         int x, y;
 
         if(bot_player){
-            bot_x = random.nextInt(MAXSIZE) + 1;
-            bot_y = random.nextInt(MAXSIZE) + 1;
+            bot_x = random.nextInt(MAXSIZE);
+            bot_y = random.nextInt(MAXSIZE);
 
             while (!verify_tile(bot_x, bot_y,board)) {
-                bot_x = random.nextInt(MAXSIZE) + 1;
-                bot_y = random.nextInt(MAXSIZE) + 1;
+                bot_x = random.nextInt(MAXSIZE);
+                bot_y = random.nextInt(MAXSIZE);
             }
             board_add_tile(tile.getBiome(), tile.getAnimals(), tile.getRotation(), bot_x, bot_y,board, player_tracker);
         }
@@ -223,12 +223,12 @@ public class Board extends Printer // todo comments
         if(availableTokenPlacement(animal, board, player_tracker)){
 
             if(bot_player){
-                bot_x = random.nextInt(MAXSIZE) + 1;
-                bot_y = random.nextInt(MAXSIZE) + 1;
+                bot_x = random.nextInt(MAXSIZE);
+                bot_y = random.nextInt(MAXSIZE);
 
                 while (verify_animal_token_placement(bot_x, bot_y, animal, board)) {
-                    bot_x = random.nextInt(MAXSIZE) + 1;
-                    bot_y = random.nextInt(MAXSIZE) + 1;
+                    bot_x = random.nextInt(MAXSIZE);
+                    bot_y = random.nextInt(MAXSIZE);
                 }
                 if(board[bot_x][bot_y].getBiome().length() == 1){
                     player_tracker.setNature_tokens(player_tracker.getNature_tokens() + 1);
