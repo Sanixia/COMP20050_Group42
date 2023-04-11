@@ -16,7 +16,7 @@ public class Display_And_Input {
     private static ArrayList<Player_Tracker> players = new ArrayList<>();   //Array of objects to keep track of players
 
 
-    private static boolean bot_players = false;
+    private static boolean bot_players = false; //true if bot vs bot
     private static int player_count = 0;
 
     public static boolean isBot_players() {
@@ -141,7 +141,7 @@ public class Display_And_Input {
 
 
 
-    public static void randomised_order_players(){                                  // Might get rid of, seems redundant
+    public static void randomised_order_players(){                                 // TODO maybe redundant
         int i;
 
         System.out.println("The order in which players will play will be: ");

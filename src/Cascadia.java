@@ -29,7 +29,7 @@ public class Cascadia extends Display_And_Input{
         player_names();
         randomised_order_players();
         if(isBot_players()){
-            WildLife_Scoring_Setup.print_scoring_card(new int[]{1,1,1,1,1});
+            WildLife_Scoring_Setup.print_scoring_card(new int[]{1,1,1,1,1}); // prints the scoring card for the bot
         }
         else{
             WildLife_Scoring_Setup.scoring_card_array(player_scoring_card);
@@ -329,7 +329,7 @@ public class Cascadia extends Display_And_Input{
                 for(int i = 0; i < getPlayers().size(); i++){
 
                     if(isBot_players()){
-                        Scoring_Setup.scoring_setup(  getPlayers().get(i).getBoard(), // scoring setup
+                        Scoring_Setup.scoring_setup(  getPlayers().get(i).getBoard(), // scoring setup for bots
                                 getPlayers().get(i).getOdd(),
                                 getPlayers().get(i).getMax_col(),
                                 getPlayers().get(i).getMax_row(),
