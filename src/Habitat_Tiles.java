@@ -32,6 +32,14 @@ public class Habitat_Tiles
     );
 
 
+    // HABITAT SCORING
+    /*
+    Find the largest habitat corridor (group of a contiguous habitat type) for each of the 5 habitat types (Mountains,
+Forests, Prairies, Wetlands, Rivers). Award 3 points (in a 3-4 Player game) or 2 points (in a 2 player game) to the
+player with the largest habitat corridor and 1 point (in a 3-4 Player game) or 0 points (in a 2 player game) to the
+player with the second largest. (Record these points in the
+     */
+
 
 };
 

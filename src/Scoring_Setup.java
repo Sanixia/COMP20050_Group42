@@ -43,12 +43,28 @@ public class Scoring_Setup extends Board {
     public static int scoring_setups(Board[][]board, int odd, int[] scoring_cards) {       // temporary for testing purposes
         setBoard(board);
         setOdd(odd);
+        remove_slot();
         int fox_num=0, hawk_num=0, bear_num=0, salmon_score=0, elk_num=0;
+        int[] habitat_scoring = new int[5];
         int[] bear_arr = new int[20], elk_arr = new int[20], fox_arr = new int[20];
         int b=0, e=0, f=0;      // indexes
         for (int i=0; i<MAXSIZE; i++) {
             for (int j=0; j<MAXSIZE; j++) {
                 Board t = board[i][j];
+
+
+                // TODO habitat scoring
+
+                if (t!=null){
+                    habitat_scoring = Scoring_Habitat_Tiles.habitat_score(i, j, habitat_scoring);
+                }
+
+
+
+
+
+
+
                 if( t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='f') {            // FOX
                     //System.out.println("fox    ["+i+"]["+j+"] " + fox_scoring_cards(i, j, scoring_cards[2]));
                     if (scoring_cards[2]==2) {
@@ -473,5 +489,32 @@ public class Scoring_Setup extends Board {
 
         System.out.println("\nTotal score for " + name + " is: " + (fox_score + hawk_score + bear_score + salmon_score + elk_score + nature_tokens + "\n\n\n\n"));
 
+    }
+    
+    public int tilescore = 0;
+
+    public int tile_scoring(int x, int y, String biome) {
+        int score = 0;
+        int plusOne = calculateSpace(x);
+        if (y-1>=0 && checkTile(x, y, biome, 1)) score++;              // left
+        if (y-1<=MAXSIZE && checkTile(x, y, biome, 4)) score++;        // right
+        if (y-1+plusOne>=0 && x-1>=0 && checkTile(x, y, biome, 2)) score++;        // top left
+        if (y+plusOne<=MAXSIZE && x-1>=0 && checkTile(x, y, biome, 3)) score++;    // top right
+        if (y-1+plusOne>=0 && x+1<=MAXSIZE && checkTile(x, y, biome, 0)) score++;       // bottom left
+        if (y+plusOne<=MAXSIZE && x+1<=MAXSIZE && checkTile(x, y, biome, 5)) score++;   // bottom right
+        if (score == 6) score++;
+        return score;
+    }
+
+    public Boolean checkTile(int x, int y, String keystoneBiome, int pos) {
+        int rotation = board[x][y].getRotation();
+        if (board[x][y].getBiome().charAt(1) == keystoneBiome.charAt(0)) {
+            rotation = (rotation+3)%6;
+        }
+
+        if (pos == rotation || pos == (rotation+1)%6 || pos == (rotation+5%6)) {
+            return true;
+        }
+        return false;
     }
 }
