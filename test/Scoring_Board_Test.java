@@ -10,34 +10,34 @@ class Scoring_Board_Test {
                 int[] scoring_cards = {1,1,1,1,1};
                 Board[][] b = new  Board[26][26];
 
-                b[0][2] = new Board("F", "FB", 0);
-                b[0][3] = new Board("F", "b", 0);
-                b[0][5] = new Board("F", "s", 0);
+                b[0][2] = new Board("F", "FB", 6);
+                b[0][3] = new Board("F", "b", 6);
+                b[0][5] = new Board("F", "s", 6);
 
-                b[1][1] = new Board("F", "h", 0);
-                b[1][2] = new Board("F", "b", 0);
-                b[1][3] = new Board("F", "s", 0);
-                b[1][4] = new Board("F", "s", 0);
-                b[1][5] = new Board("F", "e", 0);
-                b[1][6] = new Board("F", "h", 0);
+                b[1][1] = new Board("F", "h", 6);
+                b[1][2] = new Board("F", "b", 6);
+                b[1][3] = new Board("F", "s", 6);
+                b[1][4] = new Board("F", "s", 6);
+                b[1][5] = new Board("F", "e", 6);
+                b[1][6] = new Board("F", "h", 6);
 
-                b[2][1] = new Board("F", "f", 0);
-                b[2][2] = new Board("F", "f", 0);
-                b[2][3] = new Board("F", "s", 0);
-                b[2][4] = new Board("F", "h", 0);
-                b[2][5] = new Board("F", "e", 0);
-                b[2][6] = new Board("F", "b", 0);
+                b[2][1] = new Board("F", "f", 6);
+                b[2][2] = new Board("F", "f", 6);
+                b[2][3] = new Board("F", "s", 6);
+                b[2][4] = new Board("F", "h", 6);
+                b[2][5] = new Board("F", "e", 6);
+                b[2][6] = new Board("F", "b", 6);
 
-                b[3][1] = new Board("F", "e", 0);
-                b[3][2] = new Board("F", "e", 0);
-                b[3][3] = new Board("F", "s", 0);
-                b[3][4] = new Board("F", "e", 0);
-                b[3][5] = new Board("F", "b", 0);
-                b[3][6] = new Board("F", "F", 0);
+                b[3][1] = new Board("F", "e", 6);
+                b[3][2] = new Board("F", "e", 6);
+                b[3][3] = new Board("F", "s", 6);
+                b[3][4] = new Board("F", "e", 6);
+                b[3][5] = new Board("F", "b", 6);
+                b[3][6] = new Board("F", "F", 6);
 
-                b[4][3] = new Board("F", "BES", 0);
-                b[4][4] = new Board("F", "h", 0);
-                b[4][5] = new Board("F", "f", 0);
+                b[4][3] = new Board("F", "BES", 6);
+                b[4][4] = new Board("F", "h", 6);
+                b[4][5] = new Board("F", "f", 6);
 
 
                 // Bear: 2 pairs of bear for 11 points
@@ -63,35 +63,35 @@ class Scoring_Board_Test {
                 int[] scoring_cards = {2,2,2,2,2};
                 Board[][] b = new  Board[26][26];
 
-                b[0][2] = new Board("F", "FB", 0);
-                b[0][3] = new Board("F", "b", 0);
-                b[0][5] = new Board("F", "s", 0);
+                b[0][2] = new Board("F", "FB", 6);
+                b[0][3] = new Board("F", "b", 6);
+                b[0][5] = new Board("F", "s", 6);
 
-                b[1][1] = new Board("F", "h", 0);
-                b[1][2] = new Board("F", "b", 0);
-                b[1][3] = new Board("F", "s", 0);
-                b[1][4] = new Board("F", "s", 0);
-                b[1][5] = new Board("F", "e", 0);
-                b[1][6] = new Board("F", "h", 0);
+                b[1][1] = new Board("F", "h", 6);
+                b[1][2] = new Board("F", "b", 6);
+                b[1][3] = new Board("F", "s", 6);
+                b[1][4] = new Board("F", "s", 6);
+                b[1][5] = new Board("F", "e", 6);
+                b[1][6] = new Board("F", "h", 6);
 
-                b[2][1] = new Board("F", "F", 0);
-                b[2][2] = new Board("F", "f", 0);
-                b[2][3] = new Board("F", "s", 0);
-                b[2][4] = new Board("F", "h", 0);
-                b[2][5] = new Board("F", "e", 0);
-                b[2][6] = new Board("F", "b", 0);
+                b[2][1] = new Board("F", "F", 6);
+                b[2][2] = new Board("F", "f", 6);
+                b[2][3] = new Board("F", "s", 6);
+                b[2][4] = new Board("F", "h", 6);
+                b[2][5] = new Board("F", "e", 6);
+                b[2][6] = new Board("F", "b", 6);
 
-                b[3][0] = new Board("F", "h", 0);
-                b[3][1] = new Board("F", "e", 0);
-                b[3][2] = new Board("F", "e", 0);
-                b[3][3] = new Board("F", "s", 0);
-                b[3][4] = new Board("F", "e", 0);
-                b[3][5] = new Board("F", "b", 0);
-                b[3][6] = new Board("F", "F", 0);
+                b[3][0] = new Board("F", "h", 6);
+                b[3][1] = new Board("F", "e", 6);
+                b[3][2] = new Board("F", "e", 6);
+                b[3][3] = new Board("F", "s", 6);
+                b[3][4] = new Board("F", "e", 6);
+                b[3][5] = new Board("F", "b", 6);
+                b[3][6] = new Board("F", "F", 6);
 
-                b[4][3] = new Board("F", "BES", 0);
-                b[4][4] = new Board("F", "h", 0);
-                b[4][5] = new Board("F", "f", 0);
+                b[4][3] = new Board("F", "BES", 6);
+                b[4][4] = new Board("F", "h", 6);
+                b[4][5] = new Board("F", "f", 6);
 
 
                 // Bear: no bears found with 3 so 0 points
@@ -117,35 +117,35 @@ class Scoring_Board_Test {
                 int[] scoring_cards = {3,3,3,3,3};
                 Board[][] b = new  Board[26][26];
 
-                b[0][2] = new Board("F", "FB", 0);
-                b[0][3] = new Board("F", "b", 0);
-                b[0][5] = new Board("F", "s", 0);
+                b[0][2] = new Board("F", "FB", 6);
+                b[0][3] = new Board("F", "b", 6);
+                b[0][5] = new Board("F", "s", 6);
 
-                b[1][1] = new Board("F", "h", 0);
-                b[1][2] = new Board("F", "b", 0);
-                b[1][3] = new Board("F", "s", 0);
-                b[1][4] = new Board("F", "s", 0);
-                b[1][5] = new Board("F", "e", 0);
-                b[1][6] = new Board("F", "h", 0);
+                b[1][1] = new Board("F", "h", 6);
+                b[1][2] = new Board("F", "b", 6);
+                b[1][3] = new Board("F", "s", 6);
+                b[1][4] = new Board("F", "s", 6);
+                b[1][5] = new Board("F", "e", 6);
+                b[1][6] = new Board("F", "h", 6);
 
-                b[2][1] = new Board("F", "F", 0);
-                b[2][2] = new Board("F", "f", 0);
-                b[2][3] = new Board("F", "s", 0);
-                b[2][4] = new Board("F", "h", 0);
-                b[2][5] = new Board("F", "e", 0);
-                b[2][6] = new Board("F", "b", 0);
+                b[2][1] = new Board("F", "F", 6);
+                b[2][2] = new Board("F", "f", 6);
+                b[2][3] = new Board("F", "s", 6);
+                b[2][4] = new Board("F", "h", 6);
+                b[2][5] = new Board("F", "e", 6);
+                b[2][6] = new Board("F", "b", 6);
 
-                b[3][0] = new Board("F", "h", 0);
-                b[3][1] = new Board("F", "e", 0);
-                b[3][2] = new Board("F", "e", 0);
-                b[3][3] = new Board("F", "s", 0);
-                b[3][4] = new Board("F", "e", 0);
-                b[3][5] = new Board("F", "b", 0);
-                b[3][6] = new Board("F", "F", 0);
+                b[3][0] = new Board("F", "h", 6);
+                b[3][1] = new Board("F", "e", 6);
+                b[3][2] = new Board("F", "e", 6);
+                b[3][3] = new Board("F", "s", 6);
+                b[3][4] = new Board("F", "e", 6);
+                b[3][5] = new Board("F", "b", 6);
+                b[3][6] = new Board("F", "F", 6);
 
-                b[4][3] = new Board("F", "BES", 0);
-                b[4][4] = new Board("F", "h", 0);
-                b[4][5] = new Board("F", "f", 0);
+                b[4][3] = new Board("F", "BES", 6);
+                b[4][4] = new Board("F", "h", 6);
+                b[4][5] = new Board("F", "f", 6);
 
 
                 // Bear: 2 found of pair 2 so 5 + 5 = 10 points

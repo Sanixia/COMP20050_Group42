@@ -13,41 +13,41 @@ public class Scoring_SalmonTest {
 
         // 6 salmon scored because they are not adjacent to more than 1 salmon for the run
         // 20 score for 6 salmon
-        b[0][0] = new Board("P", "s", 0);
-        b[1][0] = new Board("P", "s", 0);
-        b[1][1] = new Board("P", "s", 0);
-        b[1][2] = new Board("P", "s", 0);
-        b[0][3] = new Board("P", "s", 0);
-        b[0][4] = new Board("P", "s", 0);
+        b[0][0] = new Board("P", "s", 6);
+        b[1][0] = new Board("P", "s", 6);
+        b[1][1] = new Board("P", "s", 6);
+        b[1][2] = new Board("P", "s", 6);
+        b[0][3] = new Board("P", "s", 6);
+        b[0][4] = new Board("P", "s", 6);
 
 
         // 0 salmon scored because they are touching more than 2 salmon each
         // 0 score for 0 salmon
-        b[3][0] = new Board("P", "s", 0);
-        b[3][1] = new Board("P", "s", 0);
-        b[4][1] = new Board("P", "s", 0);
-        b[4][0] = new Board("P", "s", 0);
-        b[5][0] = new Board("P", "s", 0);
+        b[3][0] = new Board("P", "s", 6);
+        b[3][1] = new Board("P", "s", 6);
+        b[4][1] = new Board("P", "s", 6);
+        b[4][0] = new Board("P", "s", 6);
+        b[5][0] = new Board("P", "s", 6);
 
 
         // 4 salmon scored from the run
         // 11 score for 4 salmon
-        b[3][3] = new Board("P", "s", 0);
-        b[2][4] = new Board("P", "s", 0);
-        b[2][5] = new Board("P", "s", 0);
-        b[3][4] = new Board("P", "B", 0);
-        b[3][5] = new Board("P", "s", 0);
-        b[4][4] = new Board("P", "B", 0);
-        b[4][5] = new Board("P", "F", 0);
+        b[3][3] = new Board("P", "s", 6);
+        b[2][4] = new Board("P", "s", 6);
+        b[2][5] = new Board("P", "s", 6);
+        b[3][4] = new Board("P", "B", 6);
+        b[3][5] = new Board("P", "s", 6);
+        b[4][4] = new Board("P", "B", 6);
+        b[4][5] = new Board("P", "F", 6);
 
 
         // 2 salmon scored from the run
         // 4 score for 2 salmon
-        b[5][5] = new Board("P", "f", 0);
-        b[4][6] = new Board("P", "b", 0);
-        b[3][6] = new Board("P", "h", 0);
-        b[5][6] = new Board("P", "s", 0);
-        b[4][7] = new Board("P", "s", 0);
+        b[5][5] = new Board("P", "f", 6);
+        b[4][6] = new Board("P", "b", 6);
+        b[3][6] = new Board("P", "h", 6);
+        b[5][6] = new Board("P", "s", 6);
+        b[4][7] = new Board("P", "s", 6);
 
 
 
@@ -75,41 +75,41 @@ public class Scoring_SalmonTest {
 
         // 4 salmon scored because they are not adjacent to more than 1 salmon for the run
         // 12 score for 4 salmon (after 4 doesn't count)
-        b[0][0] = new Board("P", "s", 0);
-        b[1][0] = new Board("P", "s", 0);
-        b[1][1] = new Board("P", "s", 0);
-        b[1][2] = new Board("P", "s", 0);
-        b[0][3] = new Board("P", "s", 0);
-        b[0][4] = new Board("P", "s", 0);
+        b[0][0] = new Board("P", "s", 6);
+        b[1][0] = new Board("P", "s", 6);
+        b[1][1] = new Board("P", "s", 6);
+        b[1][2] = new Board("P", "s", 6);
+        b[0][3] = new Board("P", "s", 6);
+        b[0][4] = new Board("P", "s", 6);
 
 
         // 0 salmon scored because they are touching more than 2 salmon each
         // 0 score for 0 salmon
-        b[3][0] = new Board("P", "s", 0);
-        b[3][1] = new Board("P", "s", 0);
-        b[4][1] = new Board("P", "s", 0);
-        b[4][0] = new Board("P", "s", 0);
-        b[5][0] = new Board("P", "s", 0);
+        b[3][0] = new Board("P", "s", 6);
+        b[3][1] = new Board("P", "s", 6);
+        b[4][1] = new Board("P", "s", 6);
+        b[4][0] = new Board("P", "s", 6);
+        b[5][0] = new Board("P", "s", 6);
 
 
         // 4 salmon scored from the run
         // 12 score for 4 salmon
-        b[3][3] = new Board("P", "s", 0);
-        b[2][4] = new Board("P", "s", 0);
-        b[2][5] = new Board("P", "s", 0);
-        b[3][4] = new Board("P", "B", 0);
-        b[3][5] = new Board("P", "s", 0);
-        b[4][4] = new Board("P", "B", 0);
-        b[4][5] = new Board("P", "F", 0);
+        b[3][3] = new Board("P", "s", 6);
+        b[2][4] = new Board("P", "s", 6);
+        b[2][5] = new Board("P", "s", 6);
+        b[3][4] = new Board("P", "B", 6);
+        b[3][5] = new Board("P", "s", 6);
+        b[4][4] = new Board("P", "B", 6);
+        b[4][5] = new Board("P", "F", 6);
 
 
         // 2 salmon scored from the run
         // 4 score for 2 salmon
-        b[5][5] = new Board("P", "f", 0);
-        b[4][6] = new Board("P", "b", 0);
-        b[3][6] = new Board("P", "h", 0);
-        b[5][6] = new Board("P", "s", 0);
-        b[4][7] = new Board("P", "s", 0);
+        b[5][5] = new Board("P", "f", 6);
+        b[4][6] = new Board("P", "b", 6);
+        b[3][6] = new Board("P", "h", 6);
+        b[5][6] = new Board("P", "s", 6);
+        b[4][7] = new Board("P", "s", 6);
 
 
 
@@ -135,41 +135,41 @@ public class Scoring_SalmonTest {
 
         // 4 salmon scored because they are not adjacent to more than 1 salmon for the run
         // 17 score for 5 salmon (after 5 doesn't count)
-        b[0][0] = new Board("P", "s", 0);
-        b[1][0] = new Board("P", "s", 0);
-        b[1][1] = new Board("P", "s", 0);
-        b[1][2] = new Board("P", "s", 0);
-        b[0][3] = new Board("P", "s", 0);
-        b[0][4] = new Board("P", "s", 0);
+        b[0][0] = new Board("P", "s", 6);
+        b[1][0] = new Board("P", "s", 6);
+        b[1][1] = new Board("P", "s", 6);
+        b[1][2] = new Board("P", "s", 6);
+        b[0][3] = new Board("P", "s", 6);
+        b[0][4] = new Board("P", "s", 6);
 
 
         // 0 salmon scored because they are touching more than 2 salmon each
         // 0 score for 0 salmon
-        b[3][0] = new Board("P", "s", 0);
-        b[3][1] = new Board("P", "s", 0);
-        b[4][1] = new Board("P", "s", 0);
-        b[4][0] = new Board("P", "s", 0);
-        b[5][0] = new Board("P", "s", 0);
+        b[3][0] = new Board("P", "s", 6);
+        b[3][1] = new Board("P", "s", 6);
+        b[4][1] = new Board("P", "s", 6);
+        b[4][0] = new Board("P", "s", 6);
+        b[5][0] = new Board("P", "s", 6);
 
 
         // 4 salmon scored from the run
         // 11 score for 4 salmon
-        b[3][3] = new Board("P", "s", 0);
-        b[2][4] = new Board("P", "s", 0);
-        b[2][5] = new Board("P", "s", 0);
-        b[3][4] = new Board("P", "B", 0);
-        b[3][5] = new Board("P", "s", 0);
-        b[4][4] = new Board("P", "B", 0);
-        b[4][5] = new Board("P", "F", 0);
+        b[3][3] = new Board("P", "s", 6);
+        b[2][4] = new Board("P", "s", 6);
+        b[2][5] = new Board("P", "s", 6);
+        b[3][4] = new Board("P", "B", 6);
+        b[3][5] = new Board("P", "s", 6);
+        b[4][4] = new Board("P", "B", 6);
+        b[4][5] = new Board("P", "F", 6);
 
 
         // 2 salmon scored from the run
         // 4 score for 2 salmon
-        b[5][5] = new Board("P", "f", 0);
-        b[4][6] = new Board("P", "b", 0);
-        b[3][6] = new Board("P", "h", 0);
-        b[5][6] = new Board("P", "s", 0);
-        b[4][7] = new Board("P", "s", 0);
+        b[5][5] = new Board("P", "f", 6);
+        b[4][6] = new Board("P", "b", 6);
+        b[3][6] = new Board("P", "h", 6);
+        b[5][6] = new Board("P", "s", 6);
+        b[4][7] = new Board("P", "s", 6);
 
 
 
