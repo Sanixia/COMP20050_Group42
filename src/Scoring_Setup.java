@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 // Group 42
 // Roshan, Michal
@@ -45,7 +46,7 @@ public class Scoring_Setup extends Board {
         setOdd(odd);
         remove_slot();
         int fox_num=0, hawk_num=0, bear_num=0, salmon_score=0, elk_num=0;
-        int[] habitat_scoring = new int[5];
+        int[] habitat_scoring = {0,0,0,0,0};
         int[] bear_arr = new int[20], elk_arr = new int[20], fox_arr = new int[20];
         int b=0, e=0, f=0;      // indexes
         for (int i=0; i<MAXSIZE; i++) {
@@ -147,6 +148,8 @@ public class Scoring_Setup extends Board {
             elk_score = elk_score_calculate(elk_num, elk_arr, scoring_cards[1]);
             System.out.println("Total Elk score:" + elk_score);
         }
+
+        System.out.println("Total Habitat score:" + Arrays.toString(habitat_scoring));
 
         return fox_score + hawk_score + bear_score + elk_score + salmon_score;
     }
@@ -367,7 +370,7 @@ public class Scoring_Setup extends Board {
             col--;                                                  // left
         }
         if (row==x && col==y) return null;
-        if(row<0 || row>MAXSIZE || col<0 || col>MAXSIZE) return null;
+        if(row<0 || row>=MAXSIZE || col<0 || col>=MAXSIZE) return null;
         return board[row][col];
     }
 
@@ -516,5 +519,24 @@ public class Scoring_Setup extends Board {
             return true;
         }
         return false;
+    }
+
+
+    public static void main(String[] args) {
+        Board[][] b = new Board[MAXSIZE][MAXSIZE];
+        b[0][1] = new Board("R", "E", 6);
+        b[0][2] = new Board("R", "E", 6);
+        b[0][3] = new Board("R", "F", 6);
+        b[1][1] = new Board("R", "E", 6);
+
+        b[3][4] = new Board("R", "E", 6);
+        b[3][5] = new Board("R", "E", 6);
+        b[4][3] = new Board("R", "E", 6);
+        b[1][4] = new Board("R", "E", 6);
+
+        Board.print_boards(b, 7, 5, 1);
+
+        int score = scoring_setups(b, 1, new int[] {1,1,1,1,1});
+        System.out.println(score);
     }
 }

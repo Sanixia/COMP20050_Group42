@@ -136,7 +136,7 @@ public class Cascadia extends Display_And_Input{
                                             command_state = Command_State.get_input(4, isBot_players());
 
                                             //selects the rotation of the tile
-                                            if(Command_State.getHabitat_tile_choice() == 0 && (command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4 || command_state.getChoice() == 5 || command_state.getChoice() == 6 || command_state.getChoice() == 7 )) {
+                                            if(Command_State.getHabitat_tile_choice() == 0 && (command_state.getChoice() == 1 || command_state.getChoice() == 2 || command_state.getChoice() == 3 || command_state.getChoice() == 4 || command_state.getChoice() == 5 || command_state.getChoice() == 6)) {
 
                                                 getPlayers().get(playerNum).print_board(getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
                                                 place_tile(place_tile, isBot_players(), command_state.getChoice()-1, getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
@@ -148,7 +148,7 @@ public class Cascadia extends Display_And_Input{
                                         else{ // if the tile is a keystone
 
                                             getPlayers().get(playerNum).print_board(getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
-                                            place_tile(place_tile, isBot_players(), 0, getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
+                                            place_tile(place_tile, isBot_players(), 6, getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
                                             proper_input = false;
                                         }
 

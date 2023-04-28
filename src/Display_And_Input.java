@@ -192,14 +192,23 @@ public class Display_And_Input {
     }
 
     public static void display_tiles(){                                    // Displays the habitat tiles
-        int max = 8;
+        int max = 8, rotation = 0;
         Board[] row = new Board[max];
         int i;
         System.out.println("\nHabitat Tiles: \n");
 
         for (i = 0; i < 4; i++){
-            row[i*2] = new Board(Habitat_Tiles.biome.get(i),  Habitat_Tiles.animals.get(i), 1);
-            row[1+i*2] = new Board("space", "", 1);
+
+            // keystone tile check
+            if(Habitat_Tiles.biome.get(i).length() == 1){
+                row[i*2] = new Board(Habitat_Tiles.biome.get(i),  Habitat_Tiles.animals.get(i), 6);
+                row[1+i*2] = new Board("space", "", 6);
+            }
+            else{
+                row[i*2] = new Board(Habitat_Tiles.biome.get(i),  Habitat_Tiles.animals.get(i), 1);
+                row[1+i*2] = new Board("space", "", 1);
+            }
+
         }
         System.out.println(Board.num_printer(4) + "\n" + Board.row_printer(row, max, 0, " ")+"\n");
     }

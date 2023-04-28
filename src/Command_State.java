@@ -80,7 +80,7 @@ public class Command_State {
         }
 
         else if(inputMenu == 4){ // habitat rotation menu
-            if(menuInput == 1 || menuInput == 2 || menuInput == 3 || menuInput == 4 || menuInput == 5 || menuInput == 6 || menuInput == 7){
+            if(menuInput == 1 || menuInput == 2 || menuInput == 3 || menuInput == 4 || menuInput == 5 || menuInput == 6){
                 state_type = state.TOKEN_MENU;
                 choice = menuInput;
                 setHabitat_tile_choice(0);

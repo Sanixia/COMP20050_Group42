@@ -56,27 +56,27 @@ public class Board extends Printer // todo comments
 
         switch(setup_board){
             case "Forest":
-                board_add_tile("F", "E", 0, 1, 2, board, player_tracker);
+                board_add_tile("F", "E", 6, 1, 2, board, player_tracker);
                 board_add_tile("RM", "BEH", 3, 2, 2,board, player_tracker);
-                board_add_tile("WP", "FS", 6, 2, 3,board, player_tracker);
+                board_add_tile("WP", "FS", 0, 2, 3,board, player_tracker); // change
                 break;
             case "Prairie":
-                board_add_tile("P", "F", 0, 1, 2,board, player_tracker);
+                board_add_tile("P", "F", 6, 1, 2,board, player_tracker);
                 board_add_tile("WR", "FHS", 5, 2, 2,board, player_tracker);
                 board_add_tile("FM", "BE", 0, 2, 3,board, player_tracker);
                 break;
             case "Wetland":
-                board_add_tile("W", "H", 0, 1, 2,board, player_tracker);
+                board_add_tile("W", "H", 6, 1, 2,board, player_tracker);
                 board_add_tile("FR", "EHS", 2, 2, 2,board, player_tracker);
                 board_add_tile("MP", "BF", 3, 2, 3,board, player_tracker);
                 break;
             case "Mountain":
-                board_add_tile("M", "B", 0, 1, 2,board, player_tracker);
+                board_add_tile("M", "B", 6, 1, 2,board, player_tracker);
                 board_add_tile("FW", "EHF", 5, 2, 2,board, player_tracker);
                 board_add_tile("RP", "BS", 6, 2, 3,board, player_tracker);
                 break;
             case "River":
-                board_add_tile("R", "S", 0, 1, 2,board, player_tracker);
+                board_add_tile("R", "S", 6, 1, 2,board, player_tracker);
                 board_add_tile("FP", "BES", 2, 2, 2,board, player_tracker);
                 board_add_tile("WM", "FH", 3, 2, 3,board, player_tracker);
                 break;
@@ -310,22 +310,22 @@ public class Board extends Printer // todo comments
         if (player_tracker.getCheckOddOrEven() == 1 && player_tracker.getOdd() == 0 && x % 2 != 0) plusOne = 0;
 
         if (y-1>=0 && board[x][y-1] == null){
-            board[x][y-1] = new Board("slot", "", 0);         // left
+            board[x][y-1] = new Board("slot", "", 6);         // left
         }
         if (y-1<=MAXSIZE && board[x][y+1] == null){
-            board[x][y+1] = new Board("slot", "", 0);         // right
+            board[x][y+1] = new Board("slot", "", 6);         // right
         }
         if (y-1+plusOne>=0 && x-1>=0 && board[x-1][y-1+plusOne] == null){
-            board[x-1][y-1+plusOne] = new Board("slot", "", 0);   // top left
+            board[x-1][y-1+plusOne] = new Board("slot", "", 6);   // top left
         }
         if (y+plusOne<=MAXSIZE && x-1>=0 && board[x-1][y+plusOne] == null){
-            board[x-1][y+plusOne] = new Board("slot", "", 0);     // top right
+            board[x-1][y+plusOne] = new Board("slot", "", 6);     // top right
         }
         if (y-1+plusOne>=0 && x+1<=MAXSIZE && board[x+1][y-1+plusOne] == null){
-            board[x+1][y-1+plusOne] = new Board("slot", "", 0);   // bottom left
+            board[x+1][y-1+plusOne] = new Board("slot", "", 6);   // bottom left
         }
         if (y+plusOne<=MAXSIZE && x+1<=MAXSIZE && board[x+1][y+plusOne] == null){
-            board[x+1][y+plusOne] = new Board("slot", "", 0);     // bottom right
+            board[x+1][y+plusOne] = new Board("slot", "", 6);     // bottom right
         }
     }
 

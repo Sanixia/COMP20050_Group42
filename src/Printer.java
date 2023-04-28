@@ -115,22 +115,27 @@ public class Printer {
     public static String tile_printout(String colour1, String colour2, int rotation, String animals)
     {
         // Printing keystone tiles (rotation won't matter)
-        if (colour2 == null)
-        {
-            return long_section(colour1) + body(colour1, colour1, animals) + long_section(colour1);
-        }
+//        if (colour2 == null)
+//        {
+//            return long_section(colour1) + body(colour1, colour1, animals) + long_section(colour1);
+//        }
 
         // Switch case for printing double biome tiles in each of their rotations
-        else {
+//        else {
             switch (rotation) {
+                case 0: return long_section(colour1) + body(colour2, colour1, animals) + long_section(colour2);
                 case 1: return long_section_dual(colour2, colour1) + body(colour2, colour1, animals) + long_section_dual(colour2, colour1);
                 case 2: return long_section(colour2) + body(colour2, colour1, animals) + long_section(colour1);
                 case 3: return long_section(colour2) + body(colour1, colour2, animals) + long_section(colour1);
                 case 4: return long_section_dual(colour1, colour2) + body(colour1, colour2, animals) + long_section_dual(colour1, colour2);
                 case 5: return long_section(colour1) + body(colour1, colour2, animals) + long_section(colour2);
-                default: return long_section(colour1) + body(colour2, colour1, animals) + long_section(colour2);
+
+
+
+                // keystone tiles
+                default: return long_section(colour1) + body(colour1, colour1, animals) + long_section(colour1);
             }
-        }
+//        }
     }
 
     //// Line by line printing functions
@@ -227,12 +232,13 @@ public class Printer {
     }
 
     public static void main(String[] args) {        // demo of the same tile in different rotations
-        //Board t = new Board("RM", "BEH", 0);
-        System.out.println(print_tile_setup(new Board("RM", "BEH", 0)));
-        System.out.println(print_tile_setup(new Board("RM", "b", 1)));
-        System.out.println(print_tile_setup(new Board("RM", "BEH", 2)));
-        System.out.println(print_tile_setup(new Board("RM", "e", 3)));
-        System.out.println(print_tile_setup(new Board("RM", "BEH", 4)));
-        System.out.println(print_tile_setup(new Board("RP", "BH", 5)));
+        Board t = new Board("RM", "BEH", 0);
+        System.out.println(print_tile_setup(new Board("FR", "b", 1)) + "1");
+        System.out.println(print_tile_setup(new Board("FR", "BEH", 2))+ "2");
+        System.out.println(print_tile_setup(new Board("FR", "e", 3))+ "3");
+        System.out.println(print_tile_setup(new Board("FR", "BEH", 4))+ "4");
+        System.out.println(print_tile_setup(new Board("FR", "BH", 5))+ "5");
+        System.out.println(print_tile_setup(new Board("FR", "BEH", 0))+ "6");
+        System.out.println(print_tile_setup(new Board("FR", "BEH", 6))+ "6");
     }
 }
