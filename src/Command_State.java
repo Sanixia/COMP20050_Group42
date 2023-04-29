@@ -80,7 +80,7 @@ public class Command_State {
         }
 
         else if(inputMenu == 4){ // habitat rotation menu
-            if(menuInput == 1 || menuInput == 2 || menuInput == 3 || menuInput == 4 || menuInput == 5 || menuInput == 6){
+            if(menuInput >= 1 && menuInput <= 6){
                 state_type = state.TOKEN_MENU;
                 choice = menuInput;
                 setHabitat_tile_choice(0);
@@ -98,7 +98,7 @@ public class Command_State {
             }
             else if(menuInput == 2){
                 state_type = state.MAIN_MENU;
-                choice = 0;
+                choice = menuInput;
             }
             else{
                 state_type = state.TOKEN_MENU;
@@ -239,7 +239,7 @@ public class Command_State {
                     break;
             }
 
-            if(bot_players == false){
+            if(!bot_players){
                 user_input = in.nextLine();
             }
 

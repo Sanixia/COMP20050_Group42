@@ -1,3 +1,7 @@
+// Group 42
+// Roshan, Michal
+// Sanixia, glucoseIntolerant
+
 import java.util.ArrayList;
 
 public class Scoring_Habitat_Tiles extends Scoring_Cards{

@@ -493,7 +493,10 @@ public class Scoring_Setup extends Board {
         System.out.println("\nTotal score for " + name + " is: " + (fox_score + hawk_score + bear_score + salmon_score + elk_score + nature_tokens + "\n\n\n\n"));
 
     }
-    
+
+
+    /* unnecessary functions
+
     public int tilescore = 0;
 
     public int tile_scoring(int x, int y, String biome) {
@@ -520,6 +523,8 @@ public class Scoring_Setup extends Board {
         }
         return false;
     }
+
+     */
 
 
     public static void main(String[] args) {
