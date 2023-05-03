@@ -13,7 +13,6 @@ public class Player_Tracker {
     private int nature_tokens = 0;
     private static final int MAXSIZE = 26;
 
-
     private Board[][] board;
     private int max_col;         // adjusts 'length' of board
     private int max_row;         // adjusts 'height' of board
@@ -72,6 +71,10 @@ public class Player_Tracker {
 
     public Board[][] getBoard() {
         return board;
+    }
+
+    public void setBoardTile(Board[][] board, int x, int y, Board tile) {
+        this.getBoard()[x][y] = tile;
     }
 
     public void setMax_row_change(int max_row){

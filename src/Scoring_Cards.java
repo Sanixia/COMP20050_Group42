@@ -44,6 +44,7 @@ public class Scoring_Cards extends Scoring_Setup
             col--;                                                  // left
         }
         if (row==x && col==y) return new int[] {-1,-1};
+        if(row<0 || row>=MAXSIZE || col<0 || col>=MAXSIZE) return new int[] {-1,-1};
         return new int[] {row, col};
     }
 

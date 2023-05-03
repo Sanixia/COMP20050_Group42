@@ -53,7 +53,7 @@ public class Cascadia extends Display_And_Input{
 
             current_player = getPlayers().get(playerNum);
             player_board = getPlayers().get(playerNum).getBoard();
-            command_state = Command_State.get_input(1,is_it_bot(current_player));   // Setting the command state
+            command_state = Command_State.get_input(1, is_it_bot(current_player), current_player);   // Setting the command state
 
 
             if (command_state.isInPlay()){ // this is for the main game so it loops to not quit unless option 4 or players turns have all been ended
@@ -79,7 +79,6 @@ public class Cascadia extends Display_And_Input{
 
                 else if (command_state.getChoice() == 2){    // this is for the player to end their turn without placing a tile and token
                     next_player_turn();
-
                 }
 
 
@@ -128,10 +127,10 @@ public class Cascadia extends Display_And_Input{
                                             display_tiles_and_tokens(culling_trigger, is_it_bot(current_player));
 
                                             display_tile_rotation(place_tile);
-                                            command_state = Command_State.get_input(4, is_it_bot(current_player));
+                                            command_state = Command_State.get_input(4, is_it_bot(current_player), current_player);
 
                                             //selects the rotation of the tile
-                                            if(Command_State.getHabitat_tile_choice() == 0 && (command_state.getChoice() > 0 && command_state.getChoice() < 7) );{
+                                            if(Command_State.getHabitat_tile_choice() == 0 && (command_state.getChoice() >= 1 && command_state.getChoice() <= 6) ){
 
 
                                                 current_player.print_board(player_board, current_player);
@@ -215,6 +214,8 @@ public class Cascadia extends Display_And_Input{
 
                                                     }
                                                     else{
+                                                        current_player.print_board(player_board, current_player);
+                                                        display_tiles_and_tokens(culling_trigger, is_it_bot(current_player));
                                                         System.out.println("You can't place down that animal token as there is no available tiles for it!");
                                                         next_player_turn();
 
@@ -268,7 +269,7 @@ public class Cascadia extends Display_And_Input{
                                                 break;
                                             }
 
-                                            command_state = Command_State.get_input(8, is_it_bot(current_player)); // nature token option 2 for selecting any number of tokens to remove
+                                            command_state = Command_State.get_input(8, is_it_bot(current_player), current_player); // nature token option 2 for selecting any number of tokens to remove
 
                                             if((command_state.getChoice() >= 1 && command_state.getChoice() <= 4)){
                                                 nature_token_any_number(command_state.getChoice());
@@ -297,7 +298,7 @@ public class Cascadia extends Display_And_Input{
     public static void display_board_tiles_tokens(int player_number, int menu_number, boolean culling_t){
         getPlayers().get(player_number).print_board(getPlayers().get(player_number).getBoard(), getPlayers().get(player_number));
         display_tiles_and_tokens(culling_t, is_it_bot(current_player));
-        command_state = Command_State.get_input(menu_number, is_it_bot(current_player));
+        command_state = Command_State.get_input(menu_number, is_it_bot(current_player), current_player);
 
         culling_trigger = false;
     }

@@ -529,28 +529,17 @@ public class Scoring_Setup extends Board {
 
     public static void main(String[] args) {
         Board[][] b = new Board[MAXSIZE][MAXSIZE];
-        b[0][1] = new Board("R", "E", 6);
-        b[0][2] = new Board("R", "E", 6);
-        b[0][3] = new Board("R", "F", 6);
-        b[1][1] = new Board("R", "E", 6);
+        b[1][2] = new Board("WP", "EFS", 3);
+        b[1][1] = new Board("WP", "E", 2);
+        b[2][1] = new Board("WM", "F", 1);
+        b[2][2] = new Board("P", "E", 6);
 
-        b[3][4] = new Board("R", "E", 6);
-        b[3][5] = new Board("R", "E", 6);
-        b[4][3] = new Board("R", "E", 6);
-        b[1][4] = new Board("R", "E", 6);
-        b[1][5] = new Board("R", "E", 6);
-        b[1][6] = new Board("R", "E", 6);
-        b[1][7] = new Board("R", "E", 6);
-        b[2][6] = new Board("R", "E", 6);
+        b[3][0] = new Board("FR", "E", 0);
+        b[3][1] = new Board("WR", "E", 5);
+        b[3][2] = new Board("FM", "B", 0);
 
-
-        b[2][3] = new Board("M", "E", 6);
-        b[1][2] = new Board("MP", "E", 0);
-        b[1][3] = new Board("MP", "E", 0);
-        b[2][2] = new Board("MP", "E", 0);
-        b[2][4] = new Board("MP", "E", 1);
-        b[3][3] = new Board("MP", "E", 1);
-        b[3][2] = new Board("MP", "E", 0);
+        b[4][1] = new Board("WR", "E", 2);
+        b[4][2] = new Board("R", "E", 6);
 
         Board.print_boards(b, 10, 10, 1);
 

@@ -37,7 +37,7 @@ public class Scoring_Habitat_Tiles extends Scoring_Cards{
 
 
         ArrayList<Integer[]> tiles_found = new ArrayList<Integer[]>();
-         int x2 = x, y2 = y;
+        int x2 = x, y2 = y;
         int tiles_found_index = 0;
         int habitat_index = habitat_to_score(habitat);
         int amount_of_habitats_to_check = 0;

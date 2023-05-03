@@ -26,7 +26,6 @@ public class Board extends Printer // todo comments
         this.animals = animals;
         this.rotation = rotation;
     }
-
     public String getBiome() {
         return biome;
     }
@@ -96,6 +95,8 @@ public class Board extends Printer // todo comments
         int x, y;
 
         if(bot_player){
+
+            /*
             bot_x = random.nextInt(MAXSIZE);
             bot_y = random.nextInt(MAXSIZE);
 
@@ -103,6 +104,11 @@ public class Board extends Printer // todo comments
                 bot_x = random.nextInt(MAXSIZE);
                 bot_y = random.nextInt(MAXSIZE);
             }
+
+             */
+
+            bot_x = Bot_Scoring.getBest_coordinates()[0];
+            bot_y = Bot_Scoring.getBest_coordinates()[1];
             board_add_tile(tile.getBiome(), tile.getAnimals(), tile.getRotation(), bot_x, bot_y,board, player_tracker);
         }
 

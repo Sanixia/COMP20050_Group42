@@ -1,8 +1,6 @@
 // Group 42
 // Roshan, Michal
 // Sanixia, glucoseIntolerant
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -152,17 +150,15 @@ public class Command_State {
 
 
 
-    public static Command_State get_input(int type_of_menu, boolean bot_players) {
+    public static Command_State get_input(int type_of_menu, boolean bot_players, Player_Tracker current_player) {
 
-
-        menu_type(type_of_menu, commandState, bot_players);
+        menu_type(type_of_menu, commandState, bot_players, current_player);
         return commandState;
-
     }
 
 
 
-    public static Command_State menu_type(int type_of_menu, Command_State commandState, boolean bot_players){
+    public static Command_State menu_type(int type_of_menu, Command_State commandState, boolean bot_players, Player_Tracker current_player){
         Scanner in = new Scanner(System.in);
         int int_input;
         String user_input = "";
@@ -200,7 +196,11 @@ public class Command_State {
                     menu_type = 1;
                     menu_type_string = "Please enter 1, 2, 3 or 4.";
                     if(bot_players){
-                        bot_input = random.nextInt(4) + 1;
+
+
+                        // bot_input = random.nextInt(4) + 1;  previously a random input bot
+
+                        bot_input = Bot_Scoring.get_optimal_habitat_placement(current_player) + 1;
                         break;
                     }
                     break;
@@ -209,7 +209,9 @@ public class Command_State {
                     menu_type = 3;
                     menu_type_string = "Please enter 1, 2, 3, 4, 5 or 6.";
                     if(bot_players){
-                        bot_input = random.nextInt(6) + 1;
+                        //bot_input = random.nextInt(6) + 1;
+
+                        bot_input = Bot_Scoring.getBest_rotation() + 1; // as it goes from 0-5 for rotation, need to add 1
                         break;
                     }
                     break;
