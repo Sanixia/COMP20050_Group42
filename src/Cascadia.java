@@ -35,7 +35,7 @@ public class Cascadia extends Display_And_Input{
         add_bots_or_humans();
         randomised_order_players();
 
-        if(isBot_players()){
+        if(isBot_players()){ // TODO
             WildLife_Scoring_Setup.print_scoring_card(new int[]{1,1,1,1,1}); // prints the scoring card for the bot
         }
         else{

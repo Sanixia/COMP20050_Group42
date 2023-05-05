@@ -24,7 +24,7 @@ public class Display_And_Input {
     private static int player_count = 0;
 
     public static boolean isBot_players() {
-        return bot_vs_bot;
+        return bot_vs_bot || bot_vs_human;
     }
 
     public static int getBot_count() {
@@ -129,11 +129,11 @@ public class Display_And_Input {
 
         if (choice == 5) {
             System.out.println("How many bots do you want to play against each other? Enter (2, 3 or 4)");
-            System.out.println("-> ");
+            System.out.print("-> ");
             do {
                 try {
                     num_of_bots = in.nextInt();
-                    if (num_of_bots == 2 || num_of_bots == 3 || num_of_bots == 4) {
+                    if (num_of_bots == 1 || num_of_bots == 2 || num_of_bots == 3 || num_of_bots == 4) {  //TODO change 1
                         validNumOfBots = true;
                     } else {
                         System.out.print("Please enter a number that is either 2, 3 or 4: ");
@@ -151,7 +151,7 @@ public class Display_And_Input {
 
         else{
             System.out.println("How many bots do you want to play against? Enter (1, 2 or 3)");
-            System.out.println("-> ");
+            System.out.print("-> ");
             do {
                 try {
                     num_of_bots = in.nextInt();
@@ -206,7 +206,13 @@ public class Display_And_Input {
                 while(!checkValidName){
                     temp_name = in.nextLine();
 
-                    if (playerNames.contains(temp_name)){
+                    if(temp_name.isBlank()){
+                        System.out.print("Please enter a name that isn't blank: ");
+                    }
+                    else if(temp_name.length() > 20){
+                        System.out.print("Please enter a name that is less than 20 characters: ");
+                    }
+                    else if (playerNames.contains(temp_name)){
                         System.out.print("Please enter a name that isn't already taken: ");
                     }
                     else{
@@ -251,6 +257,7 @@ public class Display_And_Input {
     public static void randomise_player_tiles_and_tokens(){
 
         long seed = System.nanoTime();                                          // To have the same randomised list order for animals and biome tiles
+        //long seed = 123456789;
         Collections.shuffle(Starter_Habitat.getStarter_Habitat_Tiles());
 
         Collections.shuffle(Habitat_Tiles.biome, new Random(seed));

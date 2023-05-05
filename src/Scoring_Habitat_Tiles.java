@@ -53,6 +53,8 @@ public class Scoring_Habitat_Tiles extends Scoring_Cards{
             x2 = tiles_found.get(tiles_found_index)[0];
             y2 = tiles_found.get(tiles_found_index)[1];
 
+
+
             current_tile = getBoard()[tiles_found.get(tiles_found_index)[0]][tiles_found.get(tiles_found_index)[1]];
 
 
@@ -67,7 +69,7 @@ public class Scoring_Habitat_Tiles extends Scoring_Cards{
             if (amount_of_habitats_to_check == 1) {
 
                 // check all 6 surrounding tiles
-                for (int i = 1; i < 7; i++) {
+                for (int i = 1; i <= 6; i++) {
 
                     // if the tile is not null and the tile is the same biome as the habitat we are checking
                     if (get_surrounding_tile(x2, y2, i) != null && get_surrounding_tile(x2, y2, i).getBiome().contains(Character.toString(habitat))) {
@@ -206,21 +208,28 @@ public class Scoring_Habitat_Tiles extends Scoring_Cards{
                     break;
 
                 case 3:
-                    for_loop_rotation(x2, y2, habitat, 4, tile_found, index_of_character);
-                    for_loop_rotation(x2, y2, habitat, 5, tile_found, index_of_character);
-                    for_loop_rotation(x2, y2, habitat, 0, tile_found, index_of_character);
+                    for (int i = 4; i <= 6; i++) {
+                        for_loop_rotation(x2, y2, habitat, i, tile_found, index_of_character);
+
+                    }
+//                    for_loop_rotation(x2, y2, habitat, 4, tile_found, index_of_character);
+//                    for_loop_rotation(x2, y2, habitat, 5, tile_found, index_of_character);
+//                    for_loop_rotation(x2, y2, habitat, 6, tile_found, index_of_character);
                     break;
 
                 case 4:
                     for_loop_rotation(x2, y2, habitat, 5, tile_found, index_of_character);
-                    for_loop_rotation(x2, y2, habitat, 0, tile_found, index_of_character);
+                    for_loop_rotation(x2, y2, habitat, 6, tile_found, index_of_character);
                     for_loop_rotation(x2, y2, habitat, 1, tile_found, index_of_character);
                     break;
 
                 case 5:
-                    for(int i = 0; i < 3; i++){
-                        for_loop_rotation(x2, y2, habitat, i, tile_found, index_of_character);
-                    }
+                    for_loop_rotation(x2, y2, habitat, 6, tile_found, index_of_character);
+                    for_loop_rotation(x2, y2, habitat, 1, tile_found, index_of_character);
+                    for_loop_rotation(x2, y2, habitat, 2, tile_found, index_of_character);
+//                    for(int i = 0; i < 3; i++){
+//                        for_loop_rotation(x2, y2, habitat, i, tile_found, index_of_character);
+//                    }
                     break;
 
             }
@@ -231,21 +240,28 @@ public class Scoring_Habitat_Tiles extends Scoring_Cards{
             switch (rotation){
 
                 case 0:
-                    for_loop_rotation(x2, y2, habitat, 4, tile_found, index_of_character);
-                    for_loop_rotation(x2, y2, habitat, 5, tile_found, index_of_character);
-                    for_loop_rotation(x2, y2, habitat, 0, tile_found, index_of_character);
-                    break;
+                    for (int i = 4; i <= 6; i++) {
+                        for_loop_rotation(x2, y2, habitat, i, tile_found, index_of_character);
+                    }
+//                    for_loop_rotation(x2, y2, habitat, 4, tile_found, index_of_character);
+//                    for_loop_rotation(x2, y2, habitat, 5, tile_found, index_of_character);
+//                    for_loop_rotation(x2, y2, habitat, 6, tile_found, index_of_character);
+//                    break;
 
                 case 1:
                     for_loop_rotation(x2, y2, habitat, 5, tile_found, index_of_character);
-                    for_loop_rotation(x2, y2, habitat, 0, tile_found, index_of_character);
+                    for_loop_rotation(x2, y2, habitat, 6, tile_found, index_of_character);
                     for_loop_rotation(x2, y2, habitat, 1, tile_found, index_of_character);
                     break;
 
                 case 2:
-                    for(int i = 0; i < 3; i++){
-                        for_loop_rotation(x2, y2, habitat, i, tile_found, index_of_character);
-                    }
+                    for_loop_rotation(x2, y2, habitat, 6, tile_found, index_of_character);
+                    for_loop_rotation(x2, y2, habitat, 1, tile_found, index_of_character);
+                    for_loop_rotation(x2, y2, habitat, 2, tile_found, index_of_character);
+
+//                    for(int i = 0; i < 3; i++){
+//                        for_loop_rotation(x2, y2, habitat, i, tile_found, index_of_character);
+//                    }
                     break;
 
                 case 3:
@@ -277,7 +293,7 @@ public class Scoring_Habitat_Tiles extends Scoring_Cards{
 
 
         if (get_surrounding_tile(x2, y2, i) != null && get_surrounding_tile(x2, y2, i).getBiome().contains(Character.toString(habitat))) {
-            if (check_rotation(i, get_surrounding_tile(x2, y2, i), index_of_character)) {
+            if (check_rotation(i, get_surrounding_tile(x2, y2, i), get_surrounding_tile(x2, y2, i).getBiome().indexOf(habitat))) { //gets the index of the habitat in the biome string
                 int[] coordinates = get_surrounding_tile_coordinates(x2, y2, i);
                 if (!deepContains(tile_found, new Integer[]{coordinates[0], coordinates[1]})) {
                     tile_found.add(new Integer[]{coordinates[0], coordinates[1]});

@@ -196,6 +196,7 @@ public class Printer {
 
     public static String blank_tile() {
         return empty_left() + empty_right() + newline + empty_body() + newline + empty_left() + empty_right();
+       // return sp12_R + newline + sp12_R + newline + sp12_R + newline + sp12_R;
     }
     public static String blank_half() {
         return sp6 + newline + sp6 + newline + sp6 + newline + sp6;

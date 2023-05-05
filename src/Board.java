@@ -199,9 +199,10 @@ public class Board extends Printer // todo comments
                 plusCol = 1;
             }
             player_tracker.setmax_col();
-        } else if (col + plusOne >= player_tracker.getMax_col() - 1) {  // normal case
+        } else if (col + plusOne >= player_tracker.getMax_col() - 2) {  // normal case
             player_tracker.setmax_col();
         }
+
         place_slot_tiles(row+plusRow, col+plusCol, board, player_tracker);  // places slot tiles around the new tile
     }
 

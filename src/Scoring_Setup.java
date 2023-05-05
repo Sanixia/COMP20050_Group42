@@ -31,8 +31,18 @@ public class Scoring_Setup extends Board {
     }
 
     public static int calculateSpace(int col) {
-        if (col % 2 == 0 && odd == 1) return 0;
-        return 1;
+        if (odd == 0){
+            if (col % 2 == 1) return 0;
+            return 1;
+        }
+        else if(odd == 1){
+            if (col % 2 == 1) return 1;
+        }
+        return 0;
+    }
+
+    public static void setBoardTile(Board[][] board, int x, int y, Board tile) {
+        getBoard()[x][y] = tile;
     }
 
     /*  Scoring main function used for unit tests
@@ -389,6 +399,7 @@ public class Scoring_Setup extends Board {
     }
 
 
+
     /*      Actual main scoring function that's used in game
      */
     public static void scoring_setup(Board[][] board, int odd, int max_col, int max_row, int[] scoring_cards, String name, int nature_tokens) {
@@ -402,11 +413,23 @@ public class Scoring_Setup extends Board {
 
         int[] bear_arr = new int[20],  elk_arr = new int[20], fox_arr = new int [20];
         int b=0, e=0, f=0;
+        int[] habitat_scoring = {0,0,0,0,0};
 
         for (int i=0; i< max_row; i++) {
             for (int j=0; j< max_col; j++) {
 
+
+
+
                 Board t = board[i][j];
+
+
+                if (t!=null){
+                    habitat_scoring = Scoring_Habitat_Tiles.habitat_score(i, j, habitat_scoring);   // HABITAT SCORING
+                }
+
+
+
                 if( t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='f') {            // FOX
 
                     if (scoring_cards[2]==2) {
@@ -490,12 +513,24 @@ public class Scoring_Setup extends Board {
 
         System.out.println("Total Nature Tokens: " + nature_tokens);
 
-        System.out.println("\nTotal score for " + name + " is: " + (fox_score + hawk_score + bear_score + salmon_score + elk_score + nature_tokens + "\n\n\n\n"));
+        System.out.println("\n\nHabitat scoring: ");
+        System.out.println("Forest: " + habitat_scoring[0]);
+        System.out.println("Wetland: " + habitat_scoring[1]);
+        System.out.println("River: " + habitat_scoring[2]);
+        System.out.println("Mountain: " + habitat_scoring[3]);
+        System.out.println("Prairie: " + habitat_scoring[4]);
+
+        int total_habitat_score = 0;
+        for (int i=0; i<5; i++) {
+            total_habitat_score += habitat_scoring[i];
+        }
+
+        System.out.println("\nTotal score for " + name + " is: " + (fox_score + hawk_score + bear_score + salmon_score + elk_score + nature_tokens + total_habitat_score + "\n\n\n\n"));
 
     }
 
 
-    /* unnecessary functions
+    /*
 
     public int tilescore = 0;
 
