@@ -209,8 +209,8 @@ public class Display_And_Input {
                     if(temp_name.isBlank()){
                         System.out.print("Please enter a name that isn't blank: ");
                     }
-                    else if(temp_name.length() > 20){
-                        System.out.print("Please enter a name that is less than 20 characters: ");
+                    else if(temp_name.length() > 14){
+                        System.out.print("Please enter a name that is less than 14 characters: ");
                     }
                     else if (playerNames.contains(temp_name)){
                         System.out.print("Please enter a name that isn't already taken: ");

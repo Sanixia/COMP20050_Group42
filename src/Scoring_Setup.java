@@ -402,7 +402,17 @@ public class Scoring_Setup extends Board {
 
     /*      Actual main scoring function that's used in game
      */
-    public static void scoring_setup(Board[][] board, int odd, int max_col, int max_row, int[] scoring_cards, String name, int nature_tokens) {
+    public static void scoring_setup(Player_Tracker player_tracker, int[] scoring_cards) {
+
+        int max_col = player_tracker.getMax_col();
+        int max_row = player_tracker.getMax_row();
+        int odd = player_tracker.getOdd();
+        String name = player_tracker.getPlayer_name();
+        int nature_tokens = player_tracker.getNature_tokens();
+
+        Board[][] board = player_tracker.getBoard();
+
+
         setBoard(board);
         setOdd(odd);
 

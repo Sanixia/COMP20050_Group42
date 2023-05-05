@@ -337,22 +337,14 @@ public class Cascadia extends Display_And_Input{
                 for(int i = 0; i < getPlayers().size(); i++){
 
                     if(isBot_players()){
-                        Scoring_Setup.scoring_setup(  getPlayers().get(i).getBoard(), // scoring setup for bots
-                                getPlayers().get(i).getOdd(),
-                                getPlayers().get(i).getMax_col(),
-                                getPlayers().get(i).getMax_row(),
-                                new int[]{1,1,1,1,1},
-                                getPlayers().get(i).getPlayer_name(),
-                                getPlayers().get(i).getNature_tokens());
+                        Scoring_Setup.scoring_setup(
+                                getPlayers().get(i),
+                                new int[]{1,1,1,1,1});
                     }
                     else{
-                        Scoring_Setup.scoring_setup(  getPlayers().get(i).getBoard(), // scoring setup
-                                getPlayers().get(i).getOdd(),
-                                getPlayers().get(i).getMax_col(),
-                                getPlayers().get(i).getMax_row(),
-                                player_scoring_card,
-                                getPlayers().get(i).getPlayer_name(),
-                                getPlayers().get(i).getNature_tokens());
+                        Scoring_Setup.scoring_setup( // scoring setup
+                                getPlayers().get(i),
+                                player_scoring_card);
                     }
 
                 }
