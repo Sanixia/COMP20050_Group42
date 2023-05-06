@@ -17,7 +17,7 @@ public class Scoring_Elk extends Scoring_Cards
         int[] coordinates = new int[2];
         Board surrounding_tile = null;
         for (int i=2; i<6; i++) {
-            if(pos == -1){
+            if(pos == -1){ // the first tile
                 surrounding_tile = get_surrounding_tile(x2, y2, i);
                 coordinates = get_surrounding_tile_coordinates(x2, y2, i);
             }

@@ -212,9 +212,7 @@ public class Scoring_Habitat_Tiles extends Scoring_Cards{
                         for_loop_rotation(x2, y2, habitat, i, tile_found, index_of_character);
 
                     }
-//                    for_loop_rotation(x2, y2, habitat, 4, tile_found, index_of_character);
-//                    for_loop_rotation(x2, y2, habitat, 5, tile_found, index_of_character);
-//                    for_loop_rotation(x2, y2, habitat, 6, tile_found, index_of_character);
+
                     break;
 
                 case 4:
@@ -227,9 +225,7 @@ public class Scoring_Habitat_Tiles extends Scoring_Cards{
                     for_loop_rotation(x2, y2, habitat, 6, tile_found, index_of_character);
                     for_loop_rotation(x2, y2, habitat, 1, tile_found, index_of_character);
                     for_loop_rotation(x2, y2, habitat, 2, tile_found, index_of_character);
-//                    for(int i = 0; i < 3; i++){
-//                        for_loop_rotation(x2, y2, habitat, i, tile_found, index_of_character);
-//                    }
+
                     break;
 
             }
@@ -243,10 +239,7 @@ public class Scoring_Habitat_Tiles extends Scoring_Cards{
                     for (int i = 4; i <= 6; i++) {
                         for_loop_rotation(x2, y2, habitat, i, tile_found, index_of_character);
                     }
-//                    for_loop_rotation(x2, y2, habitat, 4, tile_found, index_of_character);
-//                    for_loop_rotation(x2, y2, habitat, 5, tile_found, index_of_character);
-//                    for_loop_rotation(x2, y2, habitat, 6, tile_found, index_of_character);
-//                    break;
+
 
                 case 1:
                     for_loop_rotation(x2, y2, habitat, 5, tile_found, index_of_character);
@@ -259,9 +252,6 @@ public class Scoring_Habitat_Tiles extends Scoring_Cards{
                     for_loop_rotation(x2, y2, habitat, 1, tile_found, index_of_character);
                     for_loop_rotation(x2, y2, habitat, 2, tile_found, index_of_character);
 
-//                    for(int i = 0; i < 3; i++){
-//                        for_loop_rotation(x2, y2, habitat, i, tile_found, index_of_character);
-//                    }
                     break;
 
                 case 3:

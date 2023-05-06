@@ -24,7 +24,18 @@ public class Scoring_Setup extends Board {
         return board;
     }
     public static void setBoard(Board[][] board) {
-        Scoring_Setup.board = board;
+        Board[][] copy = new Board[MAXSIZE][MAXSIZE];
+        for (int i = 0; i < MAXSIZE; i++) {
+            for (int j = 0; j < MAXSIZE; j++) {
+                Board original = board[i][j];
+                if (original == null) {
+                    copy[i][j] = null;
+                } else {
+                    copy[i][j] = new Board(original.getBiome(), original.getAnimals(), original.getRotation());
+                }
+            }
+        }
+        Scoring_Setup.board = copy;
     }
     public static void setOdd(int odd) {
         Scoring_Setup.odd = odd;
@@ -41,8 +52,13 @@ public class Scoring_Setup extends Board {
         return 0;
     }
 
-    public static void setBoardTile(Board[][] board, int x, int y, Board tile) {
-        getBoard()[x][y] = tile;
+    public static void setBoardTile(int x, int y, Board tile) {
+        board[x][y] = tile;
+    }
+
+    public static void setBoardAnimal(int x, int y, String animal) {
+        Board new_tile = new Board(board[x][y].getBiome(), animal, getBoard()[x][y].getRotation());
+        board[x][y] = new_tile;
     }
 
     /*  Scoring main function used for unit tests
@@ -391,7 +407,7 @@ public class Scoring_Setup extends Board {
     public static void remove_slot() {
         for (int i = 0; i < MAXSIZE; i++) {
             for (int j = 0; j < MAXSIZE; j++) {
-                if (board[i][j]!=null && Objects.equals(board[i][j].getBiome(), "slot")) {
+                if (board[i][j]!=null && (board[i][j].getBiome()).length() == 4){ //(board[i][j].getBiome(), "slot")) {
                     board[i][j] = null;
                 }
             }
@@ -431,7 +447,7 @@ public class Scoring_Setup extends Board {
 
 
 
-                Board t = board[i][j];
+                Board t = getBoard()[i][j];
 
 
                 if (t!=null){
@@ -466,7 +482,7 @@ public class Scoring_Setup extends Board {
                     }
                     else bear_num += bear_scoring_cards(i, j, scoring_cards[0]);
                 }
-                if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='s') {
+                if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='s') {        // SALMON
 
                     salmon_score += salmon_score_calculate(salmon_scoring_cards(i, j, scoring_cards[4]), scoring_cards[4]);
                 }
@@ -476,7 +492,7 @@ public class Scoring_Setup extends Board {
         for (int i=0; i< max_row; i++) {           // ELK
             for (int j = 0; j < max_col; j++) {
 
-                Board t = board[i][j];
+                Board t = getBoard()[i][j];
 
                 if (t != null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0) == 'e') {
                     if (scoring_cards[1]==3) {
@@ -539,37 +555,111 @@ public class Scoring_Setup extends Board {
 
     }
 
+    public static int animal_scoring(int[] scoring_cards, Player_Tracker player_tracker) {
 
-    /*
+        Scoring_Salmon.getSalmon_found().clear();
+        Scoring_Salmon.setIndex_salmon(0);
+        Scoring_Hawk.getHawk_found().clear();
 
-    public int tilescore = 0;
+        remove_slot();
 
-    public int tile_scoring(int x, int y, String biome) {
-        int score = 0;
-        int plusOne = calculateSpace(x);
-        if (y-1>=0 && checkTile(x, y, biome, 1)) score++;              // left
-        if (y-1<=MAXSIZE && checkTile(x, y, biome, 4)) score++;        // right
-        if (y-1+plusOne>=0 && x-1>=0 && checkTile(x, y, biome, 2)) score++;        // top left
-        if (y+plusOne<=MAXSIZE && x-1>=0 && checkTile(x, y, biome, 3)) score++;    // top right
-        if (y-1+plusOne>=0 && x+1<=MAXSIZE && checkTile(x, y, biome, 0)) score++;       // bottom left
-        if (y+plusOne<=MAXSIZE && x+1<=MAXSIZE && checkTile(x, y, biome, 5)) score++;   // bottom right
-        if (score == 6) score++;
-        return score;
-    }
+        int fox_num=0, hawk_num=0, bear_num=0, salmon_score=0, elk_num=0;
 
-    public Boolean checkTile(int x, int y, String keystoneBiome, int pos) {
-        int rotation = board[x][y].getRotation();
-        if (board[x][y].getBiome().charAt(1) == keystoneBiome.charAt(0)) {
-            rotation = (rotation+3)%6;
+        int[] bear_arr = new int[20], elk_arr = new int[20], fox_arr = new int[20];
+        int b=0, e=0, f=0;      // indexes
+
+        for (int i=0; i<player_tracker.getMax_row(); i++) {
+            for (int j=0; j<player_tracker.getMax_col(); j++) {
+
+                Board t = getBoard()[i][j];
+
+                if( t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='f') {            // FOX
+
+                    if (scoring_cards[2]==2) {
+                        fox_arr[f] = fox_scoring_cards(i, j, scoring_cards[2]);
+                        f++;
+                    }
+                    else fox_num += fox_scoring_cards(i, j, scoring_cards[2]);
+                }
+                else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='h') {        // HAWK
+
+                    if(scoring_cards[3]==3) {
+                        hawk_num += hawk_score_calculate(hawk_scoring_cards(i, j, scoring_cards[3]), scoring_cards[3]);
+                    }
+                    else{
+                        hawk_num += hawk_scoring_cards(i, j, scoring_cards[3]);
+                    }
+                }
+                else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='b') {        // BEAR
+
+                    if (scoring_cards[0]==3) {
+                        bear_arr[b] = bear_scoring_cards(i, j, scoring_cards[0]);
+                        b++;
+                    }
+                    else bear_num += bear_scoring_cards(i, j, scoring_cards[0]);
+                }
+                else if(t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='s') {        // SALMON
+
+                    salmon_score += salmon_score_calculate(salmon_scoring_cards(i, j, scoring_cards[4]), scoring_cards[4]);
+                }
+            }
+        }
+        // separate loop for elks to not affect other tiles as elk are removed after scoring
+        for (int i=0; i< player_tracker.getMax_row(); i++) {
+            for (int j = 0; j < player_tracker.getMax_col(); j++) {
+
+                Board t = getBoard()[i][j];
+
+                if (t != null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0) == 'e') {       // ELK
+                    if (scoring_cards[1]==3) {
+                        elk_arr[e] = elk_scoring_cards(i, j, scoring_cards[1], 0);
+                        e++;
+                    }
+                    else{
+                        elk_num += elk_scoring_cards(i, j, scoring_cards[1], -1);
+                    }
+
+                }
+
+            }
         }
 
-        if (pos == rotation || pos == (rotation+1)%6 || pos == (rotation+5%6)) {
-            return true;
+
+
+        int fox_score = fox_score_calculate(fox_num, scoring_cards[2], fox_arr);
+        int bear_score = bear_score_calculate(bear_num, bear_arr, scoring_cards[0]);
+        System.out.println("\n\nTotal Fox score:" + fox_score);
+
+        int hawk_score = 0;
+
+        if(scoring_cards[3]==1 || scoring_cards[3]==2) {
+            hawk_score = hawk_score_calculate(hawk_num, scoring_cards[3]);
+            System.out.println("Total Hawk score:" + hawk_score);
         }
-        return false;
+        else{
+            hawk_score = hawk_num;
+            System.out.println("Total Hawk score:" + hawk_score);
+        }
+
+
+        System.out.println("Total Bear score:" + bear_score);
+        System.out.println("Total Salmon score:" + salmon_score);
+
+        int elk_score = 0;
+
+        if(scoring_cards[1]==2 || scoring_cards[1]==1){
+            elk_score = elk_num;
+            System.out.println("Total Elk score:" + elk_score);
+        }
+        else{
+            elk_score = elk_score_calculate(elk_num, elk_arr, scoring_cards[1]);
+            System.out.println("Total Elk score:" + elk_score);
+        }
+
+
+        return fox_score + hawk_score + bear_score + elk_score + salmon_score;
     }
 
-     */
 
 
     public static void main(String[] args) {

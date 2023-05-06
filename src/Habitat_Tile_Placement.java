@@ -5,10 +5,10 @@
 /**
  * Optimal tile placement for the bots, strategy would be habitat tile placements
  */
-public class Bot_Scoring extends Board{
+public class Habitat_Tile_Placement extends Board{
 
 
-    public Bot_Scoring(String biome, String animals, int rotation) {
+    public Habitat_Tile_Placement(String biome, String animals, int rotation) {
         super(biome, animals, rotation);
     }
 
@@ -30,11 +30,11 @@ public class Bot_Scoring extends Board{
     }
 
     public static void setBest_score(int best_score) {
-        Bot_Scoring.best_score = best_score;
+        Habitat_Tile_Placement.best_score = best_score;
     }
 
     public static void setBest_coordinates(int[] best_coordinates) {
-        Bot_Scoring.best_coordinates = best_coordinates;
+        Habitat_Tile_Placement.best_coordinates = best_coordinates;
     }
 
     public static int getBest_rotation() {
@@ -42,7 +42,7 @@ public class Bot_Scoring extends Board{
     }
 
     public static void setBest_rotation(int best_rotation) {
-        Bot_Scoring.best_rotation = best_rotation;
+        Habitat_Tile_Placement.best_rotation = best_rotation;
     }
 
 
@@ -51,7 +51,7 @@ public class Bot_Scoring extends Board{
     }
 
     public static void setBest_habitat_to_choose(int best_habitat_to_choose) {
-        Bot_Scoring.best_habitat_to_choose = best_habitat_to_choose;
+        Habitat_Tile_Placement.best_habitat_to_choose = best_habitat_to_choose;
     }
 
 
@@ -133,10 +133,9 @@ public class Bot_Scoring extends Board{
                     if(habitat.length() == 1){
 
                         Board current_habitat_check = new Board(Habitat_Tiles.biome.get(habitat_index), Habitat_Tiles.animals.get(habitat_index), 6);
-                        //Board.board_add_tile(Habitat_Tiles.biome.get(habitat_index), Habitat_Tiles.animals.get(habitat_index), 6, x2, y2, player_tracker.getBoard(), player_tracker );
 
 
-                        Scoring_Setup.setBoardTile(Scoring_Setup.getBoard(), x2, y2, current_habitat_check);
+                        Scoring_Setup.setBoardTile(x2, y2, current_habitat_check);
 
                         int[] habitat_score = new int[5];
 
@@ -146,10 +145,9 @@ public class Bot_Scoring extends Board{
 
                         update_score(habitat_score, habitat_array_index_1, x2, y2, 6, habitat_index);
 
-                        //Board.board_add_tile(Habitat_Tiles.biome.get(habitat_index), Habitat_Tiles.animals.get(habitat_index), 6, x2, y2, player_tracker.getBoard(), player_tracker );
 
-                        Scoring_Setup.setBoardTile(Scoring_Setup.getBoard(), x2, y2, available_tiles);
-                        //player_tracker.setBoardTile(player_tracker.getBoard(), x2, y2, available_tiles);
+                        Scoring_Setup.setBoardTile(x2, y2, available_tiles);
+
                     }
 
                     // for two habitat tiles
@@ -159,11 +157,9 @@ public class Bot_Scoring extends Board{
                         for(int j = 0; j < 6; j++){
 
                             Board current_habitat_check = new Board(Habitat_Tiles.biome.get(habitat_index), Habitat_Tiles.animals.get(habitat_index), j);
-                            //Board.board_add_tile(Habitat_Tiles.biome.get(habitat_index), Habitat_Tiles.animals.get(habitat_index), j, x2, y2, player_tracker.getBoard(), player_tracker );
 
 
-                           //Scoring_Setup.setBoardTile(player_tracker.getBoard(), x2, y2, current_habitat_check);
-                            Scoring_Setup.setBoardTile(Scoring_Setup.getBoard(), x2, y2, current_habitat_check);
+                            Scoring_Setup.setBoardTile(x2, y2, current_habitat_check);
 
                             int[] habitat_score = new int[5];
 
@@ -175,21 +171,17 @@ public class Bot_Scoring extends Board{
                             update_score(habitat_score, habitat_array_index_1, x2, y2, j, habitat_index);
                             update_score(habitat_score, habitat_array_index_2, x2, y2, j, habitat_index);
 
-                            //player_tracker.setBoardTile(player_tracker.getBoard(), x2, y2, available_tiles);
-                            Scoring_Setup.setBoardTile(Scoring_Setup.getBoard(), x2, y2, available_tiles);
+                            // returns it back to being a slot tile
+                            Scoring_Setup.setBoardTile(x2, y2, available_tiles);
 
-                            //Board.board_add_tile(Habitat_Tiles.biome.get(habitat_index), Habitat_Tiles.animals.get(habitat_index), j, x2, y2, player_tracker.getBoard(), player_tracker );
+
 
                         }
-
-
                     }
-
-                    // returns it back to being a slot tile
-
                 }
             }
 
+            // for next position around the habitat
             x2 = x;
             y2 = y;
 

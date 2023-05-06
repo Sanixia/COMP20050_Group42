@@ -72,11 +72,6 @@ public class Player_Tracker {
     public Board[][] getBoard() {
         return board;
     }
-
-    public void setBoardTile(Board[][] board, int x, int y, Board tile) {
-        this.getBoard()[x][y] = tile;
-    }
-
     public void setMax_row_change(int max_row){
         this.max_row = max_row;
     }

@@ -107,8 +107,8 @@ public class Board extends Printer // todo comments
 
              */
 
-            bot_x = Bot_Scoring.getBest_coordinates()[0];
-            bot_y = Bot_Scoring.getBest_coordinates()[1];
+            bot_x = Habitat_Tile_Placement.getBest_coordinates()[0];
+            bot_y = Habitat_Tile_Placement.getBest_coordinates()[1];
             board_add_tile(tile.getBiome(), tile.getAnimals(), tile.getRotation(), bot_x, bot_y,board, player_tracker);
         }
 
@@ -227,16 +227,21 @@ public class Board extends Printer // todo comments
         Random random = new Random(seed);
         int bot_x = 0;
         int bot_y = 0;
+
         if(availableTokenPlacement(animal, board, player_tracker)){
 
             if(bot_player){
-                bot_x = random.nextInt(MAXSIZE);
-                bot_y = random.nextInt(MAXSIZE);
+//                bot_x = random.nextInt(MAXSIZE);
+//                bot_y = random.nextInt(MAXSIZE);
 
-                while (verify_animal_token_placement(bot_x, bot_y, animal, board)) {
-                    bot_x = random.nextInt(MAXSIZE);
-                    bot_y = random.nextInt(MAXSIZE);
-                }
+//                while (verify_animal_token_placement(bot_x, bot_y, animal, board)) {
+//                    bot_x = random.nextInt(MAXSIZE);
+//                    bot_y = random.nextInt(MAXSIZE);
+//                }
+
+                bot_x = Animal_Token_Placement.getBest_coordinates_token()[0];
+                bot_y = Animal_Token_Placement.getBest_coordinates_token()[1];
+
                 if(board[bot_x][bot_y].getBiome().length() == 1){
                     player_tracker.setNature_tokens(player_tracker.getNature_tokens() + 1);
                     System.out.println("\nYou have gained a nature token, you now have " + player_tracker.getNature_tokens() + "!");

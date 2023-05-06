@@ -1,6 +1,7 @@
 // Group 42
 // Roshan, Michal
 // Sanixia, glucoseIntolerant
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ public class Command_State {
     private static int choice;
     static Command_State commandState = new Command_State(0,0);
 
-
+    private static int habitat_choice_bot;
     private static int habitat_tile_choice = 0;
 
 
@@ -200,7 +201,8 @@ public class Command_State {
 
                         // bot_input = random.nextInt(4) + 1;  previously a random input bot
 
-                        bot_input = Bot_Scoring.get_optimal_habitat_placement(current_player) + 1;
+                        bot_input = Habitat_Tile_Placement.get_optimal_habitat_placement(current_player) + 1;
+                        setHabitat_choice_bot(bot_input);
                         break;
                     }
                     break;
@@ -211,7 +213,7 @@ public class Command_State {
                     if(bot_players){
                         //bot_input = random.nextInt(6) + 1;
 
-                        bot_input = Bot_Scoring.getBest_rotation() + 1; // as it goes from 0-5 for rotation, need to add 1
+                        bot_input = Habitat_Tile_Placement.getBest_rotation() + 1; // as it goes from 0-5 for rotation, need to add 1
                         break;
                     }
                     break;
@@ -220,7 +222,17 @@ public class Command_State {
                     menu_type = 2;
                     menu_type_string = "Please enter 1 or 2.";
                     if(bot_players){
-                        bot_input = 1;
+                         //bot_input = 1; //Previously random input bot always selected a token
+                        int[] check_for_coordinates = new int[] {-1,-1};
+
+                        check_for_coordinates = Animal_Token_Placement.optimal_token_placement(Wildlife_Tokens.tokens.get(getHabitat_choice_bot() - 1), current_player);
+
+                        if(check_for_coordinates[0] != -1){ // if the coordinates are not -1, then the token can be placed
+                            bot_input = 1;
+                        }
+                        else{
+                            bot_input = 2;
+                        }
                         break;
                     }
                     break;
@@ -341,7 +353,7 @@ public class Command_State {
 
 
     public static boolean isValid(String input, int menu, boolean bot_players){
-        if(bot_players == true){
+        if(bot_players){
             return true;
         }
         if(menu == 1){
@@ -351,7 +363,7 @@ public class Command_State {
             return input.equals("1") || input.equals("2");
         }
         else if(menu == 3){
-            return input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") || input.equals("5") || input.equals("6") || input.equals("7");
+            return input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") || input.equals("5") || input.equals("6");
 
         }
         else if(menu == 4){
@@ -429,6 +441,14 @@ public class Command_State {
 
     public boolean isInAnyNumberTokenMenu(){
         return state_type == state.ANY_NUMBER_TOKENS;
+    }
+
+    public static int getHabitat_choice_bot() {
+        return habitat_choice_bot;
+    }
+
+    public static void setHabitat_choice_bot(int habitat_choice_bot) {
+        Command_State.habitat_choice_bot = habitat_choice_bot;
     }
 
 

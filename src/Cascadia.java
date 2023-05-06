@@ -16,7 +16,7 @@ public class Cascadia extends Display_And_Input{
     private static int playerNum = 0;
     private static boolean culling_trigger = true;
 
-    private static int[] player_scoring_card = new int[5];
+    private static final int[] player_scoring_card = new int[5];
 
     private static int player_turns_over = 0;
 
