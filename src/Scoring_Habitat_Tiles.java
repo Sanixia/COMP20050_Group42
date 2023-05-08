@@ -30,9 +30,6 @@ public class Scoring_Habitat_Tiles extends Scoring_Cards{
         return habitat_tiles;
 
     }
-
-    // TODO make an x and y getter for board tiles
-
     public static int[] calculate_habitat_score(char habitat, int x, int y, int[] habitat_tiles) {
 
 

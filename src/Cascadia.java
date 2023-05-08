@@ -35,7 +35,7 @@ public class Cascadia extends Display_And_Input{
         add_bots_or_humans();
         randomised_order_players();
 
-        if(isBot_players()){ // TODO
+        if(isBot_players()){
             WildLife_Scoring_Setup.print_scoring_card(new int[]{1,1,1,1,1}); // prints the scoring card for the bot
         }
         else{
@@ -173,7 +173,7 @@ public class Cascadia extends Display_And_Input{
                                                                 display_token(place_tile);
                                                                 Board.place_animal_token(is_it_bot(current_player), Wildlife_Tokens.tokens.get(place_tile), player_board, current_player);
                                                                 remove_token(place_tile);
-
+                                                                getPlayers().get(playerNum).print_board(getPlayers().get(playerNum).getBoard(), getPlayers().get(playerNum));
 
                                                                 next_player_turn();
 
@@ -310,6 +310,15 @@ public class Cascadia extends Display_And_Input{
             System.out.println("\n\nTurn " + current_player.getPlayerTurn() + " for " +  current_player.getPlayer_name() +  " is over!");
 
             if (playerNum == getPlayer_count() - 1) {    //resets to the start of the player list
+                System.out.println("\n*********** CURRENT LEADERBOARD ***********\n");
+
+                if(isBot_players()){
+                    Leaderboard.board(new int[] {1,1,1,1,1});                        //  leaderboard affects stuff
+                }
+                else{
+                    Leaderboard.board(player_scoring_card);
+                }
+
                 playerNum = 0;
             } else {
                 playerNum++;
@@ -317,7 +326,6 @@ public class Cascadia extends Display_And_Input{
             System.out.println( getPlayers().get(playerNum).getPlayer_name() + " is up!");
             culling_trigger = true;
 
-             Leaderboard.board();                        // TODO leaderboard affects stuff
             Command_State.setToMainMenu(command_state);
         }
 
@@ -326,7 +334,7 @@ public class Cascadia extends Display_And_Input{
             player_turns_over++;
 
             if (getPlayers().size() == player_turns_over) {
-                System.out.println("You have no more turns left, calculating score for everyone...\n\n");
+                System.out.println("Turn 20 over, you have no more turns left, calculating score for everyone!\n\n");
 
                 if(isBot_players()){
                     WildLife_Scoring_Setup.print_scoring_card(new int[]{1,1,1,1,1});
@@ -335,26 +343,18 @@ public class Cascadia extends Display_And_Input{
                     WildLife_Scoring_Setup.print_scoring_card(player_scoring_card);
                 }
 
-                for(int i = 0; i < getPlayers().size(); i++){
-
-                    if(isBot_players()){
-                        Scoring_Setup.scoring_setup(
-                                getPlayers().get(i),
-                                new int[]{1,1,1,1,1});
+                if(isBot_players()){
+                    Leaderboard.board( new int[]{1,1,1,1,1});
                     }
                     else{
-                        Scoring_Setup.scoring_setup( // scoring setup
-                                getPlayers().get(i),
-                                player_scoring_card);
+                        Leaderboard.board(player_scoring_card);
                     }
-
-                }
 
                Command_State.setToQuit(command_state);
 
             }
             else {
-                System.out.println("You have no more turns left, calculating score once everyone is done...");
+                System.out.println("Turn 20 over, you have no more turns left, calculating score once everyone is done!");
                 if (playerNum == getPlayer_count() - 1) {    //resets to the start of the player list
                     playerNum = 0;
                 } else {
@@ -363,7 +363,6 @@ public class Cascadia extends Display_And_Input{
                 System.out.println("\n\n" + current_player.getPlayer_name() + " is up!");
                 culling_trigger = true;
             }
-            Leaderboard.board();
         }
 
 

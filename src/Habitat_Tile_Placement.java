@@ -55,9 +55,6 @@ public class Habitat_Tile_Placement extends Board{
     }
 
 
-    // TODO remember to add in something to check the animal tokens inside the habitat tiles if we do optimal token placement too
-
-
     public static int get_optimal_habitat_placement(Player_Tracker player_tracker){
 
         String current_habitat = "";
@@ -139,12 +136,9 @@ public class Habitat_Tile_Placement extends Board{
 
                         int[] habitat_score = new int[5];
 
-                        int habitat_array_index_1 = Scoring_Habitat_Tiles.habitat_to_score(habitat.charAt(0));
-
                         habitat_score =  Scoring_Habitat_Tiles.habitat_score(x2, y2, habitat_score);
 
-                        update_score(habitat_score, habitat_array_index_1, x2, y2, 6, habitat_index);
-
+                        update_score(habitat_score, x2, y2, 6, habitat_index);
 
                         Scoring_Setup.setBoardTile(x2, y2, available_tiles);
 
@@ -163,13 +157,10 @@ public class Habitat_Tile_Placement extends Board{
 
                             int[] habitat_score = new int[5];
 
-                            int habitat_array_index_1 = Scoring_Habitat_Tiles.habitat_to_score(habitat.charAt(0));
-                            int habitat_array_index_2 = Scoring_Habitat_Tiles.habitat_to_score(habitat.charAt(1));
-
                             habitat_score =  Scoring_Habitat_Tiles.habitat_score(x2, y2, habitat_score);  // { F, W, R, M, P}
 
-                            update_score(habitat_score, habitat_array_index_1, x2, y2, j, habitat_index);
-                            update_score(habitat_score, habitat_array_index_2, x2, y2, j, habitat_index);
+                            update_score(habitat_score,  x2, y2, j, habitat_index);
+                            update_score(habitat_score,  x2, y2, j, habitat_index);
 
                             // returns it back to being a slot tile
                             Scoring_Setup.setBoardTile(x2, y2, available_tiles);
@@ -189,10 +180,9 @@ public class Habitat_Tile_Placement extends Board{
     }
 
 
-    public static void update_score(int[] habitat_score, int habitat_array_index, int x, int y, int rotation, int habitat_index){
+    public static void update_score(int[] habitat_score, int x, int y, int rotation, int habitat_index){
 
-        if(habitat_score[habitat_array_index] >= getBest_score()){
-
+            // { F, W, R, M, P}
             int totalscore = 0;
 
             for(int i = 0; i < 5; i++){
@@ -200,15 +190,11 @@ public class Habitat_Tile_Placement extends Board{
             }
 
             // sets the new best score, coordinates, the best selected tile in the game (out of 4) and rotation for the bot to use
-            if (totalscore > getBest_score()){
+            if (totalscore >= getBest_score()){
                 setBest_score(totalscore);
-            }else{
-                setBest_score(habitat_score[habitat_array_index]);  // { F, W, R, M, P}
-            }
-
-            setBest_coordinates(new int[] {x,y});
-            setBest_habitat_to_choose(habitat_index);
-            setBest_rotation(rotation);
+                setBest_coordinates(new int[] {x,y});
+                setBest_habitat_to_choose(habitat_index);
+                setBest_rotation(rotation);
 
         }
     }

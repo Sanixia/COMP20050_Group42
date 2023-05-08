@@ -8,9 +8,6 @@ public class Display_And_Input {
     /**
      * This class is used to display output to users like tiles and habitats and receives input from users too
      */
-
-    private static ArrayList<Player_Tracker> players_score_calculation = new ArrayList<>();
-
     private static ArrayList<String> playerNames = new ArrayList<>();
 
     private static ArrayList<Player_Tracker> players = new ArrayList<>();   //Array of objects to keep track of players and bots
@@ -36,37 +33,21 @@ public class Display_And_Input {
     }
 
 
-    public static void setPlayer_count(int player_count) {
-        Display_And_Input.player_count = player_count;
+    public static boolean is_it_bot(Player_Tracker player_tracker){
+        return player_tracker.getClass() == Bot.class;
     }
 
     public static int getPlayer_count() {
         return player_count;
     }
-
-    public ArrayList<String> getPlayerNames() {
-        return playerNames;
-    }
-
     public static ArrayList<Player_Tracker> getPlayers() {
         return players;
     }
 
-  //  public static ArrayList<Player_Tracker> getPlayers_score_calculation() {
-  //      return players_score_calculation;
-  //   }
-
-
-
-
-
-
-
-
 
     public static void welcome(){
         /* welcome message */
-        /* ask how many players */
+        /* ask how many players and bots */
 
         System.out.println("Welcome to Cascadia!");
         System.out.println("How many people are playing?");
@@ -75,9 +56,6 @@ public class Display_And_Input {
         System.out.println("Enter 6 for bot vs human.");
         System.out.print("-> ");
     }
-
-
-
 
     public static void num_players() {
 
@@ -90,7 +68,7 @@ public class Display_And_Input {
             try{
 
                 player_count = in.nextInt();
-                if (player_count == 1 || player_count == 2 || player_count == 3 || player_count == 4 || player_count == 5 || player_count == 6){
+                if (player_count == 2 || player_count == 3 || player_count == 4 || player_count == 5 || player_count == 6){
 
                     if(player_count == 5){
                         number_of_bots(player_count);
@@ -133,7 +111,7 @@ public class Display_And_Input {
             do {
                 try {
                     num_of_bots = in.nextInt();
-                    if (num_of_bots == 1 || num_of_bots == 2 || num_of_bots == 3 || num_of_bots == 4) {  //TODO change 1
+                    if (num_of_bots == 2 || num_of_bots == 3 || num_of_bots == 4) {
                         validNumOfBots = true;
                     } else {
                         System.out.print("Please enter a number that is either 2, 3 or 4: ");
@@ -150,25 +128,25 @@ public class Display_And_Input {
         }
 
         else{
-            System.out.println("How many bots do you want to play against? Enter (1, 2 or 3)");
+            System.out.println("How many want to play (2 or 3 players)? Enter (2 or 3)");
             System.out.print("-> ");
             do {
                 try {
                     num_of_bots = in.nextInt();
-                    if (num_of_bots == 1 || num_of_bots == 2 || num_of_bots == 3) {
+                    if (num_of_bots == 2 || num_of_bots == 3) {
                         validNumOfBots = true;
                     } else {
-                        System.out.print("Please enter a number that is either 1, 2 or 3: ");
+                        System.out.print("Please enter a number that is either 2 or 3: ");
                     }
                 } catch (InputMismatchException ex) {
-                    System.out.print("Please enter a valid number (1,2 or 3): ");
+                    System.out.print("Please enter a valid number (2 or 3): ");
                     in.nextLine();
                 }
             }
             while (!validNumOfBots);
 
-            setBot_count(num_of_bots);
-            player_count = num_of_bots + 1;
+            setBot_count(4 - num_of_bots);
+            player_count = getBot_count() + num_of_bots;
         }
 
     }
@@ -190,7 +168,7 @@ public class Display_And_Input {
             amount_of_names_to_add = 0;
         }
 
-        // for bot vs human
+        // for bot vs humans
         if(bot_vs_human){
             bot_names();
             amount_of_names_to_add = player_count - getBot_count();
@@ -234,11 +212,11 @@ public class Display_And_Input {
 
 
 
-    public static void randomised_order_players(){                                 // TODO maybe redundant
+    public static void randomised_order_players(){
 
         long seed = System.nanoTime();
 
-        System.out.println("The order in which players will play will be: \n");
+        System.out.println("\n\nThe order in which players will play will be: \n");
 
         Collections.shuffle(playerNames, new Random(seed));
         Collections.shuffle(getPlayers(), new Random(seed));
@@ -256,13 +234,13 @@ public class Display_And_Input {
 
     public static void randomise_player_tiles_and_tokens(){
 
-        //long seed = System.nanoTime();                                          // To have the same randomised list order for animals and biome tiles
-        long seed = 123456789;
+        long seed = System.nanoTime();                                          // To have the same randomised list order for animals and biome tiles
+        //long seed = 123456789;
         Collections.shuffle(Starter_Habitat.getStarter_Habitat_Tiles());
 
         Collections.shuffle(Habitat_Tiles.biome, new Random(seed));
         Collections.shuffle(Habitat_Tiles.animals, new Random(seed));
-        Collections.shuffle(Wildlife_Tokens.tokens, new Random(seed));
+        Collections.shuffle(Wildlife_Tokens.tokens);
 
     }
 
@@ -289,9 +267,6 @@ public class Display_And_Input {
             }
         }
 
-
-
-
     }
 
 
@@ -301,7 +276,7 @@ public class Display_And_Input {
 
         printTokens();
         if(culling_trigger){
-            callTheCulling(bot_player);
+            Culling.callTheCulling(bot_player);
         }
 
     }
@@ -328,169 +303,7 @@ public class Display_And_Input {
         System.out.println(Board.num_printer(4) + "\n" + Board.row_printer(row, max, 0, " ")+"\n");
     }
 
-    public static void callTheCulling(boolean bot_player){                                 // Calls the culling method
 
-        String culling = "";
-        int numForCulling, j;
-        int cullingChoice = 0, continueOption = 0;
-
-        culling = getCulling(culling);
-
-        numForCulling = cullingCheck(culling);
-
-        while(numForCulling != 5){
-
-
-            switch(numForCulling){
-                case 4:
-                    System.out.println("Culling initiated as there has been 4 tokens that are the same, replacing tokens!");
-                    culling = "";
-
-                    for (j = 0; j < 4; j++){
-                        remove_token(j);
-                    }
-                    culling = getCulling(culling);
-                    break;
-
-
-                case 3:
-
-                    cullingChoice = getCullingChoice(cullingChoice, bot_player);
-                    if(cullingChoice == 1){
-                        culling = "";
-                        for(j = 0; j < 3; j++){
-                            remove_token(j);
-                        }
-                        culling = getCulling(culling);
-                    }
-                    else{
-                        continueOption = 1;
-                        culling = getCulling(culling);
-                    }
-
-                    break;
-
-                case 2:
-
-                    cullingChoice = getCullingChoice(cullingChoice, bot_player);
-                    if(cullingChoice == 1){
-                        culling = "";
-                        for(j=0; j < 2; j++){
-                            remove_token(j);
-                        }
-                        remove_token(3);
-                        culling = getCulling(culling);
-                    }
-                    else{
-                        continueOption = 1;
-                        culling = getCulling(culling);
-                    }
-                    break;
-
-                case 1:
-
-                    cullingChoice = getCullingChoice(cullingChoice, bot_player);
-                    if(cullingChoice == 1){
-                        culling = "";
-
-                        for(j = 2; j < 4; j++){
-                            remove_token(j);
-                        }
-                        remove_token(0);
-                        culling = getCulling(culling);
-                    }
-                    else{
-                        continueOption = 1;
-                        culling = getCulling(culling);
-                    }
-                    break;
-
-                case 0:
-
-                    cullingChoice = getCullingChoice(cullingChoice, bot_player);
-                    if(cullingChoice == 1){
-                        culling = "";
-                        for(j = 1; j < 4; j++){
-                            remove_token(j);
-                        }
-                        culling = getCulling(culling);
-                    }
-                    else{
-                        continueOption = 1;
-                        culling = getCulling(culling);
-                    }
-                    break;
-
-            }
-
-
-            printTokens();
-
-            if (continueOption == 1) {
-                numForCulling = 5;
-            }
-            else{
-                numForCulling = cullingCheck(culling);
-            }
-
-
-
-
-        }
-    }
-
-    public static int getCullingChoice(int cullingChoice, boolean bot_player){
-
-        Scanner in = new Scanner(System.in);
-
-        if(bot_player){
-            long seed = System.nanoTime();
-            Random random = new Random(seed);
-
-            cullingChoice = random.nextInt(2) + 1;
-            return cullingChoice;
-        }
-
-        System.out.println("Optional culling identified as 3 tiles are the same, would you like to get rid of the 3 or continue?");
-        System.out.print("Please enter 1 for yes or 2 to continue (1/2): ");
-
-        boolean validInput = false;
-
-        do{
-            try{
-
-                cullingChoice = in.nextInt();
-                if (cullingChoice == 1 || cullingChoice == 2){
-
-                    validInput = true;
-                }
-
-                else{
-                    System.out.print("Please enter a number that is either 1 for yes or 2 to continue: ");
-                }
-
-            }
-
-            catch (InputMismatchException ex) {
-                System.out.print("Please enter a valid number (1 for yes and 2 to continue): ");
-                in.nextLine();
-            }
-        }
-        while (!validInput);
-
-        return cullingChoice;
-
-    }
-
-
-    public static String getCulling(String culling){
-        int i;
-
-        for (i = 0; i < 4; i++){
-            culling = culling + Wildlife_Tokens.tokens.get(i);
-        }
-        return culling;
-    }
 
 
     public static void printTokens(){
@@ -519,51 +332,6 @@ public class Display_And_Input {
         }
     }
 
-
-
-
-
-
-
-    //have to determine which token is the one being left over for the culling in the 3 case
-    public static int cullingCheck(String cullingWord){
-        char firstLetter = cullingWord.charAt(0);
-        char secondLetter = cullingWord.charAt(1);
-        char thirdLetter = cullingWord.charAt(2);
-        char fourthLetter = cullingWord.charAt(3);
-
-
-
-
-        boolean firstThreeSame = firstLetter == secondLetter && secondLetter == thirdLetter ;
-        boolean lastThreeSame = secondLetter == thirdLetter && thirdLetter == fourthLetter;
-        boolean firstAndLastTwoSame = firstLetter == thirdLetter && thirdLetter == fourthLetter;
-        boolean firstTwoAndLastSame = firstLetter == secondLetter && secondLetter == fourthLetter;
-        boolean allSame = firstLetter == secondLetter && secondLetter == thirdLetter && thirdLetter == fourthLetter;
-
-        if (allSame){
-            return 4;
-        }
-        else if(firstThreeSame){
-            return 3;
-        }
-        else if(firstTwoAndLastSame){
-            return 2;
-        }
-        else if(firstAndLastTwoSame){
-            return 1;
-        }
-        else if(lastThreeSame){
-            return 0;
-        }
-
-        else{
-            return 5;
-        }
-
-
-
-    }
 
     public static void display_tile_rotation(int tile_number){
 
@@ -670,9 +438,6 @@ public class Display_And_Input {
     }
 
 
-    public static boolean is_it_bot(Player_Tracker player_tracker){
-        return player_tracker.getClass() == Bot.class;
-    }
 
 
 }
