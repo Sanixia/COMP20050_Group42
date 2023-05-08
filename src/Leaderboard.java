@@ -1,8 +1,5 @@
 import java.util.Objects;
 
-// todo add +3 / +1 to habitats
-// todo add round number
-// todo add "player" is in the lead!
 public class Leaderboard extends Display_And_Input
 {
     private static final int MAX = 14;
@@ -33,37 +30,35 @@ public class Leaderboard extends Display_And_Input
         Leaderboard.player4 = player4;
     }
 
-
     public static void board(int[] scoring_cards) {
         setPlayer_num(getPlayer_count());
 
         String[] player_names = new String[player_num];
         for (int i=0; i<player_num; i++) {
-            //player_names[i] = "bob";
             player_names[i] = getPlayers().get(i).getPlayer_name();
         }
 
-        setPlayer1( getData( 0, scoring_cards) );
+        setPlayer1( getData( 0, scoring_cards) );                           // gets data in the form of menu array above
         setPlayer2( getData( 1, scoring_cards) );
         setPlayer3( getData( 2, scoring_cards) );
         setPlayer4( getData( 3, scoring_cards) );
 
         int []player1_copy = new int[MAX], player2_copy = new int[MAX], player3_copy = new int[MAX], player4_copy = new int[MAX];
-        System.arraycopy(player1, 0, player1_copy, 0, MAX);
+        System.arraycopy(player1, 0, player1_copy, 0, MAX);         // a copy of each array is made for print statements
         System.arraycopy(player2, 0, player2_copy, 0, MAX);
         System.arraycopy(player3, 0, player3_copy, 0, MAX);
         System.arraycopy(player4, 0, player4_copy, 0, MAX);
 
-        getBonus();
+        getBonus();                                                               // calculates bonuses for habitat biomes
 
-        calculateTotals(0, player1);
+        calculateTotals(0, player1);                                        // totals are recalculated again afterwards
         calculateTotals(1, player2);
         calculateTotals(2, player3);
         calculateTotals(3, player4);
 
-        printLeaderboard(player_names, player1_copy, player2_copy, player3_copy, player4_copy);
+        printLeaderboard(player_names, player1_copy, player2_copy, player3_copy, player4_copy);     // scores get printed
 
-        if (getPlayers().get(0).getPlayerTurn() == 20) {
+        if (getPlayers().get(0).getPlayerTurn() == 20) {                                            // message for winner
             printWinner(player_names);
         }
     }
@@ -96,7 +91,8 @@ public class Leaderboard extends Display_And_Input
     }
 
     public static void printWinner(String[] player_names) {
-        int h1 = player1[12], h2 = player2[12], h3 = player3[12], h4 = player4[12];
+        int h1 = player1[13], h2 = player2[13], h3 = player3[13], h4 = player4[13];
+
         int highscore = Math.max(h1 ,Math.max(h2 ,Math.max(h3 , h4)));
 
         int winners = 0;
@@ -141,16 +137,14 @@ public class Leaderboard extends Display_And_Input
             }
             int maxtokens = Math.max(n_tokens[0] ,Math.max(n_tokens[1] ,Math.max(n_tokens[2] , n_tokens[3])));
 
-            if (n_tokens[0] == maxtokens) System.out.println( player_names[0] + " WONS AS THEY HAD " + player1[13] + " NATURE TOKENS");
-            if (n_tokens[1] == maxtokens) System.out.println( player_names[1] + " WONS AS THEY HAD " + player2[13] + " NATURE TOKENS");
-            if (n_tokens[2] == maxtokens) System.out.println( player_names[2] + " WONS AS THEY HAD " + player3[13] + " NATURE TOKENS");
-            if (n_tokens[3] == maxtokens) System.out.println( player_names[3] + " WONS AS THEY HAD " + player4[13] + " NATURE TOKENS");
+            if (n_tokens[0] == maxtokens) System.out.println( player_names[0] + " WINS AS THEY HAD " + player1[10] + " NATURE TOKENS");
+            if (n_tokens[1] == maxtokens) System.out.println( player_names[1] + " WINS AS THEY HAD " + player2[10] + " NATURE TOKENS");
+            if (n_tokens[2] == maxtokens) System.out.println( player_names[2] + " WINS AS THEY HAD " + player3[10] + " NATURE TOKENS");
+            if (n_tokens[3] == maxtokens) System.out.println( player_names[3] + " WINS AS THEY HAD " + player4[10] + " NATURE TOKENS");
         }
-
-
     }
 
-    public static int[] getData(int player, int[]scoring_cards) {
+    public static int[] getData(int player, int[]scoring_cards) {                   // Gets input from
 
         if (player+1 > player_num) return new int[] {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 
