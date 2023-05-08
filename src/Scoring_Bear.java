@@ -46,7 +46,7 @@ public class Scoring_Bear extends Scoring_Cards
         return 0;
     }
 
-    public static int bear_scoring_B(int x, int y) {        // TODO
+    public static int bear_scoring_B(int x, int y) {
         ArrayList<Integer> positions = new ArrayList<Integer>();
 
         for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it
@@ -92,7 +92,7 @@ public class Scoring_Bear extends Scoring_Cards
 
 
 
-    public static int bear_scoring_C(int x, int y) {        // TODO
+    public static int bear_scoring_C(int x, int y) {
         ArrayList<Integer> positions = new ArrayList<Integer>();
 
         for (int i=0; i<6; i++) {               // will only check to the right, bottom right, bottom left to not count any tiles that were before it

@@ -4,7 +4,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Board extends Printer // todo comments
+public class Board extends Printer
 {
     /* board is a 26x26 adaptive board
        - it will extend itself or move everything once it reaches the limit
@@ -100,7 +100,7 @@ public class Board extends Printer // todo comments
             bot_x = random.nextInt(MAXSIZE);
             bot_y = random.nextInt(MAXSIZE);
 
-            while (!verify_tile(bot_x, bot_y,board)) {
+            while (!verify_tile(bot_x, bot_y,board)) {         // initially random
                 bot_x = random.nextInt(MAXSIZE);
                 bot_y = random.nextInt(MAXSIZE);
             }
@@ -182,7 +182,7 @@ public class Board extends Printer // todo comments
         if (col % 2 == 1 && player_tracker.getOdd() == 1 || col % 2 == 0 && player_tracker.getOdd() == 0) plusOne = 1;
 
         if (row == 0) {                                     // case: upperbounds of board
-            if (!(tile.getBiome() == "slot")) { //TODO
+            if (!(tile.getBiome() == "slot")) {
                 indent_row(board, player_tracker);          // everything will be pushed (indented) downwards
                 plusRow = 1;
             }
