@@ -336,6 +336,12 @@ public class Cascadia extends Display_And_Input{
             if (getPlayers().size() == player_turns_over) {
                 System.out.println("Turn 20 over, you have no more turns left, calculating score for everyone!\n\n");
 
+                for(int i = 0; i < getPlayer_count(); i++){
+                    System.out.println(getPlayers().get(i).getPlayer_name());
+                    getPlayers().get(i).print_board(getPlayers().get(i).getBoard(), getPlayers().get(i));
+
+                }
+
                 if(isBot_players()){
                     WildLife_Scoring_Setup.print_scoring_card(new int[]{1,1,1,1,1});
                 }
@@ -344,6 +350,7 @@ public class Cascadia extends Display_And_Input{
                 }
 
                 if(isBot_players()){
+
                     Leaderboard.board( new int[]{1,1,1,1,1});
                     }
                     else{
