@@ -118,7 +118,7 @@ public class Leaderboard extends Display_And_Input
         }
         
         else {
-            int n_tokens[] = {0,0,0,0};
+            int[] n_tokens = {0,0,0,0};
             if (h1 == highscore) {
                 System.out.println( player_names[0] + " DRAWS WITH " + player1[13] + " POINTS");
                 n_tokens[0] = player1[10];
