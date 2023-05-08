@@ -1,77 +1,224 @@
+import java.util.Objects;
+
+// todo add +3 / +1 to habitats
+// todo add round number
+// todo add "player" is in the lead!
 public class Leaderboard extends Display_And_Input
 {
-    private static final String dashes_12 = "-- -- -- -- -- -- ";
-    private static final String dashes_2 = "-- ";
-    private static final String hr = "| ";
+    private static final int MAX = 14;
+    private static int player_num = 0;
+
+    private static int[] player1;
+    private static int[] player2;
+    private static int[] player3;
+    private static int[] player4;
+    
+    public static void setPlayer_num(int player_num) {
+        Leaderboard.player_num = player_num;
+    }
+
+    public static void setPlayer1(int[] player1) {
+        Leaderboard.player1 = player1;
+    }
+
+    public static void setPlayer2(int[] player2) {
+        Leaderboard.player2 = player2;
+    }
+
+    public static void setPlayer3(int[] player3) {
+        Leaderboard.player3 = player3;
+    }
+
+    public static void setPlayer4(int[] player4) {
+        Leaderboard.player4 = player4;
+    }
 
 
     public static void board() {
-        int player_num = getPlayer_count();
+        setPlayer_num(getPlayer_count());
 
-        String p = "tatsu", b="14", e="12", f="7", h="9", s="13", F="3", W="2", R="8", M="2", P="3";
-        String[] arr = {p, b, e, f, h, s, F, W, R, M, P, "34", "51", "85"};
-        String[] menu = {"Players", "Bear", "Elk", "Fox", "Hawk", "Salmon", "Forest", "Wetland", "River", "Mountain", "Prairie", "Total Animal", "Total Habitat", "Total Score" };
+        String[] menu = {"Bear", "Elk", "Fox", "Hawk", "Salmon", "Forest", "Wetland", "River", "Mountain", "Prairie", "Nature Tokens","Total Animal", "Total Habitat", "Total Score" };
+        int[] scoring_cards = {1,1,1,1,1};
 
-
-        String player1name = getPlayers().get(0).getPlayer_name();
-        String player2name = getPlayers().get(1).getPlayer_name();
-        String player3name = null;
-        String player4name = null;
-
-        int[] player1 = new int[12];
-        int[] player2 = new int[12];
-        int[] player3 = new int[12];
-        int[] player4 = new int[12];
-
-        if (player_num == 3) {
-            player3name = getPlayers().get(2).getPlayer_name();
-        } if (player_num == 4) {
-            player4name = getPlayers().get(3).getPlayer_name();
+        String[] player_names = new String[player_num];
+        for (int i=0; i<player_num; i++) {
+            //player_names[i] = "bob";
+            player_names[i] = getPlayers().get(i).getPlayer_name();
         }
 
+        setPlayer1( getData( 0, scoring_cards) );
+        setPlayer2( getData( 1, scoring_cards) );
+        setPlayer3( getData( 2, scoring_cards) );
+        setPlayer4( getData( 3, scoring_cards) );
 
+        int []player1_copy = new int[MAX], player2_copy = new int[MAX], player3_copy = new int[MAX], player4_copy = new int[MAX];
+        System.arraycopy(player1, 0, player1_copy, 0, MAX);
+        System.arraycopy(player2, 0, player2_copy, 0, MAX);
+        System.arraycopy(player3, 0, player3_copy, 0, MAX);
+        System.arraycopy(player4, 0, player4_copy, 0, MAX);
 
+        getBonus();
 
-        for (int i=0; i<player1.length; i++) {
-            // player1[i] = Display_And_Input.
-        }
-
+        calculateTotals(0, player1);
+        calculateTotals(1, player2);
+        calculateTotals(2, player3);
+        calculateTotals(3, player4);
 
         int index = 0;
 
-        for (int i=0; i<19; i++) {
-            if (i == 0 || i == 2 || i == 8 || i == 14 || i == 18) {
-                System.out.println(dashes_12 + dashes_12 + dashes_12 + dashes_2);
-            } else if (i == 1) {
-                System.out.println(hr + append(menu[index], 14) + hr + append(arr[index], 11) + hr + append(arr[index], 11) + hr + append(arr[index], 11) + hr);
-            } else {
-                System.out.println(hr + append(menu[index], 14) + hr + append(arr[index], 11) + hr + append(arr[index], 11) + hr + append(arr[index], 11) + hr);
+        for (int i=0; i<20; i++) {
+            if (i == 0 || i == 2 || i == 8 || i == 15 || i == 19)
+            {
+                System.out.println(" " + dashPrinter("-", 17 * (player_num + 1)-1));
+            } else if (i == 1)
+            {
+                String str = "| " + append("Players", MAX);
+                for (int j=0; j<player_num; j++) {
+                    str += append(player_names[j], MAX);
+                }
+                System.out.println(str);
+            } else if (i==17 || i ==18) {
+                System.out.println( "| " + append(menu[index], MAX) + appendInt(player1[index], player1[index], MAX) + appendInt(player2[index], player2[index], MAX)
+                        + appendInt(player3[index], player3[index], MAX) + appendInt(player4[index], player4[index], MAX));
+                index++;
+            } else
+            {
+                System.out.println( "| " + append(menu[index], MAX) + appendInt(player1[index], player1_copy[index], MAX) + appendInt(player2[index], player2_copy[index], MAX)
+                        + appendInt(player3_copy[index], player3[index], MAX) + appendInt(player4_copy[index], player4[index], MAX));
                 index++;
             }
         }
     }
 
+    public static String appendInt(int numToPrint, int num2,  int x) {
+        String str = Integer.toString(numToPrint);
+
+        if (numToPrint != num2) {
+            int diff = Math.abs(numToPrint - num2);
+            str += " (+" + diff + ")";
+        }
+
+        return append(str, x);
+    }
+
     public static String append(String str, int x) {
-        while (str.length() < x) {
+        if (Objects.equals(str, "-1") || str.isBlank()) {
+            return "";
+        }
+        while (str.length() <= x) {
             str+=" ";
+             if (str.length() <= x) str = " " + str;     // centers data in tables
+        }
+        str+="| ";
+        return str;
+    }
+
+    public static String dashPrinter(String str, int max) {
+        String s = str;
+        while (str.length() < max) {
+            str+=s;
         }
         return str;
     }
 
-//    public static String[] totals(String[] player) {
-//        player[11] = player[1] + player[2] + player[3] + player[4] + player[5];
-//        return null;
-//    }
+    public static int[] getData(int player, int[]scoring_cards) {
 
-    public static int[] getData(int[] player, int playernum) {
+        if (player+1 > player_num) return new int[] {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 
-        for (int i=0; i<10; i++) {
 
+        Board[][] b = getPlayers().get(player).getBoard();
+        int[] scorescopy = Scoring_Setup.scoring_setups(b, getPlayers().get(player).getOdd(), scoring_cards);
+
+
+        int[] scores = new int[MAX];
+
+        System.arraycopy(scorescopy, 0, scores, 0, 10);
+
+        scores[10] = getPlayers().get(player).getNature_tokens();
+        calculateTotals(player, scores);
+        return scores;
+    }
+
+    public static void calculateTotals(int player, int[] scores) {
+        if (player+1 > player_num) {
+            return;
+        }
+        scores[11] = scores[0] +  scores[1] + scores[2] + scores[3] + scores[4];
+        scores[12] = scores[5] +  scores[6] + scores[7] + scores[8] + scores[9] + scores[10];
+        scores[13] = scores[12] + scores[11];
+    };
+
+    public static String[] getBonus() {
+        for (int i=5; i<10; i++) {
+            int h1 = player1[i], h2 = player2[i], h3 = player3[i], h4 = player4[i];
+
+            if (player_num == 2)
+            {
+                if (h1 > h2) player1[i] += 2;
+                else if (h2 > h1) player2[i] += 2;
+                else {
+                    player1[i] += 1;
+                    player2[i] += 1;
+                }
+            } else
+            {
+                int max = Math.max(h1 ,Math.max(h2 ,Math.max(h3 , h4)));
+                int biggest_number = 0;
+                int bonus = 0;
+
+                if (h1 == max) biggest_number++;
+                if (h2 == max) biggest_number++;
+                if (h3 == max) biggest_number++;
+                if (h4 == max) biggest_number++;
+
+                if (biggest_number == 2) {
+                    bonus = 2;
+                } else if (biggest_number == 3) {
+                    bonus = 1;
+                }
+
+                if (biggest_number == 1) {
+                    int max2 = 0;
+
+                    if (h1 == max)  {
+                        player1[i] += 3;
+                        max2 = Math.max(h2 ,Math.max(h3 , h4));
+                    }
+                    else if (h2 == max) {
+                        player2[i] += 3;
+                        max2 = Math.max(h1 ,Math.max(h3 , h4));
+                    }
+                    else if (h3 == max) {
+                        player3[i] += 3;
+                        max2 = Math.max(h2 ,Math.max(h1 , h4));
+                    }
+                    if (h4 == max) {
+                        player4[i] += 3;
+                        max2 = Math.max(h2 ,Math.max(h3 , h1));
+                    }
+
+                    if (h1 == max2) player1[i] += 1;
+                    if (h2 == max2) player2[i] += 1;
+                    if (h3 == max2) player3[i] += 1;
+                    if (h4 == max2) player4[i] += 1;
+                }
+
+                else {
+                    if (h1 == max) player1[i] += bonus;
+                    if (h2 == max) player2[i] += bonus;
+                    if (h3 == max) player3[i] += bonus;
+                    if (h4 == max) player4[i] += bonus;
+                }
+            }
         }
         return null;
     }
 
     public static void main(String[] args) {
-        board();
+        //board();        // >(')____,
+        String[] bonuses = new String[20];
+        String p = "helolw work";
+        p+=bonuses[2];
+        System.out.println(p);
     }
 }

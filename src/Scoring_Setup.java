@@ -67,7 +67,8 @@ public class Scoring_Setup extends Board {
         - a seperate loop is run for elk 1 and 2 as they are removed from the board and would affect fox and hawk scoring
      */
 
-    public static int scoring_setups(Board[][]board, int odd, int[] scoring_cards) {       // temporary for testing purposes
+    public static int[] scoring_setups(Board[][]board, int odd, int[] scoring_cards) {
+        setBoard(board);
         setBoard(board);
         setOdd(odd);
         remove_slot();
@@ -77,19 +78,13 @@ public class Scoring_Setup extends Board {
         int b=0, e=0, f=0;      // indexes
         for (int i=0; i<MAXSIZE; i++) {
             for (int j=0; j<MAXSIZE; j++) {
-                Board t = board[i][j];
-
+                Board t = getBoard()[i][j];
 
                 // TODO habitat scoring
 
                 if (t!=null){
-                    habitat_scoring = Scoring_Habitat_Tiles.habitat_score(i, j, habitat_scoring);
+                    habitat_scoring = Scoring_Habitat_Tiles.habitat_score(i, j, habitat_scoring);       // F W R M P
                 }
-
-
-
-
-
 
 
                 if( t!=null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0)=='f') {            // FOX
@@ -127,7 +122,7 @@ public class Scoring_Setup extends Board {
         for (int i=0; i< MAXSIZE; i++) {
             for (int j = 0; j < MAXSIZE; j++) {
 
-                Board t = board[i][j];
+                Board t = getBoard()[i][j];
 
                 if (t != null && !t.getAnimals().isBlank() && t.getAnimals().charAt(0) == 'e') {       // ELK
                     if (scoring_cards[1]==3) {
@@ -143,8 +138,6 @@ public class Scoring_Setup extends Board {
             }
         }
 
-
-
         int fox_score = fox_score_calculate(fox_num, scoring_cards[2], fox_arr);
         int bear_score = bear_score_calculate(bear_num, bear_arr, scoring_cards[0]);
         System.out.println("\n\nTotal Fox score:" + fox_score);
@@ -159,7 +152,6 @@ public class Scoring_Setup extends Board {
             hawk_score = hawk_num;
             System.out.println("Total Hawk score:" + hawk_score);
         }
-
 
         System.out.println("Total Bear score:" + bear_score);
         System.out.println("Total Salmon score:" + salmon_score);
@@ -177,7 +169,8 @@ public class Scoring_Setup extends Board {
 
         System.out.println("Total Habitat score:" + Arrays.toString(habitat_scoring));
 
-        return fox_score + hawk_score + bear_score + elk_score + salmon_score;
+        // b e f h s || F W R M P
+        return new int[]{bear_score, elk_score, fox_score, hawk_score, salmon_score, habitat_scoring[0], habitat_scoring[1], habitat_scoring[2], habitat_scoring[3], habitat_scoring[4]};
     }
 
 
@@ -678,7 +671,8 @@ public class Scoring_Setup extends Board {
 
         Board.print_boards(b, 10, 10, 1);
 
-        int score = scoring_setups(b, 1, new int[] {1,1,1,1,1});
+        //int score = scoring_setups(b, 1, new int[] {1,1,1,1,1});
+        int score[] = scoring_setups(b, 1, new int[] {1,1,1,1,1});
         System.out.println(score);
     }
 }

@@ -317,6 +317,7 @@ public class Cascadia extends Display_And_Input{
             System.out.println( getPlayers().get(playerNum).getPlayer_name() + " is up!");
             culling_trigger = true;
 
+             Leaderboard.board();                        // TODO leaderboard affects stuff
             Command_State.setToMainMenu(command_state);
         }
 
@@ -362,6 +363,7 @@ public class Cascadia extends Display_And_Input{
                 System.out.println("\n\n" + current_player.getPlayer_name() + " is up!");
                 culling_trigger = true;
             }
+            Leaderboard.board();
         }
 
 

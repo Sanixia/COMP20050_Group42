@@ -256,13 +256,13 @@ public class Display_And_Input {
 
     public static void randomise_player_tiles_and_tokens(){
 
-        long seed = System.nanoTime();                                          // To have the same randomised list order for animals and biome tiles
-        //long seed = 123456789;
+        //long seed = System.nanoTime();                                          // To have the same randomised list order for animals and biome tiles
+        long seed = 123456789;
         Collections.shuffle(Starter_Habitat.getStarter_Habitat_Tiles());
 
         Collections.shuffle(Habitat_Tiles.biome, new Random(seed));
         Collections.shuffle(Habitat_Tiles.animals, new Random(seed));
-        Collections.shuffle(Wildlife_Tokens.tokens);
+        Collections.shuffle(Wildlife_Tokens.tokens, new Random(seed));
 
     }
 
